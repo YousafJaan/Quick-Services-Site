@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Research Student's Field Guide | Quick Services</title>
-<meta name="description" content="Free 7-chapter field guide for students and researchers: from topic selection to viva defense, step by step. By M. Yousaf.">
+<meta name="description" content="Free 27-page field guide for students and researchers: topic selection, research questions, literature search, methodology, SPSS analysis, APA formatting, and viva defense. By M. Yousaf.">
 <link rel="canonical" href="https://quick-services-site.pages.dev/guide.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="manifest" href="/site.webmanifest">
@@ -13,22 +13,23 @@
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://quick-services-site.pages.dev/guide.html">
 <meta property="og:title" content="The Research Student's Field Guide | Quick Services">
-<meta property="og:description" content="Step-by-step guidance from topic selection to data analysis and viva defense. Free student edition by M. Yousaf.">
+<meta property="og:description" content="Free comprehensive 27-page guide from topic selection to data analysis and viva defense. By M. Yousaf, Quick Services.">
 <meta property="og:image" content="https://quick-services-site.pages.dev/assets/og-image.png">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Research Student's Field Guide | Quick Services">
-<meta name="twitter:description" content="Step-by-step guidance from topic selection to data analysis and viva defense. Free student edition by M. Yousaf.">
+<meta name="twitter:description" content="Free comprehensive 27-page guide from topic selection to data analysis and viva defense. By M. Yousaf, Quick Services.">
 <meta name="twitter:image" content="https://quick-services-site.pages.dev/assets/og-image.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"></noscript>
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:#0a0f1c;color:#0a0f1c;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;line-height:1.6;font-size:16px}
+body{margin:0;background:#0a0f1c;color:#0a0f1c;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;line-height:1.6;font-size:16px;overflow-x:hidden}
 .d{font-family:'Bricolage Grotesque','Plus Jakarta Sans',sans-serif;letter-spacing:-.035em;font-weight:800}
 .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
 .tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;padding:7px 14px;border-radius:999px;border:1px solid currentColor}
@@ -39,7 +40,7 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #fd
 /* Header */
 .hd{position:sticky;top:0;z-index:30;background:rgba(10,15,28,.92);backdrop-filter:blur(12px);border-bottom:1px solid #1e293b;padding-top:env(safe-area-inset-top,0px)}
 .hd .in{display:flex;align-items:center;justify-content:space-between;min-height:64px}
-.logo{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;color:#fff;text-decoration:none}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;color:#fff;text-decoration:none;min-height:44px;min-width:44px}
 .logo span{width:32px;height:32px;border-radius:9px;background:#ff6b2c;color:#0a0f1c;display:flex;align-items:center;justify-content:center;font-size:17px}
 .dnav{display:none}
 .menu summary{list-style:none;cursor:pointer;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid #334155;color:#fff;font-size:20px}
@@ -50,7 +51,7 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #fd
 /* Hero */
 .hero{background:#0a0f1c;color:#fff;position:relative;padding:56px 0 64px}
 .hero-glow{position:absolute;inset:0;background:radial-gradient(420px 340px at 90% 10%,rgba(255,107,44,.32),transparent 70%),radial-gradient(380px 320px at 10% 95%,rgba(99,102,241,.24),transparent 70%);pointer-events:none}
-.hero h1{font-size:clamp(38px,9vw,80px);line-height:.98;margin:22px 0 18px}
+.hero h1{font-size:clamp(36px,8.5vw,76px);line-height:.98;margin:22px 0 18px}
 .hero p.lead{font-size:clamp(17px,4vw,20px);color:#94a3b8;max-width:760px;margin:0 0 26px}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .promise-box{background:#111827;border:1px solid #1e293b;border-radius:20px;padding:22px;margin-top:36px;color:#cbd5e1;font-size:15px;line-height:1.6}
@@ -66,19 +67,24 @@ a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #fd
 .toc-num{width:32px;height:32px;border-radius:8px;background:#0a0f1c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
 
 /* Chapters */
-.chapter{padding:54px 0 44px;border-bottom:1px solid #e2e8f0;scroll-margin-top:80px}
+.chapter{padding:54px 0 44px;border-bottom:1px solid #e2e8f0;scroll-margin-top:80px;content-visibility:auto;contain-intrinsic-size:600px}
 .chapter:last-of-type{border-bottom:none}
-.chap-tag{font-size:12.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#c2410c;margin-bottom:8px;display:inline-block}
-.chapter h2{font-size:clamp(28px,6vw,44px);line-height:1.1;margin:0 0 18px}
+.chap-tag{font-size:12.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#9a3412;margin-bottom:8px;display:inline-block}
+.chapter h2{font-size:clamp(26px,5.5vw,42px);line-height:1.15;margin:0 0 18px}
 .chapter p{color:#334155;font-size:16.5px;line-height:1.65;margin:0 0 18px}
-.subhead{font-size:22px;margin:28px 0 12px;color:#0a0f1c}
+.subhead{font-size:21px;margin:28px 0 12px;color:#0a0f1c}
 
 /* Framework Cards & Tables */
+.problem-card{background:#fff1f2;border-left:4px solid #e11d48;border-radius:12px;padding:16px 20px;margin:20px 0;color:#881337;font-size:15px;line-height:1.6}
+.problem-card strong{color:#4c0519}
 .card-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:20px;padding:24px;margin:20px 0}
+.tip-box{background:#fff7ed;border-left:4px solid #ff6b2c;border-radius:12px;padding:16px 20px;margin:20px 0;color:#7c2d12;font-size:15px;line-height:1.6}
+.mistake-box{background:#fef2f2;border-left:4px solid #ef4444;border-radius:12px;padding:16px 20px;margin:20px 0;color:#991b1b;font-size:15px;line-height:1.6}
+
 .q-list{list-style:none;padding:0;margin:16px 0}
 .q-list li{margin:10px 0;padding-left:28px;position:relative;font-size:16px;color:#334155}
 .q-list li strong{color:#0a0f1c}
-.q-list li::before{content:"B8";position:absolute;left:4px;color:#ff6b2c;font-size:20px;line-height:1}
+.q-list li::before{content:"\2192";position:absolute;left:4px;color:#ff6b2c;font-size:18px;line-height:1}
 
 .tbl-wrap{overflow-x:auto;margin:22px 0;border:1px solid #e2e8f0;border-radius:16px;-webkit-overflow-scrolling:touch}
 table{width:100%;border-collapse:collapse;font-size:14.5px;text-align:left;min-width:540px}
@@ -89,44 +95,45 @@ tr:nth-child(even) td{background:#f8fafc}
 /* Code / Frame Box */
 .frame-box{background:#0a0f1c;color:#e2e8f0;border-radius:18px;padding:20px 24px;margin:20px 0;font-size:15px;line-height:1.65}
 .frame-box p,.frame-box strong{color:#f1f5f9!important}
-.locked-box p{color:#e2e8f0!important}
-.locked-box h3{color:#fff!important}
 .frame-box span.hl{color:#fdba74;font-weight:700}
 
-/* Locked Teaser */
-.locked-box{background:linear-gradient(135deg,#0a0f1c,#111827);border:1.5px solid #ff6b2c;border-radius:24px;padding:28px 24px;margin:32px 0;color:#fff;position:relative;box-shadow:0 12px 30px -10px rgba(255,107,44,.25)}
-.locked-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,44,.18);color:#fdba74;border:1px solid #ff6b2c;padding:6px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
-.locked-box h3{font-size:22px;margin:0 0 10px;color:#fff}
-.locked-box p{color:#cbd5e1;font-size:15.5px;margin:0 0 20px;line-height:1.6}
-.locked-actions{display:flex;flex-wrap:wrap;gap:12px}
+/* Where M. Yousaf Helps Panel */
+.help-panel{background:linear-gradient(135deg,#0a0f1c,#111827);border:1.5px solid #ff6b2c;border-radius:20px;padding:24px 22px;margin:28px 0;color:#fff;display:flex;flex-direction:column;gap:16px}
+.help-panel-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,107,44,.18);color:#fdba74;border:1px solid #ff6b2c;padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;align-self:flex-start}
+.help-panel h3{font-size:20px;margin:0;color:#fff}
+.help-panel p{color:#cbd5e1;font-size:14.5px;margin:0;line-height:1.55}
+.help-panel .wa-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#ff6b2c;color:#0a0f1c;padding:12px 22px;border-radius:999px;font-weight:700;font-size:14.5px;text-decoration:none;align-self:flex-start;min-height:44px;transition:transform .2s}
+.help-panel .wa-btn:hover{transform:translateY(-2px)}
 
 /* Sticky Bottom Bar on Mobile */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(10,15,28,.95);backdrop-filter:blur(12px);border-top:1px solid #1e293b}
-.bar a{flex:1;text-align:center;min-height:48px;padding:12px;border-radius:999px;font-weight:700;font-size:14.5px;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.bar a{flex:1;text-align:center;min-height:48px;padding:12px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;display:flex;align-items:center;justify-content:center}
 .pad{height:76px;background:#0a0f1c}
 
 /* Footer CTA */
 .guide-cta{background:#ff6b2c;color:#0a0f1c;padding:72px 0;text-align:center}
-.guide-cta h2{font-size:clamp(34px,8vw,72px);line-height:1;margin:0 0 16px}
+.guide-cta h2{font-size:clamp(32px,7.5vw,68px);line-height:1;margin:0 0 16px}
 .guide-cta p{font-size:18px;margin:0 0 28px}
 .site-footer{background:#0a0f1c;color:#94a3b8;font-size:13.5px;padding:24px 0}
-.site-footer a{color:#94a3b8;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;padding:8px 0;}
+.site-footer a{color:#94a3b8;text-decoration:none;min-height:44px;min-width:44px;display:inline-flex;align-items:center;padding:8px 6px}
 .site-footer a:hover{color:#fff}
 
 @media (min-width:768px){
   .wrap{padding:0 32px}
   .menu{display:none}
   .dnav{display:flex;gap:24px}
-  .dnav a{color:#cbd5e1;text-decoration:none;font-weight:600;font-size:14px;min-height:44px;display:inline-flex;align-items:center;padding:6px 0;transition:color .2s}
+  .dnav a{color:#cbd5e1;text-decoration:none;font-weight:600;font-size:14px;min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;padding:6px 6px;transition:color .2s}
   .dnav a:hover{color:#fff}
   .dnav a.active{color:#ff6b2c}
   .toc-grid{grid-template-columns:1fr 1fr}
   .bar{display:none}
   .pad{display:none}
+  .help-panel{flex-direction:row;align-items:center;justify-content:space-between}
+  .help-panel .wa-btn{align-self:center;flex-shrink:0}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .btn:hover,.toc-item:hover{transform:none}
+  .btn:hover,.toc-item:hover,.help-panel .wa-btn:hover{transform:none}
 }
 </style>
 </head>
@@ -138,7 +145,6 @@ tr:nth-child(even) td{background:#f8fafc}
     <nav class="dnav">
       <a href="/">Home</a>
       <a href="/guide.html" class="active">Free Guide</a>
-      <a href="/download.html">Unlock Full Guide</a>
       <a href="/#services">Services</a>
       <a href="/#standards">Standards</a>
       <a href="https://wa.me/923296646824" style="color:#fdba74">WhatsApp M. Yousaf</a>
@@ -147,8 +153,7 @@ tr:nth-child(even) td{background:#f8fafc}
       <div class="links">
         <a href="/">Home</a>
         <a href="/guide.html" style="color:#ff6b2c">Free Guide</a>
-        <a href="/download.html">Unlock Full Guide (Code)</a>
-        <a href="/assets/Research-Field-Guide-FREE.pdf" download>Download Free PDF</a>
+        <a href="/assets/Research-Student-Field-Guide.pdf" download>Download Free PDF (27 pages)</a>
         <a href="/#services">Services</a>
         <a href="/#standards">Standards</a>
         <a href="https://wa.me/923296646824">Chat on WhatsApp</a>
@@ -160,13 +165,13 @@ tr:nth-child(even) td{background:#f8fafc}
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="wrap" style="position:relative">
-    <span class="tag" style="color:#fdba74">Free Student Edition</span>
+    <span class="tag" style="color:#fdba74">Free 27-Page Guide &bull; Complete Edition</span>
     <h1 class="d">The Research Student's <span style="color:#ff6b2c">Field Guide.</span></h1>
     <p class="lead">From topic selection to your final viva defense, step by step. Written by M. Yousaf, lead academic consultant at Quick Services.</p>
+    
     <div class="hero-actions">
-      <a class="btn" href="/assets/Research-Field-Guide-FREE.pdf" download style="background:#ff6b2c;color:#0a0f1c">Download Free Edition (PDF)</a>
-      <a class="btn" href="/download.html" style="background:transparent;border:1.5px solid #334155;color:#fff">Unlock Full Guide with Access Code</a>
-      <a class="btn" href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20have%20a%20question%20about%20the%20Field%20Guide." style="background:#fff;color:#0a0f1c">Ask M. Yousaf</a>
+      <a class="btn" href="/assets/Research-Student-Field-Guide.pdf" download style="background:#ff6b2c;color:#0a0f1c">Download Free PDF (27 pages, 0.6 MB)</a>
+      <a class="btn" href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20have%20a%20question%20about%20the%20Field%20Guide." style="background:#fff;color:#0a0f1c">Ask M. Yousaf on WhatsApp</a>
     </div>
 
     <div class="promise-box">
@@ -184,7 +189,7 @@ tr:nth-child(even) td{background:#f8fafc}
         <a href="#ch1" class="toc-item"><span class="toc-num d">01</span><span>Choose a topic you can actually finish</span></a>
         <a href="#ch2" class="toc-item"><span class="toc-num d">02</span><span>Turn it into a clear research question</span></a>
         <a href="#ch3" class="toc-item"><span class="toc-num d">03</span><span>Search the literature properly</span></a>
-        <a href="#ch4" class="toc-item"><span class="toc-num d">04</span><span>Pick a design and a sample</span></a>
+        <a href="#ch4" class="toc-item"><span class="toc-num d">04</span><span>Pick a design and a sample size</span></a>
         <a href="#ch5" class="toc-item"><span class="toc-num d">05</span><span>Analyse your data without panic</span></a>
         <a href="#ch6" class="toc-item"><span class="toc-num d">06</span><span>Write, cite and format cleanly</span></a>
         <a href="#ch7" class="toc-item"><span class="toc-num d">07</span><span>Prepare for your viva defense</span></a>
@@ -195,143 +200,244 @@ tr:nth-child(even) td{background:#f8fafc}
     <article id="ch1" class="chapter">
       <span class="chap-tag">Chapter 01</span>
       <h2 class="d">Choose a topic you can actually finish</h2>
-      <p>Most thesis problems begin with a topic that is too big. Test every idea against three questions before you commit:</p>
+      <div class="problem-card">
+        <strong>The Real-World Problem:</strong> Most delayed theses stall at month three because the student chose a grand, philosophical topic without checking whether participants, medical records, or data files actually exist.
+      </div>
+      <p>Most thesis problems begin with a topic that is too big. Test every candidate topic against three ruthless criteria before committing:</p>
       
       <ul class="q-list">
-        <li><strong>Answerable:</strong> Can data or evidence settle it, rather than just opinion?</li>
-        <li><strong>Measurable:</strong> Can you name the variables or themes you would collect?</li>
-        <li><strong>Doable:</strong> Can you finish it with your time, access and budget?</li>
+        <li><strong>Answerable:</strong> Can data or empirical evidence settle it, rather than just opinion?</li>
+        <li><strong>Measurable:</strong> Can you explicitly name the variables, scales, or qualitative themes you will collect?</li>
+        <li><strong>Doable:</strong> Can you finish it with your time, physical access, and budget?</li>
       </ul>
 
-      <h3 class="d subhead">Narrow it step by step</h3>
+      <h3 class="d subhead">The Narrowing Funnel (Step by Step)</h3>
       <div class="card-box" style="border-left:4px solid #ff6b2c">
-        <strong>Example walkthrough:</strong><br>
-        Hospitals &rarr; Operating theatres in private hospitals &rarr; Waste segregation compliance in operating theatres of private hospitals in one city.
+        <strong>Example narrowing walkthrough:</strong><br>
+        <span style="color:#991b1b">&times; Too broad:</span> Hospital waste management and environmental health.<br>
+        <span style="color:#c2410c">&sim; Narrower:</span> Clinical waste practices in operating theatres of private hospitals.<br>
+        <span style="color:#15803d">&check; Actionable:</span> Waste segregation protocol compliance among scrub nurses in tertiary private hospitals of Lahore.
       </div>
 
       <h3 class="d subhead">Topic scoring worksheet</h3>
-      <p>Score each candidate topic from 1 (weak) to 5 (strong). Choose the topic with the highest total, then check the lowest score for any deal-breaker:</p>
+      <p>Score each candidate topic from 1 (weak) to 5 (strong). Choose the topic with the highest total, then check the lowest score for any deal-breaker (such as lack of participant access):</p>
       <div class="tbl-wrap">
         <table>
           <thead>
-            <tr><th>Criterion</th><th>Topic A</th><th>Topic B</th><th>Topic C</th></tr>
+            <tr><th>Evaluation Criterion</th><th>Topic A</th><th>Topic B</th><th>Topic C</th></tr>
           </thead>
           <tbody>
-            <tr><td>Interest: will I still care in six months?</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
-            <tr><td>Answerable with data or evidence</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
-            <tr><td>Variables or themes are clear</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
-            <tr><td>Access to participants or data</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
-            <tr><td>Fits my time and budget</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
-            <tr><td>Supervisor can guide it</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
-            <tr><td><strong>Total (max 30)</strong></td><td><strong>/ 30</strong></td><td><strong>/ 30</strong></td><td><strong>/ 30</strong></td></tr>
+            <tr><td>Personal interest: will I still care in six months?</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
+            <tr><td>Answerable with data or documents</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
+            <tr><td>Variables or themes are clearly defined</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
+            <tr><td>Guaranteed access to participants or hospital data</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
+            <tr><td>Fits current budget and semester timeline</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
+            <tr><td>Supervisor has proven expertise in this sub-field</td><td>/ 5</td><td>/ 5</td><td>/ 5</td></tr>
+            <tr><td><strong>Total Feasibility Score (max 30)</strong></td><td><strong>/ 30</strong></td><td><strong>/ 30</strong></td><td><strong>/ 30</strong></td></tr>
           </tbody>
         </table>
       </div>
 
       <h3 class="d subhead">One-page pitch for your supervisor</h3>
       <ol style="padding-left:22px;color:#334155;line-height:1.75">
-        <li><strong>Working title</strong> in one line.</li>
+        <li><strong>Working title:</strong> Single concise line stating variables and target population.</li>
         <li><strong>Problem:</strong> What is unknown or unsolved, and for whom, in two sentences.</li>
         <li><strong>Question:</strong> Your draft research question.</li>
         <li><strong>Method:</strong> Design, population and how you will collect data.</li>
-        <li><strong>Feasibility:</strong> Timeline, access and ethics approval needed.</li>
-        <li><strong>Ask:</strong> The one decision you need from your supervisor.</li>
+        <li><strong>Feasibility:</strong> Timeline, access, and ethics approval needed.</li>
+        <li><strong>The Ask:</strong> The one decision you need from your supervisor.</li>
       </ol>
+
+      <div class="mistake-box">
+        <strong>Common Mistake:</strong> Walking into your supervisor's office asking "What topic should I do?" Supervisors respect candidates who present two evaluated options with feasibility metrics.
+      </div>
+
+      <div class="help-panel">
+        <div>
+          <span class="help-panel-tag">Where M. Yousaf Helps</span>
+          <h3 class="d">Topic Evaluation &amp; Supervisor Pitch Review</h3>
+          <p>Get a 1-on-1 review of your proposed topic, feasibility evaluation, and draft supervisor pitch before submission.</p>
+        </div>
+        <a href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20need%20help%20choosing%20and%20refining%20my%20research%20topic." class="wa-btn">Message on WhatsApp &rarr;</a>
+      </div>
     </article>
 
     <!-- Chapter 2 -->
     <article id="ch2" class="chapter">
       <span class="chap-tag">Chapter 02</span>
       <h2 class="d">Turn it into a clear research question</h2>
-      <p>A good question names who, what and how you will compare or describe. Use these frames and fill in the blanks:</p>
+      <div class="problem-card">
+        <strong>The Real-World Problem:</strong> Students often write poetic or philosophical questions ("How can hospital culture be improved?") that cannot be answered with statistical tests or qualitative coding frames.
+      </div>
+      <p>A rigorous empirical question explicitly identifies the independent variable, dependent variable, and target population. Use these frames and fill in the blanks:</p>
 
       <div class="frame-box">
-        <p><strong>Comparison:</strong> Does <span class="hl">[factor]</span> differ between <span class="hl">[group A]</span> and <span class="hl">[group B]</span>?</p>
-        <p><strong>Relationship:</strong> Is <span class="hl">[variable 1]</span> related to <span class="hl">[variable 2]</span> among <span class="hl">[population]</span>?</p>
-        <p style="margin:0"><strong>Description:</strong> How common is <span class="hl">[condition]</span> among <span class="hl">[population]</span>?</p>
+        <p><strong>Frame 1 &bull; Comparison:</strong> Does <span class="hl">[Dependent Variable]</span> differ significantly between <span class="hl">[Group A]</span> and <span class="hl">[Group B]</span> among <span class="hl">[Population]</span>?</p>
+        <p><strong>Frame 2 &bull; Relationship:</strong> Is there a significant relationship between <span class="hl">[Variable 1]</span> and <span class="hl">[Variable 2]</span> among <span class="hl">[Population]</span>?</p>
+        <p style="margin:0"><strong>Frame 3 &bull; Prevalence / Description:</strong> What is the prevalence of <span class="hl">[Condition/Behavior]</span> among <span class="hl">[Population]</span> across <span class="hl">[Setting]</span>?</p>
       </div>
 
-      <h3 class="d subhead">Keep objectives matched</h3>
-      <p>Every objective needs a matching method and a matching result. If one has no match, rewrite it or remove it.</p>
+      <h3 class="d subhead">Keep objectives matched: The Alignment Matrix</h3>
+      <p>The single most common reason examiners fail proposals is methodological drift &mdash; when Chapter 3 uses tests that do not answer the questions in Chapter 1. Fill one row per objective:</p>
 
       <div class="tbl-wrap">
         <table>
           <thead>
-            <tr><th>Objective</th><th>Hypothesis</th><th>Variable(s) &amp; scale</th><th>Test or method</th><th>Result table</th></tr>
+            <tr><th>Objective</th><th>Hypothesis</th><th>Variable(s) &amp; scale</th><th>Test or method</th><th>Target Table</th></tr>
           </thead>
           <tbody>
-            <tr><td>1. [verb + what]</td><td>H1: [prediction]</td><td>[e.g. score, interval]</td><td>[e.g. independent t-test]</td><td>Table 4.1</td></tr>
-            <tr><td>2. [verb + what]</td><td>H2: [prediction]</td><td>[e.g. ordinal, count]</td><td>[e.g. Mann-Whitney U]</td><td>Table 4.2</td></tr>
-            <tr><td>3. [verb + what]</td><td>H3: [prediction]</td><td>[e.g. categorical]</td><td>[e.g. Chi-square test]</td><td>Table 4.3</td></tr>
+            <tr><td>1. Compare test scores between groups</td><td>H1: Group A will score higher than B</td><td>Score (Continuous ratio scale)</td><td>Independent samples t-test</td><td>Table 4.1</td></tr>
+            <tr><td>2. Determine link between stress &amp; sleep</td><td>H2: Significant negative correlation</td><td>Stress (Scale), Sleep (Hours)</td><td>Pearson r correlation</td><td>Table 4.2</td></tr>
+            <tr><td>3. Assess compliance association by shift</td><td>H3: Association between shift &amp; compliance</td><td>Shift (Nominal), Compliance (Binary)</td><td>Chi-square test of independence</td><td>Table 4.3</td></tr>
           </tbody>
         </table>
       </div>
 
       <h3 class="d subhead">Checks before you finalise</h3>
       <ul class="q-list">
-        <li>Each objective starts with one measurable verb (compare, measure, identify, assess).</li>
+        <li>Each objective starts with one measurable verb (compare, measure, identify, assess; avoid "understand" or "explore").</li>
         <li>The hypothesis can be proved wrong by your data.</li>
         <li>The population and setting are stated in the question.</li>
-        <li>The method you chose is the simplest one that answers the question.</li>
+        <li>Every objective generates its own dedicated table or chart in your Results chapter.</li>
       </ul>
+
+      <div class="mistake-box">
+        <strong>Common Mistake:</strong> Stating five objectives in Chapter 1, but only presenting three tables in Chapter 4. Examiners cross-reference these page numbers immediately.
+      </div>
+
+      <div class="help-panel">
+        <div>
+          <span class="help-panel-tag">Where M. Yousaf Helps</span>
+          <h3 class="d">Question Formulation &amp; Alignment Matrix Audit</h3>
+          <p>Review your research questions, operational objectives, and hypothesis-test alignment matrix to prevent methodological drift.</p>
+        </div>
+        <a href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20need%20help%20with%20my%20research%20questions%20and%20alignment%20matrix." class="wa-btn">Message on WhatsApp &rarr;</a>
+      </div>
     </article>
 
     <!-- Chapter 3 -->
     <article id="ch3" class="chapter">
       <span class="chap-tag">Chapter 03</span>
       <h2 class="d">Search the literature properly</h2>
-      <p>Do not start with a general search engine and stop at page one. Search academic databases with a plan and keep a log:</p>
+      <div class="problem-card">
+        <strong>The Real-World Problem:</strong> Relying solely on Google Scholar page one, citing predatory journals, or copying citations from third-party bibliographies without reading the primary source.
+      </div>
+      <p>Search academic databases with a reproducible plan and keep a log:</p>
 
-      <ul class="q-list">
-        <li><strong>Where:</strong> Crossref and OpenAlex for broad coverage, PubMed for health, arXiv for computing and physics.</li>
-        <li><strong>How:</strong> Combine ideas with <code>AND</code>, synonyms with <code>OR</code>, and exact phrases in quotes.</li>
-        <li><strong>Screen:</strong> Title first, then abstract, then full text.</li>
-      </ul>
-
-      <div class="card-box">
-        <strong>Check every source:</strong> Open the real paper and confirm the DOI, authors and year before you cite it. Never cite something you have not directly seen.
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Repository</th><th>Discipline Focus</th><th>Best For</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Crossref</strong></td><td>All disciplines (140M+ DOI records)</td><td>Verifying exact digital object identifiers &amp; publication metadata.</td></tr>
+            <tr><td><strong>OpenAlex</strong></td><td>Multidisciplinary global database</td><td>Citation networks, institutional tracing, modern open science.</td></tr>
+            <tr><td><strong>PubMed</strong></td><td>Medicine, nursing, health sciences</td><td>Peer-reviewed clinical trials, MeSH terminology indexing.</td></tr>
+            <tr><td><strong>arXiv</strong></td><td>Physics, mathematics, computer science</td><td>Preprints and computational algorithms.</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h3 class="d subhead">Example search string</h3>
+      <h3 class="d subhead">Constructing Boolean Search Strings</h3>
+      <p>Combine ideas with <code>AND</code>, synonyms with <code>OR</code>, and exact phrases in quotes:</p>
       <div class="frame-box" style="font-family:monospace;font-size:14px">
-        ("biomedical waste" OR "healthcare waste" OR "medical waste") AND (segregation OR compliance OR practices) AND ("operating theatre" OR "operating room")
+        ("biomedical waste" OR "healthcare waste" OR "clinical waste") AND (segregation OR compliance OR practices) AND ("operating theatre" OR "operating room")
       </div>
 
-      <h3 class="d subhead">Reference-manager setup</h3>
+      <h3 class="d subhead">Systematic Search Log Template</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Database</th><th>Exact Query String</th><th>Filters Applied</th><th>Hits</th><th>Retained</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>12/10/26</td><td>PubMed</td><td>("clinical waste") AND (segregat*)</td><td>2020-2026, English, Free Full Text</td><td>142</td><td>18</td></tr>
+            <tr><td>14/10/26</td><td>OpenAlex</td><td>("hospital waste") AND ("operating theatre")</td><td>2021-2026, Peer-reviewed</td><td>89</td><td>12</td></tr>
+            <tr><td>16/10/26</td><td>Crossref</td><td>"surgical waste management"</td><td>2019-2026</td><td>45</td><td>7</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="d subhead">Reference-manager setup (Zotero / Mendeley / EndNote)</h3>
       <ol style="padding-left:22px;color:#334155;line-height:1.75">
-        <li>Pick one tool (Zotero, Mendeley or EndNote) and stay with it.</li>
-        <li>Save every source with its DOI whenever one exists.</li>
-        <li>Add a tag for each chapter that uses the source.</li>
-        <li>Fix author names and years in the manager, not by hand in the document.</li>
-        <li>Before submission, scan for sources missing volume, issue or page numbers.</li>
+        <li>Pick one tool and stay with it throughout the thesis.</li>
+        <li>Import via direct DOI / PMID lookup to avoid manual typing errors.</li>
+        <li>Add a tag for each chapter that uses the source (e.g. <code>Ch2_Prevalence</code>).</li>
+        <li>Attach the real PDF to every entry. Never cite an abstract alone.</li>
+        <li>Fix author names and years in the manager, never by hand in the Word draft.</li>
       </ol>
+
+      <div class="mistake-box">
+        <strong>Common Mistake:</strong> Copy-pasting citations generated by AI chatbots. These frequently invent fictitious authors and non-existent DOIs. Always verify the DOI on Crossref.
+      </div>
+
+      <div class="help-panel">
+        <div>
+          <span class="help-panel-tag">Where M. Yousaf Helps</span>
+          <h3 class="d">Literature Search &amp; Reference Manager Training</h3>
+          <p>Master database queries, Boolean string syntax, Zotero reference library setup, and bibliographic verification.</p>
+        </div>
+        <a href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20need%20literature%20search%20training%20for%20my%20review." class="wa-btn">Message on WhatsApp &rarr;</a>
+      </div>
     </article>
 
     <!-- Chapter 4 -->
     <article id="ch4" class="chapter">
       <span class="chap-tag">Chapter 04</span>
-      <h2 class="d">Pick a design and a sample</h2>
-      <p>Your question decides your method, not the other way around:</p>
+      <h2 class="d">Pick a design and a sample size</h2>
+      <div class="problem-card">
+        <strong>The Real-World Problem:</strong> Students pulling arbitrary numbers like "100 participants" out of thin air without mathematical justification or statistical power analysis.
+      </div>
+      <p>Your question decides your method, not personal preference:</p>
 
-      <ul class="q-list">
-        <li><strong>Quantitative:</strong> Numbers and statistical tests, best for comparing and measuring.</li>
-        <li><strong>Qualitative:</strong> Interviews and themes, best for meaning and experience.</li>
-        <li><strong>Mixed:</strong> Both, only when each answers a different part of the question.</li>
-      </ul>
-
-      <div class="card-box">
-        <strong>Do not guess your sample size:</strong> Sample size depends on the statistical test, the effect size you expect, and your tolerance for error. Free tools such as G*Power can calculate it, but you must justify the inputs.
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Design Type</th><th>When to Use</th><th>Data Collected</th><th>Typical Tools</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Quantitative Descriptive</strong></td><td>Measuring prevalence, baseline characteristics, attitudes.</td><td>Numerical survey scores, demographic data.</td><td>Validated Likert scales, questionnaires.</td></tr>
+            <tr><td><strong>Quantitative Quasi-Experimental</strong></td><td>Testing pre-post interventions without random allocation.</td><td>Pre-test and post-test scores across cohorts.</td><td>Paired measurements, standardized tests.</td></tr>
+            <tr><td><strong>Qualitative Phenomenological</strong></td><td>Understanding lived experiences and perspectives.</td><td>Audio transcripts, reflective field notes.</td><td>Semi-structured interview guides.</td></tr>
+            <tr><td><strong>Mixed Methods Explanatory</strong></td><td>Using qualitative interviews to explain surprising statistical results.</td><td>Initial quantitative survey followed by focused interviews.</td><td>Questionnaire + purposive sub-sample.</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- Locked Teaser -->
-      <div class="locked-box">
-        <div class="locked-badge">&#128274; Continues in Full Edition</div>
-        <h3 class="d" style="font-size:22px;margin:0 0 10px;color:#fff">Worked sample-size walkthrough &amp; ethics approval checklist</h3>
-        <p>Get the step-by-step G*Power input walkthrough for common designs, along with the full institutional ethics-approval checklist for surveys and patient-related data.</p>
-        <div class="locked-actions">
-          <a class="btn" href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20am%20reading%20Chapter%204%20and%20need%20the%20full%20guide%20access%20code." style="background:#ff6b2c;color:#0a0f1c">Message M. Yousaf for Code</a>
-          <a class="btn" href="/download.html" style="background:transparent;border:1px solid #94a3b8;color:#fff">Unlock with code &rarr;</a>
+      <h3 class="d subhead">1. Survey Proportion Sample Size (Cochran's Formula)</h3>
+      <p>For estimating prevalence or proportions in large or unknown populations:</p>
+      <div class="card-box" style="font-family:monospace;font-size:15px;background:#f8fafc">
+        n = (Z&sup2; * p * (1 - p)) / d&sup2;<br><br>
+        &bull; Z = 1.96 (for a standard 95% Confidence Interval)<br>
+        &bull; p = 0.50 (assumed proportion for maximum variability)<br>
+        &bull; d = 0.05 (margin of error at 5%)<br>
+        <strong>Calculation:</strong> (1.96&sup2; * 0.5 * 0.5) / 0.05&sup2; = <strong>384.16 &rarr; Minimum 385 participants.</strong>
+      </div>
+
+      <h3 class="d subhead">2. Statistical Power Analysis via G*Power</h3>
+      <p>For hypothesis testing (e.g. comparing two independent means with a t-test):</p>
+      <ul class="q-list">
+        <li><strong>Test family:</strong> t tests &rarr; Means: Difference between two independent means.</li>
+        <li><strong>Type of power analysis:</strong> A priori: Compute required sample size.</li>
+        <li><strong>Input Parameters:</strong> Effect size d = 0.50 (medium effect), &alpha; err prob = 0.05, Power (1-&beta;) = 0.80, Allocation ratio N2/N1 = 1.</li>
+        <li><strong>Output Result:</strong> Sample size group 1 = 64, Sample size group 2 = 64 &rarr; <strong>Total sample size = 128.</strong></li>
+      </ul>
+
+      <h3 class="d subhead">Institutional Ethics Clearance Checklist</h3>
+      <ol style="padding-left:22px;color:#334155;line-height:1.75">
+        <li>Participant Information Sheet (PIS) written in plain, accessible language.</li>
+        <li>Written Informed Consent Form with voluntary withdrawal clause.</li>
+        <li>Data de-identification plan (storing survey keys separately from responses).</li>
+        <li>Secure encrypted storage declaration and institutional approval letter.</li>
+      </ol>
+
+      <div class="help-panel">
+        <div>
+          <span class="help-panel-tag">Where M. Yousaf Helps</span>
+          <h3 class="d">Methodology Design &amp; G*Power Sample Sizing</h3>
+          <p>Get exact sample size calculations, justification write-ups, and ethical protocol guidance tailored to your committee requirements.</p>
         </div>
+        <a href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20need%20methodology%20and%20sample%20size%20coaching." class="wa-btn">Message on WhatsApp &rarr;</a>
       </div>
     </article>
 
@@ -339,31 +445,61 @@ tr:nth-child(even) td{background:#f8fafc}
     <article id="ch5" class="chapter">
       <span class="chap-tag">Chapter 05</span>
       <h2 class="d">Analyse your data without panic</h2>
+      <div class="problem-card">
+        <strong>The Real-World Problem:</strong> Jumping directly to running t-tests and regressions in SPSS on raw survey imports without checking missing values, reverse coding, or normality assumptions.
+      </div>
       <p>Before any test, clean the data. Most wrong results come from messy data, not hard statistics:</p>
 
       <ul class="q-list">
-        <li><strong>Code it:</strong> Check every variable has labels and the right measurement scale (nominal, ordinal, scale).</li>
-        <li><strong>Missing:</strong> Count missing data, decide how to handle it transparently, and report your method.</li>
-        <li><strong>Outliers:</strong> Look at boxplots first; never delete a value just because it is inconvenient.</li>
-        <li><strong>Assumptions:</strong> Check normality (Shapiro-Wilk) and spread (Levene's test) before running parametric tests.</li>
+        <li><strong>Variable View Definition:</strong> Verify every item has explicit <em>Values</em> defined (1 = Strongly Disagree to 5 = Strongly Agree), appropriate <em>Measure</em> setting (Nominal, Ordinal, Scale), and clean Variable Names.</li>
+        <li><strong>Missing Values:</strong> Run <code>Analyze &gt; Descriptive Statistics &gt; Frequencies</code>. Screen missing entries; exclude pairwise or impute mean only if missing rate is below 5%. Never hide missing data.</li>
+        <li><strong>Outliers:</strong> Generate boxplots: <code>Analyze &gt; Descriptive Statistics &gt; Explore</code>. Inspect extreme values. Screen for data-entry typos (e.g. typing "55" instead of "5").</li>
+        <li><strong>Assumptions:</strong> Check normality (Shapiro-Wilk p &gt; .05, skewness &plusmn;1.5) and spread (Levene's test p &gt; .05) before interpreting parametric tests.</li>
       </ul>
 
-      <h3 class="d subhead">Reporting results correctly</h3>
-      <div class="frame-box">
-        <p><strong>ANOVA:</strong> A one-way ANOVA showed [a significant / no significant] difference between groups, <em>F([df1], [df2]) = [x], p = [x], &eta;&sup2; = [x]</em>.</p>
-        <p><strong>Correlation:</strong> [Variable 1] and [variable 2] were [positively / negatively] correlated, <em>r([df]) = [x], p = [x]</em>.</p>
-        <p style="margin:0"><strong>Chi-square:</strong> There was [an / no] association between [A] and [B], <em>&chi;&sup2;([df], N = [x]) = [x], p = [x], Cramer's V = [x]</em>.</p>
+      <h3 class="d subhead">Parametric vs. Non-Parametric Match Guide</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Research Objective</th><th>Normal / Scale (Parametric)</th><th>Skewed / Ordinal (Non-Parametric)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Compare 2 independent groups</td><td><strong>Independent samples t-test</strong></td><td><strong>Mann-Whitney U test</strong></td></tr>
+            <tr><td>Compare same group twice (pre/post)</td><td><strong>Paired samples t-test</strong></td><td><strong>Wilcoxon signed-rank test</strong></td></tr>
+            <tr><td>Compare 3 or more groups</td><td><strong>One-way ANOVA</strong></td><td><strong>Kruskal-Wallis H test</strong></td></tr>
+            <tr><td>Relationship between 2 continuous items</td><td><strong>Pearson correlation (r)</strong></td><td><strong>Spearman rank correlation (rho)</strong></td></tr>
+            <tr><td>Association between 2 categorical items</td><td><strong>Chi-square test of independence</strong></td><td><strong>Fisher's exact test (if cell &lt; 5)</strong></td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- Locked Teaser -->
-      <div class="locked-box">
-        <div class="locked-badge">&#128274; Continues in Full Edition</div>
-        <h3 class="d" style="font-size:22px;margin:0 0 10px;color:#fff">SPSS menu-by-menu steps &amp; ready-to-adapt result tables</h3>
-        <p>Get exact click-by-click SPSS navigation paths for independent t-test, paired t-test, one-way ANOVA, Pearson correlation, regression, and Chi-square, plus complete APA-formatted table templates.</p>
-        <div class="locked-actions">
-          <a class="btn" href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20am%20reading%20Chapter%205%20and%20need%20the%20full%20guide%20access%20code." style="background:#ff6b2c;color:#0a0f1c">Message M. Yousaf for Code</a>
-          <a class="btn" href="/download.html" style="background:transparent;border:1px solid #94a3b8;color:#fff">Unlock with code &rarr;</a>
+      <h3 class="d subhead">Menu-by-Menu SPSS Execution Paths</h3>
+      <ul class="q-list">
+        <li><strong>Independent t-test:</strong> <code>Analyze &gt; Compare Means &gt; Independent-Samples T Test</code>. Outcome to <em>Test Variable(s)</em>, grouping factor to <em>Grouping Variable</em> &rarr; <em>Define Groups</em> (1, 2).</li>
+        <li><strong>One-Way ANOVA:</strong> <code>Analyze &gt; Compare Means &gt; One-Way ANOVA</code>. Select <em>Post Hoc &gt; Tukey</em>, and <em>Options &gt; Homogeneity of variance test</em>.</li>
+        <li><strong>Pearson Correlation:</strong> <code>Analyze &gt; Correlate &gt; Bivariate</code>. Select Pearson, Two-tailed, Flag significant correlations.</li>
+        <li><strong>Chi-Square:</strong> <code>Analyze &gt; Descriptive Statistics &gt; Crosstabs</code>. Under <em>Statistics</em> check <em>Chi-square</em> and <em>Phi and Cramer's V</em>; under <em>Cells</em> check <em>Observed</em> and <em>Expected</em>.</li>
+      </ul>
+
+      <h3 class="d subhead">Ready-to-Adapt Result Reporting Templates</h3>
+      <div class="frame-box">
+        <p><strong>Independent t-test:</strong> An independent-samples t-test was conducted to compare scores between Group A (M = [M1], SD = [SD1]) and Group B (M = [M2], SD = [SD2]). There was a significant difference in scores; <em>t([df]) = [t-val], p = .024, d = 0.52</em>.</p>
+        <p><strong>ANOVA:</strong> A one-way between-subjects ANOVA was conducted to compare the effect of [Factor] on [Outcome]. There was a significant effect; <em>F([df1], [df2]) = [val], p = .008, &eta;&sup2; = .14</em>. Post-hoc comparisons using the Tukey HSD test indicated significant group differences.</p>
+        <p><strong>Correlation:</strong> [Variable 1] and [variable 2] were positively correlated, <em>r([df]) = [val], p = .014</em>.</p>
+        <p style="margin:0"><strong>Chi-square:</strong> A chi-square test of independence showed a significant association between shift timing and protocol compliance, <em>&chi;&sup2;([df], N = [N]) = [val], p = .031, Cramer's V = .22</em>.</p>
+      </div>
+
+      <div class="tip-box">
+        <strong>Reporting Rule:</strong> Report exact p-values (e.g. <code>p = .032</code>), unless SPSS shows <code>.000</code>, which must be reported as <code>p &lt; .001</code>. Always report effect sizes alongside significance.
+      </div>
+
+      <div class="help-panel">
+        <div>
+          <span class="help-panel-tag">Where M. Yousaf Helps</span>
+          <h3 class="d">SPSS &amp; SmartPLS Analysis Support</h3>
+          <p>Full data screening, statistical testing, APA table generation, and 1-on-1 explanation of your output (from PKR 8,000 / ~$45 USD).</p>
         </div>
+        <a href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20need%20help%20with%20SPSS%20or%20SmartPLS%20analysis." class="wa-btn">Message on WhatsApp &rarr;</a>
       </div>
     </article>
 
@@ -371,41 +507,65 @@ tr:nth-child(even) td{background:#f8fafc}
     <article id="ch6" class="chapter">
       <span class="chap-tag">Chapter 06</span>
       <h2 class="d">Write, cite and format cleanly</h2>
-      <p>Structure carries the reader. For most empirical papers, follow IMRaD: Introduction, Methods, Results and Discussion:</p>
+      <div class="problem-card">
+        <strong>The Real-World Problem:</strong> Treating the literature review like an annotated shopping list ("Author A said X. Author B said Y."), or mixing personal interpretations into the Results chapter before reaching the Discussion.
+      </div>
+      <p>Structure carries the reader. For empirical theses, follow the IMRaD framework:</p>
 
-      <ul class="q-list">
-        <li><strong>Paraphrase honestly:</strong> Restate the idea in your own structure and still cite the source.</li>
-        <li><strong>Stay consistent:</strong> One citation style, applied everywhere.</li>
-        <li><strong>Match the template:</strong> Margins, headings, tables and figure captions.</li>
-        <li><strong>Write the abstract last:</strong> An abstract summarises what you actually found, so write it after the results are final.</li>
-      </ul>
-
-      <h3 class="d subhead">Citation quick reference (Journal article)</h3>
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Style</th><th>Pattern</th></tr></thead>
+          <thead>
+            <tr><th>Section</th><th>What You Must Deliver</th><th>Common Student Mistake</th></tr>
+          </thead>
           <tbody>
-            <tr><td><strong>APA 7</strong></td><td>Author, A. A., &amp; Author, B. B. (Year). Title of article. <em>Journal Name</em>, volume(issue), pages. https://doi.org/...</td></tr>
-            <tr><td><strong>Vancouver</strong></td><td>Author AA, Author BB. Title of article. Journal Abbrev. Year;volume(issue):pages.</td></tr>
-            <tr><td><strong>IEEE</strong></td><td>[1] A. Author and B. Author, "Title of article," <em>Journal Abbrev.</em>, vol. x, no. x, pp. xx-xx, Year.</td></tr>
-            <tr><td><strong>Harvard</strong></td><td>Author, A. and Author, B. (Year) 'Title of article', <em>Journal Name</em>, volume(issue), pp. xx-xx.</td></tr>
+            <tr><td><strong>Introduction</strong></td><td>Problem statement, identified research gap, objectives, significance.</td><td>Starting with broad platitudes; failing to name the exact gap.</td></tr>
+            <tr><td><strong>Literature Review</strong></td><td>Thematic synthesis across themes; conceptual framework.</td><td>Listing one study per paragraph with zero cross-synthesis.</td></tr>
+            <tr><td><strong>Methodology</strong></td><td>Design, sample justification, instruments, validity/reliability, analysis plan.</td><td>Too brief for an independent researcher to replicate.</td></tr>
+            <tr><td><strong>Results</strong></td><td>Objective-by-objective presentation of tables and findings.</td><td>Introducing opinions or discussing broader literature findings here.</td></tr>
+            <tr><td><strong>Discussion</strong></td><td>Comparing findings with prior studies; implications and limits.</td><td>Merely re-listing percentages without explaining why.</td></tr>
+            <tr><td><strong>Conclusion</strong></td><td>Direct answers to research questions; recommendations.</td><td>Introducing brand-new data or citations not previously presented.</td></tr>
           </tbody>
         </table>
       </div>
 
-      <div class="card-box">
-        <strong>The Paraphrasing Test:</strong> Close the source and explain the idea from memory. Then compare: if you copied its sentence structure or key phrases, rewrite it again and cite it either way.
+      <h3 class="d subhead">Citation Quick Reference (Journal Article Pattern)</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Style</th><th>Reference List Pattern</th></tr></thead>
+          <tbody>
+            <tr><td><strong>APA 7th</strong></td><td>Author, A. A., &amp; Author, B. B. (2024). Title of journal article. <em>Journal of Healthcare Management</em>, 18(2), 112&ndash;124. https://doi.org/10.1016/j.jhm.2024.01.005</td></tr>
+            <tr><td><strong>Vancouver</strong></td><td>Author AA, Author BB. Title of journal article. J Healthc Manag. 2024;18(2):112-24.</td></tr>
+            <tr><td><strong>IEEE</strong></td><td>[1] A. A. Author and B. B. Author, "Title of journal article," <em>J. Healthc. Manag.</em>, vol. 18, no. 2, pp. 112&ndash;124, 2024.</td></tr>
+            <tr><td><strong>Harvard</strong></td><td>Author, A.A. and Author, B.B. (2024) 'Title of journal article', <em>Journal of Healthcare Management</em>, 18(2), pp. 112&ndash;124.</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- Locked Teaser -->
-      <div class="locked-box">
-        <div class="locked-badge">&#128274; Continues in Full Edition</div>
-        <h3 class="d" style="font-size:22px;margin:0 0 10px;color:#fff">Chapter-by-chapter writing checklist &amp; style sheets</h3>
-        <p>Access the detailed section-by-section breakdown (Introduction, Literature Review, Methods, Results, Discussion, Conclusion) highlighting common student mistakes and complete formatting checklists.</p>
-        <div class="locked-actions">
-          <a class="btn" href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20am%20reading%20Chapter%206%20and%20need%20the%20full%20guide%20access%20code." style="background:#ff6b2c;color:#0a0f1c">Message M. Yousaf for Code</a>
-          <a class="btn" href="/download.html" style="background:transparent;border:1px solid #94a3b8;color:#fff">Unlock with code &rarr;</a>
+      <h3 class="d subhead">The Honest Paraphrasing Test</h3>
+      <div class="tip-box">
+        <strong>How to Paraphrase Legally:</strong><br>
+        1. Read the source paragraph twice until you understand its underlying argument.<br>
+        2. Close the browser tab or paper completely.<br>
+        3. Explain the finding in your own words onto a blank screen as if teaching a peer.<br>
+        4. Open the source and compare sentence structures. If your draft mimics the original word order, rewrite it from scratch.<br>
+        5. Add the parenthetical in-text citation immediately. <em>Paraphrased ideas still belong to the original author.</em>
+      </div>
+
+      <h3 class="d subhead">Pre-Submission Formatting Checklist</h3>
+      <ul class="q-list">
+        <li>Consistent heading hierarchy (H1, H2, H3) throughout using Word Styles.</li>
+        <li>Every table and figure is numbered, captioned, and explicitly referenced in paragraph text ("As shown in Table 4.2...").</li>
+        <li>100% two-way match: every citation in text appears in the reference list; every list item is cited.</li>
+        <li>Write the abstract last: 200&ndash;250 words covering Background, Methods, Core Findings (with numbers), and Conclusion.</li>
+      </ul>
+
+      <div class="help-panel">
+        <div>
+          <span class="help-panel-tag">Where M. Yousaf Helps</span>
+          <h3 class="d">Proofreading, Academic Editing &amp; Formatting</h3>
+          <p>Thorough line editing, tracked changes, marginal explanations, and university template compliance on your own draft.</p>
         </div>
+        <a href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20need%20editing%20and%20formatting%20support%20on%20my%20draft." class="wa-btn">Message on WhatsApp &rarr;</a>
       </div>
     </article>
 
@@ -413,40 +573,57 @@ tr:nth-child(even) td{background:#f8fafc}
     <article id="ch7" class="chapter">
       <span class="chap-tag">Chapter 07</span>
       <h2 class="d">Prepare for your viva defense</h2>
-      <p>Examiners rarely try to trick you. They test whether you understand your own work:</p>
+      <div class="problem-card">
+        <strong>The Real-World Problem:</strong> Students viewing examiners as hostile adversaries trying to "catch them out", leading to defensive arguments, ungrounded justifications, and verbal rambling.
+      </div>
+      <p>Examiners evaluate whether you comprehend the boundaries of what you did. They test three core fundamentals:</p>
 
       <ul class="q-list">
-        <li><strong>Why this method?</strong> Link it back to your question.</li>
-        <li><strong>What are the limits?</strong> Name them calmly before they do.</li>
-        <li><strong>What does it add?</strong> State your contribution in two clear sentences.</li>
+        <li><strong>Methodological Justification:</strong> Why did you select this specific approach over available alternatives?</li>
+        <li><strong>Intellectual Honesty:</strong> Can you candidly identify your study's limitations before the committee points them out?</li>
+        <li><strong>Core Contribution:</strong> Can you summarize what your data adds to the literature in two precise sentences?</li>
       </ul>
 
-      <h3 class="d subhead">Answer structure: A-R-E</h3>
+      <h3 class="d subhead">The A-R-E Answering Framework</h3>
       <div class="card-box" style="border-left:4px solid #ff6b2c">
-        <strong>Answer (A):</strong> Answer directly in one sentence.<br>
-        <strong>Reason (R):</strong> Give the academic or methodological reason.<br>
-        <strong>Example (E):</strong> Add a concrete example from your own dataset or findings.<br>
-        <em>Stop talking, and let the examiner ask more.</em>
+        <strong>Answer (A) &bull; One direct sentence:</strong> Answer directly without hedging or apologizing. ("I chose an independent samples t-test because the dependent variable was measured on a continuous scale and satisfied normality assumptions.")<br><br>
+        <strong>Reason (R) &bull; Academic logic:</strong> Give the cited rationale. ("According to Field (2018), when skewness and kurtosis fall between &plusmn;1.0, parametric tests provide superior statistical power.")<br><br>
+        <strong>Example (E) &bull; Dataset evidence:</strong> Anchor the answer in your actual thesis findings. ("In my dataset, the Shapiro-Wilk test yielded p = .18 for Group A and p = .24 for Group B, confirming acceptable normality.")<br><br>
+        <em>Stop talking, and let the examiner ask their next question.</em>
       </div>
 
-      <h3 class="d subhead">The week before defense checklist</h3>
+      <h3 class="d subhead">Committee Question Bank</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr><th>Domain</th><th>Questions You Must Prepare and Rehearse Out Loud</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Purpose &amp; Gap</strong></td><td>Why did you choose this topic? What exact gap does it fill? What is your primary contribution?</td></tr>
+            <tr><td><strong>Methodology</strong></td><td>Why this design? Why this specific sampling frame? How did you control for confounding variables?</td></tr>
+            <tr><td><strong>Instruments</strong></td><td>How was validity and reliability established? Did you pilot test the tool? How was consent recorded?</td></tr>
+            <tr><td><strong>Analysis</strong></td><td>Why did you choose this test over non-parametric alternatives? How did you treat missing data?</td></tr>
+            <tr><td><strong>Results &amp; Limits</strong></td><td>Which finding surprised you? Which result do you trust least, and why? What are your limitations?</td></tr>
+            <tr><td><strong>Future Impact</strong></td><td>If you had six more months, what would you do differently? Who should act on these findings?</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="d subhead">The 7-Day Pre-Viva Countdown</h3>
       <ul class="q-list">
-        <li>Re-read your abstract, objectives and conclusions until you can say them without notes.</li>
-        <li>Know every table: what it shows and why it matters.</li>
-        <li>Time your presentation and rehearse with a colleague who asks questions.</li>
-        <li>Prepare a calm, one-line answer to "What is your biggest limitation?"</li>
-        <li>Arrive early and bring a printed copy with your key notes tabbed.</li>
+        <li><strong>Day 7 to 5:</strong> Re-read your Abstract, Objectives, and Conclusions until you can recite them without slides.</li>
+        <li><strong>Day 4 to 3:</strong> Review every single table: know sample size, test statistic, p-value, and effect size by heart.</li>
+        <li><strong>Day 2:</strong> Conduct a full timed slide rehearsal with an academic colleague or coach who interrupts with questions.</li>
+        <li><strong>Day 1:</strong> Prepare your bound copy with colored adhesive tabs for instant chapter and table navigation. Rest.</li>
       </ul>
 
-      <!-- Locked Teaser -->
-      <div class="locked-box">
-        <div class="locked-badge">&#128274; Continues in Full Edition</div>
-        <h3 class="d" style="font-size:22px;margin:0 0 10px;color:#fff">Full bank of likely committee questions &amp; mock viva prep</h3>
-        <p>Unlock the comprehensive bank of committee questions across purpose, design, tools, analysis, limits, and ethics, plus book a 1-on-1 mock viva session with M. Yousaf.</p>
-        <div class="locked-actions">
-          <a class="btn" href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20am%20preparing%20for%20my%20viva%20and%20would%20like%20the%20full%20guide%20access%20code." style="background:#ff6b2c;color:#0a0f1c">Message M. Yousaf for Code</a>
-          <a class="btn" href="/download.html" style="background:transparent;border:1px solid #94a3b8;color:#fff">Unlock with code &rarr;</a>
+      <div class="help-panel">
+        <div>
+          <span class="help-panel-tag">Where M. Yousaf Helps</span>
+          <h3 class="d">Mock Viva Defense Coaching</h3>
+          <p>Experience an intensive 1-on-1 mock defense with direct, constructive feedback on your slide deck, verbal delivery, and answer structures.</p>
         </div>
+        <a href="https://wa.me/923296646824?text=Hi%20M.%20Yousaf%2C%20I%20need%20viva%20coaching%20and%20a%20mock%20defense." class="wa-btn">Message on WhatsApp &rarr;</a>
       </div>
     </article>
 
@@ -458,20 +635,20 @@ tr:nth-child(even) td{background:#f8fafc}
     <h2 class="d">Where to go from here</h2>
     <p>A guide can show you the way, but your topic, data and deadline are your own. If you want a second pair of eyes, M. Yousaf offers editing, SPSS/SmartPLS support, methodology coaching, and viva preparation on your own work.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
-      <a class="btn" href="https://wa.me/923296646824" style="background:#0a0f1c;color:#fff">WhatsApp +92 329 6646824</a>
+      <a class="btn" href="/assets/Research-Student-Field-Guide.pdf" download style="background:#0a0f1c;color:#fff">Download Full 27-Page PDF</a>
+      <a class="btn" href="https://wa.me/923296646824" style="background:#fff;color:#0a0f1c">WhatsApp +92 329 6646824</a>
       <a class="btn" href="mailto:quickservices489@gmail.com" style="border:2px solid #0a0f1c;color:#0a0f1c">Email quickservices489@gmail.com</a>
-      <a class="btn" href="/download.html" style="background:#fff;color:#0a0f1c">Unlock Full PDF Guide</a>
     </div>
   </div>
 </section>
 
 <footer class="site-footer">
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
-    <div><strong>Quick Services</strong> &bull; Academic Support &amp; Research Consulting</div>
+    <div><strong>Quick Services</strong> &bull; Academic Support &amp; Research Consulting &bull; Led by M. Yousaf</div>
     <div>
       <a href="/">Home</a> &bull;
       <a href="/guide.html">Free Guide</a> &bull;
-      <a href="/download.html">Code Portal</a> &bull;
+      <a href="/assets/Research-Student-Field-Guide.pdf" download>Download PDF</a> &bull;
       <a href="mailto:quickservices489@gmail.com">quickservices489@gmail.com</a>
     </div>
   </div>
@@ -479,9 +656,8 @@ tr:nth-child(even) td{background:#f8fafc}
 
 <div class="pad"></div>
 <div class="bar">
-  <a href="/assets/Research-Field-Guide-FREE.pdf" download style="background:#fff;color:#0a0f1c">Free PDF</a>
-  <a href="/download.html" style="border:1.5px solid #ff6b2c;color:#fdba74">Unlock Full</a>
-  <a href="https://wa.me/923296646824" style="background:#ff6b2c;color:#0a0f1c">WhatsApp</a>
+  <a href="/assets/Research-Student-Field-Guide.pdf" download style="background:#ff6b2c;color:#0a0f1c">Download PDF</a>
+  <a href="https://wa.me/923296646824" style="background:#fff;color:#0a0f1c">WhatsApp M. Yousaf</a>
 </div>
 
 </body>

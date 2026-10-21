@@ -7,10 +7,6 @@ access-codes.txt
 *.key
 *.pem
 
-# Local generator tools (kept local, excluded from deployment)
-tools/
-tools/*
-
 # OS & build artifacts
 .DS_Store
 Thumbs.db

@@ -24,6 +24,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Exclude local tools from site deployment
+        run: rm -rf tools
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
