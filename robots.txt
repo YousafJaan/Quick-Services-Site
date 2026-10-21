@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /download.html
+Disallow: /download
+Disallow: /tools/
+
+Sitemap: https://quick-services-site.pages.dev/sitemap.xml

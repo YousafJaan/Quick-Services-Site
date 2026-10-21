@@ -1,0 +1,20 @@
+# Sensitive PDFs & codes (NEVER commit or deploy)
+Research-Field-Guide-FULL.pdf
+*FULL.pdf
+*full.pdf
+access-codes.txt
+*access-codes*
+*.key
+*.pem
+
+# Local generator tools (kept local, excluded from deployment)
+tools/
+tools/*
+
+# OS & build artifacts
+.DS_Store
+Thumbs.db
+node_modules/
+.venv/
+__pycache__/
+*.log
