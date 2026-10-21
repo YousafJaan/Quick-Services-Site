@@ -280,7 +280,7 @@ table.clean-tbl tr:nth-child(even) td {{
   <div style="border-top:1px solid #1e293b;padding-top:16px;display:flex;justify-content:space-between;align-items:flex-end">
     <div>
       <div class="d" style="font-size:17px;color:#fff">M. Yousaf</div>
-      <div style="font-size:12px;color:#94a3b8">Lead Academic Consultant, Quick Services</div>
+      <div style="font-size:12px;color:#94a3b8">Lead Academic Consultant &bull; MS English (BZU) &bull; 3 Years Exp (60+ Projects)</div>
       <div style="font-size:12px;color:#64748b;margin-top:4px">WhatsApp: +92 329 6646824 &bull; quickservices489@gmail.com</div>
     </div>
     <div style="text-align:right">
@@ -306,7 +306,7 @@ table.clean-tbl tr:nth-child(even) td {{
     </div>
     <div>
       <div class="d" style="font-size:16px;color:#0a0f1c">M. Yousaf</div>
-      <div style="font-size:12px;color:#64748b;margin-bottom:6px">Lead Academic Consultant &bull; [ADD: degrees & university] &bull; [ADD: years of experience]</div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:6px">Lead Academic Consultant &bull; MS English (BZU) &bull; 3 Years Experience &bull; 60+ Projects Completed</div>
       <p style="font-size:12.5px;line-height:1.45;margin:0">
         Every academic year, I review hundreds of dissertation drafts, proposal papers, and statistical datasets. Most struggling students are not lacking intelligence; they are simply trapped in avoidable methodological traps.
       </p>
