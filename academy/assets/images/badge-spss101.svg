@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" aria-label="SPSS Quantitative Analysis Badge" role="img">
+  <defs>
+    <filter id="soft-shadow" x="-8%" y="-8%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.06"/>
+    </filter>
+    <linearGradient id="badge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFAF7"/>
+      <stop offset="100%" stop-color="#F5EFE6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Octagon Container -->
+  <polygon points="60,12 140,12 188,60 188,140 140,188 60,188 12,140 12,60" 
+           fill="url(#badge-grad)" 
+           stroke="#E2D7CC" 
+           stroke-width="2" 
+           stroke-linejoin="round"
+           filter="url(#soft-shadow)"/>
+
+  <!-- Inner Hairline Octagon Accent -->
+  <polygon points="63,20 137,20 180,63 180,137 137,180 63,180 20,137 20,63" 
+           fill="none" 
+           stroke="#EADECF" 
+           stroke-width="1" 
+           stroke-dasharray="3 3"/>
+
+  <!-- Inner Artwork -->
+  <g transform="translate(0, 0)">
+    <!-- Tabular Spreadsheet Matrix Card -->
+    <rect x="46" y="52" width="108" height="96" rx="4" fill="#FAF8F5" stroke="#102B4E" stroke-width="2.5"/>
+    <!-- Header Row -->
+    <rect x="46" y="52" width="108" height="20" rx="4" fill="#DDE8DF" stroke="#102B4E" stroke-width="2"/>
+    <line x1="46" y1="72" x2="154" y2="72" stroke="#102B4E" stroke-width="2"/>
+    
+    <!-- Grid Column Lines -->
+    <line x1="82" y1="52" x2="82" y2="148" stroke="#102B4E" stroke-width="1.5"/>
+    <line x1="118" y1="52" x2="118" y2="148" stroke="#102B4E" stroke-width="1.5"/>
+    
+    <!-- Grid Row Lines -->
+    <line x1="46" y1="96" x2="154" y2="96" stroke="#E2D7CC" stroke-width="1.5"/>
+    <line x1="46" y1="122" x2="154" y2="122" stroke="#E2D7CC" stroke-width="1.5"/>
+
+    <!-- Column Headers -->
+    <text x="64" y="66" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="bold" fill="#102B4E" text-anchor="middle">VAR_1</text>
+    <text x="100" y="66" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="bold" fill="#102B4E" text-anchor="middle">MEAN</text>
+    <text x="136" y="66" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="bold" fill="#B95335" text-anchor="middle">SIG.</text>
+
+    <!-- Regression Trendline Overlay Across Table -->
+    <line x1="54" y1="138" x2="146" y2="82" stroke="#B95335" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Scatter Plot Points -->
+    <circle cx="62" cy="130" r="3" fill="#102B4E"/>
+    <circle cx="86" cy="120" r="3" fill="#102B4E"/>
+    <circle cx="106" cy="102" r="3" fill="#102B4E"/>
+    <circle cx="122" cy="98" r="3" fill="#102B4E"/>
+    <circle cx="138" cy="84" r="3.5" fill="#B95335"/>
+
+    <text x="100" y="164" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="600" fill="#637083" text-anchor="middle">p &lt; .001 ANOVA</text>
+  </g>
+</svg>

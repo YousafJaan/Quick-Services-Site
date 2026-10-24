@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" aria-label="Citation & Referencing Mastery Badge" role="img">
+  <defs>
+    <filter id="soft-shadow" x="-8%" y="-8%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.06"/>
+    </filter>
+    <linearGradient id="badge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFAF7"/>
+      <stop offset="100%" stop-color="#F5EFE6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Octagon Container -->
+  <polygon points="60,12 140,12 188,60 188,140 140,188 60,188 12,140 12,60" 
+           fill="url(#badge-grad)" 
+           stroke="#E2D7CC" 
+           stroke-width="2" 
+           stroke-linejoin="round"
+           filter="url(#soft-shadow)"/>
+
+  <!-- Inner Hairline Octagon Accent -->
+  <polygon points="63,20 137,20 180,63 180,137 137,180 63,180 20,137 20,63" 
+           fill="none" 
+           stroke="#EADECF" 
+           stroke-width="1" 
+           stroke-dasharray="3 3"/>
+
+  <!-- Inner Artwork -->
+  <g transform="translate(0, 0)">
+    <!-- Parenthetical Quotation Marks -->
+    <g transform="translate(62, 54)">
+      <path d="M 12,24 C 6,24 2,18 2,12 C 2,4 10,0 18,0 L 18,8 C 14,8 10,10 10,14 C 12,14 14,14 16,16 C 18,18 18,22 18,24 Z" fill="#B95335"/>
+      <path d="M 32,24 C 26,24 22,18 22,12 C 22,4 30,0 38,0 L 38,8 C 34,8 30,10 30,14 C 32,14 34,14 36,16 C 38,18 38,22 38,24 Z" fill="#B95335"/>
+    </g>
+
+    <!-- Scholarly Document Page -->
+    <rect x="70" y="86" width="60" height="76" rx="4" fill="#FAF8F5" stroke="#102B4E" stroke-width="2.5"/>
+    <!-- Page Corner Fold -->
+    <polygon points="116,86 130,100 116,100" fill="#E2D7CC" stroke="#102B4E" stroke-width="1.5"/>
+    <!-- Text Lines -->
+    <line x1="80" y1="102" x2="110" y2="102" stroke="#637083" stroke-width="2" stroke-linecap="round"/>
+    <line x1="80" y1="112" x2="120" y2="112" stroke="#637083" stroke-width="2" stroke-linecap="round"/>
+    <line x1="80" y1="122" x2="108" y2="122" stroke="#B95335" stroke-width="2" stroke-linecap="round"/>
+    <line x1="80" y1="132" x2="116" y2="132" stroke="#637083" stroke-width="2" stroke-linecap="round"/>
+    <line x1="80" y1="142" x2="100" y2="142" stroke="#637083" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Reference Link Nodes -->
+    <circle cx="140" cy="72" r="8" fill="#FAF5F0" stroke="#102B4E" stroke-width="2"/>
+    <text x="140" y="75" font-family="'Newsreader', Georgia, serif" font-size="9" font-style="italic" font-weight="bold" fill="#102B4E" text-anchor="middle">p</text>
+    <path d="M 126,90 L 134,78" fill="none" stroke="#B95335" stroke-width="1.5" stroke-dasharray="2 2"/>
+  </g>
+</svg>

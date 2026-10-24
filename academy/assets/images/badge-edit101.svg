@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" aria-label="Academic Writing & Proofreading Badge" role="img">
+  <defs>
+    <filter id="soft-shadow" x="-8%" y="-8%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.06"/>
+    </filter>
+    <linearGradient id="badge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFAF7"/>
+      <stop offset="100%" stop-color="#F5EFE6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Octagon Container -->
+  <polygon points="60,12 140,12 188,60 188,140 140,188 60,188 12,140 12,60" 
+           fill="url(#badge-grad)" 
+           stroke="#E2D7CC" 
+           stroke-width="2" 
+           stroke-linejoin="round"
+           filter="url(#soft-shadow)"/>
+
+  <!-- Inner Hairline Octagon Accent -->
+  <polygon points="63,20 137,20 180,63 180,137 137,180 63,180 20,137 20,63" 
+           fill="none" 
+           stroke="#EADECF" 
+           stroke-width="1" 
+           stroke-dasharray="3 3"/>
+
+  <!-- Inner Artwork -->
+  <g transform="translate(0, 0)">
+    <!-- Fountain Pen Nib -->
+    <g transform="translate(100, 84) rotate(-45) translate(-100, -84)">
+      <!-- Nib Body -->
+      <path d="M 88,50 L 112,50 L 114,88 L 100,126 L 86,88 Z" fill="#FAF8F5" stroke="#102B4E" stroke-width="2.5" stroke-linejoin="round"/>
+      <!-- Breather Hole and Slit -->
+      <circle cx="100" cy="88" r="3.5" fill="#B95335"/>
+      <line x1="100" y1="92" x2="100" y2="126" stroke="#102B4E" stroke-width="2"/>
+      <path d="M 94,62 L 106,62" stroke="#637083" stroke-width="1.5"/>
+      <!-- Barrel Collar -->
+      <rect x="86" y="38" width="28" height="12" rx="2" fill="#102B4E" stroke="#102B4E"/>
+    </g>
+
+    <!-- Guided Editorial Baseline Waves -->
+    <path d="M 44,142 C 60,134 76,148 94,140 C 112,132 130,146 156,138" fill="none" stroke="#637083" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 54,156 C 70,148 86,162 104,154 C 122,146 140,160 152,154" fill="none" stroke="#B95335" stroke-width="1.5" stroke-dasharray="3 3" stroke-linecap="round"/>
+    
+    <!-- Editorial Caret Proofing Mark -->
+    <path d="M 124,128 L 130,118 L 136,128" fill="none" stroke="#B95335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

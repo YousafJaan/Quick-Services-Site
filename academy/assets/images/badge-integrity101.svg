@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" aria-label="Research Integrity Badge" role="img">
+  <defs>
+    <filter id="soft-shadow" x="-8%" y="-8%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.06"/>
+    </filter>
+    <linearGradient id="badge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFAF7"/>
+      <stop offset="100%" stop-color="#F5EFE6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Octagon Container -->
+  <polygon points="60,12 140,12 188,60 188,140 140,188 60,188 12,140 12,60" 
+           fill="url(#badge-grad)" 
+           stroke="#E2D7CC" 
+           stroke-width="2" 
+           stroke-linejoin="round"
+           filter="url(#soft-shadow)"/>
+
+  <!-- Inner Hairline Octagon Accent -->
+  <polygon points="63,20 137,20 180,63 180,137 137,180 63,180 20,137 20,63" 
+           fill="none" 
+           stroke="#EADECF" 
+           stroke-width="1" 
+           stroke-dasharray="3 3"/>
+
+  <!-- Inner Artwork -->
+  <g transform="translate(0, 0)">
+    <!-- Integrity Verification Shield -->
+    <path d="M 100,42 L 144,56 C 144,102 118,136 100,148 C 82,136 56,102 56,56 Z" 
+          fill="#FAF8F5" stroke="#102B4E" stroke-width="2.5" stroke-linejoin="round"/>
+    
+    <!-- Balance Scales inside Shield -->
+    <!-- Center Beam -->
+    <line x1="100" y1="62" x2="100" y2="118" stroke="#102B4E" stroke-width="2.5" stroke-linecap="round"/>
+    <polygon points="94,118 106,118 102,124 98,124" fill="#102B4E"/>
+    <!-- Crossbar -->
+    <line x1="74" y1="72" x2="126" y2="72" stroke="#102B4E" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="100" cy="72" r="3" fill="#B95335"/>
+    
+    <!-- Left Pan -->
+    <line x1="76" y1="72" x2="68" y2="92" stroke="#637083" stroke-width="1.5"/>
+    <line x1="76" y1="72" x2="84" y2="92" stroke="#637083" stroke-width="1.5"/>
+    <path d="M 64,92 C 64,100 88,100 88,92 Z" fill="#DDE8DF" stroke="#102B4E" stroke-width="2"/>
+
+    <!-- Right Pan -->
+    <line x1="124" y1="72" x2="116" y2="92" stroke="#637083" stroke-width="1.5"/>
+    <line x1="124" y1="72" x2="132" y2="92" stroke="#637083" stroke-width="1.5"/>
+    <path d="M 112,92 C 112,100 136,100 136,92 Z" fill="#DDE8DF" stroke="#102B4E" stroke-width="2"/>
+
+    <!-- Verified Checkmark Badge at Bottom Right -->
+    <circle cx="134" cy="134" r="14" fill="#FAF5F0" stroke="#102B4E" stroke-width="2"/>
+    <path d="M 127,134 L 132,139 L 142,128" fill="none" stroke="#B95335" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

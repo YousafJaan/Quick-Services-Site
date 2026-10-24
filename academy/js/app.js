@@ -28,6 +28,15 @@ function getBaseDataPath() {
   return './data';
 }
 
+function getBaseAssetPath() {
+  const path = window.location.pathname;
+  if (path.includes('/academy')) {
+    const idx = path.indexOf('/academy');
+    return path.substring(0, idx + '/academy'.length) + '/assets';
+  }
+  return './assets';
+}
+
 // Route 1: Catalog View (#/)
 router.addRoute('/', async () => {
   try {
@@ -542,60 +551,60 @@ function renderCatalog(courses) {
   const currentLang = store.getEnglishLevel();
 
   mainEl.innerHTML = `
-    <!-- Top Hero Section: Two-Column Editorial Layout -->
-    <section class="hero-editorial-section">
+    <!-- Top Hero Section: Claude Academy Warm Blush Banner -->
+    <section class="claude-hero-banner">
       <div class="wrap">
-        <div class="hero-grid-2col">
+        <div class="claude-hero-grid">
           
           <!-- Left Column: Copy & Actions -->
-          <div class="hero-left-col">
+          <div class="claude-hero-copy">
             <!-- Verified HEC Alignment Pill -->
-            <div class="hero-hec-badge">
-              <span class="badge-dot"></span>
-              <span>HEC PAKISTAN ALIGNED • FREE POSTGRADUATE RESEARCH LMS</span>
+            <div class="claude-breadcrumb-tag">
+              <span class="dot"></span>
+              <span>HEC Pakistan Aligned • Free Postgraduate Research LMS</span>
             </div>
 
-            <!-- Master Headline -->
-            <h1 class="hero-headline">
-              Build stronger research. Write with <em class="hero-highlight">clarity.</em>
+            <!-- Master Headline in Editorial Serif -->
+            <h1 class="claude-hero-title">
+              Build stronger research. Write with <em>clarity.</em>
             </h1>
 
             <!-- Supporting Text -->
-            <p class="hero-subtext">
+            <p class="claude-hero-desc">
               Practical academic training for postgraduate researchers. Strengthen your research design, academic writing, statistical analysis and reporting skills through guided lessons and interactive learning tools.
             </p>
 
-            <!-- 3 CTAs matching Brief -->
-            <div class="hero-actions-group">
-              <a href="#courses-section" class="btn btn-primary">
+            <!-- Claude Academy Metadata Pills Strip -->
+            <div class="claude-meta-strip">
+              <span class="claude-meta-pill">📖 9 Complete Tracks</span>
+              <span class="claude-meta-pill">⏱️ 32 Accredited Hours</span>
+              <span class="claude-meta-pill">📝 168 Modular Lessons</span>
+              <span class="claude-meta-pill">🎓 Verifiable Credentials</span>
+              <span class="claude-meta-pill">🔬 Sentence Clarity Lab</span>
+            </div>
+
+            <!-- Claude Academy Action Pills -->
+            <div class="claude-hero-actions">
+              <a href="#courses-section" class="claude-btn-dark">
                 ➔ Explore Courses
               </a>
-              <a href="#certificates" class="btn btn-secondary">
+              <a href="#certificates" class="claude-btn-subtle">
                 <span>📄</span> View Credentials
               </a>
-              <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="btn btn-secondary">
+              <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="claude-btn-subtle">
                 <span>📖</span> Open Field Guide
               </a>
             </div>
-
-            <!-- Value Proof Badges Strip -->
-            <div class="hero-proof-strip">
-              <div class="hero-proof-item">
-                <span>🎓</span> <span>9 Complete Tracks</span>
-              </div>
-              <div class="hero-proof-item">
-                <span>🛡️</span> <span>HEC Aligned Standards</span>
-              </div>
-              <div class="hero-proof-item">
-                <span>🔬</span> <span>Sentence Clarity Lab</span>
-              </div>
-            </div>
           </div>
 
-          <!-- Right Column: Academic Desk Visual SVG -->
-          <div class="hero-right-col">
-            <div class="hero-desk-visual-wrap">
-              ${getAcademicDeskSvg()}
+          <!-- Right Column: Claude Academy Signature Decagonal Emblem -->
+          <div class="claude-hero-badge-wrap">
+            <div class="claude-badge-decagon">
+              <img src="${getBaseAssetPath()}/images/hero-academy-emblem.svg" 
+                   alt="Quick Academy Master Academic Emblem" 
+                   class="claude-badge-img" 
+                   width="260" 
+                   height="260">
             </div>
           </div>
 
@@ -1031,86 +1040,150 @@ function renderCourseCard(c) {
 }
 
 /* ==========================================================================
-   Course Overview Page
+   Course Overview Page (Claude Academy Aligned Architecture)
    ========================================================================== */
 function renderCourseOverview(course) {
   const hours = (course.minutes / 60).toFixed(1);
   const totalLessons = course.modules.reduce((acc, m) => acc + (m.lessons || []).length, 0);
   const progress = store.getCourseProgress(course.id, totalLessons);
   const firstLessonId = course.modules?.[0]?.lessons?.[0]?.id || 't1';
+  const baseAsset = getBaseAssetPath();
 
   mainEl.innerHTML = `
-    <div style="background: linear-gradient(180deg, rgba(185, 83, 53, 0.05) 0%, rgba(250, 247, 241, 0) 100%); padding: 52px 0 40px; border-bottom: 1px solid var(--qsa-border);">
+    <!-- Course Overview Hero Banner: Claude Academy Blush Banner -->
+    <div class="claude-hero-banner">
       <div class="wrap">
-        <a href="#/" style="color: var(--qsa-terracotta); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 16px;">
-          ← Back to Course Catalog
-        </a>
-        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
-          <span class="tag tag-clay">${course.category}</span>
-          <span class="tag tag-peach">${course.level}</span>
-        </div>
-        <h1 style="font-size: clamp(30px, 5vw, 44px); color: var(--qsa-text-primary); margin-bottom: 14px; font-weight: 400;">
-          ${course.title}
-        </h1>
-        <p style="font-size: 17px; color: var(--qsa-text-secondary); max-width: 740px; line-height: 1.6; margin-bottom: 24px;">
-          ${course.tagline}
-        </p>
-        <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-          <a href="#lesson-${course.id}-${firstLessonId}" class="btn btn-primary">
-            ${progress > 0 ? 'Continue Learning ➔' : 'Start First Lesson ➔'}
-          </a>
-          <span style="color: var(--qsa-text-muted); font-size: 14px; font-weight: 500;">
-            ${course.modules.length} Modules • ${totalLessons} Lessons • ${hours} Hours total
-          </span>
+        <div class="claude-hero-grid">
+          
+          <!-- Left: Breadcrumb, Title, Tagline, Pills, Action -->
+          <div class="claude-hero-copy">
+            <a href="#/" class="claude-breadcrumb-tag" style="text-decoration: none; margin-bottom: 16px;">
+              <span style="font-size: 15px;">←</span> <span>Academy / Courses</span>
+            </a>
+            
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 10px;">
+              <span class="tag tag-clay">${course.category}</span>
+              <span class="tag tag-peach">${course.level}</span>
+            </div>
+
+            <h1 class="claude-hero-title">
+              ${course.title}
+            </h1>
+
+            <p class="claude-hero-desc">
+              ${course.tagline || course.description}
+            </p>
+
+            <div class="claude-meta-strip">
+              <span class="claude-meta-pill">📖 ${totalLessons} Lessons</span>
+              <span class="claude-meta-pill">⏱️ ${hours} Hours total</span>
+              <span class="claude-meta-pill">📝 Practical Quizzes</span>
+              <span class="claude-meta-pill">🎓 Verifiable Badge</span>
+              ${progress > 0 ? `<span class="claude-meta-pill" style="color: var(--qsa-terracotta); font-weight: 700;">✓ ${progress}% Completed</span>` : ''}
+            </div>
+
+            <div class="claude-hero-actions">
+              <a href="#lesson-${course.id}-${firstLessonId}" class="claude-btn-dark">
+                ${progress > 0 ? 'Continue Course ➔' : 'Start Course ➔'}
+              </a>
+              <a href="#curriculum-breakdown" class="claude-btn-subtle">
+                <span>📑</span> View Syllabus
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Hosted Decagonal Course Badge -->
+          <div class="claude-hero-badge-wrap">
+            <div class="claude-badge-decagon">
+              <img src="${baseAsset}/images/badge-${course.id}.svg" 
+                   alt="${course.title} Badge" 
+                   class="claude-badge-img" 
+                   width="250" 
+                   height="250"
+                   onerror="this.onerror=null; this.src='${baseAsset}/images/hero-academy-emblem.svg';">
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <div class="wrap" style="padding: 52px 20px 72px;">
-      <div style="display: grid; grid-template-columns: 1fr; gap: 36px;">
-        <!-- Learning Outcomes -->
-        <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 32px;">
-          <h3 style="color: var(--qsa-text-primary); margin-bottom: 16px; font-size: 22px;">What You Will Master</h3>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
-            ${(course.outcomes || []).map(o => `
-              <div style="display: flex; gap: 12px; align-items: flex-start;">
-                <span style="color: #15803d; font-weight: 800; font-size: 16px;">✓</span>
-                <span style="color: var(--qsa-text-secondary); font-size: 14.5px; line-height: 1.5;">${o}</span>
-              </div>`).join('')}
-          </div>
-        </div>
-
-        <!-- Curriculum Module Breakdown -->
-        <div>
-          <h3 style="color: var(--qsa-text-primary); margin-bottom: 20px; font-size: 22px;">Curriculum by Module</h3>
-          <div style="display: flex; flex-direction: column; gap: 18px;">
-            ${course.modules.map((m, idx) => `
-              <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 24px;">
-                <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); margin-bottom: 4px;">
-                  Module ${idx + 1}
-                </div>
-                <h4 style="font-size: 19px; margin: 0 0 6px; font-family: var(--qsa-font-serif); font-weight: 500;">${m.title}</h4>
-                <p style="font-size: 13.5px; color: var(--qsa-text-muted); margin-bottom: 16px;">${m.description}</p>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  ${(m.lessons || []).map(l => {
-                    const done = store.isLessonComplete(course.id, l.id);
-                    return `
-                      <a href="#lesson-${course.id}-${l.id}" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--qsa-bg-subtle); border-radius: 8px; text-decoration: none; font-size: 14px; color: var(--qsa-text-primary); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                          <span style="color: ${done ? '#15803d' : 'var(--qsa-text-muted)'}; font-weight: 800;">
-                            ${done ? '✓' : '○'}
-                          </span>
-                          <span style="font-weight: 500;">${l.title}</span>
-                          <span class="tag tag-peach" style="font-size: 10px; padding: 2px 7px;">${l.type}</span>
-                        </div>
-                        <span style="font-size: 12.5px; color: var(--qsa-text-muted);">${l.minutes}m</span>
-                      </a>`;
-                  }).join('')}
-                </div>
-              </div>`).join('')}
-          </div>
+    <!-- Main Course Detail Container -->
+    <div class="wrap" style="padding: 44px 20px 80px;">
+      
+      <!-- HEC Standards Notice Banner -->
+      <div class="claude-notice-banner">
+        <span class="claude-notice-icon">🛡️</span>
+        <div class="claude-notice-text">
+          <strong>HEC Pakistan Research Standards (2026):</strong> This curriculum is fully structured in accordance with Higher Education Commission guidelines for MPhil, MS, and PhD dissertation rigor and international publication indexing.
         </div>
       </div>
+
+      <!-- What You'll Learn Card with Chevron Bullets -->
+      <div class="claude-learn-card">
+        <h3 class="claude-learn-card-title">What you'll learn</h3>
+        <div class="claude-learn-grid">
+          ${(course.outcomes || []).map(o => `
+            <div class="claude-chevron-item">
+              <span class="chevron">›</span>
+              <span>${o}</span>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- Prerequisites & Who This Course Is For Section -->
+      <div class="claude-prereq-grid">
+        <div class="claude-prereq-card">
+          <h4>Prerequisites</h4>
+          <ul>
+            <li>Basic understanding of undergraduate/postgraduate research concepts.</li>
+            <li>No prior software or programming experience required; step-by-step guidance provided.</li>
+            <li>A current research proposal, thesis topic, or working dataset is helpful but optional.</li>
+          </ul>
+        </div>
+        <div class="claude-prereq-card">
+          <h4>Who this course is for</h4>
+          <ul>
+            <li>MPhil, MS, and PhD scholars preparing thesis proposals or empirical dissertations.</li>
+            <li>Early-career academic faculty and postgraduate researchers writing peer-reviewed papers.</li>
+            <li>Research supervisors seeking standardized pedagogical modules for their laboratory scholars.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Curriculum by Module Breakdown -->
+      <div id="curriculum-breakdown">
+        <h3 style="font-family: var(--qsa-font-serif); color: var(--qsa-primary-navy); margin-bottom: 22px; font-size: 26px; font-weight: 500;">
+          Curriculum by Module
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          ${course.modules.map((m, idx) => `
+            <div style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-card); padding: 26px 28px; box-shadow: var(--qsa-shadow-card);">
+              <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.6px; margin-bottom: 6px;">
+                Module ${idx + 1}
+              </div>
+              <h4 style="font-size: 20px; margin: 0 0 6px; font-family: var(--qsa-font-serif); font-weight: 500; color: var(--qsa-primary-navy);">${m.title}</h4>
+              <p style="font-size: 14px; color: var(--qsa-text-secondary); margin-bottom: 18px; line-height: 1.6;">${m.description}</p>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                ${(m.lessons || []).map(l => {
+                  const done = store.isLessonComplete(course.id, l.id);
+                  return `
+                    <a href="#lesson-${course.id}-${l.id}" style="display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; background: var(--qsa-bg-subtle); border-radius: 8px; text-decoration: none; font-size: 14px; color: var(--qsa-text-primary); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
+                      <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: ${done ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'}; font-weight: 800; font-size: 15px;">
+                          ${done ? '✓' : '○'}
+                        </span>
+                        <span style="font-weight: 500;">${l.title}</span>
+                        <span class="tag tag-peach" style="font-size: 10px; padding: 2px 7px;">${l.type}</span>
+                      </div>
+                      <span style="font-size: 12.5px; color: var(--qsa-text-muted); font-weight: 600;">${l.minutes}m</span>
+                    </a>`;
+                }).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>
+
     </div>`;
 }
 

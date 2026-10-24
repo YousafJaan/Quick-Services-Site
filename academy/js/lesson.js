@@ -107,88 +107,150 @@ function renderLessonPlayer(container, course, lesson) {
   const currentModule = course.modules.find(m => (m.lessons || []).some(l => l.id === lesson.id));
 
   container.innerHTML = `
-    <div class="wrap-narrow">
-      <div class="reader-canvas">
-        <!-- Reader Top Navigation Bar -->
-        <div class="reader-top-bar">
-          <a href="#course-${course.id}" class="reader-back-btn">
-            <span style="font-size: 15px;">←</span> <span>${course.title}</span>
-          </a>
-          <div class="reader-meta-group">
-            <button type="button" class="syllabus-pill-btn" id="open-syllabus-drawer-btn" title="Open course curriculum syllabus">
-              <span>📑 Syllabus</span>
-              <span class="syllabus-count">${currentIndex + 1} / ${allLessons.length}</span>
-            </button>
-            <span class="tag tag-clay">${(lesson.type || 'read').toUpperCase()}</span>
-            <span class="lesson-time-pill">${lesson.minutes || 10} min</span>
-          </div>
+    <div class="wrap" style="padding: 32px 20px 80px;">
+      <!-- Breadcrumb Bar -->
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+        <a href="#course-${course.id}" class="claude-breadcrumb-tag" style="text-decoration: none; margin-bottom: 0;">
+          <span style="font-size: 15px;">←</span> <span>Academy / ${course.title}</span>
+        </a>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button type="button" class="syllabus-pill-btn" id="open-syllabus-drawer-btn" title="Open course curriculum syllabus">
+            <span>📑 Syllabus</span>
+            <span class="syllabus-count">${currentIndex + 1} / ${allLessons.length}</span>
+          </button>
+          <span class="tag tag-clay">${(lesson.type || 'read').toUpperCase()}</span>
+          <span class="lesson-time-pill">${lesson.minutes || 10} min</span>
         </div>
+      </div>
 
-        <!-- Crisp Edge Header Card -->
-        <header class="reader-header-card">
-          <div class="reader-module-eyebrow">
-            ${currentModule ? currentModule.title : 'Curriculum'}
-          </div>
-          <h1 class="reader-lesson-title">
-            ${lesson.title}
-          </h1>
+      <!-- Two-Column Claude Academy Layout -->
+      <div class="claude-lesson-layout">
+        
+        <!-- Left Main Column: Lesson Reading & Interactive Content -->
+        <main class="claude-lesson-main">
+          <div class="reader-canvas">
+            
+            <!-- Crisp Edge Header Card -->
+            <header class="reader-header-card">
+              <div class="reader-module-eyebrow">
+                ${currentModule ? currentModule.title : 'Curriculum'}
+              </div>
+              <h1 class="reader-lesson-title">
+                ${lesson.title}
+              </h1>
 
-          <!-- Controls: Reading English Style & Depth -->
-          <div class="reader-controls-card">
-            <!-- English Style Switcher -->
-            <div class="reader-control-item">
-              <span class="control-label">English Style</span>
-              <div class="lang-level-switcher" id="reader-lang-switcher" title="Choose English explanation style">
-                <button type="button" class="lang-btn ${currentLang === 'simple' ? 'active' : ''}" data-lang="simple" title="Simple English for easy comprehension">Simple</button>
-                <button type="button" class="lang-btn ${currentLang === 'plain' ? 'active' : ''}" data-lang="plain" title="Plain academic English">Plain</button>
-                <button type="button" class="lang-btn ${currentLang === 'technical' ? 'active' : ''}" data-lang="technical" title="Advanced technical dissertation register">Tech</button>
+              <!-- Controls: Reading English Style & Depth -->
+              <div class="reader-controls-card">
+                <!-- English Style Switcher -->
+                <div class="reader-control-item">
+                  <span class="control-label">English Style</span>
+                  <div class="lang-level-switcher" id="reader-lang-switcher" title="Choose English explanation style">
+                    <button type="button" class="lang-btn ${currentLang === 'simple' ? 'active' : ''}" data-lang="simple" title="Simple English for easy comprehension">Simple</button>
+                    <button type="button" class="lang-btn ${currentLang === 'plain' ? 'active' : ''}" data-lang="plain" title="Plain academic English">Plain</button>
+                    <button type="button" class="lang-btn ${currentLang === 'technical' ? 'active' : ''}" data-lang="technical" title="Advanced technical dissertation register">Tech</button>
+                  </div>
+                </div>
+
+                <!-- Depth Controls (For Read Lessons) -->
+                ${lesson.type === 'read' ? `
+                  <div class="reader-control-item">
+                    <span class="control-label">Depth</span>
+                    <div class="depth-control">
+                      <button class="depth-btn" data-depth="quick">Quick</button>
+                      <button class="depth-btn active" data-depth="standard">Standard</button>
+                      <button class="depth-btn" data-depth="deep">Deep</button>
+                    </div>
+                  </div>` : ''}
+              </div>
+            </header>
+
+            <!-- Main Lesson Content Article Card -->
+            <article class="reader-article-card" id="lesson-article-body">
+              ${renderLessonBody(lesson, activeDepth, currentLang)}
+            </article>
+
+            <!-- Claude Academy Feedback Widget ("Was this helpful?") -->
+            <div class="claude-helpful-widget" id="claude-helpful-widget">
+              <div class="claude-helpful-title">Was this lesson helpful?</div>
+              <div class="claude-helpful-actions">
+                <button type="button" class="claude-helpful-btn" data-helpful="yes">
+                  <span>👍</span> <span>Yes, clear &amp; practical</span>
+                </button>
+                <button type="button" class="claude-helpful-btn" data-helpful="no">
+                  <span>👎</span> <span>Needs more explanation</span>
+                </button>
               </div>
             </div>
 
-            <!-- Depth Controls (For Read Lessons) -->
-            ${lesson.type === 'read' ? `
-              <div class="reader-control-item">
-                <span class="control-label">Depth</span>
-                <div class="depth-control">
-                  <button class="depth-btn" data-depth="quick">Quick</button>
-                  <button class="depth-btn active" data-depth="standard">Standard</button>
-                  <button class="depth-btn" data-depth="deep">Deep</button>
+            <!-- Complete Action Banner -->
+            <div style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-card); padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: var(--qsa-shadow-card); margin-top: 24px;">
+              <div>
+                <strong style="color: var(--qsa-primary-navy); font-size: 14.5px;">Finished this lesson?</strong>
+                <p style="margin: 2px 0 0; font-size: 13px; color: var(--qsa-text-secondary);">Save progress towards your verifiable course credential.</p>
+              </div>
+              <button class="btn btn-primary btn-sm" id="mark-complete-btn">
+                ${store.isLessonComplete(course.id, lesson.id) ? '✓ Completed' : 'Mark as Complete'}
+              </button>
+            </div>
+
+            <!-- Claude Academy Split Previous / Next Navigation Cards -->
+            <div class="claude-split-nav-cards">
+              ${prevLesson ? `
+                <a href="#lesson-${course.id}-${prevLesson.id}" class="claude-nav-card" title="Previous: ${prevLesson.title}">
+                  <span class="claude-nav-card-dir">← Previous Lesson</span>
+                  <h4 class="claude-nav-card-title">${prevLesson.title}</h4>
+                </a>` : `
+                <a href="#course-${course.id}" class="claude-nav-card" title="Course Overview">
+                  <span class="claude-nav-card-dir">← Course Overview</span>
+                  <h4 class="claude-nav-card-title">${course.title}</h4>
+                </a>`}
+
+              ${nextLesson ? `
+                <a href="#lesson-${course.id}-${nextLesson.id}" class="claude-nav-card" style="text-align: right;" title="Next: ${nextLesson.title}">
+                  <span class="claude-nav-card-dir">Next Lesson →</span>
+                  <h4 class="claude-nav-card-title">${nextLesson.title}</h4>
+                </a>` : `
+                <a href="#course-${course.id}" class="claude-nav-card" style="text-align: right;" title="Course Completed">
+                  <span class="claude-nav-card-dir">Track Completed 🏆</span>
+                  <h4 class="claude-nav-card-title">View Certificate &amp; Review</h4>
+                </a>`}
+            </div>
+
+          </div>
+        </main>
+
+        <!-- Right Column: Sticky Syllabus Sidebar (Claude Academy Style) -->
+        <aside class="claude-sticky-syllabus" aria-label="Course Curriculum">
+          <div class="claude-syllabus-head">
+            <div class="claude-syllabus-dropdown-label">Lesson ${currentIndex + 1} of ${allLessons.length}</div>
+            <div class="claude-syllabus-progress-count">${Math.round(((currentIndex + 1) / allLessons.length) * 100)}%</div>
+          </div>
+          
+          <div style="font-weight: 700; font-size: 14.5px; color: var(--qsa-primary-navy); margin-bottom: 16px; font-family: var(--qsa-font-serif);">
+            ${course.title}
+          </div>
+
+          <div class="claude-syllabus-scroll">
+            ${course.modules.map((mod, modIdx) => `
+              <div class="claude-syllabus-module-block">
+                <div class="claude-syllabus-module-title">Module ${modIdx + 1}: ${mod.title}</div>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                  ${(mod.lessons || []).map(l => {
+                    const isDone = store.isLessonComplete(course.id, l.id);
+                    const isCurrent = l.id === lesson.id;
+                    return `
+                      <a href="#lesson-${course.id}-${l.id}" class="claude-syllabus-link ${isCurrent ? 'active' : ''}">
+                        <span style="font-size: 13px; color: ${isDone ? 'var(--qsa-status-success)' : isCurrent ? 'var(--qsa-terracotta)' : 'var(--qsa-text-muted)'}; font-weight: 800;">
+                          ${isDone ? '✓' : isCurrent ? '●' : '○'}
+                        </span>
+                        <span style="flex: 1;">${l.title}</span>
+                      </a>`;
+                  }).join('')}
                 </div>
-              </div>` : ''}
+              </div>`).join('')}
           </div>
-        </header>
+        </aside>
 
-        <!-- Main Lesson Content Article Card -->
-        <article class="reader-article-card" id="lesson-article-body">
-          ${renderLessonBody(lesson, activeDepth, currentLang)}
-        </article>
-
-        <!-- Lesson Navigation Footer Card -->
-        <footer class="reader-nav-footer">
-          <div class="reader-nav-prev">
-            ${prevLesson ? `
-              <a href="#lesson-${course.id}-${prevLesson.id}" class="reader-nav-btn reader-nav-prev-btn" title="Previous: ${prevLesson.title}">
-                <span class="nav-dir">← Previous</span>
-                <span class="nav-title">${prevLesson.title}</span>
-              </a>` : '<div></div>'}
-          </div>
-          <div class="reader-nav-complete" style="text-align: center;">
-            <button class="btn btn-primary btn-sm" id="mark-complete-btn">
-              ${store.isLessonComplete(course.id, lesson.id) ? '✓ Completed' : 'Mark as Complete'}
-            </button>
-          </div>
-          <div class="reader-nav-next">
-            ${nextLesson ? `
-              <a href="#lesson-${course.id}-${nextLesson.id}" class="reader-nav-btn reader-nav-next-btn" title="Next: ${nextLesson.title}">
-                <span class="nav-dir">Next Lesson →</span>
-                <span class="nav-title">${nextLesson.title}</span>
-              </a>` : `
-              <a href="#course-${course.id}" class="reader-nav-btn reader-nav-next-btn" title="Return to Course Overview">
-                <span class="nav-dir">Complete Track 🏆</span>
-                <span class="nav-title">Course Overview</span>
-              </a>`}
-          </div>
-        </footer>
       </div>
     </div>
 
@@ -336,6 +398,24 @@ function renderLessonPlayer(container, course, lesson) {
       completeBtn.innerText = '✓ Completed';
       completeBtn.classList.remove('btn-primary');
       completeBtn.classList.add('btn-secondary');
+      showGlobalToast('Lesson marked complete!');
+    });
+  }
+
+  // Claude Academy "Was this helpful?" feedback handler
+  const helpfulWidget = container.querySelector('#claude-helpful-widget');
+  if (helpfulWidget) {
+    helpfulWidget.querySelectorAll('.claude-helpful-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-helpful');
+        helpfulWidget.innerHTML = `
+          <div style="color: var(--qsa-status-success); font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 6px 0;">
+            <span style="font-size: 18px;">✓</span> <span>Thank you for your feedback! Your evaluation helps refine this academic curriculum.</span>
+          </div>`;
+        try {
+          localStorage.setItem(`qsa_helpful_${course.id}_${lesson.id}`, val);
+        } catch (e) {}
+      });
     });
   }
 }
