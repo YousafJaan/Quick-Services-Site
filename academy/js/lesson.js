@@ -273,10 +273,47 @@ function renderLessonPlayer(container, course, lesson) {
     const newLang = store.getEnglishLevel();
     const articleBody = document.getElementById('lesson-article-body');
     if (articleBody) {
+      // Check if any drawer was open before re-rendering
+      let openBlockId = null;
+      let openTab = 'visual';
+      let activeSentenceId = null;
+
+      articleBody.querySelectorAll('.inline-visual-drawer').forEach(d => {
+        if (d.style.display === 'block') {
+          openBlockId = d.id.replace('inline-drawer-', '');
+          openTab = d.querySelector('.inline-tab-btn.active')?.dataset.tab || 'visual';
+        }
+      });
+
+      const activeSpan = articleBody.querySelector('.p-sentence.active-sentence');
+      activeSentenceId = activeSpan?.dataset.sId;
+
       articleBody.innerHTML = renderLessonBody(lesson, activeDepth, newLang);
       setupParagraphRails(course.id, lesson);
       setupInlineVisualListeners(lesson);
       setupInteractiveWidgets(lesson);
+
+      // Restore previously open drawer with updated register content
+      if (openBlockId) {
+        const restoredDrawer = document.getElementById(`inline-drawer-${openBlockId}`);
+        const restoredBody = document.getElementById(`inline-body-${openBlockId}`);
+        if (restoredDrawer && restoredBody) {
+          const targetBlock = (lesson.content?.blocks || []).find(b => b.id === openBlockId);
+          let targetSentence = null;
+          if (activeSentenceId && targetBlock?.sentences) {
+            targetSentence = targetBlock.sentences.find(s => s.id === activeSentenceId);
+          }
+          if (!targetSentence && targetBlock?.sentences?.length) {
+            targetSentence = targetBlock.sentences[0];
+          }
+          if (activeSentenceId) {
+            const span = document.querySelector(`.p-sentence[data-s-id="${activeSentenceId}"]`);
+            if (span) span.classList.add('active-sentence');
+          }
+          renderInlineDrawerContent(restoredDrawer, restoredBody, targetSentence, targetBlock, openTab);
+          restoredDrawer.style.display = 'block';
+        }
+      }
     }
     const switcher = document.getElementById('reader-lang-switcher');
     if (switcher) {
@@ -423,7 +460,7 @@ function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
 
         <!-- Hidden Explainer Card -->
         <div class="explain-card" id="explain-${b.id}" style="display: none; background: var(--qsa-status-info-bg); border-left: 3.5px solid var(--qsa-status-info); padding: 16px; border-radius: 10px; margin: 12px 0; font-size: 14px; color: var(--qsa-text-primary);">
-          <strong>💡 Plain English Explanation:</strong>
+          <strong>💡 ${lang === 'technical' ? 'Technical Academic Formulation' : lang === 'simple' ? 'Simple English Breakdown' : 'Plain English Explanation'}:</strong>
           <p style="margin: 6px 0 0; color: var(--qsa-text-secondary);">${b.explain || ''}</p>
         </div>
 
@@ -641,7 +678,8 @@ function renderInlineDrawerContent(drawer, body, sentence, block, tab) {
         const l = btn.dataset.setLang;
         if (l) {
           store.setEnglishLevel(l);
-          showGlobalToast(`Reading register set to ${l.toUpperCase()}`);
+          store.acceptCookies();
+          showGlobalToast(`Reading register set to ${l.toUpperCase()} & saved to device`);
         }
       });
     });

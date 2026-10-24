@@ -264,9 +264,21 @@ export function renderCertificateView(container, { certId, courseId }) {
     window.print();
   });
 
-  container.querySelector('#download-cert-btn')?.addEventListener('click', () => {
-    const studentName = store.getVerifiedStudentName() || 'Registered Scholar';
-    generateHighResCertificate(studentName, course.title, dateStr, idStr, course.hours);
+  container.querySelector('#download-cert-btn')?.addEventListener('click', async () => {
+    const btn = container.querySelector('#download-cert-btn');
+    const originalHtml = btn.innerHTML;
+    btn.innerHTML = '<span>⏳</span> <span>Rendering 300 DPI PNG...</span>';
+    btn.disabled = true;
+    try {
+      const studentName = store.getVerifiedStudentName() || 'Registered Scholar';
+      await generateHighResCertificate(studentName, course.title, dateStr, idStr, course.hours);
+      if (typeof window.showGlobalToast === 'function') {
+        window.showGlobalToast('Official 300 DPI Certificate downloaded!');
+      }
+    } finally {
+      btn.innerHTML = originalHtml;
+      btn.disabled = false;
+    }
   });
 }
 
@@ -274,7 +286,13 @@ export function renderCertificateView(container, { certId, courseId }) {
  * 300 DPI High-Resolution Academic Certificate Canvas Generator
  * Dimensions: 2400 x 1700 (Ultra-crisp landscape canvas for print & archival)
  */
-function generateHighResCertificate(studentName, courseTitle, dateStr, certId, hours) {
+async function generateHighResCertificate(studentName, courseTitle, dateStr, certId, hours) {
+  if (document.fonts && document.fonts.ready) {
+    try {
+      await document.fonts.ready;
+    } catch (e) {}
+  }
+
   const canvas = document.createElement('canvas');
   canvas.width = 2400;
   canvas.height = 1700;
