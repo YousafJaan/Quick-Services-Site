@@ -129,12 +129,18 @@
   padding: 5px 12px;
   border-radius: var(--qsa-radius-pill);
   cursor: pointer;
-  transition: all var(--qsa-dur-fast) var(--qsa-ease-out);
+  user-select: none;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lang-btn:hover {
   color: var(--qsa-text-primary);
-  background: rgba(31, 30, 29, 0.04);
+  background: rgba(31, 30, 29, 0.05);
+}
+
+.lang-btn:active {
+  transform: scale(0.95);
+  transition-duration: 0.08s;
 }
 
 .lang-btn.active {
@@ -165,12 +171,18 @@
   padding: 5px 12px;
   border-radius: var(--qsa-radius-pill);
   cursor: pointer;
-  transition: all var(--qsa-dur-fast) var(--qsa-ease-out);
+  user-select: none;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .depth-btn:hover {
   color: var(--qsa-text-primary);
-  background: rgba(31, 30, 29, 0.04);
+  background: rgba(31, 30, 29, 0.05);
+}
+
+.depth-btn:active {
+  transform: scale(0.95);
+  transition-duration: 0.08s;
 }
 
 .depth-btn.active {
@@ -232,7 +244,7 @@
 }
 
 /* ==========================================================================
-   Buttons (Claude Soft Aesthetics)
+   Buttons (Refined Human Touch & Spring Physics)
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -248,33 +260,70 @@
   min-height: 44px;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all var(--qsa-dur-base) var(--qsa-ease-spring);
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.18s ease-out,
+              color 0.18s ease-out,
+              border-color 0.18s ease-out;
+  will-change: transform, box-shadow;
 }
 
 .btn:hover {
-  transform: translateY(-1.5px);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(0.97) translateY(0);
+  transition-duration: 0.08s;
 }
 
 .btn-primary {
   background: var(--qsa-accent-clay);
   color: #ffffff;
-  box-shadow: 0 2px 5px rgba(217, 119, 87, 0.25);
+  box-shadow: 0 2px 6px rgba(217, 119, 87, 0.25);
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: transform 0.6s ease-out;
+  pointer-events: none;
+}
+
+.btn-primary:hover::after {
+  transform: translateX(420px) rotate(25deg);
 }
 
 .btn-primary:hover {
   background: var(--qsa-accent-clay-dark);
-  box-shadow: 0 4px 12px rgba(217, 119, 87, 0.35);
+  box-shadow: 0 6px 18px rgba(217, 119, 87, 0.35);
 }
 
 .btn-secondary {
-  background: var(--qsa-bg-fill);
+  background: #ffffff;
   color: var(--qsa-text-primary);
   border-color: var(--qsa-border-line);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .btn-secondary:hover {
-  background: var(--qsa-bg-fill-hover);
+  background: var(--qsa-bg-fill);
   border-color: var(--qsa-border-strong);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
 }
 
 .btn-sm {
@@ -820,18 +869,25 @@
   color: var(--qsa-text-secondary);
   font-size: 13px;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: var(--qsa-radius-pill);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  transition: all var(--qsa-dur-fast);
+  user-select: none;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .toolbar-btn:hover {
   color: var(--qsa-text-primary);
   background: var(--qsa-bg-fill);
+  transform: translateY(-1px);
+}
+
+.toolbar-btn:active {
+  transform: scale(0.95);
+  transition-duration: 0.08s;
 }
 
 /* Margin Rail Actions */
@@ -856,14 +912,152 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  transition: all var(--qsa-dur-fast);
+  user-select: none;
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .rail-btn:hover {
   background: #ffffff;
   color: var(--qsa-accent-clay-dark);
   border-color: var(--qsa-border-strong);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+.rail-btn:active {
+  transform: scale(0.96);
+  transition-duration: 0.08s;
+}
+
+/* ==========================================================================
+   Inline Visual & Register Architecture Drawer (Inline Right At That Place)
+   ========================================================================== */
+.inline-visual-drawer {
+  margin: 18px 0 26px;
+  background: #ffffff;
+  border: 1px solid var(--qsa-border-card);
+  border-radius: var(--qsa-radius-card);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  position: relative;
+  animation: inlineDrawerSlide 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes inlineDrawerSlide {
+  from { opacity: 0; transform: translateY(-8px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.inline-drawer-pointer {
+  width: 14px;
+  height: 14px;
+  background: var(--qsa-bg-fill);
+  border-top: 1px solid var(--qsa-border-card);
+  border-left: 1px solid var(--qsa-border-card);
+  transform: rotate(45deg);
+  margin-top: -8px;
+  margin-left: 28px;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.inline-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--qsa-bg-fill);
+  border-bottom: 1px solid var(--qsa-border-line);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inline-drawer-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inline-tab-btn {
+  background: #ffffff;
+  border: 1px solid var(--qsa-border-line);
+  color: var(--qsa-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--qsa-radius-pill);
+  cursor: pointer;
+  transition: all 0.16s ease-out;
+}
+
+.inline-tab-btn:hover {
+  background: var(--qsa-bg-fill-hover);
+  color: var(--qsa-text-primary);
+}
+
+.inline-tab-btn.active {
+  background: var(--qsa-grad-dark-active);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: var(--qsa-shadow-dark-active);
+}
+
+.inline-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--qsa-text-muted);
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--qsa-radius-sm);
+  transition: all 0.16s ease-out;
+}
+
+.inline-close-btn:hover {
+  background: var(--qsa-border-line);
+  color: var(--qsa-text-primary);
+}
+
+.inline-drawer-body {
+  padding: 24px;
+}
+
+/* Inline 3-Way English Style Comparison Cards */
+.inline-style-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inline-style-card {
+  border-radius: 10px;
+  padding: 14px 18px;
+  background: var(--qsa-bg-subtle);
+  border-left: 4px solid var(--qsa-border-strong);
+}
+
+.inline-style-card.style-card-simple {
+  border-left-color: var(--qsa-status-success);
+}
+
+.inline-style-card.style-card-plain {
+  border-left-color: var(--qsa-accent-clay);
+}
+
+.inline-style-card.style-card-tech {
+  border-left-color: var(--qsa-accent-clay-dark);
+}
+
+.style-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
 }
 
 /* Modals */

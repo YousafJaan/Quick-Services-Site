@@ -70,6 +70,38 @@ class Store {
     }
   }
 
+  // Student Verified Identity (One-time locked credential for certificates)
+  getVerifiedStudentName() {
+    return this.state.verifiedStudentName || null;
+  }
+
+  getStudentRegistrationId() {
+    return this.state.studentRegistrationId || null;
+  }
+
+  getVerifiedDate() {
+    return this.state.verifiedStudentDate || null;
+  }
+
+  setVerifiedStudentName(name) {
+    if (!name || typeof name !== 'string' || !name.trim()) return false;
+    // Once locked, cannot be altered
+    if (this.state.verifiedStudentName) return false;
+
+    this.state.verifiedStudentName = name.trim();
+    this.state.verifiedStudentDate = new Date().toISOString();
+    this.state.studentRegistrationId = 'QSA-REG-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    this.save();
+    try {
+      window.dispatchEvent(new CustomEvent('qsa:student-identity-locked', { detail: { name: this.state.verifiedStudentName, regId: this.state.studentRegistrationId } }));
+    } catch (e) {}
+    return true;
+  }
+
+  isStudentNameLocked() {
+    return Boolean(this.state.verifiedStudentName);
+  }
+
   // English Proficiency Level ('simple' | 'plain' | 'technical')
   getEnglishLevel() {
     return this.state.englishLevel || 'plain';

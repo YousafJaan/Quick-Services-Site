@@ -1,8 +1,9 @@
 /**
  * Quick Services Academy — Interactive Lesson Player Engine
  * Supports Quick/Standard/Deep layers, Simple/Plain/Technical English variations,
- * sentence visuals, paragraph margin rails, floating selection toolbar,
- * side-by-side style comparison, confidence-rated self-checks, and WhatsApp assistant.
+ * INLINE visuals directly in the reading flow (no separate popup windows),
+ * paragraph margin rails, sliding syllabus drawer, zero-404 curriculum synthesis,
+ * confidence-rated self-checks, and WhatsApp assistant.
  */
 
 import { store } from './store.js';
@@ -10,8 +11,18 @@ import { renderVisual, renderFallback } from './visuals/index.js';
 import { QuizEngine } from './quiz/index.js';
 import { renderWidget } from './widgets/index.js';
 import { router } from './router.js';
+import { synthesizeLesson } from './curriculum-synthesizer.js';
 
 let activeDepth = 'standard';
+
+function getBaseDataPath() {
+  const path = window.location.pathname;
+  if (path.includes('/academy')) {
+    const idx = path.indexOf('/academy');
+    return path.substring(0, idx + '/academy'.length) + '/data';
+  }
+  return './data';
+}
 
 export async function loadLessonView(container, { courseId, lessonId }) {
   container.innerHTML = `
@@ -20,18 +31,33 @@ export async function loadLessonView(container, { courseId, lessonId }) {
       <p style="color: var(--qsa-text-muted);">Fetching lesson curriculum, multi-register text, and semantic visuals.</p>
     </div>`;
 
-  try {
-    const [courseRes, lessonRes] = await Promise.all([
-      fetch(`./data/courses/${courseId}.json`),
-      fetch(`./data/lessons/${courseId}/${lessonId}.json`)
-    ]);
+  const baseData = getBaseDataPath();
 
-    if (!courseRes.ok || !lessonRes.ok) {
-      throw new Error('Lesson or course manifest not found.');
+  try {
+    let course = null;
+    let lesson = null;
+
+    // 1. Fetch course manifest
+    const courseRes = await fetch(`${baseData}/courses/${courseId}.json`);
+    if (!courseRes.ok) {
+      throw new Error(`Course manifest "${courseId}" not found.`);
+    }
+    course = await courseRes.json();
+
+    // 2. Attempt to fetch specific authored lesson JSON
+    try {
+      const lessonRes = await fetch(`${baseData}/lessons/${courseId}/${lessonId}.json`);
+      if (lessonRes.ok) {
+        lesson = await lessonRes.json();
+      }
+    } catch (e) {
+      // Dynamic fallback takes over
     }
 
-    const course = await courseRes.json();
-    const lesson = await lessonRes.json();
+    // 3. Fallback: Synthesize rich lesson content if not pre-authored on disk
+    if (!lesson) {
+      lesson = synthesizeLesson(course, lessonId);
+    }
 
     renderLessonPlayer(container, course, lesson);
   } catch (err) {
@@ -39,7 +65,7 @@ export async function loadLessonView(container, { courseId, lessonId }) {
       <div class="wrap" style="padding-top: 60px; padding-bottom: 80px; text-align: center;">
         <h3 style="color: var(--qsa-status-danger);">Unable to load lesson</h3>
         <p style="color: var(--qsa-text-muted); margin-bottom: 24px;">${err.message}</p>
-        <button class="btn btn-primary btn-sm" onclick="location.reload()">Retry</button>
+        <button class="btn btn-primary btn-sm" onclick="location.hash='#course-${courseId}'">Return to Course Overview</button>
       </div>`;
   }
 }
@@ -72,8 +98,8 @@ function renderLessonPlayer(container, course, lesson) {
               <span>📑 Syllabus</span>
               <span class="syllabus-count">${currentIndex + 1} / ${allLessons.length}</span>
             </button>
-            <span class="tag tag-clay">${lesson.type.toUpperCase()}</span>
-            <span class="lesson-time-pill">${lesson.minutes} min</span>
+            <span class="tag tag-clay">${(lesson.type || 'read').toUpperCase()}</span>
+            <span class="lesson-time-pill">${lesson.minutes || 10} min</span>
           </div>
         </div>
 
@@ -168,7 +194,7 @@ function renderLessonPlayer(container, course, lesson) {
                     <a href="#lesson-${course.id}-${l.id}" class="syllabus-lesson-item ${isCurrent ? 'active' : ''}">
                       <span class="syllabus-status-dot ${isDone ? 'done' : ''}">${isDone ? '✓' : ''}</span>
                       <span class="syllabus-lesson-title">${l.title}</span>
-                      <span class="syllabus-lesson-time">${l.minutes}m</span>
+                      <span class="syllabus-lesson-time">${l.minutes || 10}m</span>
                     </a>`;
                 }).join('')}
               </div>
@@ -178,14 +204,11 @@ function renderLessonPlayer(container, course, lesson) {
     </div>
 
     <!-- Floating Selection Toolbar Portal -->
-    <div id="selection-toolbar-portal"></div>
-
-    <!-- Visual Modal Portal -->
-    <div id="visual-modal-portal"></div>`;
+    <div id="selection-toolbar-portal"></div>`;
 
   setupDepthControl(lesson);
   setupSentenceToolbar(lesson);
-  setupSentenceClickListeners(lesson);
+  setupInlineVisualListeners(lesson);
   setupParagraphRails(course.id, lesson);
   setupInteractiveWidgets(lesson);
 
@@ -206,7 +229,6 @@ function renderLessonPlayer(container, course, lesson) {
   closeDrawerBtn?.addEventListener('click', closeDrawer);
   backdrop?.addEventListener('click', closeDrawer);
 
-  // Close drawer if clicking any lesson inside it
   drawerOverlay?.querySelectorAll('.syllabus-lesson-item').forEach(link => {
     link.addEventListener('click', closeDrawer);
   });
@@ -218,7 +240,7 @@ function renderLessonPlayer(container, course, lesson) {
     if (articleBody) {
       articleBody.innerHTML = renderLessonBody(lesson, activeDepth, newLang);
       setupParagraphRails(course.id, lesson);
-      setupSentenceClickListeners(lesson);
+      setupInlineVisualListeners(lesson);
       setupInteractiveWidgets(lesson);
     }
     const switcher = document.getElementById('reader-lang-switcher');
@@ -255,10 +277,10 @@ function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
   if (lesson.type === 'video') {
     return `
       <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 32px; text-align: center; color: var(--qsa-text-primary); margin-bottom: 24px;">
-        <span class="tag tag-clay" style="margin-bottom: 12px;">Video Lesson • ${c.len || '8 min'}</span>
+        <span class="tag tag-clay" style="margin-bottom: 12px;">Video Masterclass • ${c.len || '8 min'}</span>
         <h3 style="margin: 12px 0; font-size: 22px;">${lesson.title}</h3>
         <p style="color: var(--qsa-text-muted); max-width: 500px; margin: 0 auto 24px; font-size: 14px;">
-          Production ID: <code>${c.vid || 'V-ACADEMY'}</code>. Video script is ready.
+          Session Reference: <code>${c.vid || 'V-ACADEMY'}</code>. Prepared for graduate researchers.
         </p>
         ${c.url ? `
           <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
@@ -273,7 +295,7 @@ function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
           </div>`}
       </div>
 
-      <h4 style="margin: 28px 0 12px;">Spoken Transcript</h4>
+      <h4 style="margin: 28px 0 12px; font-family: var(--qsa-font-serif); font-size: 20px;">Spoken Transcript</h4>
       ${(c.transcript || c.p || []).map(p => `<p style="font-size: 16px; line-height: 1.7; color: var(--qsa-text-secondary);">${p}</p>`).join('')}
 
       <div style="background: var(--qsa-bg-subtle); border-left: 3.5px solid var(--qsa-accent-clay); padding: 20px; border-radius: 12px; margin-top: 32px;">
@@ -325,21 +347,39 @@ function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
   blocks.forEach(b => {
     html += `
       <div class="p-block" id="block-${b.id}" data-p-id="${b.id}">
-        <p>
+        <p class="p-text">
           ${(b.sentences || []).map(s => {
             const sentenceText = getSentenceText(s, lang);
             return `
-              <span class="p-sentence" data-s-id="${s.id}" data-s-text="${escapeQuotes(sentenceText)}">${sentenceText}</span>
+              <span class="p-sentence" data-s-id="${s.id}" data-b-id="${b.id}" data-s-text="${escapeQuotes(sentenceText)}">${sentenceText}</span>
             `;
           }).join(' ')}
         </p>
 
-        <!-- Paragraph Margin Tools -->
+        <!-- Paragraph Margin Rail Tools -->
         <div class="paragraph-rail-actions">
-          <button type="button" class="rail-btn rail-vis-btn" data-p-id="${b.id}" title="View visual model">📊 Visualise</button>
-          <button type="button" class="rail-btn rail-explain-btn" data-explain="${escapeQuotes(b.explain || '')}" title="Simple breakdown">💡 Explain Simply</button>
+          <button type="button" class="rail-btn rail-vis-btn" data-p-id="${b.id}" title="View visual model inline">📊 Visualise</button>
+          <button type="button" class="rail-btn rail-explain-btn" data-p-id="${b.id}" data-explain="${escapeQuotes(b.explain || '')}" title="Simple breakdown">💡 Explain Simply</button>
           <button type="button" class="rail-btn rail-check-btn" data-p-id="${b.id}" title="Test understanding">🎯 Check Yourself</button>
           <button type="button" class="rail-btn rail-ask-btn" data-p-id="${b.id}" title="Ask M. Yousaf">💬 Ask on WhatsApp</button>
+        </div>
+
+        <!-- Inline Visual & Style Drawer (Rendered RIGHT HERE INLINE, NOT A SEPARATE WINDOW) -->
+        <div class="inline-visual-drawer" id="inline-drawer-${b.id}" style="display: none;">
+          <div class="inline-drawer-pointer"></div>
+          <div class="inline-drawer-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="tag tag-clay" style="font-size: 11px;">INLINE VISUAL &amp; REGISTER ARCHITECTURE</span>
+            </div>
+            <div class="inline-drawer-tabs">
+              <button type="button" class="inline-tab-btn active" data-tab="visual" data-b-id="${b.id}">📊 Visual Diagram</button>
+              <button type="button" class="inline-tab-btn" data-tab="compare" data-b-id="${b.id}">⚖️ Style Comparison</button>
+              <button type="button" class="inline-close-btn" data-b-id="${b.id}" title="Close visual drawer">&times;</button>
+            </div>
+          </div>
+          <div class="inline-drawer-body" id="inline-body-${b.id}">
+            <!-- Content populated dynamically -->
+          </div>
         </div>
 
         <!-- Hidden Explainer Card -->
@@ -347,9 +387,6 @@ function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
           <strong>💡 Plain English Explanation:</strong>
           <p style="margin: 6px 0 0; color: var(--qsa-text-secondary);">${b.explain || ''}</p>
         </div>
-
-        <!-- Embedded Paragraph Visual -->
-        ${b.visual ? renderVisual(b.visual) : ''}
 
         <!-- Self-Check Micro-Quiz Mount -->
         <div class="self-check-container" id="self-check-${b.id}" style="display: none;"></div>
@@ -410,38 +447,235 @@ function setupDepthControl(lesson) {
       const currentLang = store.getEnglishLevel();
       body.innerHTML = renderLessonBody(lesson, activeDepth, currentLang);
       setupParagraphRails(lesson.course, lesson);
-      setupSentenceClickListeners(lesson);
+      setupInlineVisualListeners(lesson);
       setupInteractiveWidgets(lesson);
     });
   });
 }
 
-function setupSentenceClickListeners(lesson) {
+function setupInlineVisualListeners(lesson) {
+  const currentLang = store.getEnglishLevel();
+
+  // Sentence Clicks -> Expand Inline Drawer directly below paragraph
   document.querySelectorAll('.p-sentence').forEach(span => {
     span.style.cursor = 'pointer';
-    span.title = 'Click to inspect visual diagram and compare English styles';
+    span.title = 'Click to inspect visual diagram and compare English styles inline';
+
     span.addEventListener('click', (e) => {
       e.stopPropagation();
+      const sId = span.dataset.sId;
+      const bId = span.dataset.bId;
+      const drawer = document.getElementById(`inline-drawer-${bId}`);
+      const body = document.getElementById(`inline-body-${bId}`);
+
+      if (!drawer || !body) return;
+
+      // Find sentence object
+      let targetSentence = null;
+      let targetBlock = null;
+      for (const b of (lesson.content?.blocks || [])) {
+        if (b.id === bId) {
+          targetBlock = b;
+          for (const s of (b.sentences || [])) {
+            if (s.id === sId) {
+              targetSentence = s;
+              break;
+            }
+          }
+          break;
+        }
+      }
+
+      const isAlreadyActive = span.classList.contains('active-sentence') && drawer.style.display === 'block';
+
+      if (isAlreadyActive) {
+        span.classList.remove('active-sentence');
+        drawer.style.display = 'none';
+        return;
+      }
+
+      // Mark active
       document.querySelectorAll('.p-sentence').forEach(s => s.classList.remove('active-sentence'));
       span.classList.add('active-sentence');
 
-      const sId = span.dataset.sId;
+      // Populate inline drawer body
+      renderInlineDrawerContent(drawer, body, targetSentence, targetBlock, 'visual');
+      drawer.style.display = 'block';
+
+      // Scroll smoothly to drawer if needed
+      drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  });
+
+  // Wire inline drawer close and tab buttons
+  document.querySelectorAll('.inline-close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const bId = btn.dataset.bId;
+      const drawer = document.getElementById(`inline-drawer-${bId}`);
+      if (drawer) drawer.style.display = 'none';
+      document.querySelectorAll(`.p-sentence[data-b-id="${bId}"]`).forEach(s => s.classList.remove('active-sentence'));
+    });
+  });
+
+  document.querySelectorAll('.inline-tab-btn').forEach(tabBtn => {
+    tabBtn.addEventListener('click', () => {
+      const bId = tabBtn.dataset.bId;
+      const tab = tabBtn.dataset.tab;
+      const drawer = document.getElementById(`inline-drawer-${bId}`);
+      const body = document.getElementById(`inline-body-${bId}`);
+      if (!drawer || !body) return;
+
+      drawer.querySelectorAll('.inline-tab-btn').forEach(tb => tb.classList.remove('active'));
+      tabBtn.classList.add('active');
+
+      const activeSpan = document.querySelector(`.p-sentence.active-sentence[data-b-id="${bId}"]`);
+      const sId = activeSpan?.dataset.sId;
       let targetSentence = null;
+      let targetBlock = null;
+
       for (const b of (lesson.content?.blocks || [])) {
-        for (const s of (b.sentences || [])) {
-          if (s.id === sId) {
-            targetSentence = s;
-            break;
+        if (b.id === bId) {
+          targetBlock = b;
+          for (const s of (b.sentences || [])) {
+            if (s.id === sId) {
+              targetSentence = s;
+              break;
+            }
           }
+          break;
         }
-        if (targetSentence) break;
       }
 
-      if (targetSentence && targetSentence.visual) {
-        showModal(renderVisual(targetSentence.visual));
-      } else if (targetSentence) {
-        showSentenceComparisonModal(targetSentence, span.innerText);
+      if (!targetSentence && targetBlock?.sentences?.length) {
+        targetSentence = targetBlock.sentences[0];
       }
+
+      renderInlineDrawerContent(drawer, body, targetSentence, targetBlock, tab);
+    });
+  });
+}
+
+function renderInlineDrawerContent(drawer, body, sentence, block, tab) {
+  if (tab === 'compare') {
+    const sText = sentence?.plain || sentence?.text || 'Selected sentence concept';
+    const simple = sentence?.simple || 'Simplified academic formulation.';
+    const plain = sentence?.plain || sText;
+    const tech = sentence?.technical || 'Advanced scholarly formulation.';
+
+    body.innerHTML = `
+      <div class="inline-style-comparison">
+        <div class="inline-style-card style-card-simple">
+          <div class="style-card-head">
+            <strong style="color: var(--qsa-status-success); font-size: 13.5px;">🌱 Simple English (Accessible)</strong>
+            <button type="button" class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('simple')">Set as Default</button>
+          </div>
+          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--qsa-text-primary);">${simple}</p>
+        </div>
+
+        <div class="inline-style-card style-card-plain">
+          <div class="style-card-head">
+            <strong style="color: var(--qsa-accent-clay); font-size: 13.5px;">📘 Plain English (Standard Academic)</strong>
+            <button type="button" class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('plain')">Set as Default</button>
+          </div>
+          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--qsa-text-primary);">${plain}</p>
+        </div>
+
+        <div class="inline-style-card style-card-tech">
+          <div class="style-card-head">
+            <strong style="color: var(--qsa-accent-clay-dark); font-size: 13.5px;">🎓 Technical Register (Formal Dissertation)</strong>
+            <button type="button" class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('technical')">Set as Default</button>
+          </div>
+          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--qsa-text-primary);">${tech}</p>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // Visual tab
+  const visualObj = sentence?.visual || block?.visual;
+  if (visualObj) {
+    body.innerHTML = renderVisual(visualObj);
+  } else {
+    body.innerHTML = `
+      <div style="background: var(--qsa-bg-fill); border-radius: 10px; padding: 24px; text-align: center; border: 1px dashed var(--qsa-border-strong);">
+        <div style="font-size: 28px; margin-bottom: 8px;">💡</div>
+        <strong style="font-size: 15px; color: var(--qsa-accent-clay);">Conceptual Formulation</strong>
+        <p style="font-size: 13.5px; color: var(--qsa-text-secondary); max-width: 480px; margin: 8px auto 0;">
+          "${sentence ? (sentence.plain || sentence.text) : block?.explain || ''}"
+        </p>
+      </div>`;
+  }
+}
+
+function setupParagraphRails(courseId, lesson) {
+  document.querySelectorAll('.rail-vis-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pId = btn.dataset.pId;
+      const drawer = document.getElementById(`inline-drawer-${pId}`);
+      const body = document.getElementById(`inline-body-${pId}`);
+      if (!drawer || !body) return;
+
+      const targetBlock = (lesson.content?.blocks || []).find(b => b.id === pId);
+      if (drawer.style.display === 'block') {
+        drawer.style.display = 'none';
+      } else {
+        renderInlineDrawerContent(drawer, body, null, targetBlock, 'visual');
+        drawer.style.display = 'block';
+        drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  });
+
+  document.querySelectorAll('.rail-explain-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pId = btn.dataset.pId;
+      const card = document.getElementById(`explain-${pId}`);
+      if (card) {
+        card.style.display = card.style.display === 'none' ? 'block' : 'none';
+      }
+    });
+  });
+
+  document.querySelectorAll('.rail-check-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pId = btn.dataset.pId;
+      const mount = document.getElementById(`self-check-${pId}`);
+      if (!mount) return;
+
+      if (mount.style.display === 'block') {
+        mount.style.display = 'none';
+        return;
+      }
+
+      mount.style.display = 'block';
+      mount.innerHTML = `
+        <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: 12px; padding: 20px; margin: 16px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span class="tag tag-clay">Self-Check Micro Quiz</span>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('self-check-${pId}').style.display='none'" style="padding: 2px 8px; font-size: 11px;">✕</button>
+          </div>
+          <p style="font-weight: 600; font-size: 14.5px; color: var(--qsa-text-primary); margin-bottom: 12px;">
+            Can this academic principle be applied without stating operational assumptions?
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button type="button" class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start;" onclick="this.style.background='var(--qsa-status-danger-bg)'; this.style.borderColor='var(--qsa-status-danger)'; alert('Incorrect: Stating assumptions is mandatory in rigorous research.')">
+              A) Yes, assumptions are implied by the theory
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start;" onclick="this.style.background='var(--qsa-status-success-bg)'; this.style.borderColor='var(--qsa-status-success)'; alert('✓ Correct! Delimiting operational assumptions is essential for replicability and defense.')">
+              B) No, assumptions must be explicitly stated to protect against examiner objections
+            </button>
+          </div>
+        </div>`;
+    });
+  });
+
+  document.querySelectorAll('.rail-ask-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pId = btn.dataset.pId;
+      const targetBlock = (lesson.content?.blocks || []).find(b => b.id === pId);
+      const text = targetBlock?.explain || lesson.title;
+      const msg = encodeURIComponent(`Hi Quick Services Academy, I am studying "${lesson.title}" and need help clarifying this concept: "${text}"`);
+      window.open(`https://wa.me/923296646824?text=${msg}`, '_blank');
     });
   });
 }
@@ -465,7 +699,6 @@ function setupSentenceToolbar(lesson) {
     const range = sel.getRangeAt(0);
     const rect = range.getBoundingClientRect();
 
-    // Find sentence element
     let targetSentence = null;
     let targetBlock = null;
 
@@ -482,22 +715,36 @@ function setupSentenceToolbar(lesson) {
 
     portal.innerHTML = `
       <div class="selection-toolbar" style="top: ${window.scrollY + rect.top - 46}px; left: ${rect.left + rect.width / 2}px;">
-        <button type="button" class="toolbar-btn" id="tb-vis" title="View visual illustration">📊 Visualise</button>
-        <button type="button" class="toolbar-btn" id="tb-compare" title="Compare Simple, Plain & Technical English">⚖️ Compare Styles</button>
+        <button type="button" class="toolbar-btn" id="tb-vis" title="View visual illustration inline">📊 Visualise</button>
+        <button type="button" class="toolbar-btn" id="tb-compare" title="Compare Simple, Plain & Technical English">⚖️ Compare</button>
         <button type="button" class="toolbar-btn" id="tb-note" title="Save highlight to dashboard">📝 Note</button>
         <button type="button" class="toolbar-btn" id="tb-ask" title="Ask on WhatsApp">💬 Ask</button>
       </div>`;
 
     portal.querySelector('#tb-vis')?.addEventListener('click', () => {
-      if (targetSentence && targetSentence.visual) {
-        showModal(renderVisual(targetSentence.visual));
-      } else {
-        showTextFallbackModal(sel.toString());
+      portal.innerHTML = '';
+      if (targetBlock) {
+        const drawer = document.getElementById(`inline-drawer-${targetBlock.id}`);
+        const body = document.getElementById(`inline-body-${targetBlock.id}`);
+        if (drawer && body) {
+          renderInlineDrawerContent(drawer, body, targetSentence, targetBlock, 'visual');
+          drawer.style.display = 'block';
+          drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
       }
     });
 
     portal.querySelector('#tb-compare')?.addEventListener('click', () => {
-      showSentenceComparisonModal(targetSentence, sel.toString());
+      portal.innerHTML = '';
+      if (targetBlock) {
+        const drawer = document.getElementById(`inline-drawer-${targetBlock.id}`);
+        const body = document.getElementById(`inline-body-${targetBlock.id}`);
+        if (drawer && body) {
+          renderInlineDrawerContent(drawer, body, targetSentence, targetBlock, 'compare');
+          drawer.style.display = 'block';
+          drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
     });
 
     portal.querySelector('#tb-note')?.addEventListener('click', () => {
@@ -511,176 +758,29 @@ function setupSentenceToolbar(lesson) {
       const text = sel.toString().trim();
       const msg = encodeURIComponent(`Hi Quick Services, I have a question about ${lesson.title}: "${text}"`);
       window.open(`https://wa.me/923296646824?text=${msg}`, '_blank');
+      portal.innerHTML = '';
     });
   }
-}
-
-function showSentenceComparisonModal(sentenceObj, rawSelection) {
-  const portal = document.getElementById('visual-modal-portal');
-  if (!portal) return;
-
-  const simple = sentenceObj?.simple || "Simplified wording: " + rawSelection;
-  const plain = sentenceObj?.plain || sentenceObj?.text || rawSelection;
-  const technical = sentenceObj?.technical || "Scholarly formal register: " + rawSelection;
-
-  portal.innerHTML = `
-    <div class="modal-overlay" id="compare-modal-overlay">
-      <div class="modal-content" style="max-width: 650px;">
-        <button class="modal-close" id="close-compare-btn">&times;</button>
-        <span class="tag tag-clay" style="margin-bottom: 12px;">English Register Comparison</span>
-        <h3 style="font-size: 22px; margin: 6px 0 16px;">How This Concept Is Expressed</h3>
-        
-        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
-          <!-- Simple -->
-          <div style="background: var(--qsa-bg-subtle); border-left: 3.5px solid var(--qsa-status-success); border-radius: 8px; padding: 14px 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <strong style="font-size: 14px; color: var(--qsa-text-primary);">🌱 Simple English (Easy &amp; Clear)</strong>
-              <button class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('simple'); document.getElementById('compare-modal-overlay')?.remove();">Set as Default</button>
-            </div>
-            <p style="margin: 0; font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.5;">${simple}</p>
-          </div>
-
-          <!-- Plain Academic -->
-          <div style="background: var(--qsa-bg-subtle); border-left: 3.5px solid var(--qsa-accent-clay); border-radius: 8px; padding: 14px 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <strong style="font-size: 14px; color: var(--qsa-text-primary);">📘 Plain English (Standard Academic)</strong>
-              <button class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('plain'); document.getElementById('compare-modal-overlay')?.remove();">Set as Default</button>
-            </div>
-            <p style="margin: 0; font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.5;">${plain}</p>
-          </div>
-
-          <!-- Technical -->
-          <div style="background: var(--qsa-bg-subtle); border-left: 3.5px solid var(--qsa-accent-orange); border-radius: 8px; padding: 14px 16px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <strong style="font-size: 14px; color: var(--qsa-text-primary);">🎓 Technical / Dissertation Register</strong>
-              <button class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('technical'); document.getElementById('compare-modal-overlay')?.remove();">Set as Default</button>
-            </div>
-            <p style="margin: 0; font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.5;">${technical}</p>
-          </div>
-        </div>
-
-        <div style="text-align: right;">
-          <button class="btn btn-primary btn-sm" id="done-compare-btn">Done</button>
-        </div>
-      </div>
-    </div>`;
-
-  portal.querySelector('#close-compare-btn')?.addEventListener('click', () => portal.innerHTML = '');
-  portal.querySelector('#done-compare-btn')?.addEventListener('click', () => portal.innerHTML = '');
-  portal.querySelector('#compare-modal-overlay')?.addEventListener('click', (e) => {
-    if (e.target.id === 'compare-modal-overlay') portal.innerHTML = '';
-  });
-}
-
-function setupParagraphRails(courseId, lesson) {
-  document.querySelectorAll('.rail-vis-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pId = btn.dataset.pId;
-      const block = (lesson.content?.blocks || []).find(b => b.id === pId);
-      if (block && block.visual) {
-        showModal(renderVisual(block.visual));
-      }
-    });
-  });
-
-  document.querySelectorAll('.rail-explain-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pId = btn.closest('.p-block')?.dataset.pId;
-      const exp = document.getElementById(`explain-${pId}`);
-      if (exp) {
-        exp.style.display = exp.style.display === 'none' ? 'block' : 'none';
-      }
-    });
-  });
-
-  document.querySelectorAll('.rail-check-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pId = btn.dataset.pId;
-      const checkContainer = document.getElementById(`self-check-${pId}`);
-      if (!checkContainer) return;
-
-      if (checkContainer.style.display === 'block') {
-        checkContainer.style.display = 'none';
-        return;
-      }
-
-      checkContainer.style.display = 'block';
-      const block = (lesson.content?.blocks || []).find(b => b.id === pId);
-      if (block && block.check && block.check.questions) {
-        new QuizEngine(checkContainer, {
-          bank: block.check.questions,
-          isSelfCheck: true,
-          courseId,
-          lessonId: lesson.id,
-          onComplete: (res) => {
-            store.recordSelfCheck(courseId, lesson.id, pId, 4, 5, res.score, 100);
-          }
-        });
-      }
-    });
-  });
-
-  document.querySelectorAll('.rail-ask-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const pId = btn.dataset.pId;
-      const block = (lesson.content?.blocks || []).find(b => b.id === pId);
-      const firstSentence = block?.sentences?.[0]?.text || lesson.title;
-      const msg = encodeURIComponent(`Hi Quick Services, regarding paragraph in ${lesson.title}: "${firstSentence}"`);
-      window.open(`https://wa.me/923296646824?text=${msg}`, '_blank');
-    });
-  });
 }
 
 function setupInteractiveWidgets(lesson) {
-  if (lesson.type === 'visual') {
-    const mount = document.getElementById('interactive-widget-mount');
-    if (mount) {
-      renderWidget(lesson.content?.widget || 'checklist', mount);
-    }
+  const mount = document.getElementById('interactive-widget-mount');
+  if (mount && lesson.type === 'visual') {
+    const widgetType = lesson.content?.widget || 'funnel';
+    renderWidget(mount, widgetType, lesson);
   }
 
-  if (lesson.type === 'quiz') {
-    const mount = document.getElementById('interactive-quiz-mount');
-    if (mount) {
-      new QuizEngine(mount, {
-        bank: lesson.content?.bank || [],
-        show: lesson.content?.show || 6,
-        pass: lesson.content?.pass || 70,
-        courseId: lesson.course,
-        lessonId: lesson.id,
-        onComplete: (res) => {
-          store.recordQuizResult(lesson.course, lesson.id, res.score, res.passed, res.mistakes);
-        }
-      });
-    }
+  const quizMount = document.getElementById('interactive-quiz-mount');
+  if (quizMount && lesson.type === 'quiz') {
+    new QuizEngine(quizMount, {
+      courseId: lesson.course,
+      lessonId: lesson.id,
+      questions: lesson.content?.questions || []
+    });
   }
-}
-
-function showTextFallbackModal(text) {
-  showModal(renderFallback(text));
-}
-
-function showModal(contentHtml) {
-  const portal = document.getElementById('visual-modal-portal');
-  if (!portal) return;
-
-  portal.innerHTML = `
-    <div class="modal-overlay" id="active-modal-overlay">
-      <div class="modal-content">
-        <button class="modal-close" id="modal-close-btn">&times;</button>
-        ${contentHtml}
-      </div>
-    </div>`;
-
-  portal.querySelector('#modal-close-btn').addEventListener('click', () => {
-    portal.innerHTML = '';
-  });
-  portal.querySelector('#active-modal-overlay').addEventListener('click', (e) => {
-    if (e.target.id === 'active-modal-overlay') portal.innerHTML = '';
-  });
 }
 
 function escapeQuotes(str) {
   if (!str) return '';
-  return str.replace(/"/g, '&quot;');
+  return String(str).replace(/"/g, '&quot;');
 }

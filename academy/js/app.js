@@ -11,10 +11,20 @@ import { getCourseThumbnailSvg } from './thumbnails.js';
 
 const mainEl = document.getElementById('app-main');
 
+function getBaseDataPath() {
+  const path = window.location.pathname;
+  if (path.includes('/academy')) {
+    const idx = path.indexOf('/academy');
+    return path.substring(0, idx + '/academy'.length) + '/data';
+  }
+  return './data';
+}
+
 // Route 1: Catalog View (#/)
 router.addRoute('/', async () => {
   try {
-    const res = await fetch('./data/courses.json');
+    const baseData = getBaseDataPath();
+    const res = await fetch(`${baseData}/courses.json`);
     const courses = await res.json();
     renderCatalog(courses);
   } catch (e) {
@@ -25,7 +35,8 @@ router.addRoute('/', async () => {
 // Route 2: Course Overview (#course-:id)
 router.addRoute('course', async ({ courseId }) => {
   try {
-    const res = await fetch(`./data/courses/${courseId}.json`);
+    const baseData = getBaseDataPath();
+    const res = await fetch(`${baseData}/courses/${courseId}.json`);
     const course = await res.json();
     renderCourseOverview(course);
   } catch (e) {
