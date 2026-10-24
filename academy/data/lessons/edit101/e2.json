@@ -3,12 +3,13 @@
   "course": "edit101",
   "title": "Pass 1: Argument Flow, Section Headings & Transitions",
   "type": "read",
-  "minutes": 11,
+  "minutes": 14,
   "content": {
     "quick": "Structural editing ensures your thesis forms a continuous, unbroken chain of reasoning. Check heading hierarchy, cross-chapter narrative linkages, and ensure that every major claim is grounded in empirical or theoretical evidence.",
     "blocks": [
       {
         "id": "p1",
+        "explain": "Structural editing evaluates the overarching rhetorical architecture of an academic dissertation before granular phrasing is addressed.",
         "sentences": [
           {
             "id": "s1",
@@ -48,6 +49,28 @@
               },
               "caption": "Informative headings guide examiners through your methodology without confusion."
             }
+          },
+          {
+            "id": "s3",
+            "text": "Headings must strictly adhere to APA 7th five-level typographic styling to establish visual and logical hierarchy.",
+            "simple": "Format your headings following official APA guidelines (Level 1 centered bold, Level 2 left-aligned bold, Level 3 italic bold).",
+            "plain": "Headings must strictly adhere to APA 7th five-level typographic styling to establish visual and logical hierarchy.",
+            "technical": "Adherence to codified APA 7th pentalevel typographic conventions enforces taxonomic subordination and facilitates cognitive processing across lengthy dissertations.",
+            "visual": {
+              "kind": "table",
+              "title": "APA 7th Five-Level Heading Hierarchy",
+              "data": {
+                "headers": ["Level", "Format / Alignment", "Text Placement"],
+                "rows": [
+                  ["Level 1", "Centered, Bold, Title Case", "Text begins on a new line below heading"],
+                  ["Level 2", "Flush Left, Bold, Title Case", "Text begins on a new line below heading"],
+                  ["Level 3", "Flush Left, Bold Italic, Title Case", "Text begins on a new line below heading"],
+                  ["Level 4", "Indented, Bold, Title Case, Period", "Text begins on the same line after the period"],
+                  ["Level 5", "Indented, Bold Italic, Title Case, Period", "Text begins on the same line after the period"]
+                ]
+              },
+              "caption": "Maintain consistent heading levels so examiners can navigate complex sub-sections effortlessly."
+            }
           }
         ],
         "visual": {
@@ -55,10 +78,9 @@
           "title": "Pass 1 Structural Audit Checklist",
           "data": {
             "items": [
-              "Does Chapter 1 introduce every construct analyzed in Chapters 4 and 5?",
-              "Are all APA 7th heading levels strictly formatted (Level 1 Centered Bold, Level 2 Left Bold)?",
-              "Does the final paragraph of each chapter provide a bridge transition to the next?",
-              "Are chapter word counts balanced according to the university guidelines?"
+              { "label": "Does Chapter 1 introduce every construct analyzed in Chapters 4 and 5?", "status": "done" },
+              { "label": "Are all APA 7th heading levels strictly formatted?", "status": "done" },
+              { "label": "Does the final paragraph of each chapter provide a bridge transition to the next?", "status": "done" }
             ]
           },
           "caption": "Verify all structural requirements before starting sentence-level editing."
@@ -66,7 +88,6 @@
         "check": {
           "questions": [
             {
-              "id": "q1",
               "type": "single",
               "q": "Why is it inefficient to correct punctuation and grammar before completing structural editing?",
               "options": [
@@ -80,7 +101,307 @@
             }
           ]
         }
+      },
+      {
+        "id": "p2",
+        "explain": "Maintain the 'Golden Thread' across all five thesis chapters so every concept introduced in Chapter 1 is rigorously executed and discussed.",
+        "sentences": [
+          {
+            "id": "s4",
+            "text": "The golden thread represents the unbroken narrative spine connecting your research problem to your final recommendations.",
+            "simple": "The golden thread is the clear connection that links your problem in Chapter 1 all the way to your conclusions in Chapter 5.",
+            "plain": "The golden thread represents the unbroken narrative spine connecting your research problem to your final recommendations.",
+            "technical": "Teleological nomological fidelity mandates an unbroken epistemological conduit linking the primary problem formulation to empirical outputs and practical recommendations.",
+            "visual": {
+              "kind": "flow",
+              "title": "The Golden Thread Architecture",
+              "data": {
+                "steps": [
+                  { "label": "Chapter 1: Problem", "desc": "Specific research gap articulated" },
+                  { "label": "Chapter 2: Theory", "desc": "Theoretical framework & hypotheses" },
+                  { "label": "Chapter 3: Method", "desc": "Operational scales & sample sizing" },
+                  { "label": "Chapter 4: Results", "desc": "Empirical hypothesis testing" },
+                  { "label": "Chapter 5: Discussion", "desc": "Implications & theoretical resolution" }
+                ]
+              },
+              "caption": "If a variable appears in Chapter 4 that was never introduced in Chapter 1 or 2, the golden thread is broken."
+            }
+          },
+          {
+            "id": "s5",
+            "text": "A severe structural defect occurs when variables suddenly appear in the methodology chapter without prior justification in the literature review.",
+            "simple": "A major mistake is testing variables in your survey that you never mentioned in your literature review.",
+            "plain": "A severe structural defect occurs when variables suddenly appear in the methodology chapter without prior justification in the literature review.",
+            "technical": "Construct emergence in Chapter 3 absent prior theoretical contextualization in Chapter 2 violates nomological validity and triggers immediate examiner queries.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Construct Consistency Across Chapters",
+              "data": {
+                "dos": [
+                  "Ensure every hypothesis tested in Chapter 4 corresponds to a literature review section in Chapter 2",
+                  "Use identical terminology for constructs across all chapters (e.g. 'work engagement', not 'job dedication')",
+                  "Conclude each chapter with a 2-paragraph bridge transition introducing the next chapter"
+                ],
+                "donts": [
+                  "Never add new demographic moderator variables into Chapter 4 without theoretical grounding",
+                  "Do not abandon research objectives from Chapter 1 without explaining why in Chapter 3",
+                  "Never end a chapter abruptly on a raw data table without a summary paragraph"
+                ]
+              },
+              "caption": "Construct consistency protects your thesis from examiner criticisms of disjointed research."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "Chapter bridge paragraphs prepare the examiner by summarizing the current chapter and previewing the next logical step in the investigation.",
+            "simple": "Write a short paragraph at the end of each chapter explaining what was just covered and what comes next.",
+            "plain": "Chapter bridge paragraphs prepare the examiner by summarizing the current chapter and previewing the next logical step in the investigation.",
+            "technical": "Terminal transitional syntheses synthesize intra-chapter findings while projecting teleological trajectories into subsequent analytical units.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Anatomy of an Effective Chapter Bridge",
+              "data": {
+                "lead": "Chapter Bridge Structure:",
+                "callouts": [
+                  { "text": "[This chapter has synthesized the theoretical literature on leadership...]", "label": "1. Retrospective Synthesis" },
+                  { "text": "[demonstrating significant gaps in empirical public sector studies.]", "label": "2. Theoretical Justification" },
+                  { "text": "[To empirically address these gaps, Chapter 3 establishes the sampling methodology...]", "label": "3. Prospective Trajectory" }
+                ]
+              },
+              "caption": "A polished bridge transition creates a seamless reading experience for the evaluation committee."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "cycle",
+          "title": "Continuous Narrative Synthesis Cycle",
+          "data": {
+            "stages": [
+              { "name": "Problem Foundation", "desc": "Chapter 1 Scope" },
+              { "name": "Theoretical Context", "desc": "Chapter 2 Evidence" },
+              { "name": "Empirical Testing", "desc": "Chapters 3 & 4 Data" },
+              { "name": "Scholarly Closure", "desc": "Chapter 5 Synthesis" }
+            ]
+          },
+          "caption": "The narrative cycle ensures that every question raised at the beginning is resolved at the end."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "What is the primary function of a chapter bridge transition in a Master's thesis?",
+              "options": [
+                "To summarize current chapter insights and provide a logical preview of the next chapter",
+                "To satisfy university minimum paragraph count requirements",
+                "To restate the references in full before turning the page",
+                "To replace the table of contents at the beginning of the thesis"
+              ],
+              "answer": 0,
+              "explanation": "Bridge transitions provide rhetorical continuity, guiding the reader smoothly from one analytical stage to the next."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "explain": "Build every body paragraph using the proven MEAL framework (Main idea, Evidence, Analysis, Link) to ensure cohesive argument development.",
+        "sentences": [
+          {
+            "id": "s7",
+            "text": "Academic paragraphs require rigorous internal organization so that each paragraph makes one distinct, defensible claim.",
+            "simple": "Every paragraph in your thesis should focus on one main point, back it up with citations, and explain why it matters.",
+            "plain": "Academic paragraphs require rigorous internal organization so that each paragraph makes one distinct, defensible claim.",
+            "technical": "Intra-paragraph thematic cohesion demands monadic argumentative focus, structured via the deductive MEAL rhetorical paradigm.",
+            "visual": {
+              "kind": "process",
+              "title": "The MEAL Paragraph Architecture",
+              "data": {
+                "inputs": ["Main Idea (M): Assert core topic sentence claim"],
+                "transformation": "Evidence (E): Integrate peer-reviewed citations + Analysis (A): Contextualize findings",
+                "outputs": ["Link (L): Synthesize connection to broader dissertation argument"]
+              },
+              "caption": "Following MEAL prevents rambling paragraphs that lose focus halfway through."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "The topic sentence must assert your scholarly claim rather than opening with a passive literature quote or citation.",
+            "simple": "Start your paragraph with your own strong point, not with someone else's quote or citation.",
+            "plain": "The topic sentence must assert your scholarly claim rather than opening with a passive literature quote or citation.",
+            "technical": "The initial thematic assertion must function as a normative epistemic claim, subordinating bibliographic evidence to analytical positioning.",
+            "visual": {
+              "kind": "compare",
+              "title": "Weak vs Authoritative Topic Sentences",
+              "data": {
+                "columns": ["Weak Topic Sentence (Passive Citations)", "Authoritative Topic Sentence (Claim-First)"],
+                "rows": [
+                  { "metric": "Opening", "col1": "\"Smith (2020) said that burnout is high in banking.\"", "col2": "\"Workplace burnout in regional banking is primarily driven by unmanageable workload expectations (Smith, 2020).\"" },
+                  { "metric": "Voice", "col1": "Passive student voice hiding behind an author", "col2": "Authoritative scholar asserting an empirical claim" },
+                  { "metric": "Examiner Perception", "col1": "Annotated bibliography patchwriting", "col2": "Synthesized critical scholarship" }
+                ]
+              },
+              "caption": "Lead with your claim; support it with the author. Never let another author speak for you."
+            }
+          },
+          {
+            "id": "s9",
+            "text": "Every citation in the evidence section must be followed by analytical commentary explaining its relevance to your research question.",
+            "simple": "After citing a paper, always add 1 or 2 sentences explaining what that finding means for your own study.",
+            "plain": "Every citation in the evidence section must be followed by analytical commentary explaining its relevance to your research question.",
+            "technical": "Bibliographic citations require immediate analytical contextualization to prevent string-citing and establish synthetic depth.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Anatomy of an Analytical Commentary",
+              "data": {
+                "lead": "Evidence + Analysis Pair:",
+                "callouts": [
+                  { "text": "[Recent empirical findings indicate that 38% of faculty experience severe burnout (Khan & Malik, 2022).]", "label": "Evidence (E)" },
+                  { "text": "[This heightened prevalence highlights an urgent need to evaluate leadership interventions specifically within public higher education...]", "label": "Analysis (A) connecting to study" }
+                ]
+              },
+              "caption": "Never drop a citation without explaining why it matters to your thesis argument."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "pyramid",
+          "title": "Paragraph Analytical Density Pyramid",
+          "data": {
+            "levels": [
+              { "label": "Critical Synthesis", "desc": "Comparing & critiquing multiple author claims" },
+              { "label": "Analytical Commentary", "desc": "Explaining relevance to candidate inquiry" },
+              { "label": "Bibliographic Evidence", "desc": "Verified peer-reviewed citation foundation" }
+            ]
+          },
+          "caption": "Deep academic writing layers analysis and synthesis on top of foundational evidence."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "What does the 'A' in the MEAL paragraph framework represent?",
+              "options": [
+                "Analysis — candidate commentary explaining why the cited evidence matters to the thesis inquiry",
+                "Abbreviations — inserting Latin abbreviations like etc. and et al.",
+                "Appendices — referencing documents at the back of the book",
+                "Author — listing the names of all researchers in the citation"
+              ],
+              "answer": 0,
+              "explanation": "In the MEAL framework (Main idea, Evidence, Analysis, Link), Analysis is where the researcher interprets and critiques the cited findings."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "explain": "Deploy sophisticated transition signposts to guide examiners seamlessly through complex empirical arguments without abrupt tonal shifts.",
+        "sentences": [
+          {
+            "id": "s10",
+            "text": "Transition signposts indicate the logical trajectory of your thought, signaling contrast, causal inference, concession, or summation.",
+            "simple": "Transition words like 'however', 'consequently', and 'furthermore' show readers how your ideas connect together.",
+            "plain": "Transition signposts indicate the logical trajectory of your thought, signaling contrast, causal inference, concession, or summation.",
+            "technical": "Discourse connectives serve as cognitive signposts that delineate argumentative trajectories across deductive sequences.",
+            "visual": {
+              "kind": "table",
+              "title": "Academic Transition Signpost Matrix",
+              "data": {
+                "headers": ["Logical Relationship", "Novice / Casual Transitions", "Scholarly Academic Connectives"],
+                "rows": [
+                  ["Contrast / Opposition", "But, On the other hand", "Conversely, In contrast, However, Nevertheless"],
+                  ["Causal Inference", "So, Because of this", "Consequently, Thus, Hence, Accordingly"],
+                  ["Concession", "Even though", "Although, While acknowledging, Albeit"],
+                  ["Additive Elaboration", "Also, And, Plus", "Furthermore, Moreover, In addition, Additionally"]
+                ]
+              },
+              "caption": "Replace informal conversational words with codified scholarly connectives."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "Avoid mechanical repetition of the same transition word at the start of consecutive paragraphs.",
+            "simple": "Do not start three paragraphs in a row with 'Furthermore' or 'However'; vary your transition styles.",
+            "plain": "Avoid mechanical repetition of the same transition word at the start of consecutive paragraphs.",
+            "technical": "Iterative recurrence of identical lexical connectives induces stylistic fatigue and signals impoverished rhetorical repertoire.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Transition Placement Best Practices",
+              "data": {
+                "dos": [
+                  "Vary transition placement by embedding connectives mid-sentence ('Khan (2021), however, argued...')",
+                  "Use conceptual transitions where ideas link naturally without requiring a mechanical adverb",
+                  "Read paragraphs aloud during Pass 1 editing to detect rhythmic and syntactical clunkiness"
+                ],
+                "donts": [
+                  "Never begin consecutive sentences with 'Additionally' or 'Moreover'",
+                  "Avoid conversational filler ('Basically', 'Obviously', 'Needless to say')",
+                  "Do not use causal transitions ('Therefore') unless an empirical link was strictly demonstrated"
+                ]
+              },
+              "caption": "Mid-sentence transition placement creates an elegant, natural academic cadence."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "Executing this comprehensive structural review transforms disjointed chapter drafts into a compelling, defense-ready scholarly masterwork.",
+            "simple": "Doing this full structural review turns a messy draft into a clear, professional thesis that supervisors love.",
+            "plain": "Executing this comprehensive structural review transforms disjointed chapter drafts into a compelling, defense-ready scholarly masterwork.",
+            "technical": "Rigorous execution of macro-structural editing guarantees teleological alignment, precluding adverse external examiner determinations.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Pass 1 Sign-Off Verification Checklist",
+              "data": {
+                "items": [
+                  { "label": "Golden thread verified across all 5 chapters", "status": "done" },
+                  { "label": "All subheadings follow APA 7th Level 1 to 5 formatting", "status": "done" },
+                  { "label": "Every paragraph follows the MEAL structural framework", "status": "done" }
+                ]
+              },
+              "caption": "Only move to Pass 2 (paragraph-level micro editing) once Pass 1 structural audit is complete."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "flow",
+          "title": "The Master Editing Progression",
+          "data": {
+            "steps": [
+              { "label": "Pass 1: Macro Structure", "desc": "Global flow, Golden Thread & headings" },
+              { "label": "Pass 2: Stylistic Polishing", "desc": "Hedging, active/passive voice & tenses" },
+              { "label": "Pass 3: Proofreading", "desc": "Punctuation, APA 7th citations & format" }
+            ]
+          },
+          "caption": "A three-pass editing strategy delivers consistent first-time thesis approvals."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Why is it preferable to place transition words mid-sentence (e.g. 'This finding, however, contradicts...') rather than always at the beginning?",
+              "options": [
+                "It produces a more sophisticated, natural academic cadence and avoids monotonous sentence beginnings",
+                "It reduces the character count for journal submissions",
+                "It is a mandatory rule in APA 7th with failing penalties",
+                "It prevents Turnitin from flagging transition phrases"
+              ],
+              "answer": 0,
+              "explanation": "Embedding connectives mid-sentence improves stylistic rhythm and prevents the monotonous repetition of beginning every sentence with 'Furthermore' or 'However'."
+            }
+          ]
+        }
       }
+    ],
+    "mistakes": [
+      "Starting micro-editing (grammar and commas) before checking macro-argument flow.",
+      "Using vague labels like 'Literature' or 'Data' instead of informative analytical subheadings.",
+      "Allowing constructs to appear in Chapter 3 methodology without prior grounding in Chapter 2.",
+      "Opening paragraphs with passive citations instead of authoritative candidate claims."
+    ],
+    "takeaways": [
+      "Edit from the top down: Macro-Structure (Pass 1) -> Paragraph Cohesion (Pass 2) -> Micro Mechanics (Pass 3).",
+      "Format all subheadings using APA 7th 5-level typographic styling.",
+      "Maintain the Golden Thread so every construct in Chapter 1 is rigorously analyzed in Chapters 4 and 5.",
+      "Structure every body paragraph with the MEAL framework (Main idea, Evidence, Analysis, Link)."
     ]
   }
 }

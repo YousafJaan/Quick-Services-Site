@@ -18,6 +18,7 @@ const DEFAULT_STATE = {
   studyTime: { totalSeconds: 0, byCourse: {} },
   badges: [],           // [ { id, title, icon, earnedAt } ]
   streak: { current: 1, lastStudyDate: new Date().toISOString().split('T')[0] },
+  cookiesAccepted: false,
   settings: {
     selfCheckPrompt: 'gentle', // 'off' | 'gentle' | 'on'
     reducedMotion: false
@@ -104,6 +105,12 @@ class Store {
 
   // English Proficiency Level ('simple' | 'plain' | 'technical')
   getEnglishLevel() {
+    try {
+      const direct = window.localStorage.getItem('qsa_english_level');
+      if (direct && ['simple', 'plain', 'technical'].includes(direct)) {
+        return direct;
+      }
+    } catch (e) {}
     return this.state.englishLevel || 'plain';
   }
 
@@ -111,6 +118,9 @@ class Store {
     if (['simple', 'plain', 'technical'].includes(level)) {
       this.state.englishLevel = level;
       this.state.hasChosenEnglishLevel = true;
+      try {
+        window.localStorage.setItem('qsa_english_level', level);
+      } catch (e) {}
       this.save();
       try {
         window.dispatchEvent(new CustomEvent('qsa:english-level-changed', { detail: { level } }));
@@ -120,6 +130,27 @@ class Store {
 
   hasChosenEnglishLevel() {
     return Boolean(this.state.hasChosenEnglishLevel);
+  }
+
+  // Cookie & Local Storage Consent Policy
+  hasAcceptedCookies() {
+    try {
+      if (window.localStorage.getItem('qsa_cookies_accepted') === 'true') {
+        return true;
+      }
+    } catch (e) {}
+    return Boolean(this.state.cookiesAccepted);
+  }
+
+  acceptCookies() {
+    this.state.cookiesAccepted = true;
+    try {
+      window.localStorage.setItem('qsa_cookies_accepted', 'true');
+    } catch (e) {}
+    this.save();
+    try {
+      window.dispatchEvent(new CustomEvent('qsa:cookies-accepted'));
+    } catch (e) {}
   }
 
   // Study Time Tracker (pauses when tab is blurred or hidden)
@@ -294,3 +325,6 @@ class Store {
 }
 
 export const store = new Store();
+if (typeof window !== 'undefined') {
+  window.store = store;
+}

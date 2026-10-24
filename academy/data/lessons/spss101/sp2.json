@@ -3,12 +3,13 @@
   "course": "spss101",
   "title": "Variable Properties: Naming, Types, Labels, and Values",
   "type": "read",
-  "minutes": 12,
+  "minutes": 14,
   "content": {
     "quick": "Variable View in SPSS defines how the software interprets your questionnaire responses. Variable names cannot start with numbers or contain spaces; labels provide full survey text; value labels map numeric codes to categories; and measurement scales govern which statistical tests SPSS allows you to run.",
     "blocks": [
       {
         "id": "p1",
+        "explain": "Setting up your variable properties in SPSS properly prevents syntax errors and ensures your output tables display clear, human-readable labels.",
         "sentences": [
           {
             "id": "s1",
@@ -32,6 +33,81 @@
           },
           {
             "id": "s2",
+            "text": "Variable names in SPSS cannot exceed 64 bytes, cannot contain spaces, and cannot end with a period or start with a number.",
+            "simple": "Variable names must be short, have no spaces, and must start with a letter (e.g. use TL_1 instead of 1_TL).",
+            "plain": "Variable names in SPSS cannot exceed 64 bytes, cannot contain spaces, and cannot end with a period or start with a number.",
+            "technical": "Identifier tokens in SPSS are subject to lexicographic constraints: strict 64-byte ceilings, initial alphabetical character requirements, and exclusion of reserved delimiters.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "SPSS Variable Naming Syntax Rules",
+              "data": {
+                "lead": "Valid vs Invalid Names:",
+                "callouts": [
+                  { "text": "Valid: Org_Commitment_1", "label": "Starts with letter, uses underscore" },
+                  { "text": "Invalid: 1_Org_Commitment", "label": "Fails: Cannot start with a numeral" },
+                  { "text": "Invalid: Org Commitment", "label": "Fails: Cannot contain whitespace spaces" }
+                ]
+              },
+              "caption": "Use concise naming conventions so variables are easily selectable in dialog boxes."
+            }
+          },
+          {
+            "id": "s3",
+            "text": "The Label column provides the full question phrasing from your survey instrument, which SPSS automatically prints onto generated tables and charts.",
+            "simple": "Paste your full survey question into the Label column so your statistical charts display full readable sentences.",
+            "plain": "The Label column provides the full question phrasing from your survey instrument, which SPSS automatically prints onto generated tables and charts.",
+            "technical": "The metadata label attribute maps descriptive semantic strings to alphanumeric tokens, automating APA-compliant tabular annotation upon procedure execution.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Variable View Column Configuration Protocol",
+              "data": {
+                "items": [
+                  { "label": "Name: Standardized abbreviated token (e.g. JS_01)", "status": "done" },
+                  { "label": "Type: Numeric (Default for coded surveys)", "status": "done" },
+                  { "label": "Label: Full verbatim questionnaire item text", "status": "done" }
+                ]
+              },
+              "caption": "Populating labels saves hours of manual table editing when compiling Chapter 4."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "SPSS Variable View Master Configuration Matrix",
+          "data": {
+            "headers": ["Column", "Recommended Setting", "Purpose", "Common Error"],
+            "rows": [
+              ["Name", "TL_01, TL_02", "Syntax identifier", "Using spaces: 'TL 01' (Crashes)"],
+              ["Type", "Numeric (Width 8, Decimals 0)", "Data format", "Leaving as 'String' (Blocks ANOVA)"],
+              ["Label", "\"My supervisor encourages innovation\"", "Human-readable label", "Leaving empty (Shows raw codes in tables)"],
+              ["Values", "1=Strongly Disagree ... 5=Strongly Agree", "Category mapping", "Typing text words into Data View"]
+            ]
+          },
+          "caption": "Configure all columns in Variable View before entering participant data."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Which of the following is an INVALID variable name in SPSS?",
+              "options": [
+                "Gender_2025",
+                "1_JobSatisfaction",
+                "Salary_PKR",
+                "Q1_Item"
+              ],
+              "answer": 1,
+              "explanation": "SPSS variable names cannot begin with a number. They must start with an alphabetical letter or an @ symbol."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p2",
+        "explain": "The Measure column governs the mathematical permissions SPSS grants to a variable, distinguishing between Nominal, Ordinal, and Scale metrics.",
+        "sentences": [
+          {
+            "id": "s4",
             "text": "The Measure column tells SPSS whether a variable represents categorical grouping data or continuous numerical quantities.",
             "simple": "The Measure column tells SPSS if a column is categories (like Gender) or continuous numbers (like Age or test scores).",
             "plain": "The Measure column tells SPSS whether a variable represents categorical grouping data or continuous numerical quantities.",
@@ -49,36 +125,276 @@
               },
               "caption": "Always set 5-point and 7-point Likert composite variables to 'Scale' in SPSS."
             }
+          },
+          {
+            "id": "s5",
+            "text": "Setting a continuous variable to 'Nominal' prevents SPSS from calculating means, standard deviations, and regression models in certain automated dialogs.",
+            "simple": "If you leave your numbers set as 'Nominal', SPSS will treat them like category tags and refuse to run certain statistics.",
+            "plain": "Setting a continuous variable to 'Nominal' prevents SPSS from calculating means, standard deviations, and regression models in certain automated dialogs.",
+            "technical": "Misclassifying metric variables as nominal induces procedure lock-out across advanced SPSS charting and linear modeling procedures.",
+            "visual": {
+              "kind": "compare",
+              "title": "Impact of Measure Setting in SPSS",
+              "data": {
+                "columns": ["Correct Measure Setting", "Incorrect Measure Setting"],
+                "rows": [
+                  { "metric": "Likert Composite", "col1": "Set to 'Scale' -> Means, SD, Pearson r enabled", "col2": "Set to 'Nominal' -> Blocked in correlation menus" },
+                  { "metric": "Gender Grouping", "col1": "Set to 'Nominal' -> Independent Samples t-test active", "col2": "Set to 'Scale' -> Confuses grouping variable logic" }
+                ]
+              },
+              "caption": "Audit your Measure column: all composite scores must be set to 'Scale'."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "According to Field (2018), composite scale scores computed by averaging 5-point or 7-point Likert items are treated as continuous Scale data.",
+            "simple": "When you average several Likert questions together, famous statisticians confirm you can treat that score as continuous Scale data.",
+            "plain": "According to Field (2018), composite scale scores computed by averaging 5-point or 7-point Likert items are treated as continuous Scale data.",
+            "technical": "Following psychometric consensus (Field, 2018; Tabachnick & Fidell, 2019), multi-item Likert composites satisfy quasi-interval properties, justifying parametric procedures.",
+            "visual": {
+              "kind": "scale",
+              "title": "Likert Item vs Composite Scale Continuum",
+              "data": {
+                "min": "Single Item (Strictly Ordinal)",
+                "max": "Summated Composite (Treated as Continuous Scale)",
+                "markers": [
+                  { "pos": 20, "label": "Single 5-Point Item", "desc": "Discrete ranked categories (1 to 5)" },
+                  { "pos": 50, "label": "3-Item Mini Composite", "desc": "Borderline interval properties" },
+                  { "pos": 85, "label": "6+ Item Composite Score", "desc": "Continuous distribution (Mean = 3.84, SD = 0.62)" }
+                ]
+              },
+              "caption": "Calculate composite scores using Transform -> Compute Variable before running regressions."
+            }
           }
         ],
         "visual": {
-          "kind": "definition",
-          "title": "Value Labels Mapping",
+          "kind": "hierarchy",
+          "title": "Measurement Scale Permissions Hierarchy",
           "data": {
-            "term": "Value Labels",
-            "meaning": "Mapping internal storage numbers to human-readable categories so you don't type strings.",
-            "example": "Value: 1 → Label: Strongly Disagree | Value: 5 → Label: Strongly Agree"
+            "root": "SPSS Measurement Scale",
+            "children": [
+              { "name": "Nominal", "desc": "Identity only (Frequencies, Chi-Square)" },
+              { "name": "Ordinal", "desc": "Order + Identity (Medians, Non-parametric)" },
+              { "name": "Scale", "desc": "Distance + Magnitude (Means, ANOVA, Regression)" }
+            ]
           },
-          "caption": "Typing numbers (1-5) is 10x faster than typing text words and avoids spelling typos in data entry."
+          "caption": "Higher levels of measurement preserve more statistical information."
         },
         "check": {
           "questions": [
             {
-              "id": "q1",
               "type": "single",
-              "q": "Which of the following is an INVALID variable name in SPSS?",
+              "q": "What should the Measure column be set to for an employee's total job satisfaction composite score averaged across 6 survey items?",
               "options": [
-                "Gender_2025",
-                "1_JobSatisfaction",
-                "Salary_PKR",
-                "Q1_Item"
+                "Scale",
+                "Nominal",
+                "Ordinal",
+                "String"
               ],
-              "answer": 1,
-              "explanation": "SPSS variable names cannot begin with a number. They must start with an alphabetical letter or an @ symbol."
+              "answer": 0,
+              "explanation": "Multi-item composite scores are continuous interval metrics and must be set to 'Scale' in SPSS."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "explain": "Value Labels map numerical codes to descriptive category titles, enabling lightning-fast numeric data entry while preserving readable output.",
+        "sentences": [
+          {
+            "id": "s7",
+            "text": "Value labels map internal numeric storage values to human-readable categories, eliminating the need to type text strings during data entry.",
+            "simple": "Value labels let you type '1' or '2' on your keyboard instead of typing 'Male' or 'Female' hundreds of times.",
+            "plain": "Value labels map internal numeric storage values to human-readable categories, eliminating the need to type text strings during data entry.",
+            "technical": "Value labeling establishes an internal categorical lookup table, optimizing disk I/O and precluding alphanumeric data entry corruption.",
+            "visual": {
+              "kind": "definition",
+              "title": "Value Labels Mapping Architecture",
+              "data": {
+                "term": "Value Label Lookup",
+                "meaning": "Assigning words to numbers: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree.",
+                "example": "Data View stores '5', but output charts and tables display 'Strongly Agree'."
+              },
+              "caption": "Press the 'Value Labels' icon (tag icon) in the toolbar to toggle between numbers and words in Data View."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "Entering numbers rather than text strings accelerates data collection tenfold and completely eliminates spelling typos that fragment category counts.",
+            "simple": "Typing numbers stops typos like 'Femlae' or 'male' with lowercase letters from creating separate accidental categories.",
+            "plain": "Entering numbers rather than text strings accelerates data collection tenfold and completely eliminates spelling typos that fragment category counts.",
+            "technical": "Numerical encoding guarantees homomorphic grouping, eliminating lexical fragmentation induced by capitalization or orthographic variance.",
+            "visual": {
+              "kind": "compare",
+              "title": "String Typing vs Numeric Coded Entry",
+              "data": {
+                "columns": ["Typing Words (String Type - Disastrous)", "Typing Numbers with Value Labels (Numeric)"],
+                "rows": [
+                  { "metric": "Data Entry Speed", "col1": "Slow (Typing 'Strongly Agree' 500 times)", "col2": "Ultra-fast (Pressing numeric keypad: 5, Enter)" },
+                  { "metric": "Typo Risk", "col1": "High ('Agree', 'agree', 'Agree ' create 3 groups)", "col2": "Zero (Only digits 1 to 5 are entered)" },
+                  { "metric": "Statistical Compatibility", "col1": "Blocks t-tests, ANOVA, and regression", "col2": "100% compatible with all parametric models" }
+                ]
+              },
+              "caption": "Never leave survey responses as String variables in SPSS."
+            }
+          },
+          {
+            "id": "s9",
+            "text": "Configuring the Missing column with discrete missing values (such as -99 or 999) ensures uncompleted responses do not distort empirical means.",
+            "simple": "Tell SPSS what number means 'no answer' (like -99) so it does not count empty answers into your averages.",
+            "plain": "Configuring the Missing column with discrete missing values (such as -99 or 999) ensures uncompleted responses do not distort empirical means.",
+            "technical": "Discrete missing value declaration isolates non-response tokens from mathematical vectors, preventing systemic bias in central tendency estimations.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Discrete Missing Value Declaration",
+              "data": {
+                "lead": "Missing Value Specification:",
+                "callouts": [
+                  { "text": "Discrete missing values: -99", "label": "Participant skipped question" },
+                  { "text": "System Missing (dot .)", "label": "Blank cell (automatically excluded by SPSS)" },
+                  { "text": "Valid responses: 1 to 5", "label": "Included in Mean and SD calculations" }
+                ]
+              },
+              "caption": "If you type '99' for missing without declaring it in the Missing column, your mean will falsely skyrocket!"
+            }
+          }
+        ],
+        "visual": {
+          "kind": "process",
+          "title": "Value Label Configuration Workflow",
+          "data": {
+            "inputs": ["5-Point Likert Questionnaire Instrument"],
+            "transformation": "Open Variable View -> Click Values '...' button -> Add 1=SD, 2=D, 3=N, 4=A, 5=SA",
+            "outputs": ["Copy & Paste Values cell across all 30 survey items", "Standardized Data Entry Ready"]
+          },
+          "caption": "You can copy and paste the Values cell across all your Likert rows in one second."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "What happens if a researcher enters '99' for missing survey answers without declaring 99 in the Missing column?",
+              "options": [
+                "SPSS will treat 99 as a real number, causing the variable mean to falsely inflate to an absurd value like 25.4",
+                "SPSS automatically recognizes that 99 means missing and deletes it",
+                "SPSS shuts down with an error message",
+                "The computer screen turns off"
+              ],
+              "answer": 0,
+              "explanation": "SPSS treats any undeclared number as genuine data. A single 99 in a 1-5 scale will completely corrupt your mean and standard deviation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "explain": "Conduct a pre-analysis data screening audit using Frequencies to catch data entry typos before running formal hypothesis tests.",
+        "sentences": [
+          {
+            "id": "s10",
+            "text": "Before running correlation or regression models, researchers must audit their raw data for impossible entry codes using Frequency tables.",
+            "simple": "Before running your main tests, run a quick Frequency check to see if anyone accidentally typed a '6' or '7' on a 1-5 scale.",
+            "plain": "Before running correlation or regression models, researchers must audit their raw data for impossible entry codes using Frequency tables.",
+            "technical": "Pre-analytical verification requires univariate frequency auditing across all survey variables to detect out-of-range typographical entries and boundary violations.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Data Screening Audit Protocol",
+              "data": {
+                "dos": [
+                  "Run Analyze -> Descriptive Statistics -> Frequencies on all survey items",
+                  "Inspect Minimum and Maximum values: on a 1-5 scale, Minimum must be 1 and Maximum must be 5",
+                  "Use Data -> Sort Cases to quickly find and fix out-of-range entry rows"
+                ],
+                "donts": [
+                  "Never jump directly to regression without screening raw frequencies first",
+                  "Do not ignore unexpected negative values in your minimum column",
+                  "Never delete a respondent's entire row if only one item is missing"
+                ]
+              },
+              "caption": "Five minutes of frequency screening prevents humiliating supervisor corrections."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "If a frequency table shows a minimum of 0 or a maximum of 55 on a 5-point scale, a typographical entry mistake has occurred that must be rectified.",
+            "simple": "If you see a 55 in your maximum column, someone accidentally hit the '5' key twice during data entry.",
+            "plain": "If a frequency table shows a minimum of 0 or a maximum of 55 on a 5-point scale, a typographical entry mistake has occurred that must be rectified.",
+            "technical": "Erroneous out-of-bound observations (e.g., x = 55 in a domain [1, 5]) induce severe leptokurtic skewness and distort covariance matrices.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Frequency Screening Audit Table",
+              "data": {
+                "lead": "Audit Findings:",
+                "callouts": [
+                  { "text": "Item JS_01: Min = 1, Max = 5, N = 384", "label": "Pristine: No out-of-range errors" },
+                  { "text": "Item JS_02: Min = 1, Max = 55, N = 384", "label": "ALERT: Typo '55' detected! Must fix row" }
+                ]
+              },
+              "caption": "Always check your minimum and maximum columns across every variable."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "Auditing your Variable View and data entry guarantees that subsequent statistical models in Chapter 4 stand on rock-solid empirical ground.",
+            "simple": "Checking your variables carefully guarantees that your final thesis chapter is 100% accurate and defense-ready.",
+            "plain": "Auditing your Variable View and data entry guarantees that subsequent statistical models in Chapter 4 stand on rock-solid empirical ground.",
+            "technical": "Methodological diligence during initial variable parameterization insulates the empirical thesis draft against adverse external examiner interrogations.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Variable View Pre-Analysis Sign-Off",
+              "data": {
+                "items": [
+                  { "label": "All variable names follow strict syntax (no spaces, no leading numbers)", "status": "done" },
+                  { "label": "All Likert items have Value Labels (1=SD to 5=SA)", "status": "done" },
+                  { "label": "All composite construct scores set to Measure = Scale", "status": "done" }
+                ]
+              },
+              "caption": "Complete this checklist before running your reliability and regression tests."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "flow",
+          "title": "SPSS Data Setup to Analysis Pipeline",
+          "data": {
+            "steps": [
+              { "label": "1. Setup Variable View", "desc": "Define names, labels, values, and scale measure" },
+              { "label": "2. Data Entry", "desc": "Enter numeric codes via keypad" },
+              { "label": "3. Screening Audit", "desc": "Run Frequencies to catch typos & missing values" },
+              { "label": "4. Compute Composites", "desc": "Calculate construct means for hypothesis testing" }
+            ]
+          },
+          "caption": "Follow this disciplined workflow for every SPSS quantitative research project."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "What is the quickest way in SPSS to locate the exact participant row containing a typographical data entry error like '55'?",
+              "options": [
+                "Right-click the variable column in Data View and select 'Sort Descending' so the 55 appears at the top row",
+                "Re-type all 400 survey responses from scratch",
+                "Delete the entire SPSS software program and reinstall it",
+                "Print the entire dataset on 100 pages of paper and search with a magnifying glass"
+              ],
+              "answer": 0,
+              "explanation": "Sorting the column descending puts the largest number (55) right on Row 1, allowing you to cross-reference the paper questionnaire and correct the typo in 5 seconds."
             }
           ]
         }
       }
+    ],
+    "mistakes": [
+      "Using spaces or leading numerals in variable names (e.g. '1 Q1' or 'Job Satisfaction').",
+      "Leaving questionnaire items as String variables instead of Numeric with Value Labels.",
+      "Leaving composite Likert scores set as Nominal instead of Scale.",
+      "Entering missing data codes like 99 without declaring them in the Missing column."
+    ],
+    "takeaways": [
+      "Variable names are short syntax codes; Variable Labels hold full survey questions.",
+      "Always set multi-item composite constructs to Measure = Scale.",
+      "Use Value Labels to map 1=SD to 5=SA so data entry is fast, numeric, and error-free.",
+      "Run Frequencies on all variables to screen for out-of-range entry typos before running statistics."
     ]
   }
 }

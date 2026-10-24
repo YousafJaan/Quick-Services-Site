@@ -72,9 +72,9 @@ router.addRoute('verify', ({ certId }) => {
 // Initialize router
 router.start();
 
-// Initialize English Proficiency System
+// Initialize English Proficiency System & Cookie Consent
 initLanguageSwitchers();
-checkLanguageOnboarding();
+initCookieConsentBanner();
 
 // Keyboard Shortcuts Listener
 document.addEventListener('keydown', (e) => {
@@ -82,6 +82,67 @@ document.addEventListener('keydown', (e) => {
     showShortcutsHelp();
   }
 });
+
+/* ==========================================================================
+   Cookie & Local Storage Consent Banner
+   ========================================================================== */
+function initCookieConsentBanner() {
+  if (store.hasAcceptedCookies()) return;
+
+  const existing = document.getElementById('qsa-cookie-consent-banner');
+  if (existing) return;
+
+  const banner = document.createElement('div');
+  banner.id = 'qsa-cookie-consent-banner';
+  banner.style.cssText = `
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(24px);
+    width: calc(100% - 32px);
+    max-width: 680px;
+    background: #ffffff;
+    border: 1px solid var(--qsa-border-strong);
+    border-radius: var(--qsa-radius-card);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+    padding: 16px 22px;
+    z-index: 9990;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: opacity 0.25s var(--qsa-ease-out), transform 0.25s var(--qsa-ease-out);
+    opacity: 0;
+  `;
+
+  banner.innerHTML = `
+    <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+      <span style="font-size: 20px; flex-shrink: 0; line-height: 1;">🛡️</span>
+      <div style="font-size: 13.5px; color: var(--qsa-text-secondary); line-height: 1.5;">
+        We use secure local device storage to remember your reading preferences, course progress, and verify your credentials.
+      </div>
+    </div>
+    <div style="display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
+      <button type="button" class="btn btn-primary btn-sm" id="accept-cookie-consent-btn" style="white-space: nowrap; padding: 8px 18px; font-size: 13px;">
+        Accept &amp; Continue
+      </button>
+    </div>
+  `;
+
+  document.body.appendChild(banner);
+
+  requestAnimationFrame(() => {
+    banner.style.opacity = '1';
+    banner.style.transform = 'translateX(-50%) translateY(0)';
+  });
+
+  banner.querySelector('#accept-cookie-consent-btn')?.addEventListener('click', () => {
+    store.acceptCookies();
+    banner.style.opacity = '0';
+    banner.style.transform = 'translateX(-50%) translateY(24px)';
+    setTimeout(() => banner.remove(), 260);
+  });
+}
 
 /* ==========================================================================
    English Proficiency Level Logic & Onboarding Modal
@@ -109,6 +170,14 @@ function initLanguageSwitchers() {
     if (lang) {
       store.setEnglishLevel(lang);
       syncButtons();
+      const labels = {
+        simple: 'Simple English (ESL & Clarity)',
+        plain: 'Plain English (Standard Academic)',
+        technical: 'Technical English (Scholarly Register)'
+      };
+      if (typeof window.showGlobalToast === 'function') {
+        window.showGlobalToast(`Reading style set to: ${labels[lang] || lang}`);
+      }
     }
   });
 
@@ -249,27 +318,27 @@ function renderCatalog(courses) {
 
   mainEl.innerHTML = `
     <!-- Hero Banner -->
-    <section style="background: linear-gradient(180deg, rgba(217, 119, 87, 0.05) 0%, rgba(250, 249, 245, 0) 100%); padding: 64px 0 44px; border-bottom: 1px solid var(--qsa-border-line);">
+    <section style="background: #ffffff; padding: 68px 0 48px; border-bottom: 1px solid var(--qsa-border-line);">
       <div class="wrap" style="text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;">
           <span class="tag tag-clay">Quick Services Academy</span>
-          <button type="button" onclick="window.openLanguagePreferenceModal()" style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--qsa-text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+          <button type="button" onclick="window.openLanguagePreferenceModal()" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 5px 14px; font-size: 12px; font-weight: 600; color: var(--qsa-text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: var(--qsa-shadow-card);">
             <span>Reading Style:</span>
             <strong style="color: var(--qsa-accent-clay);">${langLabels[currentLang]}</strong>
             <span style="font-size: 11px; opacity: 0.7;">⚙</span>
           </button>
         </div>
 
-        <h1 style="font-size: clamp(34px, 6vw, 54px); color: var(--qsa-text-primary); max-width: 820px; margin: 8px auto 16px; font-weight: 400; line-height: 1.15;">
+        <h1 style="font-size: clamp(34px, 5.5vw, 52px); color: var(--qsa-text-primary); max-width: 820px; margin: 8px auto 16px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;">
           Make your research make sense.
         </h1>
-        <p style="font-size: clamp(16px, 2.2vw, 18.5px); color: var(--qsa-text-secondary); max-width: 680px; margin: 0 auto 28px; line-height: 1.6;">
+        <p style="font-size: clamp(16px, 2vw, 18px); color: var(--qsa-text-secondary); max-width: 680px; margin: 0 auto 32px; line-height: 1.6;">
           Free, premium academic training for postgraduate and research students in Pakistan. Master thesis structure, APA 7th citations, G*Power calculations, SPSS, and SmartPLS with interactive visuals for every single sentence.
         </p>
 
         <!-- Search & Filter Controls -->
         <div style="max-width: 580px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap;">
-          <input type="text" id="catalog-search" placeholder="Search topics (e.g. Turnitin, G*Power, ANOVA, APA 7)..." style="flex: 1; min-width: 260px; padding: 13px 20px; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); font-size: 14.5px; outline: none; box-shadow: var(--qsa-shadow-card);">
+          <input type="text" id="catalog-search" placeholder="Search topics (e.g. Turnitin, G*Power, ANOVA, APA 7)..." style="flex: 1; min-width: 260px; padding: 13px 20px; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); font-size: 14.5px; outline: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);">
         </div>
       </div>
     </section>
@@ -581,27 +650,48 @@ function renderLearnerDashboard() {
    Certificates List (#certificates)
    ========================================================================== */
 function renderCertificatesList() {
+  const courses = [
+    { id: 'thesis101', code: 'THESIS', title: 'Thesis Writing 101: Problem Formulation & Defense', hours: 3.5, desc: 'Certifies mastery of empirical research problem formulation, theoretical frameworks, methodology, and proposal defense.' },
+    { id: 'cite101', code: 'CITE', title: 'Citations & Referencing: APA 7th Masterclass', hours: 3.0, desc: 'Certifies mastery of APA 7th author rules, parenthetical citations, narrative framing, and reference entries.' },
+    { id: 'integrity101', code: 'INTEG', title: 'Academic Integrity & Similarity Reports', hours: 2.8, desc: 'Certifies mastery of Turnitin similarity index analysis, ethical paraphrasing, and HEC similarity defense.' },
+    { id: 'edit101', code: 'EDIT', title: 'Proofreading & Structural Academic Editing', hours: 3.2, desc: 'Certifies mastery of the Golden Thread, MEAL paragraph structures, academic tone, and thesis editing.' },
+    { id: 'lit-search', code: 'SEARCH', title: 'Systematic Literature Search & Zotero Indexing', hours: 3.2, desc: 'Certifies mastery of PRISMA 2020 workflows, Boolean database indexing, and Zotero reference management.' },
+    { id: 'sample-size', code: 'SAMPLE', title: 'Sample Size Determination & Statistical Power', hours: 3.8, desc: 'Certifies mastery of G*Power parameterization, Cohen effect sizes, Krejcie-Morgan, and sample justification.' },
+    { id: 'spss101', code: 'SPSS', title: 'SPSS for Quantitative Empirical Research', hours: 4.2, desc: 'Certifies mastery of variable setup, data cleaning, normality screening, Cronbach alpha, and hypothesis testing.' },
+    { id: 'smartpls', code: 'PLS', title: 'SmartPLS 4 & Structural Equation Modeling (SEM)', hours: 4.0, desc: 'Certifies mastery of measurement model evaluation, structural model paths, HTMT, and mediating effects.' },
+    { id: 'viva', code: 'VIVA', title: 'Viva Voce & Proposal Defense Mastery', hours: 2.8, desc: 'Certifies mastery of slide deck budget, handling harsh examiner questions, and defense rubrics.' }
+  ];
+
   mainEl.innerHTML = `
     <div class="wrap" style="padding: 52px 20px 72px;">
-      <span class="tag tag-clay" style="margin-bottom: 12px;">Credentials</span>
-      <h1 style="color: var(--qsa-text-primary); font-size: clamp(30px, 5vw, 42px); margin-bottom: 16px; font-weight: 400;">
-        Academy Certificates
+      <span class="tag tag-clay" style="margin-bottom: 12px;">Official Credentials</span>
+      <h1 style="color: var(--qsa-text-primary); font-size: clamp(30px, 5vw, 42px); margin-bottom: 14px; font-weight: 400; letter-spacing: -0.02em;">
+        Academy Certificates &amp; Credentials
       </h1>
-      <p style="color: var(--qsa-text-secondary); font-size: 15.5px; margin-bottom: 32px; max-width: 650px;">
-        Complete all lessons in a course and achieve at least 70% on the final assessment to earn your verified credential.
+      <p style="color: var(--qsa-text-secondary); font-size: 15.5px; margin-bottom: 32px; max-width: 680px; line-height: 1.6;">
+        Every course at Quick Services Academy includes an authentic, verifiable academic certificate upon completion. Each certificate features HEC Pakistan guideline compliance, dual academic signatures, and 300 DPI high-resolution export.
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-        <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 28px;">
-          <span class="tag tag-green" style="margin-bottom: 8px;">Ready to Issue</span>
-          <h3 style="font-size: 20px; margin: 8px 0; color: var(--qsa-text-primary);">Thesis Writing 101</h3>
-          <p style="font-size: 14px; color: var(--qsa-text-secondary); margin-bottom: 20px; line-height: 1.5;">
-            Certifies mastery of research problem formulation, thesis structuring, and proposal defense preparation.
-          </p>
-          <a href="#certificate-QSA-THESIS101-202610-DEMO" class="btn btn-primary btn-sm" style="width: 100%;">
-            View &amp; Download Certificate ➔
-          </a>
-        </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        ${courses.map(c => `
+          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--qsa-shadow-card);">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span class="tag tag-clay" style="font-size: 11px;">${c.hours} Accredited Hours</span>
+                <span class="tag tag-green" style="font-size: 11px;">Official Credential</span>
+              </div>
+              <h3 style="font-size: 19px; margin: 8px 0 10px; color: var(--qsa-text-primary); font-family: var(--qsa-font-serif);">
+                ${c.title}
+              </h3>
+              <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin-bottom: 20px; line-height: 1.55;">
+                ${c.desc}
+              </p>
+            </div>
+            <a href="#certificate-${c.id}" class="btn btn-primary btn-sm" style="width: 100%; text-align: center;">
+              View &amp; Generate Certificate ➔
+            </a>
+          </div>
+        `).join('')}
       </div>
     </div>`;
 }
@@ -610,20 +700,45 @@ function renderCertificatesList() {
    Verification Route (#verify-:certId)
    ========================================================================== */
 function renderVerifyView(certId) {
+  const courses = [
+    { code: 'THESIS', title: 'Thesis Writing 101: Problem Formulation & Defense', hours: 3.5 },
+    { code: 'CITE', title: 'Citations & Referencing: APA 7th Masterclass', hours: 3.0 },
+    { code: 'INTEG', title: 'Academic Integrity & Similarity Reports', hours: 2.8 },
+    { code: 'EDIT', title: 'Proofreading & Structural Academic Editing', hours: 3.2 },
+    { code: 'SEARCH', title: 'Systematic Literature Search & Zotero Indexing', hours: 3.2 },
+    { code: 'SAMPLE', title: 'Sample Size Determination & Statistical Power', hours: 3.8 },
+    { code: 'SPSS', title: 'SPSS for Quantitative Empirical Research', hours: 4.2 },
+    { code: 'PLS', title: 'SmartPLS 4 & Structural Equation Modeling (SEM)', hours: 4.0 },
+    { code: 'VIVA', title: 'Viva Voce & Proposal Defense Mastery', hours: 2.8 }
+  ];
+
+  const matchedCourse = courses.find(c => certId.toUpperCase().includes(c.code)) || courses[0];
+
   mainEl.innerHTML = `
-    <div class="wrap" style="padding: 64px 20px; text-align: center;">
-      <div style="max-width: 580px; margin: 0 auto; background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 40px;">
-        <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--qsa-status-success-bg); color: var(--qsa-status-success); font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 1px solid var(--qsa-status-success-border);">
+    <div class="wrap" style="padding: 64px 20px 80px; text-align: center;">
+      <div style="max-width: 620px; margin: 0 auto; background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 44px 36px; box-shadow: var(--qsa-shadow-lift);">
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--qsa-status-success-bg); color: var(--qsa-status-success); font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 1.5px solid var(--qsa-status-success-border);">
           ✓
         </div>
-        <h2 style="font-size: 24px; margin-bottom: 8px; color: var(--qsa-text-primary);">Valid Credential Record</h2>
-        <div style="font-family: var(--qsa-font-mono); font-size: 13.5px; background: var(--qsa-bg-subtle); padding: 8px 14px; border-radius: 6px; display: inline-block; margin-bottom: 16px; color: var(--qsa-text-primary);">
+        <span class="tag tag-green" style="margin-bottom: 10px;">Official Verification Record</span>
+        <h2 style="font-size: 24px; margin: 6px 0 12px; color: var(--qsa-text-primary); font-family: var(--qsa-font-serif);">
+          Authentic Academic Credential
+        </h2>
+        <div style="font-family: var(--qsa-font-mono); font-size: 14px; background: var(--qsa-bg-subtle); padding: 8px 16px; border-radius: 6px; display: inline-block; margin-bottom: 20px; color: var(--qsa-text-primary); border: 1px solid var(--qsa-border-strong);">
           ${certId}
         </div>
-        <p style="font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.6;">
-          This cryptographic identifier confirms completion of all instructional requirements for the specified course at Quick Services Academy.
+        <p style="font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.6; margin-bottom: 24px;">
+          This digital cryptographic identifier validates that the recipient has satisfactorily satisfied all instructional, empirical, and evaluation requirements for:
         </p>
-        <a href="#/" class="btn btn-secondary btn-sm" style="margin-top: 16px;">Visit Academy Home</a>
+        <div style="background: var(--qsa-accent-clay-soft); border: 1px solid rgba(194,94,61,0.2); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; text-align: left;">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--qsa-accent-clay); letter-spacing: 0.5px;">Accredited Specialization:</div>
+          <strong style="font-size: 16px; color: var(--qsa-text-primary); font-family: var(--qsa-font-serif);">${matchedCourse.title}</strong>
+          <div style="font-size: 12px; color: var(--qsa-text-muted); margin-top: 4px;">Instruction Hours: ${matchedCourse.hours} Hours • Issued by Quick Services Academy</div>
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a href="#certificate-${certId}" class="btn btn-primary btn-sm">View Certificate Document</a>
+          <a href="#/" class="btn btn-secondary btn-sm">Academy Catalog</a>
+        </div>
       </div>
     </div>`;
 }

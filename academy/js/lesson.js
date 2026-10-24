@@ -15,6 +15,27 @@ import { synthesizeLesson } from './curriculum-synthesizer.js';
 
 let activeDepth = 'standard';
 
+export function showGlobalToast(message) {
+  let toastEl = document.getElementById('qsa-global-toast');
+  if (!toastEl) {
+    toastEl = document.createElement('div');
+    toastEl.id = 'qsa-global-toast';
+    toastEl.style.cssText = 'position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1c1917; color: #ffffff; padding: 10px 22px; border-radius: 999px; font-size: 13.5px; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.18); z-index: 9999; opacity: 0; pointer-events: none; transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; gap: 8px;';
+    document.body.appendChild(toastEl);
+  }
+  toastEl.innerHTML = `<span style="color: #4ade80;">✓</span> <span>${message}</span>`;
+  toastEl.style.opacity = '1';
+  toastEl.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(window.__qsaToastTimer);
+  window.__qsaToastTimer = setTimeout(() => {
+    toastEl.style.opacity = '0';
+    toastEl.style.transform = 'translateX(-50%) translateY(20px)';
+  }, 2200);
+}
+if (typeof window !== 'undefined') {
+  window.showGlobalToast = showGlobalToast;
+}
+
 function getBaseDataPath() {
   const path = window.location.pathname;
   if (path.includes('/academy')) {
@@ -233,6 +254,20 @@ function renderLessonPlayer(container, course, lesson) {
     link.addEventListener('click', closeDrawer);
   });
 
+  const readerLangSwitcher = container.querySelector('#reader-lang-switcher');
+  if (readerLangSwitcher) {
+    readerLangSwitcher.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const l = btn.dataset.lang;
+        if (l) {
+          store.setEnglishLevel(l);
+          showGlobalToast(`Reading register set to ${l.toUpperCase()}`);
+        }
+      });
+    });
+  }
+
   // Live listener for English style changes
   const handleLangChange = () => {
     const newLang = store.getEnglishLevel();
@@ -251,7 +286,11 @@ function renderLessonPlayer(container, course, lesson) {
     }
   };
 
-  window.addEventListener('qsa:english-level-changed', handleLangChange);
+  if (window.__qsaLessonLangHandler) {
+    window.removeEventListener('qsa:english-level-changed', window.__qsaLessonLangHandler);
+  }
+  window.__qsaLessonLangHandler = handleLangChange;
+  window.addEventListener('qsa:english-level-changed', window.__qsaLessonLangHandler);
 
   const completeBtn = container.querySelector('#mark-complete-btn');
   if (completeBtn) {
@@ -556,6 +595,7 @@ function setupInlineVisualListeners(lesson) {
 }
 
 function renderInlineDrawerContent(drawer, body, sentence, block, tab) {
+  const currentLang = store.getEnglishLevel();
   if (tab === 'compare') {
     const sText = sentence?.plain || sentence?.text || 'Selected sentence concept';
     const simple = sentence?.simple || 'Simplified academic formulation.';
@@ -564,30 +604,47 @@ function renderInlineDrawerContent(drawer, body, sentence, block, tab) {
 
     body.innerHTML = `
       <div class="inline-style-comparison">
-        <div class="inline-style-card style-card-simple">
-          <div class="style-card-head">
+        <div class="inline-style-card style-card-simple ${currentLang === 'simple' ? 'active-card' : ''}" style="border: 1.5px solid ${currentLang === 'simple' ? 'var(--qsa-accent-clay)' : 'var(--qsa-border-card)'}; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; background: ${currentLang === 'simple' ? 'var(--qsa-accent-clay-soft)' : '#ffffff'};">
+          <div class="style-card-head" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <strong style="color: var(--qsa-status-success); font-size: 13.5px;">🌱 Simple English (Accessible)</strong>
-            <button type="button" class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('simple')">Set as Default</button>
+            <button type="button" class="btn ${currentLang === 'simple' ? 'btn-primary' : 'btn-secondary'} btn-sm set-lang-btn" data-set-lang="simple" style="font-size: 11px; padding: 3px 10px;">
+              ${currentLang === 'simple' ? '✓ Active Register' : 'Set as Default'}
+            </button>
           </div>
-          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--qsa-text-primary);">${simple}</p>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--qsa-text-primary);">${simple}</p>
         </div>
 
-        <div class="inline-style-card style-card-plain">
-          <div class="style-card-head">
+        <div class="inline-style-card style-card-plain ${currentLang === 'plain' ? 'active-card' : ''}" style="border: 1.5px solid ${currentLang === 'plain' ? 'var(--qsa-accent-clay)' : 'var(--qsa-border-card)'}; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; background: ${currentLang === 'plain' ? 'var(--qsa-accent-clay-soft)' : '#ffffff'};">
+          <div class="style-card-head" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <strong style="color: var(--qsa-accent-clay); font-size: 13.5px;">📘 Plain English (Standard Academic)</strong>
-            <button type="button" class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('plain')">Set as Default</button>
+            <button type="button" class="btn ${currentLang === 'plain' ? 'btn-primary' : 'btn-secondary'} btn-sm set-lang-btn" data-set-lang="plain" style="font-size: 11px; padding: 3px 10px;">
+              ${currentLang === 'plain' ? '✓ Active Register' : 'Set as Default'}
+            </button>
           </div>
-          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--qsa-text-primary);">${plain}</p>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--qsa-text-primary);">${plain}</p>
         </div>
 
-        <div class="inline-style-card style-card-tech">
-          <div class="style-card-head">
+        <div class="inline-style-card style-card-tech ${currentLang === 'technical' ? 'active-card' : ''}" style="border: 1.5px solid ${currentLang === 'technical' ? 'var(--qsa-accent-clay)' : 'var(--qsa-border-card)'}; border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; background: ${currentLang === 'technical' ? 'var(--qsa-accent-clay-soft)' : '#ffffff'};">
+          <div class="style-card-head" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
             <strong style="color: var(--qsa-accent-clay-dark); font-size: 13.5px;">🎓 Technical Register (Formal Dissertation)</strong>
-            <button type="button" class="btn btn-secondary btn-sm" style="font-size: 11px; padding: 3px 8px;" onclick="store.setEnglishLevel('technical')">Set as Default</button>
+            <button type="button" class="btn ${currentLang === 'technical' ? 'btn-primary' : 'btn-secondary'} btn-sm set-lang-btn" data-set-lang="technical" style="font-size: 11px; padding: 3px 10px;">
+              ${currentLang === 'technical' ? '✓ Active Register' : 'Set as Default'}
+            </button>
           </div>
-          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.5; color: var(--qsa-text-primary);">${tech}</p>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--qsa-text-primary);">${tech}</p>
         </div>
       </div>`;
+
+    body.querySelectorAll('.set-lang-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const l = btn.dataset.setLang;
+        if (l) {
+          store.setEnglishLevel(l);
+          showGlobalToast(`Reading register set to ${l.toUpperCase()}`);
+        }
+      });
+    });
     return;
   }
 

@@ -3,12 +3,13 @@
   "course": "viva",
   "title": "Slide Budgeting: What to Include and What to Cut",
   "type": "read",
-  "minutes": 11,
+  "minutes": 14,
   "content": {
-    "quick": "Every slide in a viva presentation must defend a single scientific claim. Ruthlessly cut literature summaries and background trivia. Focus 60% of your slide budget on your methodology justification, empirical findings, and actionable theoretical contributions.",
+    "quick": "Every slide in a viva presentation must defend a single scientific claim. Ruthlessly cut literature summaries and background trivia. Focus 60% of your slide budget on your methodology justification, empirical findings, and actionable theoretical contributions. Prepare a dedicated backup deck for complex statistical queries.",
     "blocks": [
       {
         "id": "p1",
+        "explain": "A winning viva presentation cuts out generic background trivia and focuses strictly on your empirical contribution using the 1-minute-per-slide golden rule.",
         "sentences": [
           {
             "id": "s1",
@@ -33,6 +34,178 @@
           },
           {
             "id": "s2",
+            "text": "Novice candidates frequently waste eight minutes summarizing textbook literature that the examination committee already knows intimately.",
+            "simple": "Do not waste half your presentation explaining basic textbook concepts that your examiners already know.",
+            "plain": "Novice candidates frequently waste eight minutes summarizing textbook literature that the examination committee already knows intimately.",
+            "technical": "Superfluous rehearsal of canonical theoretical axioms dissipates temporal capital, forcing truncation of novel Chapter 4 empirical contributions.",
+            "visual": {
+              "kind": "compare",
+              "title": "Novice Time Trap vs Masterful Defense Allocation",
+              "data": {
+                "columns": ["Novice Slide Budget (Fails)", "Masterful Viva Allocation (Approved)"],
+                "rows": [
+                  { "metric": "Background & Literature", "col1": "9 slides (50% of time wasted on old papers)", "col2": "2 slides (Briefly establishing the gap)" },
+                  { "metric": "Methodology Justification", "col1": "1 slide ('I used a survey')", "col2": "3 slides (Sampling, G*Power, psychometric validity)" },
+                  { "metric": "Empirical Results", "col1": "2 rushed slides at the end", "col2": "4 high-impact slides with model diagrams" },
+                  { "metric": "Committee Reaction", "col1": "Committee interrupts: 'Please skip to results'", "col2": "Committee engaged and impressed by empirical rigor" }
+                ]
+              },
+              "caption": "When the committee tells you to 'skip ahead', you have already lost control of your defense pacing."
+            }
+          },
+          {
+            "id": "s3",
+            "text": "Every presentation slide must adhere to the 35-word ceiling, using diagrams, tables, and bold metrics instead of wall-to-wall text.",
+            "simple": "Keep your slides under 35 words; never read long paragraphs off the screen like a robot.",
+            "plain": "Every presentation slide must adhere to the 35-word ceiling, using diagrams, tables, and bold metrics instead of wall-to-wall text.",
+            "technical": "Visual cognitive load constraints mandate concise syntactic structures, replacing dense discursive blocks with high-density informational schematics.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Slide Visual Cognitive Load Gate",
+              "data": {
+                "items": [
+                  { "label": "Maximum 35 words per slide", "status": "done" },
+                  { "label": "Minimum font size 24pt for all body text", "status": "done" },
+                  { "label": "High contrast dark charcoal on crisp paper background", "status": "done" }
+                ]
+              },
+              "caption": "Slides are visual anchors for your speech, not reading scripts for the committee."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "15-Minute Master Viva Slide Budget",
+          "data": {
+            "headers": ["Slide #", "Slide Title", "Time Budget", "Primary Analytical Objective"],
+            "rows": [
+              ["Slide 1", "Title & Research Bounding", "0.5 min", "Establish candidate identity, university, and bounds"],
+              ["Slide 2", "Problem Hook & Gap", "1.5 min", "The urgent real-world problem and literature void"],
+              ["Slide 3", "Research Questions & Objectives", "1.0 min", "Direct testable inquiry anchors"],
+              ["Slide 4", "Theoretical Framework", "1.5 min", "Grand theory and underlying mechanism"],
+              ["Slide 5", "Conceptual Framework Schematic", "1.5 min", "Visual diagram showing hypotheses and path arrows"],
+              ["Slides 6-8", "Methodology & Sampling Plan", "3.0 min", "Target population, G*Power, instrumentation validity"],
+              ["Slides 9-11", "Empirical Findings & Paths", "3.5 min", "Structural model, beta coefficients, mediation results"],
+              ["Slides 12-13", "Theoretical & Practical Impact", "1.5 min", "Actionable implications for Pakistani policy/practice"],
+              ["Slides 14-15", "Delimitations & Future Trajectories", "1.0 min", "Mature boundary acknowledgment and closing poise"]
+            ]
+          },
+          "caption": "Stick strictly to this 15-minute presentation blueprint."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "What is the recommended maximum number of slides for a standard 15-minute viva presentation?",
+              "options": [
+                "12 to 15 slides",
+                "35 to 45 slides",
+                "Exactly 50 slides",
+                "5 slides"
+              ],
+              "answer": 0,
+              "explanation": "At roughly 1 minute per slide, 12 to 15 slides allows clear pacing without rushing through slides or reading bullet points."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p2",
+        "explain": "Reformat complex statistical outputs into bold visual diagrams rather than pasting unreadable, fuzzy software screenshots onto slides.",
+        "sentences": [
+          {
+            "id": "s4",
+            "text": "Never paste raw, tiny SPSS or SmartPLS screen snips onto presentation slides where numbers are completely illegible to examiners.",
+            "simple": "Never take blurry screenshots of SPSS tables; examiners sitting in the back of the room cannot read tiny 8pt numbers.",
+            "plain": "Never paste raw, tiny SPSS or SmartPLS screen snips onto presentation slides where numbers are completely illegible to examiners.",
+            "technical": "Pasting low-resolution raster screenshots of raw analytical outputs constitutes an unpolished artifact that signals amateurish defense preparation.",
+            "visual": {
+              "kind": "compare",
+              "title": "Raw Output Screenshot vs Clean Presentation Card",
+              "data": {
+                "columns": ["Raw Screenshot Blunder (Unreadable)", "Clean Vector Presentation Card (Masterful)"],
+                "rows": [
+                  { "metric": "Visual Quality", "col1": "Blurry 8pt gray SPSS grid snippet", "col2": "High-contrast clean summary card with 26pt bold font" },
+                  { "metric": "Cognitive Focus", "col1": "Examiner struggles to find which row is significant", "col2": "Direct highlighted callout: 'β = 0.412, p < 0.001 (Supported)'" },
+                  { "metric": "Professionalism", "col1": "Looks like an unedited student draft", "col2": "Publication-grade conference keynote aesthetics" }
+                ]
+              },
+              "caption": "Re-type key coefficients into clean presentation cards with large bold numbers."
+            }
+          },
+          {
+            "id": "s5",
+            "text": "Highlight significant path coefficients, t-values, and effect sizes (f2) using clean directional arrows overlaying your conceptual model.",
+            "simple": "Put your final statistical numbers directly onto the arrows of your model diagram so everyone sees your results instantly.",
+            "plain": "Highlight significant path coefficients, t-values, and effect sizes (f2) using clean directional arrows overlaying your conceptual model.",
+            "technical": "Overlaying standardized path coefficients and bootstrap t-statistics directly onto structural schematic vectors facilitates immediate gestalt comprehension.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Structural Results Overlay Schematic",
+              "data": {
+                "lead": "Model Path Visual:",
+                "callouts": [
+                  { "text": "Transformational Leadership ➔ Work Engagement", "label": "Direct Path: β = 0.428*** (t = 8.41, f² = 0.22)" },
+                  { "text": "Work Engagement ➔ Teacher Burnout", "label": "Direct Path: β = -0.364*** (t = 6.92, f² = 0.18)" },
+                  { "text": "Indirect Mediation Path", "label": "Mediation: β = -0.156*** (95% CI [-0.212, -0.098])" }
+                ]
+              },
+              "caption": "Displaying your findings on the conceptual diagram is the most effective visual technique in a defense."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "Use color coding purposefully: soft botanical green for supported hypotheses and neutral charcoal for non-significant paths.",
+            "simple": "Use clean colors to show which hypotheses were supported and which were not, without creating visual clutter.",
+            "plain": "Use color coding purposefully: soft botanical green for supported hypotheses and neutral charcoal for non-significant paths.",
+            "technical": "Restrained chromatic encoding (e.g. muted emerald for empirical corroboration; slate for hypothesis rejection) optimizes visual parsing.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Results Slide Visual Standards",
+              "data": {
+                "items": [
+                  { "label": "All beta coefficients and exact p-values labeled", "status": "done" },
+                  { "label": "Indirect mediation bootstrap confidence intervals displayed", "status": "done" },
+                  { "label": "R-squared variance explained reported inside the dependent variable circle", "status": "done" }
+                ]
+              },
+              "caption": "Include R² inside the circle: e.g. 'R² = 0.48 (48% variance explained)'."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "process",
+          "title": "Results Visualization Transformation",
+          "data": {
+            "inputs": ["Raw SPSS Regression Output / SmartPLS Report"],
+            "transformation": "Extract standardized β, t, p, f² -> Embed into clean vector model diagram",
+            "outputs": ["High-Impact Results Slide", "Flawless Committee Visual Comprehension"]
+          },
+          "caption": "Transforming data into visual diagrams keeps examiners focused on your speech."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Why is it superior to display results directly on the conceptual framework diagram rather than showing full SPSS output tables?",
+              "options": [
+                "Because examiners can instantly grasp which relationships were supported without searching through dense rows of numbers",
+                "Because SPSS output tables are illegal to show in university examinations",
+                "Because diagram slides take longer to explain, helping students burn time",
+                "Because conceptual diagrams do not require statistical significance"
+              ],
+              "answer": 0,
+              "explanation": "Diagrammatic overlays provide instant cognitive clarity, allowing the committee to see the entire nomological story at a glance."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "explain": "Disarm aggressive examiner attacks by presenting research limitations with poise, maturity, and rigorous methodological justifications.",
+        "sentences": [
+          {
+            "id": "s7",
             "text": "Examiners will aggressively interrogate methodological weaknesses if you gloss over sampling limitations in your slides.",
             "simple": "If you try to hide problems in your data, examiners will spot them immediately and grill you.",
             "plain": "Examiners will aggressively interrogate methodological weaknesses if you gloss over sampling limitations in your slides.",
@@ -50,39 +223,189 @@
               },
               "caption": "Honest awareness of your study's limits proves scientific maturity to examiners."
             }
+          },
+          {
+            "id": "s8",
+            "text": "A mature candidate distinguishes between research delimitations (deliberate boundaries chosen by the scholar) and limitations (unavoidable real-world constraints).",
+            "simple": "Explain the difference between your chosen boundaries (like picking one city) and real obstacles (like hospital visiting restrictions).",
+            "plain": "A mature candidate distinguishes between research delimitations (deliberate boundaries chosen by the scholar) and limitations (unavoidable real-world constraints).",
+            "technical": "Epistemic maturity requires taxonomic disambiguation between endogenous delimitations (intentional scope bounds) and exogenous limitations (stochastic systemic constraints).",
+            "visual": {
+              "kind": "compare",
+              "title": "Delimitations vs Limitations",
+              "data": {
+                "columns": ["Delimitation (Controlled Boundary)", "Limitation (Unavoidable Constraint)"],
+                "rows": [
+                  { "metric": "Definition", "col1": "Deliberate boundary set by researcher", "col2": "Uncontrolled obstacle encountered during fieldwork" },
+                  { "metric": "Example", "col1": "Focusing exclusively on permanent teachers in Multan", "col2": "COVID-19 institutional lockdowns restricting in-person surveys" },
+                  { "metric": "Defense Tone", "col1": "Assertive: 'This boundary was chosen for feasibility'", "col2": "Poised: 'This constraint was mitigated via robust sampling'" }
+                ]
+              },
+              "caption": "Examiners respect candidates who clearly articulate and defend their boundary conditions."
+            }
+          },
+          {
+            "id": "s9",
+            "text": "When presenting limitations, always pair each limitation with a mitigating methodological action that preserved study validity.",
+            "simple": "Whenever you mention a limitation, immediately explain the extra steps you took to make sure your results remained reliable.",
+            "plain": "When presenting limitations, always pair each limitation with a mitigating methodological action that preserved study validity.",
+            "technical": "Pairing each empirical boundary condition with an auditable psychometric mitigation strategy neutralizes examiner challenges regarding internal validity.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Limitation Defense Pairing Protocol",
+              "data": {
+                "dos": [
+                  "Pair cross-sectional design with Podsakoff et al. (2003) Common Method Bias Harman single-factor test",
+                  "Pair regional sampling with post-hoc G*Power statistical power verification (1 - β > 0.80)",
+                  "Propose specific longitudinal and multi-source designs for future doctoral scholars"
+                ],
+                "donts": [
+                  "Never say 'the study has no limitations'",
+                  "Do not apologize timidly as if your work was flawed or invalid",
+                  "Never blame lack of money or laziness for methodological decisions"
+                ]
+              },
+              "caption": "Always pair every limitation with its empirical defense."
+            }
           }
         ],
         "visual": {
-          "kind": "checklist",
-          "title": "Slide Quality Gate Checklist",
+          "kind": "decisionTree",
+          "title": "Examiner Objection Neutralization Protocol",
           "data": {
-            "items": [
-              "Are all slides under 35 words of text?",
-              "Are regression tables reformatted into clear bold beta coefficients rather than raw SPSS screenshots?",
-              "Is every acronym defined upon its first appearance?",
-              "Do you have backup appendix slides ready for detailed statistical tables?"
+            "root": "Examiner Challenges a Limitation",
+            "branches": [
+              { "label": "Challenge on Sample Size", "action": "Cite G*Power 3.1 calculation showing 95% statistical power" },
+              { "label": "Challenge on Non-Normality", "action": "Explain that PLS-SEM bootstrapping is robust to non-normal data" },
+              { "label": "Challenge on Scope", "action": "Cite Delimitation Section 1.5 defining operational boundaries" }
             ]
           },
-          "caption": "Never put raw SPSS or SmartPLS screen snips with unreadable 8pt font onto presentation slides."
+          "caption": "Keep calm and deploy textbook justifications to resolve examiner questions."
         },
         "check": {
           "questions": [
             {
-              "id": "q1",
               "type": "single",
-              "q": "What is the recommended maximum number of slides for a standard 15-minute viva presentation?",
+              "q": "What is the best scholarly response when an examiner points out that your survey was only conducted in South Punjab?",
               "options": [
-                "12 to 15 slides",
-                "35 to 45 slides",
-                "Exactly 50 slides",
-                "5 slides"
+                "Acknowledge the geographic delimitation with poise, explain the theoretical rationale for studying this regional industrial cluster, and suggest provincial cross-validation for future research",
+                "Argue angrily that South Punjab represents the entire universe",
+                "Apologize and offer to withdraw your dissertation",
+                "Blame your supervisor for refusing to pay for travel"
               ],
               "answer": 0,
-              "explanation": "At roughly 1 minute per slide, 12 to 15 slides allows clear pacing without rushing through slides or reading bullet points."
+              "explanation": "Poised acknowledgment combined with theoretical justification demonstrates scholarly maturity and completely disarms the critique."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "explain": "Build an exhaustive 10-slide 'Backup Appendix Deck' behind your thank-you slide to answer granular examiner statistical questions with authoritative speed.",
+        "sentences": [
+          {
+            "id": "s10",
+            "text": "The secret weapon of distinction-level viva candidates is a comprehensive backup deck positioned after the concluding slide.",
+            "simple": "The secret to acing your defense is keeping 10 hidden extra slides at the back with all your detailed statistical tables.",
+            "plain": "The secret weapon of distinction-level viva candidates is a comprehensive backup deck positioned after the concluding slide.",
+            "technical": "Maintaining an auxiliary evidentiary appendix positioned downstream from the terminal slide enables instantaneous retrieval of granular psychometric tables during cross-examination.",
+            "visual": {
+              "kind": "stack",
+              "title": "The Dual-Tier Presentation Architecture",
+              "data": {
+                "layers": [
+                  { "label": "Tier 1: Core Slide Deck (Slides 1-15)", "desc": "15-minute presentation: high-level conceptual story" },
+                  { "label": "Terminal Gate: 'Thank You / Q&A Slide'", "desc": "Official conclusion of spoken presentation" },
+                  { "label": "Tier 2: Backup Appendix Deck (Slides 16-25)", "desc": "Hidden tables: full correlation matrix, HTMT, EFA, questionnaires" }
+                ]
+              },
+              "caption": "Never put raw tables into Tier 1; store them safely in Tier 2."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "When an examiner asks for specific numbers like item cross-loadings or full correlation matrices, you can jump directly to your backup slide.",
+            "simple": "When an examiner asks 'What was the exact correlation between X and Y?', you instantly pull up the hidden slide with the exact table.",
+            "plain": "When an examiner asks for specific numbers like item cross-loadings or full correlation matrices, you can jump directly to your backup slide.",
+            "technical": "Instantaneous retrieval of un-aggregated psychometric matrices in response to forensic inquiries elicits immediate supervisory deference.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Recommended Backup Appendix Slides",
+              "data": {
+                "lead": "Backup Deck Contents:",
+                "callouts": [
+                  { "text": "Slide 16: Complete Questionnaire Scale Items & Sources", "label": "Instrumentation" },
+                  { "text": "Slide 17: Full Correlation Matrix & Descriptive Stats", "label": "Screening" },
+                  { "text": "Slide 18: Full HTMT Discriminant Validity Matrix", "label": "Psychometrics" },
+                  { "text": "Slide 19: Full Outer Cross-Loadings Matrix", "label": "Indicator Check" },
+                  { "text": "Slide 20: G*Power Detailed Parameter Screenshots", "label": "Power Proof" }
+                ]
+              },
+              "caption": "Having these slides ready proves you know every single decimal point in your dissertation."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "Delivering your presentation with this level of disciplined preparation guarantees that your defense concludes with unconditional committee approval.",
+            "simple": "Preparing this way guarantees you will pass your viva with flying colors and zero stress.",
+            "plain": "Delivering your presentation with this level of disciplined preparation guarantees that your defense concludes with unconditional committee approval.",
+            "technical": "Disciplined execution across slide budgeting, results visualization, and auxiliary auditability assures unconditional dissertation commendation.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Viva Defense Day Readiness Audit",
+              "data": {
+                "items": [
+                  { "label": "Presentation practiced 3 times with timer strictly under 15 minutes", "status": "done" },
+                  { "label": "Backup appendix slides loaded on laptop and USB drive", "status": "done" },
+                  { "label": "Printed hard copy of thesis with sticky tabs for quick page flipping", "status": "done" }
+                ]
+              },
+              "caption": "Walk into your defense room with calm, quiet academic confidence."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "flow",
+          "title": "Defense Presentation Mastery Lifecycle",
+          "data": {
+            "steps": [
+              { "label": "1. Scripting", "desc": "Author 15 clean slides focusing on methodology & results" },
+              { "label": "2. Appendix Assembly", "desc": "Compile detailed statistical matrices into backup slides" },
+              { "label": "3. Rehearsal", "desc": "Practice verbal delivery to eliminate robotic reading" },
+              { "label": "4. Oral Defense", "desc": "Deliver poised 15-minute presentation and ace examiner Q&A" }
+            ]
+          },
+          "caption": "Follow this lifecycle to achieve unconditional defense approval."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Why should a candidate prepare a hidden backup appendix deck rather than cluttering their main presentation slides?",
+              "options": [
+                "It keeps the main presentation sleek and engaging for the 15-minute limit, while providing instant empirical proof during technical Q&A",
+                "Because PowerPoint slides cannot exceed 15 slides by law",
+                "Because external examiners are not allowed to ask questions about appendix slides",
+                "Because backup slides automatically increase the candidate's GPA"
+              ],
+              "answer": 0,
+              "explanation": "Backup slides keep your main presentation clean and focused, but give you immediate, high-credibility proof when examiners ask deep technical questions."
             }
           ]
         }
       }
+    ],
+    "mistakes": [
+      "Wasting 8 minutes summarizing basic literature instead of presenting novel findings.",
+      "Pasting tiny, unreadable screenshots of raw SPSS or SmartPLS outputs onto slides.",
+      "Attempting to hide sampling limitations instead of defending them with proactive justifications.",
+      "Failing to prepare backup appendix slides for technical statistical questions."
+    ],
+    "takeaways": [
+      "Follow the 1-minute-per-slide rule: 12 to 15 slides for a standard 15-minute viva presentation.",
+      "Reformat results directly onto your conceptual model diagram with bold beta and p-value callouts.",
+      "Disarm examiners by pairing every limitation with an explicit methodological mitigation.",
+      "Prepare a 10-slide backup deck with full correlation, loading, and HTMT matrices for Q&A."
     ]
   }
 }

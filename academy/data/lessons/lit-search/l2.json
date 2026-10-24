@@ -3,12 +3,13 @@
   "course": "lit-search",
   "title": "Boolean Operators (AND, OR, NOT), Wildcards & Nesting",
   "type": "read",
-  "minutes": 11,
+  "minutes": 14,
   "content": {
-    "quick": "Boolean logic allows researchers to control database precision and recall. 'AND' narrows the search by requiring all terms; 'OR' broadens it by accepting any synonym; 'NOT' excludes irrelevant domains; parentheses group operations; and wildcards (*) match multiple word endings.",
+    "quick": "Boolean logic allows researchers to control database precision and recall. 'AND' narrows the search by requiring all terms; 'OR' broadens it by accepting any synonym; 'NOT' excludes irrelevant domains; parentheses group operations; and wildcards (*) match multiple word endings. PRISMA 2020 requires full audit logging of search strings.",
     "blocks": [
       {
         "id": "p1",
+        "explain": "Boolean operators are fundamental logical connectives used to command academic databases during systematic literature retrieval.",
         "sentences": [
           {
             "id": "s1",
@@ -32,6 +33,74 @@
           },
           {
             "id": "s2",
+            "text": "Using 'AND' commands the database engine to retrieve only publications containing every specified keyword.",
+            "simple": "When you put 'AND' between two words, the search engine only brings back papers that have BOTH words.",
+            "plain": "Using 'AND' commands the database engine to retrieve only publications containing every specified keyword.",
+            "technical": "Conjunctive 'AND' operations execute set intersections across distinct token arrays, attenuating output volume while amplifying contextual relevance.",
+            "visual": {
+              "kind": "venn",
+              "title": "Set-Theoretic AND Intersection",
+              "data": {
+                "setA": "Term A: Transformational Leadership",
+                "setB": "Term B: Teacher Burnout",
+                "intersection": "Retrieved Papers Containing BOTH Terms"
+              },
+              "caption": "Only papers falling inside the shared overlap will be returned."
+            }
+          },
+          {
+            "id": "s3",
+            "text": "In contrast, 'OR' connects synonymous expressions, ensuring that alternate terminologies in international literature are not overlooked.",
+            "simple": "Using 'OR' connects alternative words for the same idea so you do not miss papers written by authors who used different vocabulary.",
+            "plain": "In contrast, 'OR' connects synonymous expressions, ensuring that alternate terminologies in international literature are not overlooked.",
+            "technical": "Disjunctive 'OR' aggregations execute set unions, maximizing bibliographic recall across heterogenous scholarly nomenclatures.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Synonym Clustering with OR",
+              "data": {
+                "lead": "Synonym Set for Educator:",
+                "callouts": [
+                  { "text": "[teacher]", "label": "Primary Term" },
+                  { "text": "[OR educator]", "label": "Alternative Nomenclature" },
+                  { "text": "[OR instructor]", "label": "Higher Ed Variation" },
+                  { "text": "[OR faculty]", "label": "University Term" }
+                ]
+              },
+              "caption": "Always brainstorm 3 to 5 synonyms for every core construct in your study."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "Boolean Operators Set Summary",
+          "data": {
+            "headers": ["Operator", "Mathematical Set", "Research Function", "Example Query"],
+            "rows": [
+              ["AND", "A ∩ B", "Narrow to common intersection", "burnout AND turnover"],
+              ["OR", "A ∪ B", "Broaden across synonyms", "educator OR teacher OR faculty"],
+              ["NOT", "A \\ B", "Exclude confusing homonyms", "depression NOT economic"]
+            ]
+          },
+          "caption": "Combine these three operators to construct flawless academic search strings."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Which Boolean operator should always be placed between different synonyms of the SAME concept?",
+              "options": ["AND", "OR", "NOT", "NEAR"],
+              "answer": 1,
+              "explanation": "Synonyms are alternative ways of expressing the same concept, so you want papers that mention EITHER word: term1 OR term2."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p2",
+        "explain": "Parenthetical nesting enforces the correct order of operations, preventing fatal logic collapses across complex multi-concept queries.",
+        "sentences": [
+          {
+            "id": "s4",
             "text": "Parentheses are mandatory when combining different operators to prevent fatal search logic syntax errors.",
             "simple": "You must put parentheses around OR words, just like in high school mathematics.",
             "plain": "Parentheses are mandatory when combining different operators to prevent fatal search logic syntax errors.",
@@ -46,6 +115,136 @@
               },
               "caption": "Without parentheses, the database interprets 'teacher' as a standalone query alongside 'educator AND burnout'."
             }
+          },
+          {
+            "id": "s5",
+            "text": "In the facet building approach, each conceptual column of your research question is enclosed in its own set of parentheses.",
+            "simple": "Think of your research as separate building blocks: put all words for Idea 1 in brackets, connect with AND, then put all words for Idea 2 in brackets.",
+            "plain": "In the facet building approach, each conceptual column of your research question is enclosed in its own set of parentheses.",
+            "technical": "The facet-building architecture groups domain-specific synonym arrays into discrete parenthetical modules conjoined via conjunctive bridges.",
+            "visual": {
+              "kind": "flow",
+              "title": "The Facet Building Search Architecture",
+              "data": {
+                "steps": [
+                  { "label": "Facet 1: Population", "desc": "(teacher* OR educator* OR faculty)" },
+                  { "label": "Conjunctive Bridge", "desc": "AND" },
+                  { "label": "Facet 2: Predictor", "desc": "(\"transformational leadership\" OR \"supportive leadership\")" },
+                  { "label": "Conjunctive Bridge", "desc": "AND" },
+                  { "label": "Facet 3: Outcome", "desc": "(\"turnover intention*\" OR \"job burnout\" OR attrition)" }
+                ]
+              },
+              "caption": "Construct your master query block-by-block using this multi-facet strategy."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "Failing to nest OR statements causes the database to retrieve tens of thousands of irrelevant papers containing only one of the standalone terms.",
+            "simple": "If you forget parentheses, the search engine gets confused and dumps thousands of useless papers on your screen.",
+            "plain": "Failing to nest OR statements causes the database to retrieve tens of thousands of irrelevant papers containing only one of the standalone terms.",
+            "technical": "Syntax omission eliminates operator precedence boundaries, inducing catastrophic recall inflation and polluting the bibliographic extraction sample.",
+            "visual": {
+              "kind": "compare",
+              "title": "Syntax Comparison: Nested vs Un-Nested Queries",
+              "data": {
+                "columns": ["Un-Nested Query (Broken Syntax)", "Properly Nested Query (Auditable)"],
+                "rows": [
+                  { "metric": "Query", "col1": "nurses OR doctors AND burnout", "col2": "(nurses OR doctors) AND burnout" },
+                  { "metric": "Interpretation", "col1": "Any paper about 'nurses' + papers with 'doctors AND burnout'", "col2": "Papers with ('nurses' OR 'doctors') THAT ALSO contain 'burnout'" },
+                  { "metric": "Results Count", "col1": "2,450,000 papers (Completely unmanageable)", "col2": "1,840 papers (Targeted, high-relevance set)" }
+                ]
+              },
+              "caption": "Always test your nested query in Scopus or Web of Science to verify reasonable result volumes."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "process",
+          "title": "Query Formulation Pipeline",
+          "data": {
+            "inputs": ["Research Problem Statement", "Identified Independent & Dependent Constructs"],
+            "transformation": "Decompose into Facet 1, Facet 2, Facet 3 with parenthetical nesting",
+            "outputs": ["Defensible Master Search String", "High-Precision Filtered Dataset"]
+          },
+          "caption": "A structured query saves dozens of hours of manual abstract screening."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Why will the query 'nurse OR doctor AND stress' return millions of irrelevant papers about nursing history?",
+              "options": [
+                "Because without parentheses, the database treats 'nurse' as an independent standalone search that brings back every paper mentioning nurses",
+                "Because academic databases do not support the word 'nurse'",
+                "Because 'stress' is not indexed in Scopus",
+                "Because Boolean operators must always be written in lowercase"
+              ],
+              "answer": 0,
+              "explanation": "Databases evaluate AND before OR unless parentheses are present. The query becomes: [all papers about nurse] OR [papers about doctor AND stress]."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "explain": "Master truncation symbols, wildcards, and phrase quotation marks to capture spelling variations without inflating search noise.",
+        "sentences": [
+          {
+            "id": "s7",
+            "text": "The asterisk (*) acts as a truncation wildcard, retrieving every grammatical variation sharing a common root word.",
+            "simple": "Putting an asterisk at the end of a word root (like lead*) finds leader, leaders, and leadership automatically.",
+            "plain": "The asterisk (*) acts as a truncation wildcard, retrieving every grammatical variation sharing a common root word.",
+            "technical": "Right-hand truncation using the asterisk wildcard executes stem-expansion across tokenized lexicons, capturing morphological derivatives.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Root Truncation Mechanics",
+              "data": {
+                "lead": "Truncation Examples:",
+                "callouts": [
+                  { "text": "leader*", "label": "Matches: leader, leaders, leadership, leaderless" },
+                  { "text": "motivat*", "label": "Matches: motivate, motivation, motivational, motivating" },
+                  { "text": "organi*", "label": "Matches: organization, organisation, organize, organise" }
+                ]
+              },
+              "caption": "Truncate carefully: truncating too short (e.g. 'cat*') will match 'catalog', 'caterpillar', and 'catastrophe'."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "Enclosing multi-word terms in double quotation marks commands the database to search for the words as an exact, uninterrupted phrase.",
+            "simple": "Always put quote marks around multi-word phrases like \"job satisfaction\" so the words stay together.",
+            "plain": "Enclosing multi-word terms in double quotation marks commands the database to search for the words as an exact, uninterrupted phrase.",
+            "technical": "Phrase delimitation using double quotation marks forces positional proximity of zero across indexed word vectors.",
+            "visual": {
+              "kind": "compare",
+              "title": "Phrase Quotes vs Loose Words",
+              "data": {
+                "columns": ["Loose Search: job satisfaction", "Quoted Phrase: \"job satisfaction\""],
+                "rows": [
+                  { "metric": "Matching Rule", "col1": "'job' on page 1, 'satisfaction' on page 30 matches", "col2": "Words must appear immediately adjacent in order" },
+                  { "metric": "Precision", "col1": "Low (Pulls endless irrelevant papers)", "col2": "High (Pulls only literature about the construct)" },
+                  { "metric": "Recommended Use", "col1": "Never in systematic literature reviews", "col2": "Mandatory for all multi-word psychological scales" }
+                ]
+              },
+              "caption": "Never search multi-word variables without quotation marks."
+            }
+          },
+          {
+            "id": "s9",
+            "text": "Advanced databases like Scopus also support proximity operators such as W/3 or PRE/2 to find terms within a set number of words from each other.",
+            "simple": "Advanced databases let you find two words that appear within 3 words of each other using commands like W/3.",
+            "plain": "Advanced databases like Scopus also support proximity operators such as W/3 or PRE/2 to find terms within a set number of words from each other.",
+            "technical": "Proximity operators (W/n for within n words; PRE/n for precede by n words) operationalize elastic co-occurrence boundaries across full-text corpora.",
+            "visual": {
+              "kind": "definition",
+              "title": "Proximity Operators (Scopus / WoS)",
+              "data": {
+                "term": "Proximity Operator (W/n)",
+                "meaning": "Specifies that two terms must appear within 'n' words of each other in any order.",
+                "example": "Scopus query: teacher* W/3 retention -> finds 'retention of teachers', 'teacher turnover and retention', 'teachers in retention programs'"
+              },
+              "caption": "Proximity operators capture natural phrasing variations that rigid quotation marks miss."
+            }
           }
         ],
         "visual": {
@@ -56,7 +255,8 @@
             "rows": [
               ["Asterisk (*)", "Root word truncation", "leader*", "leader, leaders, leadership"],
               ["Question Mark (?)", "Single character variation", "organi?ation", "organization, organisation"],
-              ["Quotation Marks (\"\")", "Exact phrase match", "\"job satisfaction\"", "Only the exact uninterrupted phrase"]
+              ["Quotation Marks (\"\")", "Exact phrase match", "\"job satisfaction\"", "Only the exact uninterrupted phrase"],
+              ["Proximity (W/3)", "Co-occurrence within 3 words", "teacher* W/3 burnout", "Matches words within 3 positions"]
             ]
           },
           "caption": "Use exact quotation marks for multi-word constructs to avoid scattering words across pages."
@@ -64,16 +264,124 @@
         "check": {
           "questions": [
             {
-              "id": "q1",
               "type": "single",
-              "q": "Which Boolean operator should always be placed between different synonyms of the SAME concept?",
-              "options": ["AND", "OR", "NOT", "NEAR"],
-              "answer": 1,
-              "explanation": "Synonyms are alternative ways of expressing the same concept, so you want papers that mention EITHER word: term1 OR term2."
+              "q": "What happens if a scholar searches for 'transformational leadership' in Google Scholar WITHOUT quotation marks?",
+              "options": [
+                "The database retrieves papers where 'transformational' appears in the title and 'leadership' appears in the references 20 pages later",
+                "Google Scholar automatically converts it into a quoted phrase",
+                "The search engine returns zero results",
+                "The search query fails with a database syntax error"
+              ],
+              "answer": 0,
+              "explanation": "Without quotation marks, the search engine treats the words as two independent tokens joined by AND, scattering them across the document."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "explain": "Document and log your exact search strings to comply with PRISMA 2020 systematic literature review transparency standards.",
+        "sentences": [
+          {
+            "id": "s10",
+            "text": "International graduate research guidelines mandate that scholars maintain a complete search log detailing every query executed.",
+            "simple": "You must keep a written log of the exact search phrases and dates you used so your supervisor can verify your work.",
+            "plain": "International graduate research guidelines mandate that scholars maintain a complete search log detailing every query executed.",
+            "technical": "Methodological replicability criteria codified in PRISMA 2020 mandate exhaustive logging of bibliographic search strings, parameters, and harvest dates.",
+            "visual": {
+              "kind": "checklist",
+              "title": "PRISMA 2020 Search Logging Audit",
+              "data": {
+                "items": [
+                  { "label": "Full verbatim search string recorded (including parentheses & wildcards)", "status": "done" },
+                  { "label": "Exact databases queried (Scopus, Web of Science, PubMed, Google Scholar)", "status": "done" },
+                  { "label": "Date range filters (e.g., 2018-2026) and language restrictions noted", "status": "done" },
+                  { "label": "Hit counts recorded before and after duplicate removal in Zotero", "status": "done" }
+                ]
+              },
+              "caption": "Include your full search string table in Chapter 3 or an appendix to earn top marks."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "Logging exact Boolean strings protects candidates during oral viva examination when examiners ask how the literature sample was bounded.",
+            "simple": "Having a clear search table gives you instant proof when examiners ask how you found your papers during your defense.",
+            "plain": "Logging exact Boolean strings protects candidates during oral viva examination when examiners ask how the literature sample was bounded.",
+            "technical": "Empirical auditability of the bibliographic corpus pre-emptively insulates the candidate against examiner allegations of selection bias or literature cherry-picking.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Sample Dissertation Search Log Table",
+              "data": {
+                "lead": "Audit Log Format:",
+                "callouts": [
+                  { "text": "Database: Scopus (Elsevier)", "label": "Platform" },
+                  { "text": "Query: TITLE-ABS-KEY((\"transformational leader*\") AND (teacher* OR educator*) AND (\"job satisfaction\"))", "label": "Verbatim String" },
+                  { "text": "Filters: 2019-2025, English, Peer-reviewed Articles | Hits: 342", "label": "Harvest Metrics" }
+                ]
+              },
+              "caption": "Presenting this table in your methodology proves you conducted a systematic rather than casual review."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "Directly exporting these search results into Zotero creates an auditable bibliographic database ready for thematic literature matrix extraction.",
+            "simple": "Export your search results directly into Zotero so your citations and PDFs are organized and ready to write.",
+            "plain": "Directly exporting these search results into Zotero creates an auditable bibliographic database ready for thematic literature matrix extraction.",
+            "technical": "Direct RIS/BibTeX batch ingestion into reference managers preserves metadata integrity and automates deduplication prior to thematic matrix synthesis.",
+            "visual": {
+              "kind": "process",
+              "title": "Literature Extraction Pipeline",
+              "data": {
+                "inputs": ["Scopus Master Boolean Query Result Set (342 citations)"],
+                "transformation": "Export RIS file -> Ingest into Zotero -> Run automated deduplication",
+                "outputs": ["289 Unique Records", "Populated Thematic Literature Matrix in Excel/Notion"]
+              },
+              "caption": "Connecting Boolean searches directly to Zotero eliminates manual data entry."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "flow",
+          "title": "Systematic Search Progression",
+          "data": {
+            "steps": [
+              { "label": "1. Scoping", "desc": "Identify key constructs & brainstorm synonyms" },
+              { "label": "2. Construction", "desc": "Build nested Boolean strings with truncation" },
+              { "label": "3. Harvesting", "desc": "Execute in Scopus / WoS and log exact hit counts" },
+              { "label": "4. Synthesis", "desc": "Batch import to Zotero and extract matrix themes" }
+            ]
+          },
+          "caption": "Follow this rigorous 4-step workflow for all postgraduate literature reviews."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Why is it important to record the exact date on which a database search query was executed?",
+              "options": [
+                "Because academic databases add hundreds of new papers every week, meaning the result count changes over time",
+                "Because university guidelines expire every 30 days",
+                "Because search engines delete your account after 24 hours",
+                "Because search strings cannot be run on weekends"
+              ],
+              "answer": 0,
+              "explanation": "Bibliographic databases are continuously updated. Recording your exact search date establishes a clear empirical snapshot for peer replicability."
             }
           ]
         }
       }
+    ],
+    "mistakes": [
+      "Searching multi-word constructs without quotation marks, causing words to scatter across unrelated pages.",
+      "Omitting parentheses around OR synonym groups, causing syntax precedence collapse.",
+      "Over-truncating root words (e.g. 'cat*' or 'pro*') and pulling thousands of irrelevant homonyms.",
+      "Failing to record the exact search string, database name, and harvest date in a methodology audit log."
+    ],
+    "takeaways": [
+      "Use AND to intersect concepts; use OR to union synonyms; use NOT with extreme caution to filter domains.",
+      "Always enclose synonym groups in parentheses: (term1 OR term2) AND (term3 OR term4).",
+      "Enclose multi-word constructs in quotation marks: \"transformational leadership\".",
+      "Log your verbatim search strings, databases, and dates to comply with PRISMA 2020 standards."
     ]
   }
 }

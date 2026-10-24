@@ -1,70 +1,78 @@
 /* ==========================================================================
    Quick Services Academy — Design Tokens
-   Light Theme System Reverse-Engineered from Claude Academy (academy.claude.com)
-   Warm parchment canvas, soft paper cards, refined terracotta/clay accents
+   Ultra-clean, peaceful, high-legibility editorial design inspired by
+   Stripe Press, Substack, and Notion.
+   Crisp paper whites (#ffffff), soft ivory canvas (#fbfbf9),
+   razor-sharp charcoal typography (#1c1917 & #383531), warm clay accents,
+   zero blurry gradients or fuzzy shadows.
    ========================================================================== */
 
 :root {
-  /* Surfaces & Canvas (Claude Academy Warm Light Paper System) */
-  --qsa-bg-page: #faf9f5;             /* Warm parchment cream canvas */
-  --qsa-bg-sidebar: #f2f0e9;          /* Soft warm stone for sidebars & rails */
-  --qsa-bg-card: #ffffff;             /* Crisp white paper card */
-  --qsa-bg-elevated: #fbfbf9;         /* Elevated panel */
-  --qsa-bg-subtle: #f5f4ef;           /* Soft muted container fill */
-  --qsa-bg-fill: #ece9df;             /* Active pill / tab background */
-  --qsa-bg-fill-hover: #e3e1d7;       /* Hover state fill */
+  /* Surfaces & Canvas (Crisp Editorial Paper & Soft Ivory) */
+  --qsa-bg-page: #fbfbf9;             /* Peaceful, soft ivory paper canvas */
+  --qsa-bg-sidebar: #f5f5f1;          /* Subtle stone for drawers and sidebars */
+  --qsa-bg-card: #ffffff;             /* Crisp pure white paper card */
+  --qsa-bg-elevated: #ffffff;         /* Elevated panel */
+  --qsa-bg-subtle: #f6f6f2;           /* Soft muted section background */
+  --qsa-bg-fill: #ecece6;             /* Active pill / tab background */
+  --qsa-bg-fill-hover: #e2e2da;       /* Hover state fill */
 
-  /* Text & Ink (Warm Charcoal Scale — No Harsh #000) */
-  --qsa-text-primary: #141413;        /* Deep charcoal ink */
-  --qsa-text-secondary: #52514e;      /* Muted readable body ink */
-  --qsa-text-muted: #73726c;          /* Secondary metadata gray */
-  --qsa-text-tertiary: #a5a49a;       /* Subtle caption ink */
+  /* Text & Ink (Razor-Sharp High-Contrast Charcoal — Zero Eye Strain) */
+  --qsa-text-primary: #1c1917;        /* Razor-sharp deep stone charcoal */
+  --qsa-text-secondary: #383531;      /* High-legibility deep body ink (WCAG AAA) */
+  --qsa-text-muted: #65615c;          /* Clear secondary metadata gray (WCAG AA) */
+  --qsa-text-tertiary: #8c8780;       /* Crisp caption ink */
 
-  /* Brand Accents (Claude Clay & Quick Services Signature Warm Orange) */
-  --qsa-accent-clay: #d97757;         /* Claude terracotta clay */
-  --qsa-accent-clay-dark: #c6613f;    /* Emphasized clay */
-  --qsa-accent-orange: #ff6b2c;       /* Quick Services brand orange */
-  --qsa-accent-orange-hover: #e55a1f;
-  --qsa-accent-orange-soft: rgba(255, 107, 44, 0.08);
-  --qsa-accent-peach: #f4ae94;
-  --qsa-accent-peach-soft: #fcf4f0;   /* Light peach card tint */
+  /* Brand Accents (Refined Editorial Warm Clay & Amber Gold) */
+  --qsa-accent-clay: #c25e3d;         /* Editorial warm terracotta clay */
+  --qsa-accent-clay-dark: #a94b2c;    /* Deep emphasized clay */
+  --qsa-accent-clay-soft: #fcf4f1;    /* Very soft warm clay tint */
+  --qsa-accent-gold: #b45309;         /* Prestigious academic gold */
+  --qsa-accent-gold-soft: #fefbeb;    /* Soft gold background */
+  --qsa-accent-orange: #d96328;       /* Clean warm orange */
+  --qsa-accent-orange-hover: #bf531e;
+  --qsa-accent-orange-soft: rgba(217, 99, 40, 0.08);
+  --qsa-accent-peach-soft: #faf5f2;   /* Calm warm card tint */
 
-  /* Hairlines, Rings & Borders (Soft & Non-Contrasting) */
-  --qsa-border-line: rgba(31, 30, 29, 0.08);     /* Subtle hairline divider */
-  --qsa-border-card: rgba(31, 30, 29, 0.10);     /* Soft card ring */
-  --qsa-border-strong: rgba(31, 30, 29, 0.18);   /* Input & interactive border */
-  --qsa-focus-ring: #d97757;                     /* Accessible focus glow */
+  /* Hairlines, Rings & Borders (Crisp & Solid — Zero Blur) */
+  --qsa-border-line: #e7e5e0;         /* Solid crisp hairline divider */
+  --qsa-border-card: #e4e2dc;         /* Solid 1px crisp stone border */
+  --qsa-border-strong: #cac6bd;       /* Input & active border */
+  --qsa-focus-ring: #c25e3d;          /* High-visibility accessible focus ring */
 
-  /* Status Colors (Muted Botanical Tones) */
-  --qsa-status-success: #1b873f;
-  --qsa-status-success-bg: #f0f9ef;
-  --qsa-status-success-border: #d0eccd;
-  --qsa-status-danger: #c53030;
-  --qsa-status-danger-bg: #fdf2f2;
-  --qsa-status-danger-border: #fadada;
-  --qsa-status-warning: #b77700;
-  --qsa-status-warning-bg: #fefcf0;
-  --qsa-status-warning-border: #faebd0;
-  --qsa-status-info: #2a78d6;
-  --qsa-status-info-bg: #f0f7fe;
-  --qsa-status-info-border: #cde2fb;
+  /* Status Colors (Clear, Restful Botanical Tones) */
+  --qsa-status-success: #15803d;
+  --qsa-status-success-bg: #f0fdf4;
+  --qsa-status-success-border: #bbf7d0;
+  --qsa-status-danger: #b91c1c;
+  --qsa-status-danger-bg: #fef2f2;
+  --qsa-status-danger-border: #fecaca;
+  --qsa-status-warning: #b45309;
+  --qsa-status-warning-bg: #fffbeb;
+  --qsa-status-warning-border: #fde68a;
+  --qsa-status-info: #1d4ed8;
+  --qsa-status-info-bg: #eff6ff;
+  --qsa-status-info-border: #bfdbfe;
 
   /* Highlights */
-  --qsa-hl-yellow: rgba(250, 227, 184, 0.6);
-  --qsa-hl-green: rgba(202, 234, 199, 0.6);
-  --qsa-hl-blue: rgba(205, 226, 251, 0.6);
-  --qsa-hl-clay: rgba(247, 216, 203, 0.6);
+  --qsa-hl-yellow: #fef08a;
+  --qsa-hl-green: #bbf7d0;
+  --qsa-hl-blue: #bfdbfe;
+  --qsa-hl-clay: #fed7aa;
 
-  /* Premium High-Contrast Dark Gradient Tokens for Active Option States */
-  --qsa-grad-dark-active: linear-gradient(135deg, #181716 0%, #282724 100%);
-  --qsa-grad-dark-hover: linear-gradient(135deg, #242321 0%, #353330 100%);
-  --qsa-shadow-dark-active: 0 2px 8px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  --qsa-text-dark-active: #faf9f5;
+  /* Solid Contrast Active Option Tokens */
+  --qsa-grad-dark-active: #1c1917;
+  --qsa-grad-dark-hover: #292524;
+  --qsa-shadow-dark-active: 0 1px 2px rgba(0, 0, 0, 0.12);
+  --qsa-text-dark-active: #ffffff;
 
-  /* Typography Pairing (Claude Academy: Editorial Newsreader Serif Headings + Modern Sans Body) */
+  /* Typography Pairing (Stripe Press & Claude Academy: Newsreader Serif Headings + Plus Jakarta Sans Body) */
   --qsa-font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --qsa-font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --qsa-font-mono: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+  --qsa-font-cert-script: "Alex Brush", "Playfair Display", cursive;
+  --qsa-font-cert-roman: "Cinzel", "Newsreader", serif;
+  --qsa-font-cert-serif: "Cormorant Garamond", "Newsreader", Georgia, serif;
 
   /* Crisp Edge Radii */
   --qsa-radius-xs: 4px;
@@ -75,18 +83,18 @@
   --qsa-radius-modal: 16px;
   --qsa-radius-pill: 999px;
 
-  /* Shadows (Claude Academy Soft Card Rings) */
-  --qsa-shadow-card: inset 0 0 0 1px var(--qsa-border-card), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
-  --qsa-shadow-lift: inset 0 0 0 1px rgba(217, 119, 87, 0.3), 0 8px 24px -4px rgba(0, 0, 0, 0.08);
-  --qsa-shadow-modal: 0 24px 48px -12px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
-  --qsa-shadow-dropdown: 0 10px 25px -5px rgba(0, 0, 0, 0.08), inset 0 0 0 1px var(--qsa-border-line);
+  /* Crisp Shadows (Micro-elevation, Zero Fuzzy Halos) */
+  --qsa-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --qsa-shadow-lift: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --qsa-shadow-modal: 0 16px 36px -6px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  --qsa-shadow-dropdown: 0 8px 20px -4px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--qsa-border-line);
 
-  /* Animation Physics (Spring & Snap Curves) */
+  /* Animation Physics */
   --qsa-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --qsa-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
-  --qsa-dur-fast: 150ms;
-  --qsa-dur-base: 220ms;
-  --qsa-dur-slow: 350ms;
+  --qsa-dur-fast: 140ms;
+  --qsa-dur-base: 200ms;
+  --qsa-dur-slow: 300ms;
 
   /* Layout Constraints */
   --qsa-max-width: 1200px;

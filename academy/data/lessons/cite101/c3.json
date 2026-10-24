@@ -3,12 +3,13 @@
   "course": "cite101",
   "title": "Handling Multiple Authors, Et Al., and Corporate Authors",
   "type": "read",
-  "minutes": 10,
+  "minutes": 13,
   "content": {
-    "quick": "Under APA 7th edition, works with three or more authors are abbreviated immediately from the very first in-text citation using the first author followed by 'et al.'. Corporate authors must be spelled out fully on first mention followed by abbreviation in brackets.",
+    "quick": "Under APA 7th edition, works with three or more authors are abbreviated immediately from the very first in-text citation using the first author followed by 'et al.'. Corporate authors must be spelled out fully on first mention followed by abbreviation in brackets. In the reference list, up to 20 authors are enumerated before using an ellipsis.",
     "blocks": [
       {
         "id": "p1",
+        "explain": "The 7th edition of APA simplified multi-author citations: any source with 3 or more authors uses 'et al.' from the very first in-text mention.",
         "sentences": [
           {
             "id": "s1",
@@ -46,6 +47,26 @@
               },
               "caption": "Common error: Writing 'et. al.' or 'et al' without the correct punctuation."
             }
+          },
+          {
+            "id": "s3",
+            "text": "Notice that 'et' is an entire Latin word meaning 'and', while 'al.' is an abbreviation for 'alia' and therefore takes an obligatory period.",
+            "simple": "Remember that 'et' has no dot, but 'al.' always has a dot at the end.",
+            "plain": "Notice that 'et' is an entire Latin word meaning 'and', while 'al.' is an abbreviation for 'alia' and therefore takes an obligatory period.",
+            "technical": "Punctuation syntax requires that 'et' remain unpunctuated as a complete conjunction, while 'al.' carries terminal punctuation as a truncated Latin morpheme.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Et Al. Punctuation Mechanics",
+              "data": {
+                "lead": "Punctuation Anatomy:",
+                "callouts": [
+                  { "text": "[et]", "label": "No dot (Full Latin word)" },
+                  { "text": "[al.]", "label": "Obligatory dot (Abbreviation)" },
+                  { "text": "[, 2024]", "label": "Comma before publication year" }
+                ]
+              },
+              "caption": "Examiners immediately notice incorrect punctuation such as 'et. al.' or 'et al'."
+            }
           }
         ],
         "visual": {
@@ -65,7 +86,6 @@
         "check": {
           "questions": [
             {
-              "id": "q1",
               "type": "single",
               "q": "Under APA 7th edition, how should a study written by 4 authors (Ali, Raza, Tariq, & Usman, 2023) be cited the very first time in your text?",
               "options": [
@@ -79,7 +99,297 @@
             }
           ]
         }
+      },
+      {
+        "id": "p2",
+        "explain": "When multiple papers share the same first author and publication year, list additional author names to resolve ambiguity.",
+        "sentences": [
+          {
+            "id": "s4",
+            "text": "When two distinct publications by different teams shorten to the exact same 'et al.' form in the same year, ambiguity arises.",
+            "simple": "If you cite two different papers from the same year with the same lead author, readers cannot tell which paper you mean.",
+            "plain": "When two distinct publications by different teams shorten to the exact same 'et al.' form in the same year, ambiguity arises.",
+            "technical": "Nomological ambiguity emerges when disparate multi-author contributions truncate to homonymous in-text citation forms sharing identical publication years.",
+            "visual": {
+              "kind": "compare",
+              "title": "Homonymous Citation Ambiguity",
+              "data": {
+                "columns": ["Paper A Authors", "Paper B Authors"],
+                "rows": [
+                  { "metric": "Author List", "col1": "Khan, Ahmed, Tariq, & Malik (2024)", "col2": "Khan, Bashir, Rauf, & Qureshi (2024)" },
+                  { "metric": "Standard Et Al.", "col1": "(Khan et al., 2024)", "col2": "(Khan et al., 2024) — Identical!" },
+                  { "metric": "Resulting Flaw", "col1": "Examiner cannot match citation to reference list entry", "col2": "Examiner cannot match citation to reference list entry" }
+                ]
+              },
+              "caption": "When two papers collapse into the same abbreviation, special APA disambiguation rules apply."
+            }
+          },
+          {
+            "id": "s5",
+            "text": "To resolve this ambiguity, list as many author surnames as necessary to distinguish the two works, followed by 'et al.'.",
+            "simple": "To fix this, write out enough author names until the two papers look different, then add 'et al.'.",
+            "plain": "To resolve this ambiguity, list as many author surnames as necessary to distinguish the two works, followed by 'et al.'.",
+            "technical": "APA 7th resolves homonymy by sequentially enumerating secondary surnames until bibliographic divergence is established prior to appending 'et al.'.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Disambiguating In-Text Citations",
+              "data": {
+                "lead": "Resolved Citations:",
+                "callouts": [
+                  { "text": "Khan, Ahmed, et al. (2024)", "label": "Paper A Disambiguated" },
+                  { "text": "Khan, Bashir, et al. (2024)", "label": "Paper B Disambiguated" }
+                ]
+              },
+              "caption": "By naming the second author, each citation points unmistakably to its exact reference list entry."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "If only one author remains before the end of the author list to achieve distinction, list all authors rather than using 'et al.' for a single person.",
+            "simple": "If only one name is left at the end, just write out that last author instead of putting 'et al.'.",
+            "plain": "If only one author remains before the end of the author list to achieve distinction, list all authors rather than using 'et al.' for a single person.",
+            "technical": "Where disambiguation necessitates enumeration up to the penultimate author, the final author must be spelled out rather than subordinated to a singular 'et al.'.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Disambiguation Edge Case Rules",
+              "data": {
+                "dos": [
+                  "Write (Khan, Ahmed, & Tariq, 2024) if only Tariq was left",
+                  "Check reference list entries to ensure exact year matching",
+                  "Use letters a, b, c if the identical authors published two works in the same year"
+                ],
+                "donts": [
+                  "Never write (Khan, Ahmed, et al., 2024) if only one author was covered by 'et al.'",
+                  "Do not ignore identical citations; examiners will flag unresolvable references",
+                  "Never guess author initials in-text unless two first authors share identical surnames"
+                ]
+              },
+              "caption": "Punctilious disambiguation marks the difference between novice drafts and doctoral-level submissions."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "decisionTree",
+          "title": "Multi-Author Citation Disambiguation Logic",
+          "data": {
+            "root": "Multi-Author Citation",
+            "branches": [
+              { "label": "Unique First Author", "action": "Use standard (First Author et al., Year)" },
+              { "label": "Identical First Author & Year", "action": "Add second author surname before et al." },
+              { "label": "Identical Author Team & Year", "action": "Append letters to year: (Khan et al., 2024a, 2024b)" }
+            ]
+          },
+          "caption": "Follow this decision tree whenever citing prolific scholars with multiple publications in one year."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "How should a researcher cite two different 2024 papers: (1) Khan, Ahmed, & Tariq and (2) Khan, Bashir, & Qureshi?",
+              "options": [
+                "(Khan, Ahmed, et al., 2024) and (Khan, Bashir, et al., 2024)",
+                "(Khan et al., 2024a) and (Khan et al., 2024b)",
+                "(Khan et al., 2024) for both",
+                "(Khan & others, 2024)"
+              ],
+              "answer": 0,
+              "explanation": "Because the author lists differ at the second author, list through the second author to distinguish them before adding et al."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "explain": "Corporate and government authors must be spelled out completely on first mention with their acronym in brackets.",
+        "sentences": [
+          {
+            "id": "s7",
+            "text": "Government departments, universities, and international bodies often publish statistical reports without individual personal author names.",
+            "simple": "When citing reports from groups like the WHO, HEC, or World Bank, the organization itself counts as the author.",
+            "plain": "Government departments, universities, and international bodies often publish statistical reports without individual personal author names.",
+            "technical": "Institutional entities, state ministries, and supranational organizations function as corporate authors where individual attribution is unassigned.",
+            "visual": {
+              "kind": "definition",
+              "title": "Corporate / Group Authorship",
+              "data": {
+                "term": "Corporate Author",
+                "meaning": "An organization, agency, or association that publishes work under its collective institutional authority.",
+                "example": "Higher Education Commission, World Health Organization, State Bank of Pakistan"
+              },
+              "caption": "Never write 'Anonymous' if an official institutional publisher is identified."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "On first mention in parenthetical citations, spell out the full official name followed by the acronym in square brackets.",
+            "simple": "The first time you cite an organization, write its full name followed by its short acronym inside square brackets.",
+            "plain": "On first mention in parenthetical citations, spell out the full official name followed by the acronym in square brackets.",
+            "technical": "Initial parenthetical attribution mandates exhaustive institutional title declaration with the recognized acronym embedded within square brackets.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "First vs Subsequent Corporate Citation",
+              "data": {
+                "lead": "Parenthetical Citation Progression:",
+                "callouts": [
+                  { "text": "(Higher Education Commission [HEC], 2021)", "label": "1. First In-Text Citation (Square Brackets)" },
+                  { "text": "(HEC, 2021)", "label": "2. All Subsequent Citations (Acronym Only)" }
+                ]
+              },
+              "caption": "Use square brackets inside citation parentheses to avoid nested double rounded parentheses."
+            }
+          },
+          {
+            "id": "s9",
+            "text": "In narrative citations, place the acronym and year inside parentheses on first mention, then use only the acronym thereafter.",
+            "simple": "If using a narrative sentence, write the full name in your text and put the acronym and year in brackets.",
+            "plain": "In narrative citations, place the acronym and year inside parentheses on first mention, then use only the acronym thereafter.",
+            "technical": "In narrative syntax, the corporate nominative appears in running text with the acronym and publication chronometer conjoined within adjacent parentheses.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Narrative Corporate Citation Structure",
+              "data": {
+                "lead": "Narrative Citation Progression:",
+                "callouts": [
+                  { "text": "According to the Higher Education Commission (HEC, 2021)...", "label": "First Narrative Mention" },
+                  { "text": "HEC (2021) further established that...", "label": "Subsequent Narrative Mention" }
+                ]
+              },
+              "caption": "Never repeat the full organizational name across dozens of pages once the acronym is established."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "Corporate Author Citation Protocol (APA 7th)",
+          "data": {
+            "headers": ["Type", "First Citation (Parenthetical)", "Subsequent (Parenthetical)", "First (Narrative)"],
+            "rows": [
+              ["Well-known Acronym", "(Higher Education Commission [HEC], 2021)", "(HEC, 2021)", "Higher Education Commission (HEC, 2021)"],
+              ["International Body", "(World Health Organization [WHO], 2023)", "(WHO, 2023)", "World Health Organization (WHO, 2023)"],
+              ["Without Standard Acronym", "(Stanford University, 2022)", "(Stanford University, 2022)", "Stanford University (2022)"]
+            ]
+          },
+          "caption": "If an organization does not have a standard, widely recognized acronym, spell out the full name every time."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "Which is the correct APA 7th format for the very first parenthetical citation of a report by the World Health Organization?",
+              "options": [
+                "(World Health Organization [WHO], 2023)",
+                "(World Health Organization (WHO), 2023)",
+                "(WHO [World Health Organization], 2023)",
+                "(WHO, 2023)"
+              ],
+              "answer": 0,
+              "explanation": "APA 7th requires the full name followed by the acronym in square brackets inside the parentheses on first mention: (World Health Organization [WHO], 2023)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "explain": "In your final bibliography, APA 7th expanded author inclusion up to 20 authors before using an ellipsis.",
+        "sentences": [
+          {
+            "id": "s10",
+            "text": "While in-text citations abbreviate three or more authors immediately, the reference list provides complete attribution for research teams.",
+            "simple": "Even though your text uses 'et al.', your reference list at the back must list all the actual names.",
+            "plain": "While in-text citations abbreviate three or more authors immediately, the reference list provides complete attribution for research teams.",
+            "technical": "In-text brevity stands in direct dialectical contrast with reference list comprehensiveness, which mandates detailed author attribution.",
+            "visual": {
+              "kind": "compare",
+              "title": "In-Text Citation vs Reference List Entry",
+              "data": {
+                "columns": ["In-Text Citation (Body of Thesis)", "Reference List Entry (End of Thesis)"],
+                "rows": [
+                  { "metric": "Objective", "col1": "Unobtrusive reading flow without clutter", "col2": "Definitive bibliographic auditability" },
+                  { "metric": "Multi-Author Rule", "col1": "Use et al. for 3+ authors immediately", "col2": "List up to 20 individual authors by surname and initials" },
+                  { "metric": "Ellipsis Rule", "col1": "Never use ellipses in-text", "col2": "Use ellipsis after author 19 only if 21+ authors exist" }
+                ]
+              },
+              "caption": "Never write 'et al.' inside your reference list bibliography."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "APA 7th requires listing up to 20 authors by surname and initials before using an ellipsis to insert the final author.",
+            "simple": "In APA 7th, you must write out up to 20 authors in your bibliography before using three dots for huge medical papers.",
+            "plain": "APA 7th requires listing up to 20 authors by surname and initials before using an ellipsis to insert the final author.",
+            "technical": "Bibliographic formatting requires exhaustive enumeration up to 20 authors; for works exceeding 20, insert an ellipsis after the 19th author followed by the final author surname.",
+            "visual": {
+              "kind": "process",
+              "title": "Reference List 21+ Author Formatting Protocol",
+              "data": {
+                "inputs": ["Article with 25 contributing authors"],
+                "transformation": "List authors 1 through 19, insert three spaced periods (...), omit ampersand",
+                "outputs": ["Final author name appended after ellipsis: ... & Author, Z."]
+              },
+              "caption": "This major change in APA 7th ensures fair academic credit for large international scientific collaborations."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "Mastering these multi-author rules ensures that your thesis bibliography complies with international publishing and HEC standards.",
+            "simple": "Following these rules guarantees that your thesis reference list looks flawless to external examiners.",
+            "plain": "Mastering these multi-author rules ensures that your thesis bibliography complies with international publishing and HEC standards.",
+            "technical": "Strict alignment with codified APA 7th bibliographic mechanics secures institutional compliance and facilitates frictionless dissertation archiving.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Reference List Pre-Submission Verification",
+              "data": {
+                "items": [
+                  { "label": "No 'et al.' present in any reference list entry", "status": "done" },
+                  { "label": "All works with 3 to 20 authors list every individual author", "status": "done" },
+                  { "label": "Corporate author titles match official government registries", "status": "done" }
+                ]
+              },
+              "caption": "Verify your reference list before submitting your thesis draft for supervisory sign-off."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "pyramid",
+          "title": "Scholarly Attribution Hierarchy",
+          "data": {
+            "levels": [
+              { "label": "Bibliographic Integrity", "desc": "Up to 20 authors indexed in reference list" },
+              { "label": "Textual Cadence", "desc": "Smooth in-text reading flow with et al." },
+              { "label": "Primary Source Warrants", "desc": "Auditable links to indexed journals" }
+            ]
+          },
+          "caption": "Proper attribution balances textual readability with complete bibliographic transparency."
+        },
+        "check": {
+          "questions": [
+            {
+              "type": "single",
+              "q": "How many authors should be listed in an APA 7th reference list entry before inserting an ellipsis for massive author teams?",
+              "options": [
+                "19 authors, followed by an ellipsis and the final author name",
+                "Only 3 authors, followed by 'et al.'",
+                "Only 6 authors, followed by an ellipsis and the 7th author",
+                "Only the first author followed by 'et al.'"
+              ],
+              "answer": 0,
+              "explanation": "In APA 7th, you list the first 19 authors, then an ellipsis (...), followed by the final author. The older 7-author rule from APA 6th has been deprecated."
+            }
+          ]
+        }
       }
+    ],
+    "mistakes": [
+      "Writing 'et. al.' with a period after 'et'.",
+      "Using 'et al.' inside the final reference list bibliography instead of listing authors.",
+      "Listing all authors in-text for works with 3 or more authors under APA 7th.",
+      "Failing to disambiguate two different publications that shorten to the same first author and year."
+    ],
+    "takeaways": [
+      "Works with 3 or more authors use 'et al.' from the very first in-text citation in APA 7th.",
+      "'et' has no period, but 'al.' always carries a terminal period: 'et al.'.",
+      "Corporate authors must be spelled out fully on first mention with acronyms in brackets.",
+      "In the reference list, list up to 20 authors before using an ellipsis; never use 'et al.' in the bibliography."
     ]
   }
 }
