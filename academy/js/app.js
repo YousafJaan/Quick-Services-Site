@@ -1,6 +1,14 @@
 /**
  * Quick Services Academy — Application Controller & Route Coordinator
- * Reverse-engineered Claude Academy light theme aesthetic & English register manager
+ * Master Project Brief Implementation:
+ * - Design System: Navy #102B4E, Terracotta #B95335, Warm #FAF7F1, Sage #DDE8DF
+ * - 2-Column Hero with Academic Desk Illustration SVG
+ * - Dedicated Sentence Clarity Lab with Multi-Register Engine & Integrity Notice
+ * - Three Track Pillar Cards (Research Design, Statistical Analysis, Academic Writing)
+ * - All 9 Courses Preserved with Real Curricula & Live Filtering
+ * - My Learning Hub (#learning) with Progress, Streaks & Notes
+ * - Canva-Grade Verifiable Credentials (#certificates)
+ * - Light/Dark Theme Switcher with LocalStorage Persistence
  */
 
 import { router } from './router.js';
@@ -27,6 +35,7 @@ router.addRoute('/', async () => {
     const res = await fetch(`${baseData}/courses.json`);
     const courses = await res.json();
     renderCatalog(courses);
+    updateActiveNavLinks();
   } catch (e) {
     mainEl.innerHTML = `<div class="wrap" style="padding: 80px 0; text-align: center;"><h3>Error loading courses.</h3></div>`;
   }
@@ -39,6 +48,7 @@ router.addRoute('course', async ({ courseId }) => {
     const res = await fetch(`${baseData}/courses/${courseId}.json`);
     const course = await res.json();
     renderCourseOverview(course);
+    updateActiveNavLinks();
   } catch (e) {
     mainEl.innerHTML = `<div class="wrap" style="padding: 80px 0; text-align: center;"><h3>Course not found.</h3></div>`;
   }
@@ -47,34 +57,87 @@ router.addRoute('course', async ({ courseId }) => {
 // Route 3: Lesson Player (#lesson-:courseId-:lessonId)
 router.addRoute('lesson', ({ courseId, lessonId }) => {
   loadLessonView(mainEl, { courseId, lessonId });
+  updateActiveNavLinks();
 });
 
 // Route 4: Learner Dashboard (#learning)
-router.addRoute('learning', () => {
-  renderLearnerDashboard();
+router.addRoute('learning', async () => {
+  try {
+    const baseData = getBaseDataPath();
+    const res = await fetch(`${baseData}/courses.json`);
+    const courses = await res.json();
+    renderLearnerDashboard(courses);
+    updateActiveNavLinks();
+  } catch (e) {
+    renderLearnerDashboard([]);
+    updateActiveNavLinks();
+  }
 });
 
 // Route 5: Certificates List (#certificates)
 router.addRoute('certificates', () => {
   renderCertificatesList();
+  updateActiveNavLinks();
 });
 
 // Route 6: Single Certificate View (#certificate-:certId)
 router.addRoute('certificate', ({ certId }) => {
   renderCertificateView(mainEl, { certId });
+  updateActiveNavLinks();
 });
 
 // Route 7: Verification View (#verify-:certId)
 router.addRoute('verify', ({ certId }) => {
   renderVerifyView(certId);
+  updateActiveNavLinks();
 });
 
 // Initialize router
 router.start();
 
-// Initialize English Proficiency System & Cookie Consent
+// Initialize Core Subsystems
+initThemeSwitcher();
 initLanguageSwitchers();
 initCookieConsentBanner();
+updateActiveNavLinks();
+
+window.addEventListener('hashchange', updateActiveNavLinks);
+
+// Global Toast System
+window.showGlobalToast = function(msg) {
+  let toast = document.getElementById('qsa-global-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'qsa-global-toast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #102B4E;
+      color: #FAF7F1;
+      padding: 12px 20px;
+      border-radius: var(--qsa-radius-pill);
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 12px 30px rgba(16, 43, 78, 0.25);
+      border: 1px solid rgba(222, 232, 223, 0.3);
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    `;
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateY(0)';
+  clearTimeout(window.__toastTimeout);
+  window.__toastTimeout = setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(12px)';
+  }, 2800);
+};
 
 // Keyboard Shortcuts Listener
 document.addEventListener('keydown', (e) => {
@@ -91,6 +154,55 @@ document.addEventListener('click', (e) => {
     if (details) details.removeAttribute('open');
   }
 });
+
+/* ==========================================================================
+   Header Navigation Link Active State Highlighter
+   ========================================================================== */
+function updateActiveNavLinks() {
+  const hash = window.location.hash || '#/';
+  const navCourses = document.getElementById('nav-courses');
+  const navLearning = document.getElementById('nav-learning');
+  const navCertificates = document.getElementById('nav-certificates');
+
+  if (navCourses) navCourses.classList.remove('active');
+  if (navLearning) navLearning.classList.remove('active');
+  if (navCertificates) navCertificates.classList.remove('active');
+
+  if (hash === '#/' || hash.startsWith('#course-') || hash.startsWith('#courses')) {
+    if (navCourses) navCourses.classList.add('active');
+  } else if (hash === '#learning') {
+    if (navLearning) navLearning.classList.add('active');
+  } else if (hash === '#certificates' || hash.startsWith('#certificate-')) {
+    if (navCertificates) navCertificates.classList.add('active');
+  }
+}
+
+/* ==========================================================================
+   Theme Switcher Engine (Light / Dark Mode)
+   ========================================================================== */
+function initThemeSwitcher() {
+  const syncThemePills = () => {
+    const currentTheme = store.getTheme();
+    document.querySelectorAll('.theme-pill-btn').forEach(btn => {
+      const targetTheme = btn.dataset.setTheme || btn.dataset.themeVal;
+      btn.classList.toggle('active', targetTheme === currentTheme);
+    });
+  };
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.theme-pill-btn');
+    if (!btn) return;
+    const targetTheme = btn.dataset.setTheme || btn.dataset.themeVal;
+    if (targetTheme && ['light', 'dark'].includes(targetTheme)) {
+      store.setTheme(targetTheme);
+      syncThemePills();
+      window.showGlobalToast(`Theme mode set to: ${targetTheme === 'dark' ? 'Dark' : 'Light'}`);
+    }
+  });
+
+  window.addEventListener('qsa:theme-changed', syncThemePills);
+  syncThemePills();
+}
 
 /* ==========================================================================
    Cookie & Local Storage Consent Banner
@@ -157,9 +269,7 @@ function initCookieConsentBanner() {
   banner.querySelector('#accept-cookie-consent-btn')?.addEventListener('click', () => {
     store.acceptCookies();
     dismiss();
-    if (typeof window.showGlobalToast === 'function') {
-      window.showGlobalToast('Device storage enabled. Preferences and progress saved.');
-    }
+    window.showGlobalToast('Device storage enabled. Preferences and progress saved.');
   });
 
   banner.querySelector('#dismiss-cookie-consent-btn')?.addEventListener('click', () => {
@@ -168,7 +278,7 @@ function initCookieConsentBanner() {
 }
 
 /* ==========================================================================
-   English Proficiency Level Logic & Onboarding Modal
+   English Proficiency Level Logic
    ========================================================================== */
 function initLanguageSwitchers() {
   const syncButtons = () => {
@@ -181,11 +291,7 @@ function initLanguageSwitchers() {
     document.querySelectorAll('.lang-level-switcher').forEach(switcher => {
       switcher.querySelectorAll('.lang-btn').forEach(btn => {
         const lang = btn.dataset.lang;
-        if (lang === current) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
+        btn.classList.toggle('active', lang === current);
       });
     });
 
@@ -195,10 +301,9 @@ function initLanguageSwitchers() {
     }
   };
 
-  // Delegated click handler on document
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.lang-btn');
-    if (!btn) return;
+    if (!btn || btn.classList.contains('clarity-tab-btn')) return;
     const lang = btn.dataset.lang;
     if (lang) {
       store.setEnglishLevel(lang);
@@ -208,9 +313,7 @@ function initLanguageSwitchers() {
         plain: 'Plain English (Standard Academic)',
         technical: 'Technical English (Scholarly Register)'
       };
-      if (typeof window.showGlobalToast === 'function') {
-        window.showGlobalToast(`Reading style set to: ${labels[lang] || lang} & saved`);
-      }
+      window.showGlobalToast(`Reading style set to: ${labels[lang] || lang}`);
     }
   });
 
@@ -221,258 +324,288 @@ function initLanguageSwitchers() {
   syncButtons();
 }
 
-function checkLanguageOnboarding(force = false) {
-  if (!force && store.hasChosenEnglishLevel()) {
-    return;
-  }
+/* ==========================================================================
+   Academic Research Desk Visual SVG (Desktop Right Column Visual)
+   ========================================================================== */
+function getAcademicDeskSvg() {
+  return `
+    <svg viewBox="0 0 540 440" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Academic Research Desk with books, laptop, notebook and coffee">
+      <defs>
+        <linearGradient id="desk-mat-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FAF7F1" stop-opacity="0.95"/>
+          <stop offset="100%" stop-color="#EFE8DE" stop-opacity="0.9"/>
+        </linearGradient>
+        <linearGradient id="book-terracotta" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#9C3F24"/>
+          <stop offset="25%" stop-color="#B95335"/>
+          <stop offset="85%" stop-color="#B95335"/>
+          <stop offset="100%" stop-color="#802F19"/>
+        </linearGradient>
+        <linearGradient id="book-navy" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#0A1C33"/>
+          <stop offset="25%" stop-color="#102B4E"/>
+          <stop offset="85%" stop-color="#102B4E"/>
+          <stop offset="100%" stop-color="#081526"/>
+        </linearGradient>
+        <linearGradient id="book-sage" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3F634E"/>
+          <stop offset="25%" stop-color="#557F67"/>
+          <stop offset="85%" stop-color="#557F67"/>
+          <stop offset="100%" stop-color="#345240"/>
+        </linearGradient>
+        <linearGradient id="book-clay" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#A8572A"/>
+          <stop offset="25%" stop-color="#D97736"/>
+          <stop offset="85%" stop-color="#D97736"/>
+          <stop offset="100%" stop-color="#8F461E"/>
+        </linearGradient>
+        <linearGradient id="laptop-screen-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#111B27"/>
+          <stop offset="100%" stop-color="#1B293A"/>
+        </linearGradient>
+        <filter id="desk-shadow" x="-8%" y="-8%" width="116%" height="116%">
+          <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#102B4E" flood-opacity="0.08"/>
+        </filter>
+        <filter id="float-card-shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#102B4E" flood-opacity="0.12"/>
+        </filter>
+      </defs>
 
-  const modalPortal = document.getElementById('app-modal-portal');
-  if (!modalPortal) return;
+      <!-- Background Desk Mat / Architectural Surface -->
+      <rect x="15" y="15" width="510" height="410" rx="20" fill="url(#desk-mat-grad)" stroke="#E8E1D8" stroke-width="1.5" filter="url(#desk-shadow)"/>
+      
+      <!-- Subtle Architectural Grid Pattern -->
+      <g stroke="#E8E1D8" stroke-width="0.75" stroke-dasharray="4,4" opacity="0.6">
+        <line x1="40" y1="110" x2="500" y2="110"/>
+        <line x1="40" y1="210" x2="500" y2="210"/>
+        <line x1="40" y1="310" x2="500" y2="310"/>
+        <line x1="160" y1="30" x2="160" y2="400"/>
+        <line x1="360" y1="30" x2="360" y2="400"/>
+      </g>
 
-  const current = store.getEnglishLevel();
+      <!-- LAPTOP (Upper Right & Center) -->
+      <g transform="translate(210, 48)">
+        <!-- Laptop Display Body -->
+        <rect x="0" y="0" width="280" height="180" rx="8" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
+        <!-- Laptop Screen Inner -->
+        <rect x="10" y="10" width="260" height="160" rx="4" fill="url(#laptop-screen-grad)"/>
+        
+        <!-- Screen Header Bar -->
+        <rect x="10" y="10" width="260" height="22" fill="#0D1520"/>
+        <circle cx="22" cy="21" r="3" fill="#EF4444"/>
+        <circle cx="32" cy="21" r="3" fill="#F59E0B"/>
+        <circle cx="42" cy="21" r="3" fill="#10B981"/>
+        <text x="140" y="24" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#94A3B8" text-anchor="middle" letter-spacing="0.5">Quick Academy • SmartPLS 4 Workspace</text>
 
-  modalPortal.innerHTML = `
-    <div class="modal-overlay" id="onboarding-modal-overlay">
-      <div class="modal-content" style="max-width: 680px; padding: 40px 36px;">
-        <button class="modal-close" id="close-onboarding-btn" aria-label="Close dialog">×</button>
+        <!-- Screen Content: Structural Equation Model & Regression Chart -->
+        <!-- Latent Constructs (Circles) -->
+        <circle cx="65" cy="80" r="22" fill="#102B4E" stroke="#38BDF8" stroke-width="1.5"/>
+        <text x="65" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#BAE6FD" text-anchor="middle">INSTITUTIONAL</text>
+        <text x="65" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#BAE6FD" text-anchor="middle">SUPPORT</text>
 
-        <div style="text-align: center; margin-bottom: 28px;">
-          <span class="tag tag-clay" style="margin-bottom: 12px;">Personalized Academic Experience</span>
-          <h2 style="font-size: clamp(24px, 4vw, 32px); margin: 8px 0 10px;">Choose Your Reading English Style</h2>
-          <p style="color: var(--qsa-text-secondary); font-size: 15px; max-width: 520px; margin: 0 auto; line-height: 1.6;">
-            Quick Services Academy adapts course explanations to your English proficiency. You can switch styles at any second while studying.
-          </p>
-        </div>
+        <circle cx="140" cy="80" r="22" fill="#102B4E" stroke="#34D399" stroke-width="1.5"/>
+        <text x="140" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#A7F3D0" text-anchor="middle">RESEARCH</text>
+        <text x="140" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#A7F3D0" text-anchor="middle">EFFICACY</text>
 
-        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px;">
-          <!-- Option 1: Simple English -->
-          <div class="lang-option-card ${current === 'simple' ? 'selected' : ''}" data-choose-lang="simple" style="border: 1.5px solid ${current === 'simple' ? 'var(--qsa-accent-clay)' : 'var(--qsa-border-card)'}; border-radius: var(--qsa-radius-card); padding: 18px 22px; cursor: pointer; transition: all var(--qsa-dur-fast) var(--qsa-ease-out); background: ${current === 'simple' ? 'var(--qsa-accent-peach-soft)' : '#ffffff'};">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <strong style="font-size: 16.5px; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 8px;">
-                <span>🌱</span> Simple English (Easy &amp; Clear)
-              </strong>
-              <span class="tag tag-green" style="font-size: 11px;">Beginner / ESL</span>
-            </div>
-            <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 0 0 10px; line-height: 1.5;">
-              Everyday vocabulary, short sentences, and instant definitions. Ideal if English is your second language or you want fast, confusion-free comprehension.
-            </p>
-            <div style="background: var(--qsa-bg-subtle); border-radius: var(--qsa-radius-sm); padding: 10px 14px; font-size: 12.5px; color: var(--qsa-text-muted); font-style: italic;">
-              Example: "A good thesis topic must be narrow. It must study a specific group of people in one city."
-            </div>
-          </div>
+        <circle cx="215" cy="80" r="22" fill="#102B4E" stroke="#FBBF24" stroke-width="1.5"/>
+        <text x="215" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#FDE68A" text-anchor="middle">PUBLICATION</text>
+        <text x="215" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#FDE68A" text-anchor="middle">OUTPUT</text>
 
-          <!-- Option 2: Plain English -->
-          <div class="lang-option-card ${current === 'plain' ? 'selected' : ''}" data-choose-lang="plain" style="border: 1.5px solid ${current === 'plain' ? 'var(--qsa-accent-clay)' : 'var(--qsa-border-card)'}; border-radius: var(--qsa-radius-card); padding: 18px 22px; cursor: pointer; transition: all var(--qsa-dur-fast) var(--qsa-ease-out); background: ${current === 'plain' ? 'var(--qsa-accent-peach-soft)' : '#ffffff'};">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <strong style="font-size: 16.5px; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 8px;">
-                <span>📘</span> Plain English (Standard Academic)
-              </strong>
-              <span class="tag tag-clay" style="font-size: 11px;">Recommended</span>
-            </div>
-            <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 0 0 10px; line-height: 1.5;">
-              Active, direct, standard academic voice. Balanced for university assignments, research proposals, and graduate dissertations.
-            </p>
-            <div style="background: var(--qsa-bg-subtle); border-radius: var(--qsa-radius-sm); padding: 10px 14px; font-size: 12.5px; color: var(--qsa-text-muted); font-style: italic;">
-              Example: "Every successful thesis starts with an empirical problem that is clearly bounded across population and context."
-            </div>
-          </div>
+        <!-- Structural Paths / Beta Arrows -->
+        <line x1="87" y1="80" x2="116" y2="80" stroke="#38BDF8" stroke-width="1.75"/>
+        <polygon points="116,77 122,80 116,83" fill="#38BDF8"/>
+        <text x="102" y="74" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#38BDF8" text-anchor="middle">β=.48***</text>
 
-          <!-- Option 3: Technical English -->
-          <div class="lang-option-card ${current === 'technical' ? 'selected' : ''}" data-choose-lang="technical" style="border: 1.5px solid ${current === 'technical' ? 'var(--qsa-accent-clay)' : 'var(--qsa-border-card)'}; border-radius: var(--qsa-radius-card); padding: 18px 22px; cursor: pointer; transition: all var(--qsa-dur-fast) var(--qsa-ease-out); background: ${current === 'technical' ? 'var(--qsa-accent-peach-soft)' : '#ffffff'};">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-              <strong style="font-size: 16.5px; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 8px;">
-                <span>🎓</span> Technical &amp; Scholarly Register
-              </strong>
-              <span class="tag tag-orange" style="font-size: 11px;">Advanced Scholar</span>
-            </div>
-            <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 0 0 10px; line-height: 1.5;">
-              Formal dissertation prose with precise epistemological terms, mathematical formalisms, and rigorous methodological vocabulary.
-            </p>
-            <div style="background: var(--qsa-bg-subtle); border-radius: var(--qsa-radius-sm); padding: 10px 14px; font-size: 12.5px; color: var(--qsa-text-muted); font-style: italic;">
-              Example: "Empirical inquiry necessitates operationalizing constructs within explicitly delimited spatial-temporal boundaries."
-            </div>
-          </div>
-        </div>
+        <line x1="162" y1="80" x2="191" y2="80" stroke="#34D399" stroke-width="1.75"/>
+        <polygon points="191,77 197,80 191,83" fill="#34D399"/>
+        <text x="177" y="74" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#34D399" text-anchor="middle">β=.56***</text>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-          <span style="font-size: 12.5px; color: var(--qsa-text-muted);">
-            💡 You can switch anytime using the header toggle or while reading any lesson.
-          </span>
-          <button class="btn btn-primary" id="confirm-lang-btn" style="min-width: 140px;">
-            Save &amp; Continue
-          </button>
-        </div>
-      </div>
-    </div>`;
+        <!-- Indirect Mediation Arch -->
+        <path d="M 65,58 Q 140,36 215,58" fill="none" stroke="#F87171" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="140" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="800" fill="#FCA5A5" text-anchor="middle">Indirect Effect β=.27 (p &lt; .001)</text>
 
-  let selectedLang = current;
+        <!-- Bottom Metric Dashboard on Screen -->
+        <rect x="20" y="120" width="70" height="38" rx="4" fill="#0F172A" stroke="#334155"/>
+        <text x="26" y="132" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="700" fill="#64748B">R² VARIANCE</text>
+        <text x="26" y="148" font-family="'Newsreader', serif" font-size="14" font-weight="600" fill="#38BDF8">0.684</text>
 
-  modalPortal.querySelectorAll('.lang-option-card').forEach(card => {
-    card.addEventListener('click', () => {
-      selectedLang = card.dataset.chooseLang;
-      modalPortal.querySelectorAll('.lang-option-card').forEach(c => {
-        const isMatch = c.dataset.chooseLang === selectedLang;
-        c.style.border = isMatch ? '1.5px solid var(--qsa-accent-clay)' : '1.5px solid var(--qsa-border-card)';
-        c.style.background = isMatch ? 'var(--qsa-accent-peach-soft)' : '#ffffff';
-      });
-    });
-  });
+        <rect x="100" y="120" width="70" height="38" rx="4" fill="#0F172A" stroke="#334155"/>
+        <text x="106" y="132" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="700" fill="#64748B">HTMT RATIO</text>
+        <text x="106" y="148" font-family="'Newsreader', serif" font-size="14" font-weight="600" fill="#34D399">&lt; 0.85</text>
 
-  const closeModal = () => {
-    modalPortal.innerHTML = '';
-  };
+        <rect x="180" y="120" width="75" height="38" rx="4" fill="#0F172A" stroke="#334155"/>
+        <text x="186" y="132" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="700" fill="#64748B">G*POWER N</text>
+        <text x="186" y="148" font-family="'Newsreader', serif" font-size="14" font-weight="600" fill="#FBBF24">N = 384</text>
 
-  modalPortal.querySelector('#confirm-lang-btn')?.addEventListener('click', () => {
-    store.setEnglishLevel(selectedLang);
-    store.acceptCookies();
-    closeModal();
-    const labels = {
-      simple: 'Simple English (ESL & Clarity)',
-      plain: 'Plain English (Standard Academic)',
-      technical: 'Technical English (Scholarly Register)'
-    };
-    if (typeof window.showGlobalToast === 'function') {
-      window.showGlobalToast(`Reading register set to: ${labels[selectedLang] || selectedLang} & saved to device`);
-    }
-  });
+        <!-- Laptop Base / Keyboard Hinge -->
+        <path d="M -24,180 L 304,180 L 284,204 L -4,204 Z" fill="#94A3B8" stroke="#64748B" stroke-width="1.5"/>
+        <!-- Trackpad -->
+        <rect x="110" y="184" width="60" height="15" rx="2" fill="#CBD5E1" stroke="#94A3B8" stroke-width="0.75"/>
+      </g>
 
-  modalPortal.querySelector('#close-onboarding-btn')?.addEventListener('click', () => {
-    store.setEnglishLevel(selectedLang);
-    store.acceptCookies();
-    closeModal();
-  });
+      <!-- STACK OF 4 ACADEMIC BOOKS (Left & Foreground) -->
+      <g transform="translate(42, 175)">
+        <!-- Book 1 (Bottom): Research Methods & Design (Terracotta #B95335) -->
+        <g transform="translate(0, 150)">
+          <path d="M 0,0 L 220,0 L 232,18 L 12,18 Z" fill="url(#book-terracotta)" stroke="#802F19" stroke-width="1.2"/>
+          <rect x="0" y="18" width="224" height="34" rx="3" fill="url(#book-terracotta)" stroke="#802F19" stroke-width="1.2"/>
+          <line x1="8" y1="23" x2="216" y2="23" stroke="#FDE68A" stroke-width="1" opacity="0.6"/>
+          <line x1="8" y1="47" x2="216" y2="47" stroke="#FDE68A" stroke-width="1" opacity="0.6"/>
+          <text x="112" y="38" font-family="'Cinzel', serif" font-size="9.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.2">RESEARCH METHODS &amp; DESIGN</text>
+          <polygon points="224,18 244,18 244,48 224,52" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
+          <line x1="228" y1="22" x2="228" y2="48" stroke="#E2D9CC" stroke-width="0.5"/>
+          <line x1="234" y1="22" x2="234" y2="48" stroke="#E2D9CC" stroke-width="0.5"/>
+          <line x1="240" y1="22" x2="240" y2="48" stroke="#E2D9CC" stroke-width="0.5"/>
+        </g>
+
+        <!-- Book 2: Statistical Inference & SPSS (Oxford Navy #102B4E) -->
+        <g transform="translate(8, 108)">
+          <path d="M 0,0 L 214,0 L 226,16 L 12,16 Z" fill="url(#book-navy)" stroke="#081526" stroke-width="1.2"/>
+          <rect x="0" y="16" width="218" height="32" rx="3" fill="url(#book-navy)" stroke="#081526" stroke-width="1.2"/>
+          <line x1="8" y1="20" x2="210" y2="20" stroke="#93C5FD" stroke-width="0.75" opacity="0.5"/>
+          <line x1="8" y1="44" x2="210" y2="44" stroke="#93C5FD" stroke-width="0.75" opacity="0.5"/>
+          <text x="109" y="35" font-family="'Cinzel', serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">STATISTICAL INFERENCE &amp; SPSS</text>
+          <polygon points="218,16 236,16 236,44 218,48" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
+        </g>
+
+        <!-- Book 3: SmartPLS 4: SEM (Sage Green #557F67) -->
+        <g transform="translate(18, 68)">
+          <path d="M 0,0 L 204,0 L 214,15 L 10,15 Z" fill="url(#book-sage)" stroke="#345240" stroke-width="1.2"/>
+          <rect x="0" y="15" width="208" height="30" rx="3" fill="url(#book-sage)" stroke="#345240" stroke-width="1.2"/>
+          <text x="104" y="33" font-family="'Cinzel', serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">SmartPLS 4 : STRUCTURAL MODELING</text>
+          <polygon points="208,15 224,15 224,42 208,45" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
+        </g>
+
+        <!-- Book 4 (Top): Academic Writing & APA 7th (Warm Clay #D97736) -->
+        <g transform="translate(26, 30)">
+          <path d="M 0,0 L 194,0 L 204,14 L 10,14 Z" fill="url(#book-clay)" stroke="#8F461E" stroke-width="1.2"/>
+          <rect x="0" y="14" width="198" height="28" rx="3" fill="url(#book-clay)" stroke="#8F461E" stroke-width="1.2"/>
+          <text x="99" y="31" font-family="'Cinzel', serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">ACADEMIC PROSE &amp; APA 7TH</text>
+          <polygon points="198,14 212,14 212,39 198,42" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
+          <!-- Silk Bookmark Ribbon draping down -->
+          <path d="M 120,42 L 126,76 L 132,70 L 138,76 L 140,42 Z" fill="#B95335" stroke="#802F19" stroke-width="0.75"/>
+        </g>
+      </g>
+
+      <!-- RESEARCHER COFFEE MUG (Bottom Center-Right) -->
+      <g transform="translate(305, 305)">
+        <ellipse cx="28" cy="62" rx="28" ry="7" fill="#102B4E" opacity="0.12"/>
+        <path d="M 6,10 L 10,54 C 10,60 18,64 28,64 C 38,64 46,60 46,54 L 50,10 Z" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <ellipse cx="28" cy="10" rx="22" ry="6" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1.5"/>
+        <ellipse cx="28" cy="12" rx="19" ry="4.5" fill="#582C12"/>
+        <path d="M 47,18 C 60,18 62,44 45,46" fill="none" stroke="#E8E1D8" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M 47,18 C 60,18 62,44 45,46" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="21" y="26" width="14" height="18" rx="2" fill="#B95335"/>
+        <text x="28" y="39" font-family="'Newsreader', serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Q</text>
+        <path d="M 23,2 C 21,-6 27,-10 24,-18" fill="none" stroke="#B95335" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
+        <path d="M 33,0 C 35,-8 29,-14 33,-22" fill="none" stroke="#B95335" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
+      </g>
+
+      <!-- OPEN NOTEBOOK & FOUNTAIN PEN (Bottom Right) -->
+      <g transform="translate(375, 280)">
+        <rect x="0" y="0" width="130" height="95" rx="6" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5" transform="rotate(-6 65 47)"/>
+        <line x1="65" y1="2" x2="65" y2="92" stroke="#E8E1D8" stroke-width="1" stroke-dasharray="2,2" transform="rotate(-6 65 47)"/>
+        <g stroke="#E8E1D8" stroke-width="0.75" transform="rotate(-6 65 47)">
+          <line x1="12" y1="20" x2="55" y2="20"/>
+          <line x1="12" y1="32" x2="55" y2="32"/>
+          <line x1="12" y1="44" x2="50" y2="44"/>
+          <line x1="12" y1="56" x2="55" y2="56"/>
+          <line x1="75" y1="20" x2="118" y2="20"/>
+          <line x1="75" y1="32" x2="118" y2="32"/>
+          <line x1="75" y1="44" x2="115" y2="44"/>
+        </g>
+        <g transform="translate(50, 10) rotate(32)">
+          <rect x="0" y="0" width="8" height="70" rx="3" fill="#102B4E"/>
+          <rect x="0" y="45" width="8" height="6" fill="#FDE68A"/>
+          <polygon points="1,70 7,70 4,82" fill="#FDE68A" stroke="#B45309" stroke-width="0.5"/>
+          <line x1="4" y1="70" x2="4" y2="78" stroke="#102B4E" stroke-width="0.5"/>
+        </g>
+      </g>
+
+      <!-- FLOATING ANNOTATION CARD (Matching Mockup) -->
+      <g transform="translate(16, 26)" filter="url(#float-card-shadow)">
+        <rect x="0" y="0" width="194" height="52" rx="10" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <circle cx="22" cy="26" r="12" fill="#DDE8DF"/>
+        <text x="22" y="30.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#2E5A44" text-anchor="middle">✓</text>
+        <text x="42" y="21" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#B95335" letter-spacing="0.5">POSTGRADUATE EXCELLENCE</text>
+        <text x="42" y="37" font-family="'Newsreader', serif" font-size="12" font-weight="600" fill="#102B4E">Better Research. Bigger Opportunities.</text>
+      </g>
+    </svg>
+  `;
 }
 
-// Expose on window for easy access
-window.openLanguagePreferenceModal = () => checkLanguageOnboarding(true);
-
 /* ==========================================================================
-   Catalog Rendering (Stripe Press & Substack High-Legibility Aesthetic)
+   Homepage & Catalog Rendering
    ========================================================================== */
 function renderCatalog(courses) {
   const active = store.getActiveLesson();
   const currentLang = store.getEnglishLevel();
 
-  const langLabels = {
-    simple: 'Simple English (ESL)',
-    plain: 'Plain (Standard)',
-    technical: 'Technical (Scholarly)'
-  };
-
   mainEl.innerHTML = `
-    <!-- Visually Appealing Editorial Hero Section -->
+    <!-- Top Hero Section: Two-Column Editorial Layout -->
     <section class="hero-editorial-section">
-      <div class="wrap" style="text-align: center;">
-        
-        <!-- Live Academic Accreditation Badge -->
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(217, 119, 87, 0.08); border: 1px solid rgba(217, 119, 87, 0.25); padding: 6px 16px; border-radius: var(--qsa-radius-pill); font-size: 12px; font-weight: 700; color: var(--qsa-accent-clay-dark); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.8px;">
-          <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--qsa-accent-clay); box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.2);"></span>
-          <span>HEC Pakistan Aligned • Free Postgraduate Research LMS</span>
-        </div>
-
-        <h1 style="font-size: clamp(34px, 5.5vw, 54px); color: var(--qsa-text-primary); max-width: 900px; margin: 0 auto 16px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;">
-          Master your research with <em style="font-style: italic; color: var(--qsa-accent-clay); font-family: var(--qsa-font-serif);">sentence-level clarity.</em>
-        </h1>
-        <p style="font-size: clamp(15.5px, 2vw, 18px); color: var(--qsa-text-secondary); max-width: 740px; margin: 0 auto 28px; line-height: 1.65;">
-          University-grade academic training for postgraduate (MS/MPhil &amp; PhD) researchers. Master dissertation problem formulation, APA 7th citations, Turnitin defense, G*Power calculations, SPSS, and SmartPLS 4 SEM with interactive structural models for every sentence.
-        </p>
-
-        <!-- Primary Action Links -->
-        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;">
-          <a href="#courses-mount-point" class="btn btn-primary" style="padding: 12px 26px; font-size: 15px;">
-            Explore All 9 Courses ➔
-          </a>
-          <a href="#certificates" class="btn btn-secondary" style="padding: 12px 22px; font-size: 15px;">
-            <span>📜</span> View Official Credentials
-          </a>
-          <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="btn btn-secondary" style="padding: 12px 20px; font-size: 14.5px;">
-            <span>📥</span> Field Guide (PDF)
-          </a>
-        </div>
-
-        <!-- Interactive Hero Showcase: The Multi-Register Sentence Engine -->
-        <div class="hero-showcase-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--qsa-border-line); padding-bottom: 14px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 16px;">🔬</span>
-              <strong style="font-size: 13.5px; color: var(--qsa-text-primary); text-transform: uppercase; letter-spacing: 0.6px;">Interactive Sentence Engine</strong>
-              <span class="tag tag-clay" id="hero-showcase-badge" style="font-size: 11px;">📘 Plain English (Standard Academic)</span>
+      <div class="wrap">
+        <div class="hero-grid-2col">
+          
+          <!-- Left Column: Copy & Actions -->
+          <div class="hero-left-col">
+            <!-- Verified HEC Alignment Pill -->
+            <div class="hero-hec-badge">
+              <span class="badge-dot"></span>
+              <span>HEC PAKISTAN ALIGNED • FREE POSTGRADUATE RESEARCH LMS</span>
             </div>
-            
-            <!-- Hero Showcase 3-Way Tabs -->
-            <div class="lang-level-switcher" id="hero-showcase-switcher" style="padding: 3px;">
-              <button type="button" class="lang-btn ${currentLang === 'simple' ? 'active' : ''} hero-showcase-tab" data-showcase-lang="simple" title="Preview Simple English formulation">🌱 Simple</button>
-              <button type="button" class="lang-btn ${currentLang === 'plain' ? 'active' : ''} hero-showcase-tab" data-showcase-lang="plain" title="Preview Standard Plain Academic formulation">📘 Plain</button>
-              <button type="button" class="lang-btn ${currentLang === 'technical' ? 'active' : ''} hero-showcase-tab" data-showcase-lang="technical" title="Preview Technical Scholarly formulation">🎓 Technical</button>
-            </div>
-          </div>
 
-          <!-- Sentence Transformation Display Box -->
-          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-left: 4px solid var(--qsa-accent-clay); border-radius: var(--qsa-radius-md); padding: 18px 22px; margin-bottom: 18px;">
-            <div id="hero-showcase-quote" style="font-family: var(--qsa-font-serif); font-size: clamp(17px, 2.2vw, 20px); color: var(--qsa-text-primary); line-height: 1.5; transition: opacity 0.15s ease-out;">
-              “A university research proposal functions as a methodological contract between the postgraduate candidate and the supervisory committee.”
-            </div>
-            <div id="hero-showcase-tip" style="font-size: 12.5px; color: var(--qsa-text-muted); margin-top: 10px; font-style: italic;">
-              Balanced academic syntax maintaining active voice and clear agent-action relationship.
-            </div>
-          </div>
+            <!-- Master Headline -->
+            <h1 class="hero-headline">
+              Build stronger research. Write with <em class="hero-highlight">clarity.</em>
+            </h1>
 
-          <!-- Interactive 3-Node Proposition Logic Model -->
-          <div style="margin-bottom: 16px;">
-            <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--qsa-text-muted); margin-bottom: 10px;">
-              Sentence Logic Architecture • Click Any Component to Inspect
+            <!-- Supporting Text -->
+            <p class="hero-subtext">
+              Practical academic training for postgraduate researchers. Strengthen your research design, academic writing, statistical analysis and reporting skills through guided lessons and interactive learning tools.
+            </p>
+
+            <!-- 3 CTAs matching Brief -->
+            <div class="hero-actions-group">
+              <a href="#courses-section" class="btn btn-primary">
+                ➔ Explore Courses
+              </a>
+              <a href="#certificates" class="btn btn-secondary">
+                <span>📄</span> View Credentials
+              </a>
+              <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="btn btn-secondary">
+                <span>📖</span> Open Field Guide
+              </a>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
-              <div class="hero-node-card" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--qsa-text-primary); box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                <span style="font-size: 10.5px; font-weight: 800; color: var(--qsa-accent-clay); text-transform: uppercase; display: block; margin-bottom: 2px;">1. Epistemic Claim</span>
-                <strong id="hero-node-1" style="font-size: 12.5px; display: block;">Methodological Contract</strong>
+
+            <!-- Value Proof Badges Strip -->
+            <div class="hero-proof-strip">
+              <div class="hero-proof-item">
+                <span>🎓</span> <span>9 Complete Tracks</span>
               </div>
-              <div class="hero-node-card" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--qsa-text-primary); box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                <span style="font-size: 10.5px; font-weight: 800; color: var(--qsa-accent-orange); text-transform: uppercase; display: block; margin-bottom: 2px;">2. Bounded Context</span>
-                <strong id="hero-node-2" style="font-size: 12.5px; display: block;">Delimited Population &amp; Scope</strong>
+              <div class="hero-proof-item">
+                <span>🛡️</span> <span>HEC Aligned Standards</span>
               </div>
-              <div class="hero-node-card" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--qsa-text-primary); box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                <span style="font-size: 10.5px; font-weight: 800; color: var(--qsa-status-success); text-transform: uppercase; display: block; margin-bottom: 2px;">3. Empirical Covenant</span>
-                <strong id="hero-node-3" style="font-size: 12.5px; display: block;">Approved Empirical Roadmap</strong>
+              <div class="hero-proof-item">
+                <span>🔬</span> <span>Sentence Clarity Lab</span>
               </div>
             </div>
           </div>
 
-          <!-- Showcase Footer Links -->
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--qsa-border-line); padding-top: 14px; flex-wrap: wrap; gap: 10px; font-size: 13px;">
-            <a href="#lesson-thesis101-t4" style="color: var(--qsa-accent-clay); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
-              <span>Study this complete lesson in Player</span> ➔
-            </a>
-            <button type="button" onclick="window.openLanguagePreferenceModal()" style="background: none; border: none; color: var(--qsa-text-muted); font-size: 12.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; padding: 0;">
-              <span>Active Portal Preference:</span>
-              <strong id="catalog-active-lang-label" style="color: var(--qsa-accent-clay);">${langLabels[currentLang]}</strong>
-              <span>⚙</span>
-            </button>
+          <!-- Right Column: Academic Desk Visual SVG -->
+          <div class="hero-right-col">
+            <div class="hero-desk-visual-wrap">
+              ${getAcademicDeskSvg()}
+            </div>
           </div>
-        </div>
 
-        <!-- Quick Value Proofs Strip -->
-        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 36px;">
-          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-            <span>🎓</span> <span>9 Complete Tracks</span>
-          </div>
-          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-            <span>📖</span> <span>168 Multi-Register Lessons</span>
-          </div>
-          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-            <span>📜</span> <span>Canva-Grade Verifiable Credentials</span>
-          </div>
-          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-            <span>🛡️</span> <span>HEC Pakistan Compliant</span>
-          </div>
         </div>
-
       </div>
     </section>
 
-    <!-- Resume Banner (If Active) -->
+    <!-- Resume Banner (If Learner Has an Active Lesson) -->
     ${active && active.courseId ? `
-      <section style="background: #ffffff; border-bottom: 1px solid var(--qsa-border-line); padding: 14px 0;">
+      <section style="background: #ffffff; border-bottom: 1px solid var(--qsa-border); padding: 14px 0;">
         <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
           <div style="font-size: 14px; color: var(--qsa-text-secondary);">
             <strong>Resume where you left off:</strong> Lesson <code>${active.lessonId.toUpperCase()}</code> in <em>${active.courseId.toUpperCase()}</em>
@@ -481,13 +614,177 @@ function renderCatalog(courses) {
         </div>
       </section>` : ''}
 
-    <!-- Courses Grid Section with Live Filter Chips & Search -->
-    <section id="courses-mount-point" style="padding: 56px 0 72px;">
+    <!-- Core Feature: Dedicated Sentence Clarity Lab Card -->
+    <section style="padding: 24px 0 56px;">
+      <div class="wrap">
+        <div class="clarity-lab-card" id="sentence-clarity-lab">
+          
+          <!-- Lab Card Header -->
+          <div class="clarity-lab-header">
+            <div>
+              <div class="clarity-lab-badge">
+                <span>🔬</span> <span>CORE LEARNING TOOL • SENTENCE CLARITY LAB</span>
+              </div>
+              <h2 style="font-size: clamp(22px, 3.2vw, 30px); margin: 6px 0 4px; font-weight: 500; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary);">
+                Academic Paraphraser &amp; Syntax Refiner
+              </h2>
+              <p style="font-size: 14px; color: var(--qsa-text-secondary); margin: 0;">
+                See how passive, nominalized sentences transform into clear, bounded scholarly prose across registers.
+              </p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+              <!-- Register Switcher Tabs -->
+              <div class="clarity-tabs-wrap" role="tablist">
+                <button type="button" class="clarity-tab-btn ${currentLang === 'simple' ? 'active' : ''}" data-clarity-lang="simple">🌱 Simple (ESL)</button>
+                <button type="button" class="clarity-tab-btn ${currentLang === 'plain' ? 'active' : ''}" data-clarity-lang="plain">📘 Plain (Standard)</button>
+                <button type="button" class="clarity-tab-btn ${currentLang === 'technical' ? 'active' : ''}" data-clarity-lang="technical">🎓 Technical (Scholarly)</button>
+              </div>
+              <!-- Preset Selector -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--qsa-text-muted);">Preset:</span>
+                <select id="clarity-preset-select" style="padding: 5px 12px; font-size: 12.5px; font-weight: 600; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); cursor: pointer; outline: none;">
+                  <option value="empirical">Empirical Problem Statement (Thesis 101)</option>
+                  <option value="methodology">Statistical Sample &amp; Power (G*Power)</option>
+                  <option value="sem">Structural Equation Modeling (SmartPLS 4)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Two-Panel Comparison Grid -->
+          <div class="clarity-lab-grid">
+            
+            <!-- Left Panel: Original Weak Sentence -->
+            <div class="clarity-panel original-panel">
+              <div class="clarity-panel-header">
+                <span class="clarity-panel-title">Original Academic Sentence</span>
+                <span class="tag tag-peach" id="clarity-weakness-badge" style="font-size: 11px;">⚠️ Passive / Nominalized</span>
+              </div>
+              <div class="clarity-sentence-box" id="clarity-original-text">
+                “It has been observed by <span class="syntax-badge-peach">various researchers</span> that the implementation of <span class="syntax-badge-peach">certain training initiatives</span> has an impact upon the <span class="syntax-badge-peach">overall performance</span> of employees <span class="syntax-badge-peach">in an organizational setting</span>.”
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; font-size: 12px; color: var(--qsa-text-muted);">
+                <span>📏 28 words</span> • <span>Fog Index: 16.4</span> • <span>Dangling Subject Detected</span>
+              </div>
+            </div>
+
+            <!-- Right Panel: Improved Sentence -->
+            <div class="clarity-panel improved-panel">
+              <div class="clarity-panel-header">
+                <span class="clarity-panel-title">Improved Formulation</span>
+                <div class="clarity-benefit-tags" id="clarity-benefit-tags">
+                  <span class="syntax-badge-blue">✓ Active Voice</span>
+                  <span class="syntax-badge-blue">✓ Agent-Action</span>
+                  <span class="syntax-badge-blue">✓ Bounded Context</span>
+                </div>
+              </div>
+              <div class="clarity-sentence-box" id="clarity-improved-text" style="font-weight: 500;">
+                “This empirical study investigates how institutional capital allocation and pedagogical training predict student standardized test achievement across 50 public secondary schools.”
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 10px;">
+                <div style="font-size: 12px; color: var(--qsa-text-muted);">
+                  <span>Directness: <strong>+38%</strong></span> • <span>Zero Nominalization</span>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm" id="clarity-copy-btn" style="padding: 6px 14px; font-size: 12px;">
+                  <span>📋</span> <span>Copy Sentence</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Explanation Box -->
+          <div class="clarity-explanation-box" id="clarity-explanation-text">
+            <strong>Key Revisions:</strong> Replaced the empty passive subject <em>“It has been observed”</em> with an active empirical agent (<em>“This empirical study investigates”</em>). Eliminated the vague nominalization <em>“overall performance”</em> and anchored the context to <em>“50 public secondary schools”</em> for defensible scoping.
+          </div>
+
+          <!-- Mandatory Integrity & Verification Disclaimer -->
+          <div class="clarity-disclaimer">
+            <span>⚠️</span>
+            <span><strong>Academic Integrity Notice:</strong> Paraphrasing and syntax tools refine clarity but do not replace critical scholarly judgment or verify empirical findings. Users must independently verify evidence, definitions, and citations. Paraphrasing does not guarantee plagiarism exemption or bypass AI detection.</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Track Pillar Cards Grid matching Mockup -->
+    <section style="padding: 10px 0 48px;">
+      <div class="wrap">
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
+          <span class="tag tag-clay" style="margin-bottom: 8px;">Academic Architecture</span>
+          <h2 style="font-size: clamp(26px, 3.8vw, 34px); margin: 6px 0 8px; color: var(--qsa-text-primary);">
+            Three Pillars of Postgraduate Research
+          </h2>
+          <p style="color: var(--qsa-text-secondary); font-size: 15px; margin: 0;">
+            A sequential scholarly curriculum designed to take researchers from problem formulation to rigorous statistical defense.
+          </p>
+        </div>
+
+        <div class="pillar-cards-grid">
+          
+          <!-- Pillar 1 -->
+          <div class="pillar-card">
+            <div class="pillar-icon-box">📐</div>
+            <div class="pillar-track-num">TRACK 01 • METHODOLOGY</div>
+            <h3 class="pillar-card-title">Research Design &amp; Scoping</h3>
+            <p class="pillar-card-desc">
+              From initial topic bounding to proposal defense, systematic PRISMA literature synthesis, and defending your research questions.
+            </p>
+            <div class="pillar-courses-list">
+              Includes: <strong>Thesis Writing 101</strong> • <strong>Literature Search with Zotero</strong> • <strong>Viva Voce Defense</strong>
+            </div>
+            <button type="button" class="pillar-card-action filter-pillar-btn" data-pillar-filter="Research Design">
+              <span>Explore Research Track (3)</span> ➔
+            </button>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="pillar-card">
+            <div class="pillar-icon-box">📊</div>
+            <div class="pillar-track-num">TRACK 02 • EMPIRICAL RIGOR</div>
+            <h3 class="pillar-card-title">Statistical Analysis &amp; Power</h3>
+            <p class="pillar-card-desc">
+              Empirical quantitative methods: G*Power statistical power calculation, SPSS data screening, hypothesis testing, and SmartPLS 4 SEM path models.
+            </p>
+            <div class="pillar-courses-list">
+              Includes: <strong>Sample Size Determination</strong> • <strong>SPSS Quantitative Research</strong> • <strong>SmartPLS 4 SEM</strong>
+            </div>
+            <button type="button" class="pillar-card-action filter-pillar-btn" data-pillar-filter="Statistical Analysis">
+              <span>Explore Statistics Track (3)</span> ➔
+            </button>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="pillar-card">
+            <div class="pillar-icon-box">✍️</div>
+            <div class="pillar-track-num">TRACK 03 • SCHOLARLY COMMUNICATION</div>
+            <h3 class="pillar-card-title">Academic Writing &amp; Integrity</h3>
+            <p class="pillar-card-desc">
+              International publication standards: APA 7th parenthetical mechanics, Turnitin similarity report interpretation, and structural editing.
+            </p>
+            <div class="pillar-courses-list">
+              Includes: <strong>APA 7th Referencing</strong> • <strong>Turnitin &amp; Integrity</strong> • <strong>Proofreading &amp; Style</strong>
+            </div>
+            <button type="button" class="pillar-card-action filter-pillar-btn" data-pillar-filter="Academic Writing">
+              <span>Explore Writing Track (3)</span> ➔
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Course Catalogue Section with Live Filter Chips & Search -->
+    <section id="courses-section" style="padding: 40px 0 72px; border-top: 1px solid var(--qsa-border);">
       <div class="wrap">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
           <div>
             <span class="tag tag-clay" style="margin-bottom: 8px;">Curriculum</span>
-            <h2 style="font-size: clamp(26px, 4vw, 34px); color: var(--qsa-text-primary); margin: 4px 0 0;">All 9 Academy Courses</h2>
+            <h2 style="font-size: clamp(26px, 4vw, 34px); color: var(--qsa-text-primary); margin: 4px 0 0;">
+              All 9 Academy Courses
+            </h2>
           </div>
           
           <!-- Search Bar -->
@@ -496,65 +793,23 @@ function renderCatalog(courses) {
           </div>
         </div>
 
-        <!-- Quick Filter Topic Chips Strip -->
+        <!-- Topic Filter Chips Strip -->
         <div class="hero-chips-wrap" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; overflow-x: auto; padding-bottom: 4px;">
           <button type="button" class="hero-topic-chip active" data-topic="all">All Tracks (9)</button>
-          <button type="button" class="hero-topic-chip" data-topic="thesis">Thesis Writing</button>
-          <button type="button" class="hero-topic-chip" data-topic="cite">APA 7th Referencing</button>
-          <button type="button" class="hero-topic-chip" data-topic="integrity">Turnitin &amp; Integrity</button>
-          <button type="button" class="hero-topic-chip" data-topic="edit">Proofreading &amp; Style</button>
-          <button type="button" class="hero-topic-chip" data-topic="search">Literature Search</button>
-          <button type="button" class="hero-topic-chip" data-topic="sample">Sample Size &amp; Power</button>
-          <button type="button" class="hero-topic-chip" data-topic="spss">SPSS Statistics</button>
-          <button type="button" class="hero-topic-chip" data-topic="smartpls">SmartPLS 4 SEM</button>
-          <button type="button" class="hero-topic-chip" data-topic="viva">Viva Defense</button>
+          <button type="button" class="hero-topic-chip" data-topic="Research Design">Research Design (3)</button>
+          <button type="button" class="hero-topic-chip" data-topic="Statistical Analysis">Statistical Analysis (3)</button>
+          <button type="button" class="hero-topic-chip" data-topic="Academic Writing">Academic Writing (3)</button>
         </div>
 
+        <!-- Reusable Course Cards Grid -->
         <div class="cards-grid" id="courses-grid-mount">
           ${courses.map(c => renderCourseCard(c)).join('')}
         </div>
       </div>
     </section>
 
-    <!-- Learning Paths Section -->
-    <section style="background: var(--qsa-bg-sidebar); border-top: 1px solid var(--qsa-border-line); border-bottom: 1px solid var(--qsa-border-line); padding: 64px 0;">
-      <div class="wrap">
-        <div style="text-align: center; max-width: 620px; margin: 0 auto 40px;">
-          <span class="tag tag-clay" style="margin-bottom: 8px;">Curated Tracks</span>
-          <h2 style="font-size: clamp(26px, 4vw, 34px); color: var(--qsa-text-primary);">Choose Your Learning Path</h2>
-          <p style="color: var(--qsa-text-secondary); font-size: 15px;">Structured progression designed for your specific research milestone.</p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-          <div style="background: #ffffff; color: var(--qsa-text-primary); border-radius: var(--qsa-radius-card); padding: 32px; box-shadow: inset 0 0 0 1px var(--qsa-border-card); transition: transform var(--qsa-dur-fast) var(--qsa-ease-spring);">
-            <span class="tag tag-clay" style="margin-bottom: 12px;">Track 1</span>
-            <h3 style="font-size: 24px; margin: 8px 0 12px;">Thesis Starter Path</h3>
-            <p style="font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.6; margin-bottom: 20px;">
-              Designed for students writing proposals and dissertations. Takes you from initial topic bounding through citations, similarity compliance, editing, and viva defense.
-            </p>
-            <div style="font-size: 13px; font-weight: 700; color: var(--qsa-accent-clay); margin-bottom: 20px;">
-              5 Courses • 15.3 Hours • All Levels
-            </div>
-            <a href="#course-thesis101" class="btn btn-primary btn-sm" style="width: 100%;">Start Track 1 ➔</a>
-          </div>
-
-          <div style="background: #ffffff; color: var(--qsa-text-primary); border-radius: var(--qsa-radius-card); padding: 32px; box-shadow: inset 0 0 0 1px var(--qsa-border-card); transition: transform var(--qsa-dur-fast) var(--qsa-ease-spring);">
-            <span class="tag tag-orange" style="margin-bottom: 12px;">Track 2</span>
-            <h3 style="font-size: 24px; margin: 8px 0 12px;">Research &amp; Statistics Path</h3>
-            <p style="font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.6; margin-bottom: 20px;">
-              For quantitative empirical researchers. Master literature search, statistical sample sizing in G*Power, hypothesis testing in SPSS, and structural modeling in SmartPLS.
-            </p>
-            <div style="font-size: 13px; font-weight: 700; color: var(--qsa-accent-orange); margin-bottom: 20px;">
-              4 Courses • 15.8 Hours • Intermediate to Advanced
-            </div>
-            <a href="#course-lit-search" class="btn btn-primary btn-sm" style="width: 100%;">Start Track 2 ➔</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Consultation CTA -->
-    <section style="padding: 64px 0 80px;">
+    <section style="padding: 40px 0 80px;">
       <div class="wrap-narrow" style="text-align: center; background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 48px 24px;">
         <span class="tag tag-clay" style="margin-bottom: 14px;">Direct Academic Support</span>
         <h2 style="font-size: clamp(24px, 4vw, 32px); color: var(--qsa-text-primary); margin-bottom: 14px;">Need Personal Coaching with M. Yousaf?</h2>
@@ -565,85 +820,34 @@ function renderCatalog(courses) {
           <span>💬</span> Chat on WhatsApp (+92 329 6646824)
         </a>
       </div>
-    </section>`;
+    </section>
+  `;
 
-  // Live Topic Chip Filtering
+  // Attach Clarity Lab Event Handlers
+  initClarityLabListeners();
+
+  // Attach Live Topic Chip Filtering
   const chips = document.querySelectorAll('.hero-topic-chip');
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
       chips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
       const topic = chip.dataset.topic;
-      const mount = document.getElementById('courses-grid-mount');
-      if (!mount) return;
-      if (!topic || topic === 'all') {
-        mount.innerHTML = courses.map(c => renderCourseCard(c)).join('');
-      } else {
-        const filtered = courses.filter(c =>
-          c.id.toLowerCase().includes(topic) ||
-          c.title.toLowerCase().includes(topic) ||
-          c.category.toLowerCase().includes(topic) ||
-          c.description.toLowerCase().includes(topic)
-        );
-        mount.innerHTML = filtered.map(c => renderCourseCard(c)).join('');
-      }
+      filterCatalogCourses(courses, topic);
     });
   });
 
-  // Hero Showcase Interactive Multi-Register Engine
-  const showcaseSentences = {
-    simple: {
-      badge: '🌱 Simple English (Beginner / ESL)',
-      quote: '“Your research proposal is a formal written agreement with your university describing what you plan to study and how you will do it.”',
-      tip: 'Short active clauses with concrete everyday terms eliminate confusion for second-language writers.',
-      nodes: ['Clear Promise', 'Specific City & Sample', 'Approved Study Blueprint']
-    },
-    plain: {
-      badge: '📘 Plain English (Standard Academic)',
-      quote: '“A university research proposal functions as a methodological contract between the postgraduate candidate and the supervisory committee.”',
-      tip: 'Balanced academic syntax maintaining active voice and clear agent-action relationship.',
-      nodes: ['Methodological Contract', 'Delimited Population & Scope', 'Approved Empirical Roadmap']
-    },
-    technical: {
-      badge: '🎓 Technical English (Scholarly Register)',
-      quote: '“The academic research prospectus represents a binding epistemological and methodological covenant negotiated between the candidate and the institutional review board.”',
-      tip: 'Rigorous philosophical and methodological terminology suited for doctoral dissertations and high-impact journals.',
-      nodes: ['Epistemological Covenant', 'Circumscribed Construct Domain', 'Defensible Empirical Inquiry']
-    }
-  };
-
-  const updateShowcase = (lang) => {
-    const data = showcaseSentences[lang] || showcaseSentences.plain;
-    const badgeEl = document.getElementById('hero-showcase-badge');
-    const quoteEl = document.getElementById('hero-showcase-quote');
-    const tipEl = document.getElementById('hero-showcase-tip');
-    const n1 = document.getElementById('hero-node-1');
-    const n2 = document.getElementById('hero-node-2');
-    const n3 = document.getElementById('hero-node-3');
-
-    if (badgeEl) badgeEl.textContent = data.badge;
-    if (quoteEl) {
-      quoteEl.style.opacity = '0';
-      setTimeout(() => {
-        quoteEl.textContent = data.quote;
-        quoteEl.style.opacity = '1';
-      }, 120);
-    }
-    if (tipEl) tipEl.textContent = data.tip;
-    if (n1) n1.textContent = data.nodes[0];
-    if (n2) n2.textContent = data.nodes[1];
-    if (n3) n3.textContent = data.nodes[2];
-
-    document.querySelectorAll('.hero-showcase-tab').forEach(t => {
-      t.classList.toggle('active', t.dataset.showcaseLang === lang);
-    });
-  };
-
-  document.querySelectorAll('.hero-showcase-tab').forEach(btn => {
+  // Attach Pillar Card Action Buttons (Direct Filter & Smooth Scroll)
+  document.querySelectorAll('.filter-pillar-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const lang = btn.dataset.showcaseLang;
-      if (lang) {
-        updateShowcase(lang);
+      const filter = btn.dataset.pillarFilter;
+      chips.forEach(c => {
+        c.classList.toggle('active', c.dataset.topic === filter);
+      });
+      filterCatalogCourses(courses, filter);
+      const targetEl = document.getElementById('courses-section');
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
       }
     });
   });
@@ -658,13 +862,135 @@ function renderCatalog(courses) {
       const filtered = courses.filter(c => 
         c.title.toLowerCase().includes(q) || 
         c.category.toLowerCase().includes(q) || 
-        c.description.toLowerCase().includes(q)
+        c.description.toLowerCase().includes(q) ||
+        (c.tagline && c.tagline.toLowerCase().includes(q))
       );
       mount.innerHTML = filtered.map(c => renderCourseCard(c)).join('');
     });
   }
 }
 
+function filterCatalogCourses(courses, filter) {
+  const mount = document.getElementById('courses-grid-mount');
+  if (!mount) return;
+  if (!filter || filter === 'all') {
+    mount.innerHTML = courses.map(c => renderCourseCard(c)).join('');
+  } else {
+    const filtered = courses.filter(c => {
+      if (filter === 'Research Design') {
+        return ['thesis101', 'lit-search', 'viva'].includes(c.id) || c.category.includes('Research') || c.category.includes('Information');
+      }
+      if (filter === 'Statistical Analysis') {
+        return ['sample-size', 'spss101', 'smartpls'].includes(c.id) || c.category.includes('Statistical') || c.category.includes('Statistics') || c.category.includes('Methodology');
+      }
+      if (filter === 'Academic Writing') {
+        return ['cite101', 'integrity101', 'edit101'].includes(c.id) || c.category.includes('Writing') || c.category.includes('Ethics');
+      }
+      return c.category.toLowerCase().includes(filter.toLowerCase());
+    });
+    mount.innerHTML = filtered.map(c => renderCourseCard(c)).join('');
+  }
+}
+
+/* ==========================================================================
+   Sentence Clarity Lab Logic & Presets
+   ========================================================================== */
+function initClarityLabListeners() {
+  const clarityPresets = {
+    empirical: {
+      original: `“It has been observed by <span class="syntax-badge-peach">various researchers</span> that the implementation of <span class="syntax-badge-peach">certain training initiatives</span> has an impact upon the <span class="syntax-badge-peach">overall performance</span> of employees <span class="syntax-badge-peach">in an organizational setting</span>.”`,
+      weakness: `⚠️ Passive / Nominalized (28 words)`,
+      simple: `“We tested how teacher training helps teachers teach better in 50 city schools.”`,
+      plain: `“This empirical study investigates how institutional capital allocation and pedagogical training predict student standardized test achievement across 50 public secondary schools.”`,
+      technical: `“This quantitative investigation operationalizes institutional resource allocation and pedagogical development as structural regressors predicting standardized scholastic achievement across 50 secondary educational entities.”`,
+      explanation: `<strong>Key Revisions:</strong> Replaced the empty passive subject <em>“It has been observed”</em> with an active empirical agent (<em>“This empirical study investigates”</em>). Eliminated the vague nominalization <em>“overall performance”</em> and anchored the context to <em>“50 public secondary schools”</em> for defensible scoping.`
+    },
+    methodology: {
+      original: `“A sample of individuals was selected using <span class="syntax-badge-peach">some convenient methods</span> in order to obtain data for <span class="syntax-badge-peach">investigating multiple different things</span> about student satisfaction.”`,
+      weakness: `⚠️ Unbounded / Ambiguous (25 words)`,
+      simple: `“We surveyed 384 research students to see if regular meetings with supervisors help them graduate on time.”`,
+      plain: `“We drew a stratified random sample of 384 postgraduate scholars to evaluate how supervisory feedback frequency predicts doctoral dissertation completion timelines.”`,
+      technical: `“Employing stratified probabilistic sampling (N = 384, statistical power 1 - β = .95 in G*Power), we parameterize supervisory feedback cadence to evaluate hazard rates of doctoral dissertation completion.”`,
+      explanation: `<strong>Key Revisions:</strong> Replaced ambiguous convenience sampling with stratified probabilistic sampling (N = 384, G*Power calculated). Replaced vague goals with direct, testable independent and dependent constructs.`
+    },
+    sem: {
+      original: `“The survey answers were <span class="syntax-badge-peach">put into the computer</span> and showed that there are <span class="syntax-badge-peach">connections between all the factors</span>.”`,
+      weakness: `⚠️ Colloquial / Imprecise (21 words)`,
+      simple: `“Using SmartPLS, we proved that university support helps confident students publish more research papers.”`,
+      plain: `“Partial least squares structural equation modeling (PLS-SEM) confirmed that perceived institutional support mediates the relationship between research self-efficacy and scholarly publication output (β = 0.42, p < .001).”`,
+      technical: `“Reflective measurement validation established convergent validity (AVE > 0.50) and discriminant validity via HTMT0.85, while bootstrapping confirmed significant indirect mediation (β = 0.42, t = 4.86, p < .001).”`,
+      explanation: `<strong>Key Revisions:</strong> Replaced informal description with international PLS-SEM reporting standards, citing path coefficients (β = 0.42), statistical significance thresholds (p < .001), and construct reliability.`
+    }
+  };
+
+  let activePreset = 'empirical';
+  let activeLang = store.getEnglishLevel();
+
+  const updateDisplay = () => {
+    const data = clarityPresets[activePreset] || clarityPresets.empirical;
+    const origEl = document.getElementById('clarity-original-text');
+    const impEl = document.getElementById('clarity-improved-text');
+    const expEl = document.getElementById('clarity-explanation-text');
+    const weakBadge = document.getElementById('clarity-weakness-badge');
+
+    if (origEl) origEl.innerHTML = data.original;
+    if (impEl) {
+      impEl.style.opacity = '0';
+      setTimeout(() => {
+        impEl.textContent = data[activeLang] || data.plain;
+        impEl.style.opacity = '1';
+      }, 100);
+    }
+    if (expEl) expEl.innerHTML = data.explanation;
+    if (weakBadge) weakBadge.textContent = data.weakness;
+
+    document.querySelectorAll('.clarity-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.clarityLang === activeLang);
+    });
+  };
+
+  document.querySelectorAll('.clarity-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.clarityLang;
+      if (lang) {
+        activeLang = lang;
+        store.setEnglishLevel(lang);
+        updateDisplay();
+      }
+    });
+  });
+
+  const presetSelect = document.getElementById('clarity-preset-select');
+  if (presetSelect) {
+    presetSelect.addEventListener('change', (e) => {
+      activePreset = e.target.value;
+      updateDisplay();
+    });
+  }
+
+  const copyBtn = document.getElementById('clarity-copy-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const impEl = document.getElementById('clarity-improved-text');
+      if (impEl) {
+        const textToCopy = impEl.textContent.trim();
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          copyBtn.innerHTML = `<span>✓</span> <span>Copied!</span>`;
+          window.showGlobalToast('Improved academic sentence copied to clipboard');
+          setTimeout(() => {
+            copyBtn.innerHTML = `<span>📋</span> <span>Copy Sentence</span>`;
+          }, 2000);
+        }).catch(() => {
+          window.showGlobalToast('Press Ctrl+C to copy');
+        });
+      }
+    });
+  }
+}
+
+/* ==========================================================================
+   Course Card Renderer
+   ========================================================================== */
 function renderCourseCard(c) {
   const progress = store.getCourseProgress(c.id, c.lessonsCount);
   const hours = (c.minutes / 60).toFixed(1);
@@ -687,12 +1013,17 @@ function renderCourseCard(c) {
         <div class="qsa-card-meta">
           <span>📚 ${c.lessonsCount} Lessons</span>
           <span>⏱️ ${hours} Hours</span>
-          ${progress > 0 ? `<span style="color: var(--qsa-accent-clay); font-weight: 700;">${progress}% Done</span>` : ''}
+          ${progress > 0 ? `<span style="color: var(--qsa-terracotta); font-weight: 700;">${progress}% Done</span>` : ''}
         </div>
 
+        ${progress > 0 ? `
+          <div style="width: 100%; height: 5px; background: var(--qsa-border); border-radius: 3px; overflow: hidden; margin-bottom: 12px;">
+            <div style="width: ${progress}%; height: 100%; background: var(--qsa-terracotta); border-radius: 3px;"></div>
+          </div>` : ''}
+
         <div class="qsa-card-action">
-          <a href="#course-${c.id}" class="btn ${progress > 0 ? 'btn-secondary' : 'btn-primary'} btn-sm">
-            ${progress === 100 ? 'Review & Certificate 🏆' : progress > 0 ? 'Continue Course' : 'Start Course'}
+          <a href="#course-${c.id}" class="btn ${progress > 0 ? 'btn-secondary' : 'btn-primary'} btn-sm" style="width: 100%; text-align: center;">
+            ${progress === 100 ? 'Review & Certificate 🏆' : progress > 0 ? 'Continue Course ➔' : 'Start Course ➔'}
           </a>
         </div>
       </div>
@@ -700,7 +1031,7 @@ function renderCourseCard(c) {
 }
 
 /* ==========================================================================
-   Course Overview Page (Claude Academy Warm Light Paper Aesthetic)
+   Course Overview Page
    ========================================================================== */
 function renderCourseOverview(course) {
   const hours = (course.minutes / 60).toFixed(1);
@@ -709,9 +1040,9 @@ function renderCourseOverview(course) {
   const firstLessonId = course.modules?.[0]?.lessons?.[0]?.id || 't1';
 
   mainEl.innerHTML = `
-    <div style="background: linear-gradient(180deg, rgba(217, 119, 87, 0.05) 0%, rgba(250, 249, 245, 0) 100%); padding: 52px 0 40px; border-bottom: 1px solid var(--qsa-border-line);">
+    <div style="background: linear-gradient(180deg, rgba(185, 83, 53, 0.05) 0%, rgba(250, 247, 241, 0) 100%); padding: 52px 0 40px; border-bottom: 1px solid var(--qsa-border);">
       <div class="wrap">
-        <a href="#/" style="color: var(--qsa-accent-clay); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 16px;">
+        <a href="#/" style="color: var(--qsa-terracotta); font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 16px;">
           ← Back to Course Catalog
         </a>
         <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
@@ -743,7 +1074,7 @@ function renderCourseOverview(course) {
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
             ${(course.outcomes || []).map(o => `
               <div style="display: flex; gap: 12px; align-items: flex-start;">
-                <span style="color: var(--qsa-status-success); font-weight: 800; font-size: 16px;">✓</span>
+                <span style="color: #15803d; font-weight: 800; font-size: 16px;">✓</span>
                 <span style="color: var(--qsa-text-secondary); font-size: 14.5px; line-height: 1.5;">${o}</span>
               </div>`).join('')}
           </div>
@@ -755,7 +1086,7 @@ function renderCourseOverview(course) {
           <div style="display: flex; flex-direction: column; gap: 18px;">
             ${course.modules.map((m, idx) => `
               <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 24px;">
-                <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-accent-clay); margin-bottom: 4px;">
+                <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); margin-bottom: 4px;">
                   Module ${idx + 1}
                 </div>
                 <h4 style="font-size: 19px; margin: 0 0 6px; font-family: var(--qsa-font-serif); font-weight: 500;">${m.title}</h4>
@@ -766,7 +1097,7 @@ function renderCourseOverview(course) {
                     return `
                       <a href="#lesson-${course.id}-${l.id}" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: var(--qsa-bg-subtle); border-radius: 8px; text-decoration: none; font-size: 14px; color: var(--qsa-text-primary); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                          <span style="color: ${done ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'}; font-weight: 800;">
+                          <span style="color: ${done ? '#15803d' : 'var(--qsa-text-muted)'}; font-weight: 800;">
                             ${done ? '✓' : '○'}
                           </span>
                           <span style="font-weight: 500;">${l.title}</span>
@@ -786,31 +1117,90 @@ function renderCourseOverview(course) {
 /* ==========================================================================
    Learner Dashboard (#learning)
    ========================================================================== */
-function renderLearnerDashboard() {
+function renderLearnerDashboard(courses = []) {
   const state = store.state;
   const totalMinutes = Math.round(state.studyTime.totalSeconds / 60);
+  const active = store.getActiveLesson();
+  const enrolledCourses = courses.filter(c => store.getCourseProgress(c.id, c.lessonsCount) > 0);
+  const completedCourses = courses.filter(c => store.getCourseProgress(c.id, c.lessonsCount) === 100);
 
   mainEl.innerHTML = `
     <div class="wrap" style="padding: 52px 20px 72px;">
-      <span class="tag tag-clay" style="margin-bottom: 12px;">Learner Hub</span>
-      <h1 style="color: var(--qsa-text-primary); font-size: clamp(30px, 5vw, 42px); margin-bottom: 28px; font-weight: 400;">
-        My Learning Dashboard
-      </h1>
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="tag tag-clay" style="margin-bottom: 8px;">Learner Profile</span>
+          <h1 style="color: var(--qsa-text-primary); font-size: clamp(30px, 5vw, 42px); margin: 4px 0 0; font-weight: 400;">
+            My Learning Dashboard
+          </h1>
+        </div>
+        ${store.isStudentNameLocked() ? `
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: #DDE8DF; color: #102B4E; padding: 8px 16px; border-radius: var(--qsa-radius-pill); font-size: 13px; font-weight: 700;">
+            <span>🛡️</span> <span>Verified: ${store.getVerifiedStudentName()}</span>
+          </div>` : ''}
+      </div>
+
+      <!-- Continue Learning Banner (If active) -->
+      ${active && active.courseId ? `
+        <div style="background: #ffffff; border: 1.5px solid var(--qsa-terracotta); border-radius: var(--qsa-radius-card); padding: 24px; margin-bottom: 32px; box-shadow: var(--qsa-shadow-card); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); margin-bottom: 4px;">
+              Active Course in Progress
+            </div>
+            <h3 style="font-size: 20px; margin: 0 0 6px; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary);">
+              Continue: ${active.courseId.toUpperCase()} • Lesson ${active.lessonId.toUpperCase()}
+            </h3>
+            <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 0;">
+              Pick up right where you paused your reading and interactive models.
+            </p>
+          </div>
+          <a href="#lesson-${active.courseId}-${active.lessonId}" class="btn btn-primary">
+            Continue Lesson ➔
+          </a>
+        </div>` : ''}
 
       <!-- Stats Grid -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 36px;">
         <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
-          <div style="font-size: 34px; font-weight: 700; color: var(--qsa-accent-clay); font-family: var(--qsa-font-serif);">${state.streak.current} Days</div>
+          <div style="font-size: 34px; font-weight: 700; color: var(--qsa-terracotta); font-family: var(--qsa-font-serif);">${state.streak.current} Days</div>
           <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Daily Study Streak</div>
         </div>
         <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
-          <div style="font-size: 34px; font-weight: 700; color: var(--qsa-accent-orange); font-family: var(--qsa-font-serif);">${totalMinutes} Min</div>
+          <div style="font-size: 34px; font-weight: 700; color: var(--qsa-navy); font-family: var(--qsa-font-serif);">${totalMinutes} Min</div>
           <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Active Time Logged</div>
         </div>
         <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
-          <div style="font-size: 34px; font-weight: 700; color: var(--qsa-status-success); font-family: var(--qsa-font-serif);">${state.notes.length}</div>
+          <div style="font-size: 34px; font-weight: 700; color: #15803d; font-family: var(--qsa-font-serif);">${state.notes.length}</div>
           <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Saved Notes &amp; Highlights</div>
         </div>
+      </div>
+
+      <!-- Enrolled Courses & Progress -->
+      <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 32px; margin-bottom: 32px;">
+        <h3 style="margin: 0 0 18px; font-size: 22px; color: var(--qsa-text-primary);">Enrolled Courses &amp; Progress</h3>
+        ${enrolledCourses.length === 0 ? `
+          <p style="color: var(--qsa-text-muted); font-style: italic; margin: 0 0 16px;">You haven't started any courses yet. Choose a course from the catalog to begin tracking your progress.</p>
+          <a href="#/" class="btn btn-primary btn-sm">Browse All 9 Courses ➔</a>` : `
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            ${enrolledCourses.map(c => {
+              const p = store.getCourseProgress(c.id, c.lessonsCount);
+              return `
+                <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                  <div>
+                    <h4 style="margin: 0 0 4px; font-size: 16px; color: var(--qsa-text-primary);">${c.title}</h4>
+                    <span style="font-size: 12.5px; color: var(--qsa-text-muted);">${c.category} • ${c.lessonsCount} Lessons</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 14px;">
+                    <div style="width: 120px; height: 6px; background: var(--qsa-border); border-radius: 3px; overflow: hidden;">
+                      <div style="width: ${p}%; height: 100%; background: var(--qsa-terracotta);"></div>
+                    </div>
+                    <span style="font-weight: 700; font-size: 13.5px; color: var(--qsa-terracotta);">${p}%</span>
+                    <a href="#course-${c.id}" class="btn btn-secondary btn-sm" style="padding: 4px 12px; font-size: 12px;">
+                      ${p === 100 ? 'Review' : 'Continue'}
+                    </a>
+                  </div>
+                </div>`;
+            }).join('')}
+          </div>`}
       </div>
 
       <!-- Notes Management -->
@@ -823,7 +1213,7 @@ function renderLearnerDashboard() {
           <p style="color: var(--qsa-text-muted); font-style: italic; margin: 0;">No notes saved yet. Highlight any sentence in a lesson to add a note.</p>` : `
           <div style="display: flex; flex-direction: column; gap: 12px;">
             ${state.notes.map(n => `
-              <div style="background: var(--qsa-bg-subtle); padding: 14px 18px; border-radius: 10px; border-left: 3.5px solid var(--qsa-accent-clay);">
+              <div style="background: var(--qsa-bg-subtle); padding: 14px 18px; border-radius: 10px; border-left: 3.5px solid var(--qsa-terracotta);">
                 <p style="margin: 0 0 6px; font-size: 14.5px; font-weight: 500; color: var(--qsa-text-primary);">"${n.text}"</p>
                 <div style="font-size: 12px; color: var(--qsa-text-muted);">
                   ${n.courseId.toUpperCase()} • ${new Date(n.timestamp).toLocaleDateString()}
@@ -840,7 +1230,7 @@ function renderLearnerDashboard() {
         </div>
         <div style="display: flex; gap: 10px;">
           <button type="button" class="btn btn-secondary btn-sm" id="export-json-btn">Export Progress</button>
-          <button type="button" class="btn btn-secondary btn-sm" id="reset-store-btn" style="color: var(--qsa-status-danger);">Reset</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="reset-store-btn" style="color: #dc2626;">Reset</button>
         </div>
       </div>
     </div>`;
@@ -853,6 +1243,7 @@ function renderLearnerDashboard() {
     a.href = url;
     a.download = 'quick-services-academy-notes.md';
     a.click();
+    window.showGlobalToast('Notes exported to markdown');
   });
 
   document.getElementById('export-json-btn')?.addEventListener('click', () => {
@@ -863,6 +1254,7 @@ function renderLearnerDashboard() {
     a.href = url;
     a.download = 'qsa-progress-backup.json';
     a.click();
+    window.showGlobalToast('Progress backup exported');
   });
 
   document.getElementById('reset-store-btn')?.addEventListener('click', () => {
@@ -944,7 +1336,7 @@ function renderVerifyView(certId) {
   mainEl.innerHTML = `
     <div class="wrap" style="padding: 64px 20px 80px; text-align: center;">
       <div style="max-width: 620px; margin: 0 auto; background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 44px 36px; box-shadow: var(--qsa-shadow-lift);">
-        <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--qsa-status-success-bg); color: var(--qsa-status-success); font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 1.5px solid var(--qsa-status-success-border);">
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: #DDE8DF; color: #15803d; font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 1.5px solid #86efac;">
           ✓
         </div>
         <span class="tag tag-green" style="margin-bottom: 10px;">Official Verification Record</span>
@@ -957,8 +1349,8 @@ function renderVerifyView(certId) {
         <p style="font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.6; margin-bottom: 24px;">
           This digital cryptographic identifier validates that the recipient has satisfactorily satisfied all instructional, empirical, and evaluation requirements for:
         </p>
-        <div style="background: var(--qsa-accent-clay-soft); border: 1px solid rgba(194,94,61,0.2); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; text-align: left;">
-          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--qsa-accent-clay); letter-spacing: 0.5px;">Accredited Specialization:</div>
+        <div style="background: rgba(185, 83, 53, 0.08); border: 1px solid rgba(185, 83, 53, 0.2); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; text-align: left;">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.5px;">Accredited Specialization:</div>
           <strong style="font-size: 16px; color: var(--qsa-text-primary); font-family: var(--qsa-font-serif);">${matchedCourse.title}</strong>
           <div style="font-size: 12px; color: var(--qsa-text-muted); margin-top: 4px;">Instruction Hours: ${matchedCourse.hours} Hours • Issued by Quick Services Academy</div>
         </div>

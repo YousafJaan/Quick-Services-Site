@@ -24,33 +24,42 @@
   <link rel="stylesheet" href="./css/quiz.css">
 </head>
 <body>
-  <!-- Header matching live site -->
+  <!-- Header matching live mockup -->
   <header class="hd">
     <div class="wrap in">
       <a href="#/" class="logo-link">
         <span class="logo-q">Q</span>
-        <span class="logo-title">Quick Academy</span>
+        <div class="logo-brand-text">
+          <span class="logo-title">Quick Academy</span>
+          <span class="logo-tagline">RESEARCH • LEARN • ACHIEVE</span>
+        </div>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="dnav">
-        <a href="#/">Courses</a>
-        <a href="#learning">My Learning</a>
-        <a href="#certificates">Certificates</a>
-        <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" style="color: var(--qsa-accent-clay);">Field Guide</a>
+        <a href="#/" class="nav-item" id="nav-courses">Courses</a>
+        <a href="#learning" class="nav-item" id="nav-learning">My Learning</a>
+        <a href="#certificates" class="nav-item" id="nav-certificates">Certificates</a>
+        <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="nav-item">Field Guide</a>
       </nav>
 
-      <!-- English Proficiency Style Switcher -->
-      <div class="lang-level-switcher" id="header-lang-switcher" title="Choose Reading English Style">
-        <button type="button" class="lang-btn" data-lang="simple" title="Simple English for easy comprehension">Simple</button>
-        <button type="button" class="lang-btn active" data-lang="plain" title="Plain academic English">Plain</button>
-        <button type="button" class="lang-btn" data-lang="technical" title="Advanced technical dissertation register">Tech</button>
-      </div>
+      <!-- Right Header Actions (Theme Toggle & Advisor Button) -->
+      <div class="header-right-actions">
+        <!-- Light / Dark Theme Switcher Pill -->
+        <div class="theme-toggle-pill" id="header-theme-switcher" title="Toggle Light / Dark mode">
+          <button type="button" class="theme-pill-btn active" data-set-theme="light">
+            <span>☀️</span> <span>Light</span>
+          </button>
+          <button type="button" class="theme-pill-btn" data-set-theme="dark">
+            <span>🌙</span> <span>Dark</span>
+          </button>
+        </div>
 
-      <!-- Sleek Advisor CTA -->
-      <a class="cta-advisor-pill" href="https://wa.me/923296646824" target="_blank" title="Connect directly with academic advisor M. Yousaf">
-        <span>Advisor</span> <span class="arrow">↗</span>
-      </a>
+        <!-- Sleek Advisor CTA Button (Terracotta) -->
+        <a class="btn-advisor-action" href="https://wa.me/923296646824" target="_blank" title="Connect directly with academic advisor M. Yousaf">
+          <span>👤</span> <span>Advisor</span> <span class="arrow">➔</span>
+        </a>
+      </div>
 
       <!-- Mobile Menu Details -->
       <details class="menu">
@@ -59,16 +68,26 @@
           <a href="#/">Courses</a>
           <a href="#learning">My Learning</a>
           <a href="#certificates">Certificates</a>
-          <div style="padding: 10px 0; border-bottom: 1px solid var(--qsa-border-line);">
-            <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--qsa-text-muted); margin-bottom: 6px;">Reading English Style</div>
+          <a href="https://quick-services-site.pages.dev/guide.html" target="_blank">Field Guide (PDF)</a>
+          
+          <div style="padding: 12px 0; border-bottom: 1px solid var(--qsa-border); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--qsa-text-muted);">Theme</span>
+            <div class="theme-toggle-pill" id="mobile-theme-switcher">
+              <button type="button" class="theme-pill-btn active" data-set-theme="light">☀️ Light</button>
+              <button type="button" class="theme-pill-btn" data-set-theme="dark">🌙 Dark</button>
+            </div>
+          </div>
+
+          <div style="padding: 12px 0; border-bottom: 1px solid var(--qsa-border);">
+            <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--qsa-text-muted); margin-bottom: 8px;">Reading English Style</div>
             <div class="lang-level-switcher" id="mobile-lang-switcher">
               <button type="button" class="lang-btn" data-lang="simple">Simple</button>
               <button type="button" class="lang-btn active" data-lang="plain">Plain</button>
               <button type="button" class="lang-btn" data-lang="technical">Tech</button>
             </div>
           </div>
-          <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" style="color: var(--qsa-accent-clay);">Field Guide (PDF)</a>
-          <a href="https://wa.me/923296646824" target="_blank" style="color: var(--qsa-accent-clay); font-weight: 600;">Advisor WhatsApp ↗</a>
+
+          <a href="https://wa.me/923296646824" target="_blank" style="color: var(--qsa-terracotta); font-weight: 700;">Advisor WhatsApp ↗</a>
         </div>
       </details>
     </div>

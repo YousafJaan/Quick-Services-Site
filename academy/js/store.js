@@ -7,6 +7,7 @@ const STORAGE_KEY = 'qsa-progress-v2';
 
 const DEFAULT_STATE = {
   version: 2,
+  theme: 'light',       // 'light' | 'dark'
   englishLevel: 'plain', // 'simple' | 'plain' | 'technical'
   hasChosenEnglishLevel: false,
   completedLessons: {}, // { courseId: [lessonId] }
@@ -31,6 +32,14 @@ class Store {
     this.storageAvailable = this._checkStorage();
     this.state = this._loadState();
     this._initStudyTimer();
+    this._applyInitialTheme();
+  }
+
+  _applyInitialTheme() {
+    if (typeof document !== 'undefined') {
+      const current = this.getTheme();
+      document.documentElement.setAttribute('data-theme', current);
+    }
   }
 
   _checkStorage() {
@@ -64,6 +73,10 @@ class Store {
       const directCookie = window.localStorage.getItem('qsa_cookies_accepted');
       if (directCookie === 'true') {
         parsed.cookiesAccepted = true;
+      }
+      const directTheme = window.localStorage.getItem('qsa_theme');
+      if (directTheme && ['light', 'dark'].includes(directTheme)) {
+        parsed.theme = directTheme;
       }
       return { ...DEFAULT_STATE, ...parsed };
     } catch (e) {
@@ -112,6 +125,33 @@ class Store {
 
   isStudentNameLocked() {
     return Boolean(this.state.verifiedStudentName);
+  }
+
+  // Theme Management ('light' | 'dark')
+  getTheme() {
+    try {
+      const direct = window.localStorage.getItem('qsa_theme');
+      if (direct && ['light', 'dark'].includes(direct)) {
+        return direct;
+      }
+    } catch (e) {}
+    return this.state.theme || 'light';
+  }
+
+  setTheme(theme) {
+    if (['light', 'dark'].includes(theme)) {
+      this.state.theme = theme;
+      try {
+        window.localStorage.setItem('qsa_theme', theme);
+      } catch (e) {}
+      if (typeof document !== 'undefined') {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+      this.save();
+      try {
+        window.dispatchEvent(new CustomEvent('qsa:theme-changed', { detail: { theme } }));
+      } catch (e) {}
+    }
   }
 
   // English Proficiency Level ('simple' | 'plain' | 'technical')

@@ -1,80 +1,99 @@
 /* ==========================================================================
-   Quick Services Academy — Design Tokens
-   Ultra-clean, peaceful, high-legibility editorial design inspired by
-   Stripe Press, Substack, and Notion.
-   Crisp paper whites (#ffffff), soft ivory canvas (#fbfbf9),
-   razor-sharp charcoal typography (#1c1917 & #383531), warm clay accents,
-   zero blurry gradients or fuzzy shadows.
+   Quick Services Academy — Design System Tokens
+   Brand Direction:
+   - Primary Navy:     #102B4E
+   - Terracotta:       #B95335
+   - Warm Background:  #FAF7F1
+   - White Surface:    #FFFFFF
+   - Sage Accent:      #DDE8DF
+   - Primary Text:     #172536
+   - Secondary Text:   #637083
+   - Borders:          #E8E1D8
    ========================================================================== */
 
-:root {
-  /* Surfaces & Canvas (Crisp Editorial Paper & Soft Ivory) */
-  --qsa-bg-page: #fbfbf9;             /* Peaceful, soft ivory paper canvas */
-  --qsa-bg-sidebar: #f5f5f1;          /* Subtle stone for drawers and sidebars */
-  --qsa-bg-card: #ffffff;             /* Crisp pure white paper card */
-  --qsa-bg-elevated: #ffffff;         /* Elevated panel */
-  --qsa-bg-subtle: #f6f6f2;           /* Soft muted section background */
-  --qsa-bg-fill: #ecece6;             /* Active pill / tab background */
-  --qsa-bg-fill-hover: #e2e2da;       /* Hover state fill */
+:root, [data-theme="light"] {
+  /* Core Brand Colors */
+  --qsa-primary-navy: #102B4E;
+  --qsa-primary-navy-dark: #0A1C33;
+  --qsa-primary-navy-soft: #EEF3F8;
+  
+  --qsa-terracotta: #B95335;
+  --qsa-terracotta-dark: #963F26;
+  --qsa-terracotta-soft: #FBF0EC;
+  --qsa-terracotta-hover: #A3452B;
+  
+  --qsa-sage: #DDE8DF;
+  --qsa-sage-dark: #4A6B53;
+  --qsa-sage-soft: #F4F8F5;
 
-  /* Text & Ink (Razor-Sharp High-Contrast Charcoal — Zero Eye Strain) */
-  --qsa-text-primary: #1c1917;        /* Razor-sharp deep stone charcoal */
-  --qsa-text-secondary: #383531;      /* High-legibility deep body ink (WCAG AAA) */
-  --qsa-text-muted: #65615c;          /* Clear secondary metadata gray (WCAG AA) */
-  --qsa-text-tertiary: #8c8780;       /* Crisp caption ink */
+  /* Surfaces & Canvas (Warm Editorial Paper) */
+  --qsa-bg-page: #FAF7F1;             /* Warm, calm parchment canvas */
+  --qsa-bg-card: #FFFFFF;             /* Crisp pure white surface */
+  --qsa-bg-sidebar: #F4EFEB;          /* Subtle stone for drawers and sidebars */
+  --qsa-bg-elevated: #FFFFFF;         /* Elevated panels & modals */
+  --qsa-bg-subtle: #F6F1E9;           /* Soft muted section background */
+  --qsa-bg-fill: #EFE9DF;             /* Active pill / tab background */
+  --qsa-bg-fill-hover: #E4DCD0;       /* Hover state fill */
 
-  /* Brand Accents (Refined Editorial Warm Clay & Amber Gold) */
-  --qsa-accent-clay: #c25e3d;         /* Editorial warm terracotta clay */
-  --qsa-accent-clay-dark: #a94b2c;    /* Deep emphasized clay */
-  --qsa-accent-clay-soft: #fcf4f1;    /* Very soft warm clay tint */
-  --qsa-accent-gold: #b45309;         /* Prestigious academic gold */
-  --qsa-accent-gold-soft: #fefbeb;    /* Soft gold background */
-  --qsa-accent-orange: #d96328;       /* Clean warm orange */
-  --qsa-accent-orange-hover: #bf531e;
-  --qsa-accent-orange-soft: rgba(217, 99, 40, 0.08);
-  --qsa-accent-peach-soft: #faf5f2;   /* Calm warm card tint */
+  /* Text & Ink (High-Contrast Academic Readability) */
+  --qsa-text-primary: #172536;        /* Primary deep navy-charcoal */
+  --qsa-text-secondary: #637083;      /* Secondary descriptive text (WCAG AA) */
+  --qsa-text-muted: #828F9F;          /* Subtle metadata gray */
+  --qsa-text-tertiary: #A1ACB9;       /* Caption ink */
 
-  /* Hairlines, Rings & Borders (Crisp & Solid — Zero Blur) */
-  --qsa-border-line: #e7e5e0;         /* Solid crisp hairline divider */
-  --qsa-border-card: #e4e2dc;         /* Solid 1px crisp stone border */
-  --qsa-border-strong: #cac6bd;       /* Input & active border */
-  --qsa-focus-ring: #c25e3d;          /* High-visibility accessible focus ring */
+  /* Aliases for backwards compatibility */
+  --qsa-accent-clay: var(--qsa-terracotta);
+  --qsa-accent-clay-dark: var(--qsa-terracotta-dark);
+  --qsa-accent-clay-soft: var(--qsa-terracotta-soft);
+  --qsa-accent-gold: #B45309;
+  --qsa-accent-gold-soft: #FEFBEB;
+  --qsa-accent-orange: #C85A32;
+  --qsa-accent-orange-hover: #B95335;
+  --qsa-accent-orange-soft: rgba(185, 83, 53, 0.08);
+  --qsa-accent-peach-soft: var(--qsa-terracotta-soft);
 
-  /* Status Colors (Clear, Restful Botanical Tones) */
-  --qsa-status-success: #15803d;
-  --qsa-status-success-bg: #f0fdf4;
-  --qsa-status-success-border: #bbf7d0;
-  --qsa-status-danger: #b91c1c;
-  --qsa-status-danger-bg: #fef2f2;
-  --qsa-status-danger-border: #fecaca;
-  --qsa-status-warning: #b45309;
-  --qsa-status-warning-bg: #fffbeb;
-  --qsa-status-warning-border: #fde68a;
-  --qsa-status-info: #1d4ed8;
-  --qsa-status-info-bg: #eff6ff;
-  --qsa-status-info-border: #bfdbfe;
+  /* Hairlines & Borders */
+  --qsa-border: #E8E1D8;              /* Crisp 1px stone divider */
+  --qsa-border-line: #E8E1D8;
+  --qsa-border-card: #E8E1D8;
+  --qsa-border-strong: #D5CCC1;
+  --qsa-focus-ring: #B95335;
 
-  /* Highlights */
-  --qsa-hl-yellow: #fef08a;
-  --qsa-hl-green: #bbf7d0;
-  --qsa-hl-blue: #bfdbfe;
-  --qsa-hl-clay: #fed7aa;
+  /* Status Colors */
+  --qsa-status-success: #15803D;
+  --qsa-status-success-bg: #F0FDF4;
+  --qsa-status-success-border: #BBF7D0;
+  --qsa-status-danger: #B91C1C;
+  --qsa-status-danger-bg: #FEF2F2;
+  --qsa-status-danger-border: #FECACA;
+  --qsa-status-warning: #B45309;
+  --qsa-status-warning-bg: #FFFBEB;
+  --qsa-status-warning-border: #FDE68A;
+  --qsa-status-info: #102B4E;
+  --qsa-status-info-bg: #EEF3F8;
+  --qsa-status-info-border: #CBDDEE;
 
-  /* Solid Contrast Active Option Tokens */
-  --qsa-grad-dark-active: #1c1917;
-  --qsa-grad-dark-hover: #292524;
+  /* Highlight Badges */
+  --qsa-hl-yellow: #FEF08A;
+  --qsa-hl-green: #DDE8DF;
+  --qsa-hl-blue: #D6E4F0;
+  --qsa-hl-clay: #FCDBCF;
+
+  /* Active Contrast Tokens */
+  --qsa-grad-dark-active: #102B4E;
+  --qsa-grad-dark-hover: #172536;
   --qsa-shadow-dark-active: 0 1px 2px rgba(0, 0, 0, 0.12);
-  --qsa-text-dark-active: #ffffff;
+  --qsa-text-dark-active: #FFFFFF;
 
-  /* Typography Pairing (Stripe Press & Claude Academy: Newsreader Serif Headings + Plus Jakarta Sans Body) */
-  --qsa-font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  /* Typography Pairing */
+  --qsa-font-serif: "Newsreader", "Playfair Display", Georgia, "Times New Roman", serif;
   --qsa-font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --qsa-font-mono: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
   --qsa-font-cert-script: "Alex Brush", "Playfair Display", cursive;
   --qsa-font-cert-roman: "Cinzel", "Newsreader", serif;
   --qsa-font-cert-serif: "Cormorant Garamond", "Newsreader", Georgia, serif;
 
-  /* Crisp Edge Radii */
+  /* Corner Radii */
   --qsa-radius-xs: 4px;
   --qsa-radius-sm: 6px;
   --qsa-radius-md: 8px;
@@ -83,13 +102,13 @@
   --qsa-radius-modal: 16px;
   --qsa-radius-pill: 999px;
 
-  /* Crisp Shadows (Micro-elevation, Zero Fuzzy Halos) */
-  --qsa-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
-  --qsa-shadow-lift: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --qsa-shadow-modal: 0 16px 36px -6px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(0, 0, 0, 0.05);
-  --qsa-shadow-dropdown: 0 8px 20px -4px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--qsa-border-line);
+  /* Restrained Shadows */
+  --qsa-shadow-card: 0 1px 3px rgba(16, 43, 78, 0.04), 0 1px 2px rgba(16, 43, 78, 0.02);
+  --qsa-shadow-lift: 0 6px 16px -2px rgba(16, 43, 78, 0.07), 0 2px 4px -1px rgba(16, 43, 78, 0.03);
+  --qsa-shadow-modal: 0 16px 36px -6px rgba(16, 43, 78, 0.14), 0 0 0 1px rgba(16, 43, 78, 0.05);
+  --qsa-shadow-dropdown: 0 8px 20px -4px rgba(16, 43, 78, 0.08), 0 0 0 1px var(--qsa-border);
 
-  /* Animation Physics */
+  /* Animation */
   --qsa-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --qsa-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --qsa-dur-fast: 140ms;
@@ -100,4 +119,69 @@
   --qsa-max-width: 1200px;
   --qsa-narrow-width: 820px;
   --qsa-header-height: 64px;
+}
+
+/* ==========================================================================
+   Dark Theme Variant
+   ========================================================================== */
+[data-theme="dark"] {
+  --qsa-primary-navy: #7FAADB;
+  --qsa-primary-navy-dark: #A5C4EA;
+  --qsa-primary-navy-soft: #1E2D42;
+
+  --qsa-terracotta: #E27B5E;
+  --qsa-terracotta-dark: #F39B81;
+  --qsa-terracotta-soft: #2B1D19;
+  --qsa-terracotta-hover: #EB8D72;
+
+  --qsa-sage: #2D4A3E;
+  --qsa-sage-dark: #82B394;
+  --qsa-sage-soft: #17241F;
+
+  /* Surfaces */
+  --qsa-bg-page: #0B131E;             /* Deep academic night */
+  --qsa-bg-card: #131E2C;             /* Elevated dark surface */
+  --qsa-bg-sidebar: #0F1722;
+  --qsa-bg-elevated: #182535;
+  --qsa-bg-subtle: #15202E;
+  --qsa-bg-fill: #1D2B3D;
+  --qsa-bg-fill-hover: #26384F;
+
+  /* Text & Ink */
+  --qsa-text-primary: #F0F4F8;        /* Soft crisp white */
+  --qsa-text-secondary: #A0B0C0;      /* Clear readable secondary */
+  --qsa-text-muted: #728498;
+  --qsa-text-tertiary: #526375;
+
+  /* Hairlines & Borders */
+  --qsa-border: #223246;
+  --qsa-border-line: #223246;
+  --qsa-border-card: #223246;
+  --qsa-border-strong: #324760;
+  --qsa-focus-ring: #E27B5E;
+
+  /* Active Contrast Tokens */
+  --qsa-grad-dark-active: #E27B5E;
+  --qsa-grad-dark-hover: #EB8D72;
+  --qsa-shadow-dark-active: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --qsa-text-dark-active: #0B131E;
+
+  /* Status Colors (Muted for Dark Mode) */
+  --qsa-status-success: #4ADE80;
+  --qsa-status-success-bg: #14301D;
+  --qsa-status-success-border: #1E462B;
+  --qsa-status-danger: #F87171;
+  --qsa-status-danger-bg: #351818;
+  --qsa-status-danger-border: #502323;
+  --qsa-status-warning: #FBBF24;
+  --qsa-status-warning-bg: #32260B;
+  --qsa-status-warning-border: #4D3911;
+  --qsa-status-info: #7FAADB;
+  --qsa-status-info-bg: #152538;
+  --qsa-status-info-border: #233B58;
+
+  /* Shadows for Dark Mode */
+  --qsa-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --qsa-shadow-lift: 0 6px 16px -2px rgba(0, 0, 0, 0.35), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --qsa-shadow-modal: 0 16px 36px -6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
