@@ -83,6 +83,15 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// Auto-close mobile menu on navigation link click
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('.menu .links a');
+  if (link) {
+    const details = document.querySelector('details.menu');
+    if (details) details.removeAttribute('open');
+  }
+});
+
 /* ==========================================================================
    Cookie & Local Storage Consent Banner
    ========================================================================== */
@@ -351,52 +360,113 @@ function renderCatalog(courses) {
   };
 
   mainEl.innerHTML = `
-    <!-- Hero Banner -->
-    <section style="background: #ffffff; padding: 64px 0 44px; border-bottom: 1px solid var(--qsa-border-line);">
+    <!-- Visually Appealing Editorial Hero Section -->
+    <section class="hero-editorial-section">
       <div class="wrap" style="text-align: center;">
         
-        <!-- Live Academic Register Switcher on Hero -->
-        <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; justify-content: center;">
-          <span class="tag tag-clay" style="font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px;">Reading Register</span>
-          <div class="lang-level-switcher" id="catalog-hero-lang-switcher" style="background: #ffffff; border: 1.5px solid var(--qsa-border-strong); padding: 4px; box-shadow: var(--qsa-shadow-card);" title="Switch reading register immediately">
-            <button type="button" class="lang-btn ${currentLang === 'simple' ? 'active' : ''}" data-lang="simple" title="Simple English for easy ESL comprehension">🌱 Simple</button>
-            <button type="button" class="lang-btn ${currentLang === 'plain' ? 'active' : ''}" data-lang="plain" title="Plain academic English (Standard)">📘 Plain</button>
-            <button type="button" class="lang-btn ${currentLang === 'technical' ? 'active' : ''}" data-lang="technical" title="Advanced technical dissertation register">🎓 Technical</button>
-          </div>
-          <button type="button" onclick="window.openLanguagePreferenceModal()" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 14px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: var(--qsa-shadow-card);" title="Configure reading preferences">
-            <span>Active:</span>
-            <strong id="catalog-active-lang-label" style="color: var(--qsa-accent-clay);">${langLabels[currentLang]}</strong>
-            <span style="font-size: 11px; opacity: 0.7;">⚙</span>
-          </button>
+        <!-- Live Academic Accreditation Badge -->
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(217, 119, 87, 0.08); border: 1px solid rgba(217, 119, 87, 0.25); padding: 6px 16px; border-radius: var(--qsa-radius-pill); font-size: 12px; font-weight: 700; color: var(--qsa-accent-clay-dark); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.8px;">
+          <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--qsa-accent-clay); box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.2);"></span>
+          <span>HEC Pakistan Aligned • Free Postgraduate Research LMS</span>
         </div>
 
-        <h1 style="font-size: clamp(34px, 5.2vw, 50px); color: var(--qsa-text-primary); max-width: 840px; margin: 8px auto 16px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;">
-          Make your research make sense.
+        <h1 style="font-size: clamp(34px, 5.5vw, 54px); color: var(--qsa-text-primary); max-width: 900px; margin: 0 auto 16px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;">
+          Master your research with <em style="font-style: italic; color: var(--qsa-accent-clay); font-family: var(--qsa-font-serif);">sentence-level clarity.</em>
         </h1>
-        <p style="font-size: clamp(16px, 2vw, 18px); color: var(--qsa-text-secondary); max-width: 700px; margin: 0 auto 30px; line-height: 1.65;">
-          Free, university-grade academic research training for postgraduate (MS/MPhil &amp; PhD) researchers in Pakistan. Master dissertation problem formulation, APA 7th referencing, Turnitin defense, G*Power calculations, SPSS, and SmartPLS 4 with sentence-level interactive models.
+        <p style="font-size: clamp(15.5px, 2vw, 18px); color: var(--qsa-text-secondary); max-width: 740px; margin: 0 auto 28px; line-height: 1.65;">
+          University-grade academic training for postgraduate (MS/MPhil &amp; PhD) researchers. Master dissertation problem formulation, APA 7th citations, Turnitin defense, G*Power calculations, SPSS, and SmartPLS 4 SEM with interactive structural models for every sentence.
         </p>
 
-        <!-- Quick Value Metrics Strip -->
-        <div style="display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 30px;">
-          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+        <!-- Primary Action Links -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;">
+          <a href="#courses-mount-point" class="btn btn-primary" style="padding: 12px 26px; font-size: 15px;">
+            Explore All 9 Courses ➔
+          </a>
+          <a href="#certificates" class="btn btn-secondary" style="padding: 12px 22px; font-size: 15px;">
+            <span>📜</span> View Official Credentials
+          </a>
+          <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="btn btn-secondary" style="padding: 12px 20px; font-size: 14.5px;">
+            <span>📥</span> Field Guide (PDF)
+          </a>
+        </div>
+
+        <!-- Interactive Hero Showcase: The Multi-Register Sentence Engine -->
+        <div class="hero-showcase-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--qsa-border-line); padding-bottom: 14px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 16px;">🔬</span>
+              <strong style="font-size: 13.5px; color: var(--qsa-text-primary); text-transform: uppercase; letter-spacing: 0.6px;">Interactive Sentence Engine</strong>
+              <span class="tag tag-clay" id="hero-showcase-badge" style="font-size: 11px;">📘 Plain English (Standard Academic)</span>
+            </div>
+            
+            <!-- Hero Showcase 3-Way Tabs -->
+            <div class="lang-level-switcher" id="hero-showcase-switcher" style="padding: 3px;">
+              <button type="button" class="lang-btn ${currentLang === 'simple' ? 'active' : ''} hero-showcase-tab" data-showcase-lang="simple" title="Preview Simple English formulation">🌱 Simple</button>
+              <button type="button" class="lang-btn ${currentLang === 'plain' ? 'active' : ''} hero-showcase-tab" data-showcase-lang="plain" title="Preview Standard Plain Academic formulation">📘 Plain</button>
+              <button type="button" class="lang-btn ${currentLang === 'technical' ? 'active' : ''} hero-showcase-tab" data-showcase-lang="technical" title="Preview Technical Scholarly formulation">🎓 Technical</button>
+            </div>
+          </div>
+
+          <!-- Sentence Transformation Display Box -->
+          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-left: 4px solid var(--qsa-accent-clay); border-radius: var(--qsa-radius-md); padding: 18px 22px; margin-bottom: 18px;">
+            <div id="hero-showcase-quote" style="font-family: var(--qsa-font-serif); font-size: clamp(17px, 2.2vw, 20px); color: var(--qsa-text-primary); line-height: 1.5; transition: opacity 0.15s ease-out;">
+              “A university research proposal functions as a methodological contract between the postgraduate candidate and the supervisory committee.”
+            </div>
+            <div id="hero-showcase-tip" style="font-size: 12.5px; color: var(--qsa-text-muted); margin-top: 10px; font-style: italic;">
+              Balanced academic syntax maintaining active voice and clear agent-action relationship.
+            </div>
+          </div>
+
+          <!-- Interactive 3-Node Proposition Logic Model -->
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--qsa-text-muted); margin-bottom: 10px;">
+              Sentence Logic Architecture • Click Any Component to Inspect
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+              <div class="hero-node-card" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--qsa-text-primary); box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                <span style="font-size: 10.5px; font-weight: 800; color: var(--qsa-accent-clay); text-transform: uppercase; display: block; margin-bottom: 2px;">1. Epistemic Claim</span>
+                <strong id="hero-node-1" style="font-size: 12.5px; display: block;">Methodological Contract</strong>
+              </div>
+              <div class="hero-node-card" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--qsa-text-primary); box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                <span style="font-size: 10.5px; font-weight: 800; color: var(--qsa-accent-orange); text-transform: uppercase; display: block; margin-bottom: 2px;">2. Bounded Context</span>
+                <strong id="hero-node-2" style="font-size: 12.5px; display: block;">Delimited Population &amp; Scope</strong>
+              </div>
+              <div class="hero-node-card" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--qsa-text-primary); box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
+                <span style="font-size: 10.5px; font-weight: 800; color: var(--qsa-status-success); text-transform: uppercase; display: block; margin-bottom: 2px;">3. Empirical Covenant</span>
+                <strong id="hero-node-3" style="font-size: 12.5px; display: block;">Approved Empirical Roadmap</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Showcase Footer Links -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--qsa-border-line); padding-top: 14px; flex-wrap: wrap; gap: 10px; font-size: 13px;">
+            <a href="#lesson-thesis101-t4" style="color: var(--qsa-accent-clay); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+              <span>Study this complete lesson in Player</span> ➔
+            </a>
+            <button type="button" onclick="window.openLanguagePreferenceModal()" style="background: none; border: none; color: var(--qsa-text-muted); font-size: 12.5px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; padding: 0;">
+              <span>Active Portal Preference:</span>
+              <strong id="catalog-active-lang-label" style="color: var(--qsa-accent-clay);">${langLabels[currentLang]}</strong>
+              <span>⚙</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Value Proofs Strip -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 36px;">
+          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
             <span>🎓</span> <span>9 Complete Tracks</span>
           </div>
-          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
             <span>📖</span> <span>168 Multi-Register Lessons</span>
           </div>
-          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
             <span>📜</span> <span>Canva-Grade Verifiable Credentials</span>
           </div>
-          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 7px 18px; font-size: 13px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
             <span>🛡️</span> <span>HEC Pakistan Compliant</span>
           </div>
         </div>
 
-        <!-- Search & Filter Controls -->
-        <div style="max-width: 580px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap;">
-          <input type="text" id="catalog-search" placeholder="Search topics (e.g. Turnitin, G*Power, ANOVA, APA 7, SmartPLS)..." style="flex: 1; min-width: 260px; padding: 13px 20px; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); font-size: 14.5px; outline: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);">
-        </div>
       </div>
     </section>
 
@@ -411,14 +481,33 @@ function renderCatalog(courses) {
         </div>
       </section>` : ''}
 
-    <!-- Courses Grid Section -->
-    <section style="padding: 56px 0 72px;">
+    <!-- Courses Grid Section with Live Filter Chips & Search -->
+    <section id="courses-mount-point" style="padding: 56px 0 72px;">
       <div class="wrap">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
           <div>
             <span class="tag tag-clay" style="margin-bottom: 8px;">Curriculum</span>
             <h2 style="font-size: clamp(26px, 4vw, 34px); color: var(--qsa-text-primary); margin: 4px 0 0;">All 9 Academy Courses</h2>
           </div>
+          
+          <!-- Search Bar -->
+          <div style="width: 100%; max-width: 360px;">
+            <input type="text" id="catalog-search" placeholder="Search topics (e.g. Turnitin, G*Power, ANOVA, APA 7, SmartPLS)..." style="width: 100%; box-sizing: border-box; padding: 11px 18px; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); font-size: 14px; outline: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);">
+          </div>
+        </div>
+
+        <!-- Quick Filter Topic Chips Strip -->
+        <div class="hero-chips-wrap" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; overflow-x: auto; padding-bottom: 4px;">
+          <button type="button" class="hero-topic-chip active" data-topic="all">All Tracks (9)</button>
+          <button type="button" class="hero-topic-chip" data-topic="thesis">Thesis Writing</button>
+          <button type="button" class="hero-topic-chip" data-topic="cite">APA 7th Referencing</button>
+          <button type="button" class="hero-topic-chip" data-topic="integrity">Turnitin &amp; Integrity</button>
+          <button type="button" class="hero-topic-chip" data-topic="edit">Proofreading &amp; Style</button>
+          <button type="button" class="hero-topic-chip" data-topic="search">Literature Search</button>
+          <button type="button" class="hero-topic-chip" data-topic="sample">Sample Size &amp; Power</button>
+          <button type="button" class="hero-topic-chip" data-topic="spss">SPSS Statistics</button>
+          <button type="button" class="hero-topic-chip" data-topic="smartpls">SmartPLS 4 SEM</button>
+          <button type="button" class="hero-topic-chip" data-topic="viva">Viva Defense</button>
         </div>
 
         <div class="cards-grid" id="courses-grid-mount">
@@ -478,7 +567,88 @@ function renderCatalog(courses) {
       </div>
     </section>`;
 
-  // Live Catalog Filter
+  // Live Topic Chip Filtering
+  const chips = document.querySelectorAll('.hero-topic-chip');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const topic = chip.dataset.topic;
+      const mount = document.getElementById('courses-grid-mount');
+      if (!mount) return;
+      if (!topic || topic === 'all') {
+        mount.innerHTML = courses.map(c => renderCourseCard(c)).join('');
+      } else {
+        const filtered = courses.filter(c =>
+          c.id.toLowerCase().includes(topic) ||
+          c.title.toLowerCase().includes(topic) ||
+          c.category.toLowerCase().includes(topic) ||
+          c.description.toLowerCase().includes(topic)
+        );
+        mount.innerHTML = filtered.map(c => renderCourseCard(c)).join('');
+      }
+    });
+  });
+
+  // Hero Showcase Interactive Multi-Register Engine
+  const showcaseSentences = {
+    simple: {
+      badge: '🌱 Simple English (Beginner / ESL)',
+      quote: '“Your research proposal is a formal written agreement with your university describing what you plan to study and how you will do it.”',
+      tip: 'Short active clauses with concrete everyday terms eliminate confusion for second-language writers.',
+      nodes: ['Clear Promise', 'Specific City & Sample', 'Approved Study Blueprint']
+    },
+    plain: {
+      badge: '📘 Plain English (Standard Academic)',
+      quote: '“A university research proposal functions as a methodological contract between the postgraduate candidate and the supervisory committee.”',
+      tip: 'Balanced academic syntax maintaining active voice and clear agent-action relationship.',
+      nodes: ['Methodological Contract', 'Delimited Population & Scope', 'Approved Empirical Roadmap']
+    },
+    technical: {
+      badge: '🎓 Technical English (Scholarly Register)',
+      quote: '“The academic research prospectus represents a binding epistemological and methodological covenant negotiated between the candidate and the institutional review board.”',
+      tip: 'Rigorous philosophical and methodological terminology suited for doctoral dissertations and high-impact journals.',
+      nodes: ['Epistemological Covenant', 'Circumscribed Construct Domain', 'Defensible Empirical Inquiry']
+    }
+  };
+
+  const updateShowcase = (lang) => {
+    const data = showcaseSentences[lang] || showcaseSentences.plain;
+    const badgeEl = document.getElementById('hero-showcase-badge');
+    const quoteEl = document.getElementById('hero-showcase-quote');
+    const tipEl = document.getElementById('hero-showcase-tip');
+    const n1 = document.getElementById('hero-node-1');
+    const n2 = document.getElementById('hero-node-2');
+    const n3 = document.getElementById('hero-node-3');
+
+    if (badgeEl) badgeEl.textContent = data.badge;
+    if (quoteEl) {
+      quoteEl.style.opacity = '0';
+      setTimeout(() => {
+        quoteEl.textContent = data.quote;
+        quoteEl.style.opacity = '1';
+      }, 120);
+    }
+    if (tipEl) tipEl.textContent = data.tip;
+    if (n1) n1.textContent = data.nodes[0];
+    if (n2) n2.textContent = data.nodes[1];
+    if (n3) n3.textContent = data.nodes[2];
+
+    document.querySelectorAll('.hero-showcase-tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.showcaseLang === lang);
+    });
+  };
+
+  document.querySelectorAll('.hero-showcase-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.showcaseLang;
+      if (lang) {
+        updateShowcase(lang);
+      }
+    });
+  });
+
+  // Live Catalog Search Filter
   const searchInput = document.getElementById('catalog-search');
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {

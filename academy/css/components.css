@@ -1112,6 +1112,212 @@
 }
 
 /* ==========================================================================
+   Mobile Responsive Enhancements (Phones, Tablets & Small Viewports)
+   ========================================================================== */
+
+/* 1. Header & Menu Mobile Fixes */
+@media (max-width: 767px) {
+  #header-lang-switcher {
+    display: none !important;
+  }
+  .hd .in {
+    gap: 8px;
+    padding: 0 4px;
+  }
+  .logo-title {
+    font-size: 17.5px;
+  }
+  .cta-advisor-pill {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
+
+details.menu:not([open]) .links {
+  display: none !important;
+}
+
+.menu .links {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* 2. Reader Canvas & Navigation Mobile Fixes */
+@media (max-width: 640px) {
+  .reader-canvas {
+    padding: 14px 0 60px;
+    gap: 14px;
+  }
+  .reader-header-card, .reader-article-card {
+    padding: 20px 16px !important;
+    border-radius: var(--qsa-radius-md) !important;
+  }
+  .reader-lesson-title {
+    font-size: 24px !important;
+    line-height: 1.25 !important;
+  }
+  .reader-top-bar {
+    gap: 8px;
+  }
+  .reader-meta-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .reader-nav-footer {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+  .reader-nav-prev, .reader-nav-next, .reader-nav-complete {
+    width: 100% !important;
+  }
+  .reader-nav-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .inline-visual-drawer {
+    padding: 16px 12px !important;
+    margin: 14px -6px !important;
+    border-radius: 12px !important;
+  }
+  .inline-drawer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .inline-drawer-tabs {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 3. Certificate Mobile View Fixes */
+@media (max-width: 768px) {
+  #certificate-stage {
+    padding: 28px 14px !important;
+    border-width: 8px !important;
+    outline-width: 2px !important;
+    outline-offset: -5px !important;
+  }
+  #certificate-stage h2 {
+    font-size: clamp(32px, 8vw, 46px) !important;
+    padding: 0 8px !important;
+  }
+  #certificate-stage h3 {
+    font-size: 19px !important;
+    margin-bottom: 20px !important;
+  }
+  .cert-signatures-grid {
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+    justify-items: center !important;
+  }
+  .identity-lock-card {
+    padding: 18px 16px !important;
+  }
+  .identity-lock-card input[type="text"] {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* 4. Cookie Consent Banner Mobile Fixes */
+@media (max-width: 580px) {
+  #qsa-cookie-consent-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 14px 16px !important;
+    bottom: 12px !important;
+    width: calc(100% - 24px) !important;
+  }
+  #qsa-cookie-consent-banner > div:last-child {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  #qsa-cookie-consent-banner button {
+    width: 100% !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* 5. Hero Page Visual Appeal & Showcase Card */
+.hero-editorial-section {
+  background: radial-gradient(circle at 50% -10%, rgba(217, 119, 87, 0.07) 0%, rgba(251, 251, 249, 0.5) 60%, var(--qsa-bg-page) 100%);
+  padding: 56px 0 48px;
+  border-bottom: 1px solid var(--qsa-border-line);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .hero-editorial-section {
+    padding: 36px 0 32px;
+  }
+}
+
+.hero-showcase-card {
+  background: #ffffff;
+  border: 1px solid var(--qsa-border-card);
+  border-radius: var(--qsa-radius-card);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+  padding: 24px 28px;
+  max-width: 820px;
+  margin: 32px auto 0;
+  text-align: left;
+  position: relative;
+  transition: all var(--qsa-dur-base) var(--qsa-ease-spring);
+}
+
+@media (max-width: 640px) {
+  .hero-showcase-card {
+    padding: 18px 16px;
+    margin-top: 24px;
+  }
+}
+
+.hero-topic-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--qsa-radius-pill);
+  background: #ffffff;
+  border: 1px solid var(--qsa-border-card);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--qsa-text-secondary);
+  cursor: pointer;
+  transition: all var(--qsa-dur-fast) var(--qsa-ease-out);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.hero-topic-chip:hover {
+  background: var(--qsa-bg-fill);
+  border-color: var(--qsa-accent-clay);
+  color: var(--qsa-accent-clay-dark);
+}
+
+.hero-topic-chip.active {
+  background: var(--qsa-accent-clay) !important;
+  color: #ffffff !important;
+  border-color: var(--qsa-accent-clay-dark) !important;
+}
+
+/* ==========================================================================
    Print Stylesheet (Official Academic Credential Printing)
    ========================================================================== */
 @media print {

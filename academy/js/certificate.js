@@ -40,11 +40,11 @@ export function renderCertificateView(container, { certId, courseId }) {
   container.innerHTML = `
     <div class="wrap" style="padding: 40px 20px 80px; max-width: 1040px;">
       <!-- Action Bar -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
+      <div class="cert-top-bar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
         <a href="#certificates" class="reader-back-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; color: var(--qsa-text-secondary); font-size: 14px; font-weight: 500;">
           <span style="font-size: 16px;">←</span> <span>All Certificates</span>
         </a>
-        <div style="display: flex; gap: 12px; align-items: center;">
+        <div class="cert-actions-wrap" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
           <button type="button" class="btn btn-secondary btn-sm" id="print-cert-btn" style="display: inline-flex; align-items: center; gap: 6px;">
             <span>🖨️</span> <span>Print Certificate</span>
           </button>
@@ -172,7 +172,7 @@ export function renderCertificateView(container, { certId, courseId }) {
         </h3>
 
         <!-- Seal & Dual Signatures Section -->
-        <div style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: flex-end; gap: 24px; border-top: 1px solid #e7e5e0; padding-top: 28px; margin-top: 28px; position: relative; z-index: 2;">
+        <div class="cert-signatures-grid" style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: flex-end; gap: 24px; border-top: 1px solid #e7e5e0; padding-top: 28px; margin-top: 28px; position: relative; z-index: 2;">
           
           <!-- Left Signature: M. Yousaf -->
           <div style="text-align: center;">
