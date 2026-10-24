@@ -1,0 +1,17 @@
+{
+  "id": "sp8",
+  "course": "spss101",
+  "title": "The Statistical Test Selector Decision Tree",
+  "type": "visual",
+  "minutes": 14,
+  "content": {
+    "intro": "Use the interactive Statistical Test Selector below to find the exact inferential test for your research design. Select your independent variable types, number of groups, and distribution assumptions to receive instant step-by-step SPSS navigation instructions.",
+    "widget": "testPicker",
+    "key": [
+      "Compare 2 independent groups on a continuous outcome: Independent Samples t-Test (or Mann-Whitney U if non-normal).",
+      "Compare 3 or more groups on a continuous outcome: One-Way ANOVA (or Kruskal-Wallis if non-normal).",
+      "Test relationship between 2 continuous variables: Pearson Correlation r (or Spearman rho if ordinal/skewed).",
+      "Predict a continuous outcome from one or more continuous/dummy predictors: Multiple Linear Regression."
+    ]
+  }
+}

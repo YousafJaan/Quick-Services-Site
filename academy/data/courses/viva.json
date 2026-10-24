@@ -1,0 +1,60 @@
+{
+  "id": "viva",
+  "title": "Viva & Presentation Coaching",
+  "tagline": "Structuring defense slides, answering tough examiner questions, and delivering with calm confidence.",
+  "category": "Oral Defense",
+  "level": "Capstone",
+  "minutes": 170,
+  "outcomes": [
+    "Structure a concise, impactful 15-minute thesis defense presentation within a strict 12-slide budget.",
+    "Formulate structured answers to the 10 inevitable defense questions asked by internal and external examiners.",
+    "Respond calmly to unexpected or aggressive questions and handle 'I don't know' with academic poise.",
+    "Execute technical rehearsals and morning-of defense protocols to master public speaking anxiety."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: Defense Structure & Slide Design",
+      "description": "Slide budgeting, pacing per slide, high-signal visual layouts, and content triage.",
+      "lessons": [
+        { "id": "v1", "title": "The 15-Minute Defense Architecture", "type": "video", "vid": "V-VIVA-01", "minutes": 7 },
+        { "id": "v2", "title": "Slide Budgeting: What to Include and What to Cut", "type": "read", "minutes": 11 },
+        { "id": "v3", "title": "Defense Slide Budget & Speaking Pace Planner", "type": "visual", "widget": "slideTimer", "minutes": 12 },
+        { "id": "v4", "title": "Module 1 Assessment: Defense Preparation", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Anticipating Examiner Questions",
+      "description": "The questions every examiner prepares: justification of methods, sample limits, and theoretical novelty.",
+      "lessons": [
+        { "id": "v5", "title": "The 10 Inevitable Viva Questions Every Examiner Asks", "type": "read", "minutes": 12 },
+        { "id": "v6", "title": "Defense Question Flashcards with Model Answer Frameworks", "type": "visual", "widget": "vivaCards", "minutes": 15 },
+        { "id": "v7", "title": "Defending Your Methodology and Sample Limitations", "type": "video", "vid": "V-VIVA-02", "minutes": 8 },
+        { "id": "v8", "title": "Module 2 Assessment: Answering Questions", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Communication Psychology & High-Pressure Delivery",
+      "description": "Managing nervousness, non-verbal cues, answering 'I don't know', and handling adversarial examiners.",
+      "lessons": [
+        { "id": "v9", "title": "How to Answer 'I Don't Know' Without Losing Ground", "type": "read", "minutes": 11 },
+        { "id": "v10", "title": "Managing Anxiety, Pacing, and Physical Non-Verbal Signals", "type": "read", "minutes": 10 },
+        { "id": "v11", "title": "Responding to Hostile or Critical Examiners", "type": "video", "vid": "V-VIVA-03", "minutes": 7 },
+        { "id": "v12", "title": "Module 3 Assessment: Handling Pressure", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: The Final Countdown & Defense Day",
+      "description": "48-hour rehearsal regimen, tech checks for hybrid/campus rooms, and the morning readiness routine.",
+      "lessons": [
+        { "id": "v13", "title": "The 48-Hour Pre-Defense Rehearsal Protocol", "type": "read", "minutes": 10 },
+        { "id": "v14", "title": "Technical Setup for On-Campus and Online Vivas", "type": "video", "vid": "V-VIVA-04", "minutes": 6 },
+        { "id": "v15", "title": "Defense Day Morning Readiness Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "v16", "title": "Viva & Presentation Coaching Final Check", "type": "quiz", "minutes": 20 }
+      ]
+    }
+  ]
+}

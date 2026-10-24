@@ -1,0 +1,62 @@
+{
+  "id": "lit-search",
+  "title": "Literature Search with Zotero",
+  "tagline": "Systematic search strategies, open scholarly databases, and automated reference management.",
+  "category": "Information Literacy",
+  "level": "All Levels",
+  "minutes": 195,
+  "outcomes": [
+    "Formulate complex Boolean search queries with wildcards, truncations, and parentheses.",
+    "Search open scholarly databases including OpenAlex, Crossref, and PubMed alongside Google Scholar.",
+    "Evaluate journal quality and indexing status using the HEC Journal Recognition System (HJRS).",
+    "Manage a comprehensive research library and automate citations in Word using Zotero."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: Search Architecture & Boolean Logic",
+      "description": "Construct high-precision keyword queries and systematic search strings.",
+      "lessons": [
+        { "id": "l1", "title": "Developing Search Strings from Research Questions", "type": "video", "vid": "V-LIT-01", "minutes": 7 },
+        { "id": "l2", "title": "Boolean Operators (AND, OR, NOT), Wildcards & Nesting", "type": "read", "minutes": 11 },
+        { "id": "l3", "title": "Multi-Database Boolean Query Builder", "type": "visual", "widget": "boolean", "minutes": 12 },
+        { "id": "l4", "title": "Module 1 Assessment: Search Strings", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Scholarly Databases & Source Evaluation",
+      "description": "Navigate open bibliographic data, snowballing methods, and predatory journal flags.",
+      "lessons": [
+        { "id": "l5", "title": "Google Scholar vs OpenAlex, Crossref & PubMed", "type": "read", "minutes": 12 },
+        { "id": "l6", "title": "Snowballing Techniques: Forward & Backward Citations", "type": "video", "vid": "V-LIT-02", "minutes": 8 },
+        { "id": "l7", "title": "Identifying & Avoiding Predatory Journals (HEC HJRS Guide)", "type": "read", "minutes": 11 },
+        { "id": "l8", "title": "Module 2 Assessment: Source Quality", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Zotero Setup & Library Management",
+      "description": "Configure Zotero, collect web metadata, and organize files with tags and collections.",
+      "lessons": [
+        { "id": "l9", "title": "The End-to-End Zotero Workflow", "type": "visual", "widget": "zoteroFlow", "minutes": 10 },
+        { "id": "l10", "title": "Installing Zotero, Browser Connector & PDF Indexing", "type": "read", "minutes": 12 },
+        { "id": "l11", "title": "Organizing Collections, Tags, and PDF Annotations", "type": "video", "vid": "V-LIT-03", "minutes": 8 },
+        { "id": "l12", "title": "Deduplication and Metadata Cleanup", "type": "read", "minutes": 10 },
+        { "id": "l13", "title": "Module 3 Assessment: Zotero Operations", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Writing with Zotero in Microsoft Word",
+      "description": "Insert dynamic citations, switch citation styles, and log search strategies for PRISMA.",
+      "lessons": [
+        { "id": "l14", "title": "The Zotero Word Plugin: Inserting & Editing Citations", "type": "video", "vid": "V-LIT-04", "minutes": 8 },
+        { "id": "l15", "title": "Generating and Modifying Bibliographies", "type": "read", "minutes": 11 },
+        { "id": "l16", "title": "Managing Search Logs for PRISMA Systematic Reviews", "type": "read", "minutes": 10 },
+        { "id": "l17", "title": "Literature Search Protocol Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "l18", "title": "Literature Search with Zotero Final Check", "type": "quiz", "minutes": 20 }
+      ]
+    }
+  ]
+}

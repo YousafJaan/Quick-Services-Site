@@ -1,0 +1,17 @@
+{
+  "id": "c5",
+  "course": "cite101",
+  "title": "The Interactive APA 7 Reference Dissecter",
+  "type": "visual",
+  "minutes": 12,
+  "content": {
+    "widget": "apa",
+    "intro": "Every APA 7th reference is constructed from four fundamental building blocks: Author (Who created it?), Date (When was it published?), Title (What is it called?), and Source (Where can readers find it?). Use this interactive dissector to click on each component of a reference entry and master the exact punctuation and italicization rules.",
+    "key": [
+      "Author block: Surnames first, followed by initials; up to 20 authors fully listed before using an ellipsis.",
+      "Date block: Year in parentheses, followed by a period: (2022).",
+      "Title block: Journal article titles in sentence case (only capitalize the first word and proper nouns); book titles in italic sentence case.",
+      "Source block: Journal title in italic Title Case, volume in italics, issue in parentheses non-italicized, and DOI formatted as a live standard HTTPS URL without the archaic 'doi:' prefix."
+    ]
+  }
+}

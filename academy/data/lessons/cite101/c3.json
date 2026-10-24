@@ -1,0 +1,85 @@
+{
+  "id": "c3",
+  "course": "cite101",
+  "title": "Handling Multiple Authors, Et Al., and Corporate Authors",
+  "type": "read",
+  "minutes": 10,
+  "content": {
+    "quick": "Under APA 7th edition, works with three or more authors are abbreviated immediately from the very first in-text citation using the first author followed by 'et al.'. Corporate authors must be spelled out fully on first mention followed by abbreviation in brackets.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "The American Psychological Association significantly simplified multiple author in-text rules in the 7th edition.",
+            "simple": "APA 7th made citing several authors much simpler than the older rules.",
+            "plain": "The American Psychological Association significantly simplified multiple author in-text rules in the 7th edition.",
+            "technical": "The APA 7th manual revised author citation protocol to eliminate multi-iteration full author enumeration for works with three or more contributors.",
+            "visual": {
+              "kind": "compare",
+              "title": "APA 6th vs APA 7th Author Rules",
+              "data": {
+                "columns": ["APA 6th Edition (Deprecated)", "APA 7th Edition (Current Standard)"],
+                "rows": [
+                  { "metric": "3-5 Authors (1st Citation)", "col1": "List all authors: (Smith, Jones, Brown, & Lee, 2018)", "col2": "Shorten immediately: (Smith et al., 2018)" },
+                  { "metric": "Subsequent Citations", "col1": "(Smith et al., 2018)", "col2": "(Smith et al., 2018)" },
+                  { "metric": "Reference List (Authors)", "col1": "List up to 7 authors", "col2": "List up to 20 authors before ellipsis" }
+                ]
+              },
+              "caption": "Under APA 7th, works with 3 or more authors use 'et al.' from the first mention."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "For any work with three or more authors, cite only the surname of the first author followed by 'et al.' from the very first citation.",
+            "simple": "If a paper has 3 or more authors, write only the first author's last name plus 'et al.' every single time.",
+            "plain": "For any work with three or more authors, cite only the surname of the first author followed by 'et al.' from the very first citation.",
+            "technical": "Works attributable to triads or larger contributor cohorts require immediate truncation to the primary author surname and the Latin abbreviation 'et al.' upon initial citation.",
+            "visual": {
+              "kind": "definition",
+              "title": "The 'Et Al.' Rule in APA 7th",
+              "data": {
+                "term": "et al. (et alia)",
+                "meaning": "Latin for 'and others'. Note the period after 'al.' and no period after 'et'.",
+                "example": "Parenthetical: (Malik et al., 2024) | Narrative: Malik et al. (2024)"
+              },
+              "caption": "Common error: Writing 'et. al.' or 'et al' without the correct punctuation."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "APA 7th Author Citation Summary",
+          "data": {
+            "headers": ["Author Count", "Parenthetical In-Text", "Narrative In-Text"],
+            "rows": [
+              ["1 Author", "(Khan, 2024)", "Khan (2024)"],
+              ["2 Authors", "(Khan & Ahmed, 2024)", "Khan and Ahmed (2024)"],
+              ["3+ Authors", "(Khan et al., 2024)", "Khan et al. (2024)"],
+              ["Group / Institution", "(Higher Education Commission [HEC], 2020)", "Higher Education Commission (HEC, 2020)"]
+            ]
+          },
+          "caption": "Notice: In parenthetical citations use an ampersand (&); in narrative running text write out 'and'."
+        },
+        "check": {
+          "questions": [
+            {
+              "id": "q1",
+              "type": "single",
+              "q": "Under APA 7th edition, how should a study written by 4 authors (Ali, Raza, Tariq, & Usman, 2023) be cited the very first time in your text?",
+              "options": [
+                "(Ali, Raza, Tariq, & Usman, 2023)",
+                "(Ali et al., 2023)",
+                "(Ali et. al., 2023)",
+                "(Ali and others, 2023)"
+              ],
+              "answer": 1,
+              "explanation": "In APA 7th edition, works with three or more authors use 'et al.' from the very first citation."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

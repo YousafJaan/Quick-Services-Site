@@ -1,0 +1,23 @@
+{
+  "id": "s1",
+  "course": "sample-size",
+  "title": "Aligning Design with Research Questions",
+  "type": "video",
+  "minutes": 7,
+  "content": {
+    "len": "7 min",
+    "vid": "V-SAMP-01",
+    "transcript": [
+      "Welcome to Course 5: Research Methodology, Sampling & Statistical Power. In this opening video lecture, we confront the foundational decision of any scientific inquiry: aligning your methodological design with your research question.",
+      "A common failure in postgraduate dissertations is what methodologists call 'methodological mismatch'—for instance, asking an exploratory 'how do people experience grief' question, but administering a rigid 5-point Likert scale questionnaire.",
+      "If your research question seeks to measure prevalence, establish correlational relationships, or test causal hypothesis effects, you require a quantitative paradigm with probability sampling and statistical power planning.",
+      "If your question seeks to explore lived experiences, unravel cultural nuance, or formulate emergent grounded theories, a qualitative design is required. Never pick your statistical tool before your research question is crystallized."
+    ],
+    "key": [
+      "Methodological alignment: The research question dictates the design, never student software familiarity.",
+      "Confirmatory, causal, or relationship questions require quantitative probabilistic sampling.",
+      "Exploratory, phenomenological, or interpretive questions require qualitative purposive sampling.",
+      "Mixed-methods designs require explicit justification: Convergent parallel vs Explanatory sequential."
+    ]
+  }
+}

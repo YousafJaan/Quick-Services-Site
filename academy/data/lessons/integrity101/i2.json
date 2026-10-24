@@ -1,0 +1,499 @@
+{
+  "id": "i2",
+  "course": "integrity101",
+  "title": "HEC Pakistan Plagiarism Policy & Thresholds Explained",
+  "type": "read",
+  "minutes": 11,
+  "content": {
+    "quick": "The Higher Education Commission (HEC) of Pakistan mandates an overall Turnitin similarity index of at most 19% for MS, MPhil, and PhD theses, with no single source exceeding 5%. Permitted exclusions include properly cited quotes, references, small matches (5-7 words), and preliminary administrative pages.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "The Higher Education Commission of Pakistan revised its statutory plagiarism policy in 2020 to establish clear national thresholds for postgraduate research degrees.",
+            "simple": "In 2020, the Higher Education Commission of Pakistan set strict official rules for how much copied text is allowed in university theses.",
+            "plain": "The Higher Education Commission of Pakistan revised its statutory plagiarism policy in 2020 to establish clear national thresholds for postgraduate research degrees.",
+            "technical": "Pursuant to statutory regulatory authority, the Higher Education Commission of Pakistan promulgated the Revised Plagiarism Policy (2020), codifying uniform psychometric similarity thresholds across postgraduate curricula.",
+            "visual": {
+              "kind": "timeline",
+              "title": "Evolution of HEC Pakistan Plagiarism Regulations",
+              "data": {
+                "events": [
+                  { "time": "2007", "title": "First HEC Policy", "desc": "Initial introduction of Turnitin software across Pakistani public universities." },
+                  { "time": "2012", "title": "Threshold Formalization", "desc": "19% overall ceiling introduced across MS and PhD degree programs." },
+                  { "time": "2020 (Revised)", "title": "Current Statutory Policy", "desc": "5% single-source rule codified; mandatory supervisor joint liability enacted." }
+                ]
+              },
+              "caption": "The 2020 policy is the binding legal framework governing all university theses in Pakistan today."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "Under the revised policy, the maximum permissible overall similarity index for an MS, MPhil, or PhD thesis is nineteen percent.",
+            "simple": "The highest allowed total similarity score on Turnitin for your Master's or PhD thesis is 19%.",
+            "plain": "Under the revised policy, the maximum permissible overall similarity index for an MS, MPhil, or PhD thesis is nineteen percent.",
+            "technical": "Statutory institutional regulations dictate an upper empirical ceiling of nineteen percent (19%) for cumulative textual similarity on automated comparative corpora.",
+            "visual": {
+              "kind": "scale",
+              "title": "HEC Thesis Similarity Index Scale",
+              "data": {
+                "min": "0% (Extreme Caution: Possible Fabricated Synthesis)",
+                "max": "100% (Absolute Plagiarism)",
+                "markers": [
+                  { "pos": 10, "label": "5% - 12%", "desc": "Safe Thesis Zone (Balanced literature synthesis)" },
+                  { "pos": 19, "label": "19% Threshold", "desc": "HEC Statutory Maximum Ceiling" },
+                  { "pos": 35, "label": "> 19%", "desc": "Automatic Rejection & Mandatory Revision" }
+                ]
+              },
+              "caption": "Aim for a final similarity index between 8% and 14% to ensure effortless departmental clearance."
+            }
+          },
+          {
+            "id": "s3",
+            "text": "A similarity index below nineteen percent does not guarantee clearance if a single source contributes an excessive percentage of overlapping text.",
+            "simple": "Even if your total score is only 10%, you can still fail if you copied too much text from just one single article.",
+            "plain": "A similarity index below nineteen percent does not guarantee clearance if a single source contributes an excessive percentage of overlapping text.",
+            "technical": "Sub-threshold cumulative similarity (< 19%) does not constitute algorithmic immunity if monographic source concentrations violate individual ceiling parameters.",
+            "visual": {
+              "kind": "compare",
+              "title": "Compliant vs Non-Compliant Similarity Breakdown",
+              "data": {
+                "columns": ["Compliant Report (Approved)", "Violation Report (Rejected)"],
+                "rows": [
+                  { "metric": "Total Similarity", "col1": "14% (Under 19% limit)", "col2": "11% (Under 19% limit)" },
+                  { "metric": "Highest Single Source", "col1": "3% (Compliant)", "col2": "8% (Violates 5% rule!)" },
+                  { "metric": "Committee Action", "col1": "Certificate issued for defense", "col2": "Thesis rejected; revision required" }
+                ]
+              },
+              "caption": "The single-source limit catches students who paste entire pages from one paper."
+            }
+          },
+          {
+            "id": "s4",
+            "text": "The policy strictly caps any single source match at five percent, meaning no single publication may account for more than five percent of your total thesis text.",
+            "simple": "You can never have more than 5% similarity coming from any single website, book, or research article.",
+            "plain": "The policy strictly caps any single source match at five percent, meaning no single publication may account for more than five percent of your total thesis text.",
+            "technical": "The regulatory framework enforces an individual source boundary condition of five percent (5%), precluding localized textual expropriation regardless of aggregate metrics.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "The HEC Dual-Threshold Rule",
+              "data": {
+                "lead": "Turnitin Report Verification:",
+                "callouts": [
+                  { "text": "[Cumulative Similarity Index <= 19%]", "label": "Macro Threshold" },
+                  { "text": "[Single Source Maximum <= 5%]", "label": "Micro Threshold" },
+                  { "text": "[Zero Unattributed Conceptual Theft]", "label": "Qualitative Threshold" }
+                ]
+              },
+              "caption": "Both numerical criteria and qualitative review must pass before defense approval."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "matrix2x2",
+          "title": "HEC Plagiarism Risk Matrix",
+          "data": {
+            "xAxis": "Single Source Match (< 5% → > 5%)",
+            "yAxis": "Overall Similarity (< 19% → > 19%)",
+            "q1": { "title": "Immediate Clearance", "desc": "Overall <= 19% AND Single Source <= 5%. Thesis approved for defense.", "status": "optimal" },
+            "q2": { "title": "Single-Source Trap", "desc": "Overall <= 19% BUT Single Source > 5%. Must rewrite offending sections.", "status": "danger" },
+            "q3": { "title": "Macro Overflow", "desc": "Overall > 19% with scattered small matches. Paraphrase across chapters.", "status": "warning" },
+            "q4": { "title": "Severe Plagiarism", "desc": "Both thresholds violated. Investigation by University Standing Committee.", "status": "reject" }
+          },
+          "caption": "Ensure your similarity report falls squarely inside the top-left green quadrant."
+        },
+        "explain": "Many students in Pakistan think: 'My Turnitin score is 12%, so I am completely safe!' But if 7% came from one journal article, your thesis will be rejected. You must meet two rules at the same time: total under 19%, AND no single source above 5%.",
+        "check": {
+          "topic": "hec-thresholds",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "A student receives a Turnitin similarity report showing an overall index of 14%, but Source #1 contributes 7% of the total match. What is the status of this thesis under HEC policy?",
+              "options": [
+                "Approved — the overall score is well beneath the 19% ceiling.",
+                "Rejected for defense — the single source exceeds the mandatory 5% individual limit.",
+                "Approved — single source limits only apply to PhD dissertations, not MS theses.",
+                "Requires supervisor fee payment before clearance."
+              ],
+              "answer": 1,
+              "hint": "Check both the overall index and the individual source ceiling.",
+              "explanation": "Option 2 is correct. Under HEC policy, a thesis is non-compliant if ANY single source exceeds 5%, even if the total score is under 19%. The student must rewrite and re-screen the section matching Source #1."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p2",
+        "sentences": [
+          {
+            "id": "s5",
+            "text": "To prevent false-positive mechanical matches, HEC policy permits specific standardized filters when generating similarity reports.",
+            "simple": "To stop Turnitin from marking innocent sentences as copied, the university turns on official filters during scanning.",
+            "plain": "To prevent false-positive mechanical matches, HEC policy permits specific standardized filters when generating similarity reports.",
+            "technical": "To mitigate algorithmic false-positive inflation attributable to invariant syntactic structures, the regulatory protocol permits standardized programmatic exclusion parameters.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Official Turnitin Exclusion Parameters Permitted by HEC",
+              "data": {
+                "items": [
+                  { "label": "Exclude Bibliography / References", "desc": "Filters out standardized references, DOIs, and journal names", "checked": true },
+                  { "label": "Exclude Quoted Material", "desc": "Filters text enclosed in quotation marks with valid citations", "checked": true },
+                  { "label": "Exclude Small Matches (5 to 7 Words)", "desc": "Screens common idioms and methodological terminology", "checked": true },
+                  { "label": "Exclude Preliminary Pages", "desc": "Title page, certificates, declarations, table of contents", "checked": true }
+                ]
+              },
+              "caption": "Applying these exact settings ensures fair and standardized evaluation across universities."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "The reference list or terminal bibliography must be excluded from the similarity calculation because standard citations create massive artificial overlap.",
+            "simple": "Your bibliography at the end of the thesis must be turned off in Turnitin, because book and journal titles match everyone else's work.",
+            "plain": "The reference list or terminal bibliography must be excluded from the similarity calculation because standard citations create massive artificial overlap.",
+            "technical": "Bibliographic references must be algorithmically excluded; standardized bibliographic entries produce artificial collinear matches against global repository databases.",
+            "visual": {
+              "kind": "compare",
+              "title": "Turnitin Score Impact: Bibliography Included vs Excluded",
+              "data": {
+                "columns": ["Bibliography Included", "Bibliography Excluded (Correct)"],
+                "rows": [
+                  { "metric": "Apparent Similarity", "col1": "28% (False failure!)", "col2": "11% (Passes cleanly)" },
+                  { "metric": "Matches Flagged", "col1": "APA references, journal names", "col2": "Only substantive running text" },
+                  { "metric": "Action Needed", "col1": "Unnecessary rewriting of references", "col2": "Ready for defense submission" }
+                ]
+              },
+              "caption": "Always ensure your university focal person selects 'Exclude Bibliography'."
+            }
+          },
+          {
+            "id": "s7",
+            "text": "Legitimate direct quotations properly enclosed in quotation marks with accurate citations may also be excluded from the score.",
+            "simple": "Properly credited quotes in quotation marks can be excluded so they don't count against your 19% limit.",
+            "plain": "Legitimate direct quotations properly enclosed in quotation marks with accurate citations may also be excluded from the score.",
+            "technical": "Verbatim quotes demarcated by typographical quotes and accompanied by formal attribution are excluded from similarity computations.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Quotation Exclusion Requirements",
+              "data": {
+                "dos": [
+                  "Use standard double quotation marks (\"...\") around short quotes",
+                  "Include author, year, and page number immediately adjacent to the quote",
+                  "Verify that your university Turnitin filter has 'Exclude Quotes' turned on"
+                ],
+                "donts": [
+                  "Put quotes around entire pages of your literature review",
+                  "Use single quotes or unclosed quotation marks that Turnitin ignores",
+                  "Quote without providing an author citation"
+                ]
+              },
+              "caption": "Turnitin will only exclude quotes if the quotation marks and citation are properly structured."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "Finally, small phrase matches of five to seven words are filtered out to prevent common academic phrases like 'independent samples t-test' from being penalized.",
+            "simple": "Short common phrases of 5 to 7 words are ignored so you don't get penalized for writing normal research words.",
+            "plain": "Finally, small phrase matches of five to seven words are filtered out to prevent common academic phrases like 'independent samples t-test' from being penalized.",
+            "technical": "A phrase match filter of 5 to 7 words is applied to screen idiomatic disciplinary boilerplate and methodological nomenclature from algorithmic scoring.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Common Disciplinary Phrases Screened by Small Match Filters",
+              "data": {
+                "lead": "Phrases Protected by 5-7 Word Filter:",
+                "callouts": [
+                  { "text": "[independent samples t-test was conducted]", "label": "Statistical Phrase" },
+                  { "text": "[in partial fulfillment of the requirements for]", "label": "Administrative Phrase" },
+                  { "text": "[statistically significant at the point zero five level]", "label": "Inference Phrase" }
+                ]
+              },
+              "caption": "Without a small match filter, standard methodological sentences would inflate similarity scores."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "flow",
+          "title": "Official Thesis Scanning Protocol",
+          "data": {
+            "steps": [
+              { "title": "Draft Preparation", "desc": "Remove preliminary pages (Title, Certificate, Declaration)" },
+              { "title": "Filter Configuration", "desc": "Enable: Exclude Bibliography, Exclude Quotes, Exclude Matches < 6 words" },
+              { "title": "Comparative Scan", "desc": "Scan against Internet, Periodicals, and Student Repository" },
+              { "title": "Report Verification", "desc": "Supervisor reviews matches: Total <= 19%, single source <= 5%" }
+            ]
+          },
+          "caption": "Follow this official pipeline before requesting an official university clearance certificate."
+        },
+        "explain": "If your university Turnitin scanner leaves the bibliography turned on, your score will jump by 10% to 15% simply because thousands of other students cited the same books! Always ask your QEC (Quality Enhancement Cell) officer to verify that the bibliography and quote filters are active.",
+        "check": {
+          "topic": "turnitin-filters",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "multi",
+              "q": "Which of the following items are legitimately permitted to be excluded during official HEC Turnitin similarity screening?",
+              "options": [
+                "The terminal bibliography / reference list.",
+                "Direct quotations with accurate author citations.",
+                "Any paragraph with more than 30% similarity.",
+                "Common methodological phrases filtered via a 5-7 word small match filter."
+              ],
+              "answer": [0, 1, 3],
+              "hint": "Select all standardized exclusion parameters approved by HEC policy.",
+              "explanation": "The terminal bibliography, properly cited quotations, and small phrase matches (5-7 words) are valid standard exclusions. Arbitrarily excluding high-similarity paragraphs without justification is a severe integrity violation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "sentences": [
+          {
+            "id": "s9",
+            "text": "Academic integrity violations in Pakistan carry severe statutory penalties for both candidates and their research supervisors.",
+            "simple": "Getting caught copying in Pakistan brings serious legal punishments for both the student and the professor supervising them.",
+            "plain": "Academic integrity violations in Pakistan carry severe statutory penalties for both candidates and their research supervisors.",
+            "technical": "Plagiarism adjudications in Pakistan trigger severe institutional and statutory sanctions impacting both candidates and faculty supervisors under joint accountability doctrines.",
+            "visual": {
+              "kind": "hierarchy",
+              "title": "Institutional Hierarchy of Disciplinary Sanctions",
+              "data": {
+                "root": "HEC Disciplinary Enforcement",
+                "children": [
+                  { "name": "Student Sanctions", "desc": "Thesis cancellation, suspension, expulsion, degree revocation" },
+                  { "name": "Supervisor Sanctions", "desc": "Blacklisting, supervisory debarment, rank demotion, grant freeze" },
+                  { "name": "Institutional Actions", "desc": "Program de-recognition, public gazette notification" }
+                ]
+              },
+              "caption": "Both students and professors share formal legal responsibility for submitted research."
+            }
+          },
+          {
+            "id": "s10",
+            "text": "For students, penalties range from mandatory revision and delayed submission to expulsion and permanent blacklisting from all Pakistani universities.",
+            "simple": "Students can have their thesis canceled, get suspended for years, or be permanently expelled from all universities in Pakistan.",
+            "plain": "For students, penalties range from mandatory revision and delayed submission to expulsion and permanent blacklisting from all Pakistani universities.",
+            "technical": "Candidate sanctions span restorative mandates, programmatic suspension, institutional rustication, and irrevocable blacklisting across all HEC-recognized entities.",
+            "visual": {
+              "kind": "scale",
+              "title": "Severity of Student Sanctions by Offense Level",
+              "data": {
+                "min": "Minor (Drafting Phase)",
+                "max": "Major / Egregious (Post-Award)",
+                "markers": [
+                  { "pos": 20, "label": "Draft Revision", "desc": "Written warning, 1-semester delay" },
+                  { "pos": 60, "label": "Suspension", "desc": "1-2 years suspension from university" },
+                  { "pos": 90, "label": "Degree Revocation", "desc": "Permanent degree cancellation, public blacklisting" }
+                ]
+              },
+              "caption": "Even after graduation, a degree can be legally revoked if plagiarism is subsequently proven."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "If plagiarism is discovered years after graduation, HEC and the university syndicate have the legal authority to revoke the awarded degree.",
+            "simple": "Even years after you graduate, your degree can be canceled and taken back if plagiarism is discovered later.",
+            "plain": "If plagiarism is discovered years after graduation, HEC and the university syndicate have the legal authority to revoke the awarded degree.",
+            "technical": "Post-conferral discovery of substantial plagiarism empowers statutory syndicates to retroactively rescind academic credentials and issue public gazette nullifications.",
+            "visual": {
+              "kind": "timeline",
+              "title": "Post-Conferral Degree Nullification Process",
+              "data": {
+                "events": [
+                  { "time": "Formal Complaint", "title": "Whistleblower / Audit Notice", "desc": "Allegation filed with university or HEC Plagiarism Cell." },
+                  { "time": "Standing Committee Review", "title": "Expert Plagiarism Panel", "desc": "Independent subject specialists evaluate original vs stolen text." },
+                  { "time": "Syndicate Adjudication", "title": "Statutory Degree Cancellation", "desc": "Syndicate revokes degree; official notification published in national newspapers." }
+                ]
+              },
+              "caption": "There is no statute of limitations on research fraud—originality protects your long-term career."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "Research supervisors face suspension of their HEC Approved Supervisor status, research grant freezes, and public naming on the HEC academic blacklist.",
+            "simple": "Supervisors can lose their official supervisory license, have their research funds stopped, and have their names put on a public blacklist.",
+            "plain": "Research supervisors face suspension of their HEC Approved Supervisor status, research grant freezes, and public naming on the HEC academic blacklist.",
+            "technical": "Faculty supervisors incur suspension of HEC Approved status, multi-year supervision moratoria, fiscal research grant freezes, and inclusion on public disciplinary registries.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Faculty Supervisor Sanctions under HEC Policy",
+              "data": {
+                "items": [
+                  { "label": "Cancellation of HEC Approved Supervisor Status", "desc": "Debarred from supervising MS and PhD scholars for 2 to 5 years", "checked": true },
+                  { "label": "Freezing of Research & Travel Grants", "desc": "Ineligible for competitive research funding or international grants", "checked": true },
+                  { "label": "Promotion & Increment Moratorium", "desc": "Annual increments and academic promotions frozen", "checked": true },
+                  { "label": "Public Blacklist Registry", "desc": "Faculty name listed on the official public HEC Plagiarism Blacklist", "checked": true }
+                ]
+              },
+              "caption": "Because supervisors face severe penalties, they will strictly reject suspicious drafts."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "matrix2x2",
+          "title": "Legal & Career Consequences of Plagiarism",
+          "data": {
+            "xAxis": "Detection Timing (Pre-Defense → Post-Conferral)",
+            "yAxis": "Offense Scale (Minor Paraphrase Failure → Wholesome Text Theft)",
+            "q1": { "title": "Draft Correction", "desc": "Minor pre-defense overlap. Student revises and re-scans with no penalty.", "status": "optimal" },
+            "q2": { "title": "Academic Delay", "desc": "Substantial pre-defense theft. Rejection of proposal, 1-year suspension.", "status": "warning" },
+            "q3": { "title": "Degree Revocation", "desc": "Post-conferral discovery. Complete cancellation of degree and public gazette notice.", "status": "reject" },
+            "q4": { "title": "Career Destruction", "desc": "Post-conferral faculty complicity. Supervisor dismissed, scholar blacklisted.", "status": "reject" }
+          },
+          "caption": "Writing original, synthesized text is the only path that protects your degree permanently."
+        },
+        "explain": "Do not let anyone convince you to buy a thesis or copy from another university's library. In Pakistan, HEC can revoke your degree 5, 10, or 20 years from now. If someone reports the plagiarism later, the university syndicate will cancel your degree, and you will lose your job.",
+        "check": {
+          "topic": "plagiarism-sanctions",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "trueFalse",
+              "q": "True or False: Once a university has formally awarded a degree and issued the final transcript, the degree cannot be revoked even if plagiarism is later proven.",
+              "options": [
+                "True — awarded degrees are legally final and cannot be challenged.",
+                "False — HEC policy and university statutes grant full authority to cancel and revoke degrees at any time."
+              ],
+              "answer": 1,
+              "hint": "Consider the legal mandate of university syndicates regarding academic fraud.",
+              "explanation": "False. There is no statute of limitations on plagiarism in Pakistan. If substantial plagiarism is established after graduation, the university syndicate has full statutory power to revoke the degree and notify the national gazette."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "sentences": [
+          {
+            "id": "s13",
+            "text": "The only reliable, long-term strategy for achieving a clean similarity report is disciplined conceptual paraphrasing.",
+            "simple": "The only safe way to pass Turnitin is to truly understand the idea and write it in your own words.",
+            "plain": "The only reliable, long-term strategy for achieving a clean similarity report is disciplined conceptual paraphrasing.",
+            "technical": "Sustainable compliance mandates rigorous conceptual paraphrastic synthesis rather than superficial lexical substitution.",
+            "visual": {
+              "kind": "cycle",
+              "title": "The 4-Step Paraphrasing Architecture",
+              "data": {
+                "steps": [
+                  { "label": "1. Deep Reading", "desc": "Read the source text until you grasp the underlying core idea" },
+                  { "label": "2. Hide & Reframe", "desc": "Close the original paper and explain the finding without looking" },
+                  { "label": "3. Structural Synthesis", "desc": "Write the explanation in your thesis, changing sentence order" },
+                  { "label": "4. Cite & Verify", "desc": "Attach the author citation and cross-verify accuracy" }
+                ]
+              },
+              "caption": "Hiding the original source while drafting prevents accidental word-for-word copying."
+            }
+          },
+          {
+            "id": "s14",
+            "text": "Merely replacing every third word with a synonym using a spinning tool creates unreadable sentences that examiners immediately recognize as academic fraud.",
+            "simple": "Using a spinning tool or just swapping words with synonyms makes your writing sound bizarre and gets you caught immediately.",
+            "plain": "Merely replacing every third word with a synonym using a spinning tool creates unreadable sentences that examiners immediately recognize as academic fraud.",
+            "technical": "Superficial mechanical synonymization (patchwriting) corrupts disciplinary semantics, generating stylistic incoherence that experienced evaluators instantaneously detect.",
+            "visual": {
+              "kind": "beforeAfter",
+              "title": "Patchwriting vs True Paraphrasing",
+              "data": {
+                "before": {
+                  "title": "Machine Spinning / Patchwriting (Fails)",
+                  "content": "\"Transformational governance substantially escalates passionate corporate devotion.\" [Swapped words with thesaurus; sounds absurd]"
+                },
+                "after": {
+                  "title": "Defensible Scholarly Paraphrase (Passes)",
+                  "content": "Leaders who articulate an inspiring vision foster stronger emotional attachment among staff, leading to higher organizational commitment (Bass & Avolio, 2020)."
+                }
+              },
+              "caption": "Examiners instantly flag unnatural thesaurus words like 'corporate devotion' or 'transformational governance'."
+            }
+          },
+          {
+            "id": "s15",
+            "text": "When you synthesize multiple authors across a single paragraph, your similarity score drops naturally to near zero while your scholarly impact multiplies.",
+            "simple": "When you combine ideas from two or three different papers into one paragraph, your Turnitin score naturally drops to zero.",
+            "plain": "When you synthesize multiple authors across a single paragraph, your similarity score drops naturally to near zero while your scholarly impact multiplies.",
+            "technical": "Multi-source argumentative synthesis inherently suppresses comparative string overlap to negligible levels while elevating scholarly rigor.",
+            "visual": {
+              "kind": "flow",
+              "title": "Multi-Source Synthesis Flow",
+              "data": {
+                "steps": [
+                  { "title": "Source A (Khan, 2021)", "desc": "Finds that burnout reduces nurse retention in public hospitals." },
+                  { "title": "Source B (Malik et al., 2022)", "desc": "Demonstrates that supervisory support buffers against burnout." },
+                  { "title": "Your Synthesis", "desc": "While occupational burnout directly undermines nurse retention (Khan, 2021), supportive leadership mitigates this vulnerability (Malik et al., 2022)." }
+                ]
+              },
+              "caption": "Notice how synthesizing both authors creates a unique, unplagiarized scholarly sentence."
+            }
+          },
+          {
+            "id": "s16",
+            "text": "Quick Services Academy teaches you how to synthesize literature with confidence, ensuring your proposal passes departmental review on the first attempt.",
+            "simple": "Quick Services Academy teaches you how to master this writing technique so your thesis is approved with zero stress.",
+            "plain": "Quick Services Academy teaches you how to synthesize literature with confidence, ensuring your proposal passes departmental review on the first attempt.",
+            "technical": "Quick Services Academy equips scholars with rigorous pedagogical frameworks to execute defensible literature synthesis and achieve seamless institutional clearance.",
+            "visual": {
+              "kind": "quote",
+              "title": "The Golden Principle of Academic Integrity",
+              "data": {
+                "text": "Academic writing is not about concealing borrowed words; it is about standing on the shoulders of giants while speaking in your own authentic scholarly voice.",
+                "author": "Quick Services Academic Advisory"
+              },
+              "caption": "Mastering synthesis transforms you from a student copyist into an independent researcher."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "checklist",
+          "title": "Pre-Turnitin Submission Integrity Checklist",
+          "data": {
+            "items": [
+              { "label": "No Single Source Exceeds 5%", "desc": "Check the breakdown list in your report", "checked": true },
+              { "label": "Overall Similarity Below 19%", "desc": "Target 8% to 14% for guaranteed safety", "checked": true },
+              { "label": "Zero Machine-Spun Text", "desc": "Read every paragraph aloud to verify natural academic English", "checked": true },
+              { "label": "All Direct Quotes Cited with Pages", "desc": "Include p. or pp. for all verbatim text", "checked": true },
+              { "label": "AI Assistance Statement Disclosed", "desc": "Include official AI disclosure if generative tools were used", "checked": true }
+            ]
+          },
+          "caption": "Verify all 5 items before submitting your final clearance certificate to your dean."
+        },
+        "explain": "Never use AI rewriters or spinning websites to beat Turnitin. They replace words with bizarre synonyms that make examiners laugh and fail you. Instead, use the 4-step method: read the paragraph, close your laptop, explain the idea out loud to yourself, and then type what you said into your thesis. That is true paraphrasing, and Turnitin will never flag it.",
+        "check": {
+          "topic": "paraphrasing-vs-patchwriting",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "What is the primary danger of using online 'spinning' tools or simple synonym replacement to lower a Turnitin score?",
+              "options": [
+                "It makes the thesis file size too large to upload.",
+                "It produces unreadable, unnatural phrasing that examiners instantly recognize as patchwriting and academic misconduct.",
+                "It automatically changes APA 7th citations into Harvard style.",
+                "It deletes your statistical calculations in SPSS."
+              ],
+              "answer": 1,
+              "hint": "Think about how experienced examiners evaluate language coherence and academic tone.",
+              "explanation": "Spinning tools replace words without understanding academic context, producing nonsensical sentences. Evaluators readily recognize this as 'patchwriting', leading to committee investigations and thesis rejection."
+            }
+          ]
+        }
+      }
+    ],
+    "key": [
+      "Maximum overall similarity ceiling for MS and PhD theses in Pakistan is 19%.",
+      "No single source match may exceed 5%, regardless of the overall score.",
+      "Mandatory Turnitin exclusions permitted: Bibliography, Quoted material, Small matches (5-7 words), and Preliminary pages.",
+      "Plagiarism penalties include thesis rejection, suspension, expulsion, and retroactive degree revocation.",
+      "Supervisors share joint liability and face loss of HEC Approved status and inclusion on the national blacklist.",
+      "True conceptual paraphrasing and multi-source synthesis naturally reduce similarity scores to near zero."
+    ],
+    "mistakes": [
+      "Assuming a 12% overall score is safe when a single source contributes 7% (violates the 5% single-source rule).",
+      "Leaving the terminal bibliography enabled in Turnitin, which inflates scores by 10-15%.",
+      "Using online article spinners, which creates absurd prose easily spotted by examiners.",
+      "Believing a degree is permanent once conferred—HEC can legally revoke degrees years later.",
+      "Failing to exclude small matches (5-7 words), which penalizes standard disciplinary terminology."
+    ]
+  }
+}

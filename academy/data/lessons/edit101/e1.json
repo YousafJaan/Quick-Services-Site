@@ -1,0 +1,23 @@
+{
+  "id": "e1",
+  "course": "edit101",
+  "title": "The Structural, Paragraph, and Sentence Passes",
+  "type": "video",
+  "minutes": 7,
+  "content": {
+    "len": "7 min",
+    "vid": "V-EDIT-01",
+    "transcript": [
+      "Welcome to Course 4: Proofreading & Academic Editing. In this lecture, we introduce the professional editing system used by top academic journals: the Three-Pass Editing Architecture.",
+      "Most postgraduate students edit linearly—starting on page 1 and correcting commas while simultaneously trying to rethink their theoretical claims. This approach produces cognitive overload and misses critical structural flaws.",
+      "The Three-Pass framework splits editing into three distinct, non-overlapping passes: Pass 1 is Structural—you evaluate overall thesis architecture, section transitions, and argumentative continuity without touching commas. Pass 2 is Paragraph Cohesion—you check that every paragraph opens with a clear topic sentence and flows logically. Pass 3 is Sentence Mechanics—you fix nominalizations, subject-verb agreements, and formatting.",
+      "By separating macro-architecture from micro-mechanics, you cut your editing time in half and produce a vastly more rigorous, defense-ready manuscript."
+    ],
+    "key": [
+      "Never edit sentence mechanics and thesis structure in the same reading pass.",
+      "Pass 1 (Structural): Verify macro-argument flow, logical progression between chapters, and heading hierarchies.",
+      "Pass 2 (Paragraph): Inspect topic sentences, internal evidence synthesis, and concluding bridge sentences.",
+      "Pass 3 (Mechanics): Polish academic register, eliminate nominalizations, fix articles (a/an/the), and format citations."
+    ]
+  }
+}

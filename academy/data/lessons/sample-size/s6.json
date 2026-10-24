@@ -1,0 +1,17 @@
+{
+  "id": "s6",
+  "course": "sample-size",
+  "title": "Cochran's Formula & Finite Population Calculator",
+  "type": "visual",
+  "minutes": 14,
+  "content": {
+    "widget": "sampleSize",
+    "intro": "When your target population is known and finite (e.g. 1,000 university teachers in a district or 500 bank branches), applying William Cochran's (1977) Finite Population Correction (FPC) significantly reduces your required sample size without sacrificing statistical precision. Experiment with the interactive calculator below to see how population size, confidence level (95% vs 99%), and margin of error affect your sample target.",
+    "key": [
+      "For infinite populations (N > 50,000) at 95% confidence and 5% margin of error, Cochran's formula yields n0 = 384.16 (approx 385 respondents).",
+      "When the population size N is known and small, the Finite Population Correction formula n = n0 / [1 + (n0 - 1)/N] safely scales down the required sample.",
+      "For a population of N = 1,000, the required sample decreases from 385 to 278 respondents.",
+      "Always document your population parameter N and the exact Cochran FPC formula in Chapter 3 of your thesis."
+    ]
+  }
+}

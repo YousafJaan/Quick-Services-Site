@@ -1,0 +1,87 @@
+{
+  "id": "c4",
+  "course": "cite101",
+  "title": "Module 1 Assessment: In-Text Rules",
+  "type": "quiz",
+  "minutes": 10,
+  "content": {
+    "pass": 70,
+    "show": 6,
+    "bank": [
+      {
+        "type": "single",
+        "q": "Which of the following parenthetical in-text citations correctly follows APA 7th edition for a paper by two authors?",
+        "options": [
+          "(Bass and Avolio, 2020)",
+          "(Bass & Avolio, 2020)",
+          "(Bass et al., 2020)",
+          "(Bass, Avolio 2020)"
+        ],
+        "answer": 1,
+        "hint": "Check which conjunction symbol is required inside parentheses.",
+        "explanation": "In APA 7th parenthetical citations, multiple authors are joined by an ampersand (&). The word 'and' is reserved for running narrative text."
+      },
+      {
+        "type": "single",
+        "q": "Under APA 7th guidelines, how should a study written by four authors (Khan, Ahmed, Malik, and Tariq, published in 2021) be cited the very FIRST time it appears in your thesis?",
+        "options": [
+          "(Khan, Ahmed, Malik, & Tariq, 2021)",
+          "(Khan, Ahmed, et al., 2021)",
+          "(Khan et al., 2021)",
+          "(Khan & colleagues, 2021)"
+        ],
+        "answer": 2,
+        "hint": "Recall the major simplification introduced in the 7th edition for 3 or more authors.",
+        "explanation": "Under APA 7th, any publication with 3 or more authors is truncated to the first author plus 'et al.' from the very first citation."
+      },
+      {
+        "type": "trueFalse",
+        "q": "True or False: In APA 7th style, it is acceptable to use an ampersand (&) in narrative running text (e.g., 'As Bass & Avolio (2020) demonstrated...').",
+        "options": [
+          "True — the ampersand can be used interchangeably in narrative and parenthetical text.",
+          "False — the word 'and' must be spelled out in running narrative text."
+        ],
+        "answer": 1,
+        "hint": "Check the rule for narrative citations.",
+        "explanation": "False. In running text, the word 'and' must always be spelled out. The ampersand (&) is strictly reserved for parenthetical citations, tables, and reference lists."
+      },
+      {
+        "type": "single",
+        "q": "What is the threshold word count at which a direct quotation must be converted into a freestanding, indented block quotation without quotation marks?",
+        "options": [
+          "20 words or more",
+          "30 words or more",
+          "40 words or more",
+          "50 words or more"
+        ],
+        "answer": 2,
+        "hint": "Recall the 40-word boundary rule in APA 7th.",
+        "explanation": "In APA 7th, quotations of 40 words or more must be formatted as block quotes: indented 0.5 inches from the left margin with zero quotation marks."
+      },
+      {
+        "type": "single",
+        "q": "When citing multiple independent sources within the same set of parentheses, how must they be arranged?",
+        "options": [
+          "Chronologically from oldest publication year to newest.",
+          "Alphabetically by the first author's surname, separated by semicolons.",
+          "In order of importance to your research argument.",
+          "Grouped by whether they agree or disagree with your hypothesis."
+        ],
+        "answer": 1,
+        "hint": "Remember that APA prioritizes alphabetical searchability for examiners.",
+        "explanation": "Multiple works within the same parenthetical citation must be ordered alphabetically by the first author's surname, separated by semicolons: (Ahmed, 2019; Bilal, 2021; Zafar, 2015)."
+      },
+      {
+        "type": "trueFalse",
+        "q": "True or False: Every single in-text citation in your thesis must have a matching entry in your reference list, and every entry in your reference list must be cited in your text.",
+        "options": [
+          "True — complete bi-directional correspondence is required in academic dissertations.",
+          "False — you can list background books in your reference list that were never cited in your text."
+        ],
+        "answer": 0,
+        "hint": "Consider the difference between a bibliography (reading list) and an APA reference list.",
+        "explanation": "True. An APA reference list must contain only and all sources cited in the body of the paper. Uncited background sources are prohibited in APA reference lists."
+      }
+    ]
+  }
+}

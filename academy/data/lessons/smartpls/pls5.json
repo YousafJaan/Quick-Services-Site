@@ -1,0 +1,17 @@
+{
+  "id": "pls5",
+  "course": "smartpls",
+  "title": "Interactive PLS Model & Path Diagram Explorer",
+  "type": "visual",
+  "minutes": 15,
+  "content": {
+    "widget": "plsModel",
+    "intro": "Structural Equation Modeling visualizes relationships through path diagrams composed of latent variables (circles) and manifest indicator items (rectangles). Use this interactive simulator to explore the anatomy of an empirical PLS-SEM model, toggling between outer measurement model evaluation and inner structural model hypotheses.",
+    "key": [
+      "Circles represent latent unobservable constructs (e.g. Transformational Leadership, Organizational Agility, Innovation Performance).",
+      "Rectangles represent survey questionnaire items or manifest indicators.",
+      "Outer model arrows pointing from construct to indicators represent reflective measurement models.",
+      "Inner model path arrows connecting constructs represent direct structural hypotheses tested via bootstrapping."
+    ]
+  }
+}

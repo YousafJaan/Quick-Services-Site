@@ -1,0 +1,79 @@
+{
+  "id": "l2",
+  "course": "lit-search",
+  "title": "Boolean Operators (AND, OR, NOT), Wildcards & Nesting",
+  "type": "read",
+  "minutes": 11,
+  "content": {
+    "quick": "Boolean logic allows researchers to control database precision and recall. 'AND' narrows the search by requiring all terms; 'OR' broadens it by accepting any synonym; 'NOT' excludes irrelevant domains; parentheses group operations; and wildcards (*) match multiple word endings.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "Boolean operators are fundamental logical connectives used to command academic databases during systematic literature retrieval.",
+            "simple": "Boolean operators are basic command words like AND and OR that tell academic search engines exactly what to look for.",
+            "plain": "Boolean operators are fundamental logical connectives used to command academic databases during systematic literature retrieval.",
+            "technical": "Boolean operators operationalize set-theoretic logic across inverted bibliographic indices to regulate document recall and precision.",
+            "visual": {
+              "kind": "compare",
+              "title": "The Three Core Boolean Operators",
+              "data": {
+                "columns": ["Operator", "Logical Action", "Effect on Result Set"],
+                "rows": [
+                  { "metric": "AND", "col1": "Intersection (Both terms required)", "col2": "Narrows results (Increases precision)" },
+                  { "metric": "OR", "col1": "Union (Either term acceptable)", "col2": "Expands results (Increases recall)" },
+                  { "metric": "NOT", "col1": "Exclusion (Removes second term)", "col2": "Eliminates unwanted domains (Use with caution)" }
+                ]
+              },
+              "caption": "'AND' narrows; 'OR' expands; 'NOT' excludes."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "Parentheses are mandatory when combining different operators to prevent fatal search logic syntax errors.",
+            "simple": "You must put parentheses around OR words, just like in high school mathematics.",
+            "plain": "Parentheses are mandatory when combining different operators to prevent fatal search logic syntax errors.",
+            "technical": "Parenthetical nesting enforces syntactic operator precedence, ensuring disjunctive synonym clauses resolve prior to conjunctive facet intersections.",
+            "visual": {
+              "kind": "definition",
+              "title": "Parenthetical Nesting Syntax",
+              "data": {
+                "term": "Nesting (Parentheses)",
+                "meaning": "Grouping synonymous terms so the database evaluates them as a single conceptual cluster before intersecting with other criteria.",
+                "example": "Correct: (teacher OR educator) AND burnout | Incorrect: teacher OR educator AND burnout"
+              },
+              "caption": "Without parentheses, the database interprets 'teacher' as a standalone query alongside 'educator AND burnout'."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "Wildcard & Truncation Cheat Sheet",
+          "data": {
+            "headers": ["Syntax Symbol", "Function", "Example", "Matches Retrieved"],
+            "rows": [
+              ["Asterisk (*)", "Root word truncation", "leader*", "leader, leaders, leadership"],
+              ["Question Mark (?)", "Single character variation", "organi?ation", "organization, organisation"],
+              ["Quotation Marks (\"\")", "Exact phrase match", "\"job satisfaction\"", "Only the exact uninterrupted phrase"]
+            ]
+          },
+          "caption": "Use exact quotation marks for multi-word constructs to avoid scattering words across pages."
+        },
+        "check": {
+          "questions": [
+            {
+              "id": "q1",
+              "type": "single",
+              "q": "Which Boolean operator should always be placed between different synonyms of the SAME concept?",
+              "options": ["AND", "OR", "NOT", "NEAR"],
+              "answer": 1,
+              "explanation": "Synonyms are alternative ways of expressing the same concept, so you want papers that mention EITHER word: term1 OR term2."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "path-thesis",
+    "title": "Thesis Starter Path",
+    "description": "The complete roadmap from topic conception, proposal approval, and citation accuracy to final manuscript editing and viva defense.",
+    "courses": [
+      "thesis101",
+      "cite101",
+      "integrity101",
+      "edit101",
+      "viva"
+    ],
+    "targetAudience": "BS, MS, MPhil, and PhD candidates preparing to write or defend their dissertations."
+  },
+  {
+    "id": "path-stats",
+    "title": "Research & Statistics Path",
+    "description": "From systematic literature search and sample size determination to quantitative hypothesis testing and structural equation modeling.",
+    "courses": [
+      "lit-search",
+      "sample-size",
+      "spss101",
+      "smartpls"
+    ],
+    "targetAudience": "Quantitative researchers, social scientists, business management, and healthcare research scholars."
+  }
+]

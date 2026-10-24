@@ -1,0 +1,88 @@
+{
+  "id": "v2",
+  "course": "viva",
+  "title": "Slide Budgeting: What to Include and What to Cut",
+  "type": "read",
+  "minutes": 11,
+  "content": {
+    "quick": "Every slide in a viva presentation must defend a single scientific claim. Ruthlessly cut literature summaries and background trivia. Focus 60% of your slide budget on your methodology justification, empirical findings, and actionable theoretical contributions.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "An effective viva presentation requires disciplined content triage rather than exhaustive textual recitation.",
+            "simple": "A winning viva presentation cuts out boring background details and focuses only on what you actually discovered.",
+            "plain": "An effective viva presentation requires disciplined content triage rather than exhaustive textual recitation.",
+            "technical": "Oral dissertation defense optimization necessitates aggressive heuristic pruning of ancillary literature to maximize exposition of novel empirical variance.",
+            "visual": {
+              "kind": "funnel",
+              "title": "The 15-Slide Budget Allocation",
+              "data": {
+                "stages": [
+                  { "label": "Problem & Objectives (Slides 1-3)", "desc": "3 minutes: The empirical deficit" },
+                  { "label": "Theory & Framework (Slides 4-5)", "desc": "2 minutes: The explanatory model" },
+                  { "label": "Methodology & Sampling (Slides 6-8)", "desc": "3 minutes: Rigor, validity & tools" },
+                  { "label": "Findings & Hypotheses (Slides 9-11)", "desc": "3.5 minutes: Results & empirical proof" },
+                  { "label": "Contributions & Limits (Slides 12-15)", "desc": "2.5 minutes: What changed and why it matters" }
+                ]
+              },
+              "caption": "Follow the 1-minute-per-slide golden rule."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "Examiners will aggressively interrogate methodological weaknesses if you gloss over sampling limitations in your slides.",
+            "simple": "If you try to hide problems in your data, examiners will spot them immediately and grill you.",
+            "plain": "Examiners will aggressively interrogate methodological weaknesses if you gloss over sampling limitations in your slides.",
+            "technical": "Proactive transparent disclosure of epistemic and sampling boundary constraints disarms adversarial cross-examination by the evaluation committee.",
+            "visual": {
+              "kind": "compare",
+              "title": "Glazing Over vs Proactive Defense",
+              "data": {
+                "columns": ["Defensive Blunder (Attacked)", "Proactive Transparency (Commended)"],
+                "rows": [
+                  { "metric": "Sample Size", "col1": "Hiding low response rates in tables", "col2": "Showing G*Power post-hoc power calculation proving 88% statistical power" },
+                  { "metric": "Generalizability", "col1": "Claiming results apply to all Asia", "col2": "Clearly bounding findings to private sector universities in South Punjab" },
+                  { "metric": "Methodology Gaps", "col1": "Pretending cross-sectional data proves causality", "col2": "Acknowledging cross-sectional limits and proposing longitudinal future work" }
+                ]
+              },
+              "caption": "Honest awareness of your study's limits proves scientific maturity to examiners."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "checklist",
+          "title": "Slide Quality Gate Checklist",
+          "data": {
+            "items": [
+              "Are all slides under 35 words of text?",
+              "Are regression tables reformatted into clear bold beta coefficients rather than raw SPSS screenshots?",
+              "Is every acronym defined upon its first appearance?",
+              "Do you have backup appendix slides ready for detailed statistical tables?"
+            ]
+          },
+          "caption": "Never put raw SPSS or SmartPLS screen snips with unreadable 8pt font onto presentation slides."
+        },
+        "check": {
+          "questions": [
+            {
+              "id": "q1",
+              "type": "single",
+              "q": "What is the recommended maximum number of slides for a standard 15-minute viva presentation?",
+              "options": [
+                "12 to 15 slides",
+                "35 to 45 slides",
+                "Exactly 50 slides",
+                "5 slides"
+              ],
+              "answer": 0,
+              "explanation": "At roughly 1 minute per slide, 12 to 15 slides allows clear pacing without rushing through slides or reading bullet points."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

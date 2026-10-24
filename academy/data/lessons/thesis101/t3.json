@@ -1,0 +1,23 @@
+{
+  "id": "t3",
+  "course": "thesis101",
+  "title": "Crafting Defensible Problem Statements",
+  "type": "video",
+  "minutes": 8,
+  "content": {
+    "len": "8 min",
+    "vid": "V-THESIS-01",
+    "transcript": [
+      "Welcome to Lesson 3 of Thesis Writing 101. In this video lecture, we dismantle the single most frequent reason proposals get rejected at the Departmental Board of Studies: an ambiguous problem statement.",
+      "A research problem is not simply a complaint about society or an expression of personal curiosity. In academic research, a problem exists when there is a documented discrepancy between what current scientific literature predicts and what is actually observed in practice.",
+      "To build an airtight problem statement, follow the 3-part framework: First, establish the baseline ideal—what should be happening based on established theory. Second, present the empirical deficit—the documented breakdown, contradiction, or under-researched sector supported by peer-reviewed evidence. Third, define the consequence—what happens if this empirical gap remains unresolved.",
+      "When presenting your proposal in Pakistan universities, supervisors often ask: 'Why does this matter in Pakistan specifically?' You must anchor your problem statement with recent, localized contextual data alongside international theoretical foundations."
+    ],
+    "key": [
+      "A problem statement is a documented empirical discrepancy, not a personal opinion or broad social complaint.",
+      "The 3-part formula: Ideal Baseline (Theory) → Empirical Deficit (Evidence) → Practical Consequence (Urgency).",
+      "Always cite peer-reviewed citations within the last 3-5 years to prove your problem is contemporary and unresolved.",
+      "Local context must be justified with credible institutional reports (e.g. PBS, SBP, HEC, or industry data)."
+    ]
+  }
+}

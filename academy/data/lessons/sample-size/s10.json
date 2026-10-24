@@ -1,0 +1,489 @@
+{
+  "id": "s10",
+  "course": "sample-size",
+  "title": "A Priori Power Analysis for t-tests, ANOVA, and Regression",
+  "type": "read",
+  "minutes": 13,
+  "content": {
+    "quick": "Statistical power (1 - beta = 0.80) is the probability of correctly detecting a real effect when one exists. Using G*Power 3.1 before data collection (a priori) ensures your thesis has adequate sample size to avoid false-negative Type II errors.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "Statistical power represents the probability that a statistical test will correctly reject a false null hypothesis.",
+            "simple": "Statistical power means the chance that your test will successfully find a real effect if it actually exists in the real world.",
+            "plain": "Statistical power represents the probability that a statistical test will correctly reject a false null hypothesis.",
+            "technical": "Statistical power ($1 - \\beta$) quantifies the operational probability of correctly rejecting the null hypothesis under specified alternative parameterizations.",
+            "visual": {
+              "kind": "definition",
+              "title": "Statistical Power (1 - Beta)",
+              "data": {
+                "term": "Power = 1 - β",
+                "meaning": "The likelihood of finding a statistically significant result when a true effect actually exists in the target population.",
+                "example": "At 80% power, you have an 80% chance of detecting a significant correlation and a 20% risk of missing it (Type II error)."
+              },
+              "caption": "Adequate statistical power protects your thesis from false negative conclusions."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "The universally accepted scientific standard for statistical power across social and behavioral sciences is eighty percent.",
+            "simple": "The standard rule accepted by universities worldwide is 80% statistical power.",
+            "plain": "The universally accepted scientific standard for statistical power across social and behavioral sciences is eighty percent.",
+            "technical": "Methodological convention established by Cohen (1988) formalizes a minimum nominal power benchmark of .80 (or 80%).",
+            "visual": {
+              "kind": "scale",
+              "title": "Statistical Power Continuum",
+              "data": {
+                "min": "0% (Completely Blind)",
+                "max": "100% (Perfect Certainty)",
+                "markers": [
+                  { "pos": 50, "label": "50% Power", "desc": "Coin-flip odds; fatal thesis design flaw" },
+                  { "pos": 80, "label": "80% Standard", "desc": "Cohen's (1988) Gold Standard (β = 0.20)" },
+                  { "pos": 95, "label": "95% High Power", "desc": "Rigorous medical trials (Requires large N)" }
+                ]
+              },
+              "caption": "Aiming for 80% power balances sample collection costs with scientific rigor."
+            }
+          },
+          {
+            "id": "s3",
+            "text": "When a study has insufficient statistical power, it suffers from an unacceptably high risk of committing a Type II error.",
+            "simple": "If your sample is too small, you might fail to find a real result simply because you did not ask enough people.",
+            "plain": "When a study has insufficient statistical power, it suffers from an unacceptably high risk of committing a Type II error.",
+            "technical": "Underpowered empirical architectures exhibit inflated Type II error rates ($\\beta > .20$), causing premature abandonment of substantive hypotheses.",
+            "visual": {
+              "kind": "compare",
+              "title": "Type I Error (Alpha) vs Type II Error (Beta)",
+              "data": {
+                "columns": ["Type I Error (Alpha = 0.05)", "Type II Error (Beta = 0.20)"],
+                "rows": [
+                  { "metric": "Error Nature", "col1": "False Positive (Finding effect that is not real)", "col2": "False Negative (Missing a real effect)" },
+                  { "metric": "Thesis Consequence", "col1": "Claiming false relationship", "col2": "Hypothesis rejected due to low sample size" },
+                  { "metric": "Control Mechanism", "col1": "Set significance level α = .05", "col2": "Calculate adequate sample size in G*Power" }
+                ]
+              },
+              "caption": "Increasing sample size directly suppresses Type II error risk without inflating Type I error."
+            }
+          },
+          {
+            "id": "s4",
+            "text": "Examiners will severely penalize any proposal where sample size is determined by casual guesswork rather than mathematical power calculation.",
+            "simple": "Examiners will reject your proposal if you just guess your sample size instead of calculating it mathematically.",
+            "plain": "Examiners will severely penalize any proposal where sample size is determined by casual guesswork rather than mathematical power calculation.",
+            "technical": "Institutional review boards actively reject prospectus submissions relying on arbitrary sample size heuristics in lieu of formal power optimization.",
+            "visual": {
+              "kind": "quote",
+              "title": "The Golden Rule of Sample Size Justification",
+              "data": {
+                "text": "A sample size is neither 'good' nor 'bad' based on its raw number; it is defensible only when calibrated against the statistical test, the expected effect size, and the desired power.",
+                "author": "Quick Services Methodology Advisory"
+              },
+              "caption": "Always provide a G*Power protocol in Chapter 3 of your thesis."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "matrix2x2",
+          "title": "Hypothesis Testing Outcome Matrix",
+          "data": {
+            "xAxis": "Decision on Null Hypothesis (Retain H0 → Reject H0)",
+            "yAxis": "Reality in Population (H0 is True → H0 is False)",
+            "q1": { "title": "Correct Decision (1 - α)", "desc": "H0 is true and you correctly retain it (95% confidence).", "status": "optimal" },
+            "q2": { "title": "Type I Error (α)", "desc": "H0 is true but you falsely reject it (False positive risk: 5%).", "status": "danger" },
+            "q3": { "title": "Type II Error (β)", "desc": "H0 is false but you miss it due to small sample (False negative: 20%).", "status": "warning" },
+            "q4": { "title": "Statistical Power (1 - β)", "desc": "H0 is false and you correctly detect the real effect (Power: 80%).", "status": "optimal" }
+          },
+          "caption": "G*Power ensures that you land safely in Quadrant 4 when a true relationship exists."
+        },
+        "explain": "Think of statistical power like the zoom lens on a telescope. If your sample size is tiny, your lens is blurry, and you will miss real stars (Type II error). An 80% power level means your lens is sharp enough to detect real relationships 4 times out of 5.",
+        "check": {
+          "topic": "power-definition",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "What does a statistical power level of 0.80 (80%) mean in an empirical research thesis?",
+              "options": [
+                "There is an 80% chance that your data contains zero errors.",
+                "There is an 80% probability of detecting a statistically significant effect if a true effect exists in the population.",
+                "80% of your participants will return completed questionnaires.",
+                "The null hypothesis has an 80% probability of being true."
+              ],
+              "answer": 1,
+              "hint": "Recall the definition of 1 - beta.",
+              "explanation": "Statistical power (1 - beta) is the probability of correctly rejecting a false null hypothesis. At power = 0.80, you have an 80% chance of successfully finding a real effect and a 20% risk of missing it (Type II error)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p2",
+        "sentences": [
+          {
+            "id": "s5",
+            "text": "To calculate required sample size, you must specify the anticipated effect size established by prior literature.",
+            "simple": "To figure out how many people you need to survey, you must know how strong the relationship is expected to be.",
+            "plain": "To calculate required sample size, you must specify the anticipated effect size established by prior literature.",
+            "technical": "Parametric sample size determination requires explicit specification of the hypothesized effect size parameter derived from meta-analytic or pilot empirical precedents.",
+            "visual": {
+              "kind": "definition",
+              "title": "Effect Size",
+              "data": {
+                "term": "Effect Size",
+                "meaning": "A quantitative reflection of the magnitude of an experimental treatment or the strength of a relationship between two variables.",
+                "example": "Cohen's d = 0.50 means the treatment group scored half a standard deviation higher than the control group."
+              },
+              "caption": "Unlike p-values, effect size tells you the practical significance of a finding."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "Jacob Cohen established universal benchmark values for small, medium, and large effect sizes across different statistical procedures.",
+            "simple": "Famous statistician Jacob Cohen gave standard numbers for small, medium, and large effects for every common statistical test.",
+            "plain": "Jacob Cohen established universal benchmark values for small, medium, and large effect sizes across different statistical procedures.",
+            "technical": "Cohen's (1988) seminal taxonomy operationalized standardized effect size metrics, classifying deviations into small, medium, and large thresholds.",
+            "visual": {
+              "kind": "table",
+              "title": "Cohen's Effect Size Benchmarks Master Table",
+              "data": {
+                "headers": ["Statistical Test", "Metric", "Small Effect", "Medium Effect", "Large Effect"],
+                "rows": [
+                  ["Independent t-Test", "Cohen's d", "0.20", "0.50", "0.80"],
+                  ["One-Way ANOVA", "Cohen's f", "0.10", "0.25", "0.40"],
+                  ["Multiple Regression", "Cohen's f²", "0.02", "0.15", "0.35"],
+                  ["Pearson Correlation", "Correlation r", "0.10", "0.30", "0.50"]
+                ]
+              },
+              "caption": "When no prior study exists, researchers conventionally assume a medium effect size."
+            }
+          },
+          {
+            "id": "s7",
+            "text": "In multiple linear regression, effect size is measured using Cohen's f-squared, which is derived directly from the expected R-squared value.",
+            "simple": "In regression analysis, effect size is called f², and it comes directly from how much variance (R²) your model explains.",
+            "plain": "In multiple linear regression, effect size is measured using Cohen's f-squared, which is derived directly from the expected R-squared value.",
+            "technical": "In multivariable regression architectures, the omnibus effect size metric $f^2$ is computed as the ratio: $f^2 = R^2 / (1 - R^2)$.",
+            "visual": {
+              "kind": "formula",
+              "title": "Cohen's f² Effect Size Formula",
+              "data": {
+                "equation": "f^2 = R^2 / (1 - R^2)",
+                "terms": [
+                  { "symbol": "f²", "meaning": "Cohen's regression effect size (0.02 small, 0.15 medium, 0.35 large)" },
+                  { "symbol": "R²", "meaning": "Proportion of variance explained by the predictor variables" },
+                  { "symbol": "1 - R²", "meaning": "Unexplained residual variance" }
+                ]
+              },
+              "caption": "An R² of 0.13 corresponds to a medium effect: f² = 0.13 / 0.87 = 0.15."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "Smaller anticipated effects require substantially larger sample sizes to reach statistical significance.",
+            "simple": "If the effect you are looking for is tiny and subtle, you need a much bigger sample size to prove it is real.",
+            "plain": "Smaller anticipated effects require substantially larger sample sizes to reach statistical significance.",
+            "technical": "Required sample size scales inversely with effect magnitude: detecting subtle population deviations necessitates proportionally expansive sample registries.",
+            "visual": {
+              "kind": "scale",
+              "title": "Sample Size Required vs Effect Size (t-test, Power = 80%)",
+              "data": {
+                "min": "Large Effect (N = 52)",
+                "max": "Small Effect (N = 788)",
+                "markers": [
+                  { "pos": 15, "label": "Large (d = 0.80)", "desc": "N = 52 total participants" },
+                  { "pos": 45, "label": "Medium (d = 0.50)", "desc": "N = 128 total participants" },
+                  { "pos": 90, "label": "Small (d = 0.20)", "desc": "N = 788 total participants" }
+                ]
+              },
+              "caption": "Notice how sample size skyrockets when you search for small, weak relationships."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "compare",
+          "title": "Effect Size Impact on Required Sample Size",
+          "data": {
+            "columns": ["Small Effect Assumption", "Medium Effect Assumption (Standard)", "Large Effect Assumption"],
+            "rows": [
+              { "metric": "Regression f²", "col1": "f² = 0.02", "col2": "f² = 0.15", "col3": "f² = 0.35" },
+              { "metric": "Required N (5 Predictors)", "col1": "N = 647 participants", "col2": "N = 92 participants", "col3": "N = 45 participants" },
+              { "metric": "Feasibility in Thesis", "col1": "Difficult to collect on budget", "col2": "Defensible and feasible standard", "col3": "Risky; true effect may be smaller" }
+            ]
+          },
+          "caption": "Default to a medium effect size (f² = 0.15) if your literature review yields ambiguous estimates."
+        },
+        "explain": "If you are looking for a loud noise (large effect), you only need a few people to hear it. If you are listening for a faint whisper (small effect), you need hundreds of participants. For an MS thesis, assuming a 'medium effect' is the safe, standard middle ground accepted by all Pakistani universities.",
+        "check": {
+          "topic": "effect-sizes",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "What is the standard Cohen's benchmark value for a medium effect size (f²) in multiple linear regression?",
+              "options": [
+                "f² = 0.02",
+                "f² = 0.15",
+                "f² = 0.50",
+                "f² = 0.80"
+              ],
+              "answer": 1,
+              "hint": "Check the Cohen benchmarks master table above for multiple regression.",
+              "explanation": "In multiple regression, Cohen (1988) defined f² = 0.02 as small, f² = 0.15 as medium, and f² = 0.35 as large. (Note: d = 0.50 is the medium benchmark for t-tests, not regression f²)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "sentences": [
+          {
+            "id": "s9",
+            "text": "The free software program G*Power is the gold standard application used across universities to calculate a priori sample sizes.",
+            "simple": "The free software program G*Power is the official tool recommended by universities to calculate your required sample size.",
+            "plain": "The free software program G*Power is the gold standard application used across universities to calculate a priori sample sizes.",
+            "technical": "The G*Power 3.1 computational package (Faul et al., 2007) serves as the primary psychometric instrument for executing prospective statistical power analyses.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "G*Power 3.1 Interface Setup",
+              "data": {
+                "lead": "Main Selection Dropdowns:",
+                "callouts": [
+                  { "text": "[Test family: F tests]", "label": "Mathematical Family" },
+                  { "text": "[Statistical test: Linear multiple regression]", "label": "Specific Model" },
+                  { "text": "[Type of power analysis: A priori]", "label": "Before Data Collection" }
+                ]
+              },
+              "caption": "Always select 'A priori' to calculate sample size BEFORE collecting questionnaires."
+            }
+          },
+          {
+            "id": "s10",
+            "text": "To configure a regression power analysis in G*Power, select the F-test family and the linear multiple regression fixed model.",
+            "simple": "In G*Power, choose 'F tests' in the first box and 'Linear multiple regression' in the second box.",
+            "plain": "To configure a regression power analysis in G*Power, select the F-test family and the linear multiple regression fixed model.",
+            "technical": "Parameterizing multivariable linear regression mandates selecting the $F$-test distribution family paired with the fixed effects omnibus coefficient protocol.",
+            "visual": {
+              "kind": "flow",
+              "title": "G*Power Regression Configuration Flow",
+              "data": {
+                "steps": [
+                  { "title": "1. Test Family", "desc": "Select 'F tests'" },
+                  { "title": "2. Statistical Test", "desc": "Select 'Linear multiple regression: Fixed model, R² deviation from zero'" },
+                  { "title": "3. Analysis Type", "desc": "Select 'A priori: Compute required sample size'" },
+                  { "title": "4. Input Parameters", "desc": "Enter f² = 0.15, α = 0.05, Power = 0.80, Predictors = 5" }
+                ]
+              },
+              "caption": "Follow these four steps to generate the official sample size for your proposal."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "Inputting a medium effect size of 0.15, an alpha of 0.05, a power of 0.80, and five predictors yields a minimum required sample of 92 respondents.",
+            "simple": "Typing in a medium effect of 0.15, alpha of 0.05, power of 80%, and 5 variables gives a required sample size of exactly 92 people.",
+            "plain": "Inputting a medium effect size of 0.15, an alpha of 0.05, a power of 0.80, and five predictors yields a minimum required sample of 92 respondents.",
+            "technical": "Parameterizing inputs ($f^2 = .15, \\alpha = .05, 1 - \\beta = .80, k = 5$) executes noncentral $F$-distribution integration, yielding an exact required sample size of $N = 92$.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "G*Power Output Results for 5-Predictor Regression",
+              "data": {
+                "lead": "Output Parameters Window:",
+                "callouts": [
+                  { "text": "[Noncentrality parameter λ = 13.80]", "label": "Distribution Shift" },
+                  { "text": "[Critical F = 2.32]", "label": "Significance Threshold" },
+                  { "text": "[Total sample size = 92]", "label": "Minimum Required N" },
+                  { "text": "[Actual power = 0.804]", "label": "Verified Power (> 80%)" }
+                ]
+              },
+              "caption": "Take a screenshot of this output window and paste it directly into Chapter 3."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "To account for unreturned surveys and incomplete responses in field surveys, researchers typically oversample by twenty to thirty percent.",
+            "simple": "Because people often lose surveys or leave questions blank, you should hand out 20% to 30% more questionnaires than your target number.",
+            "plain": "To account for unreturned surveys and incomplete responses in field surveys, researchers typically oversample by twenty to thirty percent.",
+            "technical": "To insulate the empirical registry against attrition bias and incomplete instruments, field protocols mandate an ex-ante oversampling buffer of 20% to 30%.",
+            "visual": {
+              "kind": "flow",
+              "title": "From G*Power Calculation to Field Distribution",
+              "data": {
+                "steps": [
+                  { "title": "G*Power Minimum", "desc": "N = 92 valid, usable responses needed" },
+                  { "title": "Anticipated Attrition", "desc": "Assume 25% non-response and missing data rate" },
+                  { "title": "Field Distribution Target", "desc": "Distribute 92 / 0.75 = 123 questionnaires" },
+                  { "title": "Final Clean Dataset", "desc": "Result: 95 clean responses (Power requirement fully satisfied!)" }
+                ]
+              },
+              "caption": "Always build an attrition cushion so missing data does not drop you below 92."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "G*Power A Priori Sample Size Lookup Table (Power = .80, α = .05)",
+          "data": {
+            "headers": ["Statistical Test Model", "Predictors / Groups", "Small Effect", "Medium Effect", "Large Effect"],
+            "rows": [
+              ["Independent t-Test (Two-tailed)", "2 Groups", "788", "128", "52"],
+              ["One-Way ANOVA", "3 Groups", "969", "159", "66"],
+              ["One-Way ANOVA", "4 Groups", "1096", "180", "76"],
+              ["Multiple Regression", "2 Predictors", "485", "68", "33"],
+              ["Multiple Regression", "5 Predictors", "647", "92", "45"],
+              ["Multiple Regression", "10 Predictors", "822", "118", "59"]
+            ]
+          },
+          "caption": "Use this official lookup table for fast proposal preparation and cross-validation."
+        },
+        "explain": "G*Power gives you the mathematical minimum. If G*Power says you need 92 people, never distribute exactly 92 surveys! People will spill tea on them, leave pages blank, or refuse to return them. Hand out 120 or 130 surveys so that after cleaning the data, you still have at least 92 pristine responses.",
+        "check": {
+          "topic": "gpower-workflow",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "According to G*Power 3.1, what is the minimum required sample size for a multiple regression model with 5 predictors assuming a medium effect size (f² = 0.15), alpha = 0.05, and power = 0.80?",
+              "options": [
+                "N = 45",
+                "N = 92",
+                "N = 384",
+                "N = 647"
+              ],
+              "answer": 1,
+              "hint": "Check the lookup table for 5 predictors at medium effect.",
+              "explanation": "At f² = 0.15, alpha = 0.05, and power = 0.80 with 5 predictors, G*Power computes a noncentrality parameter lambda = 13.80 and an exact sample size of N = 92."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "sentences": [
+          {
+            "id": "s13",
+            "text": "A widespread error among students is conducting post-hoc power calculations after their study fails to find significant results.",
+            "simple": "A big mistake students make is running G*Power after their experiment fails, trying to make an excuse for why it didn't work.",
+            "plain": "A widespread error among students is conducting post-hoc power calculations after their study fails to find significant results.",
+            "technical": "A pervasive methodological fallacy involves calculating observed (post-hoc) power retrospectively following nonsignificant statistical outcomes.",
+            "visual": {
+              "kind": "mistakeFix",
+              "title": "A Priori vs Post-Hoc Power Fallacy",
+              "data": {
+                "mistake": "Running G*Power after data collection: 'Our p = .12 because post-hoc power was only 40%.'",
+                "why": "Observed post-hoc power is merely a 1-to-1 mathematical transformation of the p-value; it adds zero new empirical information.",
+                "fix": "Always conduct A Priori power analysis before collecting data, and report confidence intervals for non-significant findings."
+              },
+              "caption": "Leading statisticians (Hoenig & Heisey, 2001) condemn post-hoc power as mathematically circular."
+            }
+          },
+          {
+            "id": "s14",
+            "text": "Statisticians have proven that observed post-hoc power is merely a redundant mathematical transformation of the p-value and provides zero explanatory value.",
+            "simple": "Statisticians proved that checking power after your test is finished tells you nothing new; it just repeats your p-value in a different shape.",
+            "plain": "Statisticians have proven that observed post-hoc power is merely a redundant mathematical transformation of the p-value and provides zero explanatory value.",
+            "technical": "Mathematical proofs demonstrate that retrospective power is confounded with the test statistic, yielding an entirely circular and tautological diagnostic.",
+            "visual": {
+              "kind": "quote",
+              "title": "The Post-Hoc Power Fallacy",
+              "data": {
+                "text": "Calculating power after finding a non-significant result is like checking the weather forecast for yesterday to see if it rained.",
+                "author": "Prof. Andy Field (Discovering Statistics)"
+              },
+              "caption": "Power analysis belongs strictly in the research design phase."
+            }
+          },
+          {
+            "id": "s15",
+            "text": "Your methodology chapter must document the a priori power analysis conducted before data collection, citing G*Power and primary effect size sources.",
+            "simple": "In Chapter 3 of your thesis, write down your G*Power calculations, your alpha, your power, and the previous papers you used for your effect size.",
+            "plain": "Your methodology chapter must document the a priori power analysis conducted before data collection, citing G*Power and primary effect size sources.",
+            "technical": "Chapter 3 methodology sections must formalize prospective power protocols, providing complete software citation (Faul et al., 2007) and effect justification.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Sample Dissertation Write-up for Chapter 3",
+              "data": {
+                "lead": "Methodology Text Template:",
+                "callouts": [
+                  { "text": "[An a priori power analysis was conducted using G*Power 3.1]", "label": "Software Citation" },
+                  { "text": "[for linear multiple regression with 5 predictors]", "label": "Model Specification" },
+                  { "text": "[Assuming f² = 0.15, α = 0.05, and power = 0.80]", "label": "Input Parameters" },
+                  { "text": "[yielding a minimum sample of N = 92 respondents.]", "label": "Empirical Target" }
+                ]
+              },
+              "caption": "Copy and adapt this exact four-line paragraph into Chapter 3 of your thesis."
+            }
+          },
+          {
+            "id": "s16",
+            "text": "Presenting a clear, mathematical sample size justification protects you from skeptical examiner challenges during your proposal defense.",
+            "simple": "When you have these exact G*Power calculations in your presentation, examiners cannot attack your sample size during your defense.",
+            "plain": "Presenting a clear, mathematical sample size justification protects you from skeptical examiner challenges during your proposal defense.",
+            "technical": "Rigorous a priori power documentation insulates the researcher against methodological challenges regarding inferential sample adequacy during viva examinations.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Chapter 3 Sample Size Defense Readiness Checklist",
+              "data": {
+                "items": [
+                  { "label": "G*Power Software Cited", "desc": "Faul, Erdfelder, Lang, & Buchner (2007) in bibliography", "checked": true },
+                  { "label": "Effect Size Justified", "desc": "Cohen's medium benchmark (0.15) or past literature cited", "checked": true },
+                  { "label": "Power Set to .80 & Alpha to .05", "desc": "Standard scientific parameters stated explicitly", "checked": true },
+                  { "label": "Oversampling Buffer Explained", "desc": "Attrition buffer documented (e.g. distributed 125 to net 95)", "checked": true }
+                ]
+              },
+              "caption": "Include this checklist in your defense slide deck to impress committee members."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "hierarchy",
+          "title": "The Four Pillars of Methodological Sample Defensibility",
+          "data": {
+            "root": "Defensible Sample Size",
+            "children": [
+              { "name": "1. Statistical Power (1 - β)", "desc": "Calibrated at .80 to guard against Type II false negatives" },
+              { "name": "2. Expected Effect Size (f²)", "desc": "Grounded in Cohen's benchmarks or meta-analytic precedents" },
+              { "name": "3. Significance Level (α)", "desc": "Fixed at .05 to guard against Type I false positives" },
+              { "name": "4. Field Attrition Buffer", "desc": "Oversampled by 20-30% to guarantee net usable N >= target" }
+            ]
+          },
+          "caption": "When all four pillars are documented in Chapter 3, your methodology is unassailable."
+        },
+        "explain": "Never wait until your thesis defense to calculate power! If an examiner asks: 'Why did you choose 100 people?', never say: 'My senior told me 100 is enough.' Say: 'We conducted an a priori power analysis in G*Power 3.1 assuming a medium effect size of 0.15, alpha 0.05, and power 0.80, which determined a minimum requirement of 92 valid responses.' The examiner will nod and move on.",
+        "check": {
+          "topic": "sample-justification",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "trueFalse",
+              "q": "True or False: If your thesis study finds a non-significant p-value (e.g. p = 0.15), you should run a post-hoc power calculation in G*Power to explain that low statistical power caused the failure.",
+              "options": [
+                "True — post-hoc power proves to examiners that the sample was simply too small.",
+                "False — post-hoc power is statistically circular and rejected by academic committees; power must be determined a priori."
+              ],
+              "answer": 1,
+              "hint": "Recall the quote from Prof. Andy Field on post-hoc power.",
+              "explanation": "False. Post-hoc power is mathematically redundant with the p-value. Methodologists universally reject post-hoc power analysis. Sample size must be planned a priori before data collection commences."
+            }
+          ]
+        }
+      }
+    ],
+    "key": [
+      "Statistical power (1 - beta = 0.80) is the likelihood of detecting a true effect when one exists.",
+      "Underpowered studies risk Type II false-negative errors (missing real relationships).",
+      "Cohen established universal effect size benchmarks: t-tests (d = 0.2, 0.5, 0.8), ANOVA (f = 0.1, 0.25, 0.4), regression (f² = 0.02, 0.15, 0.35).",
+      "G*Power 3.1 calculates that a 5-predictor regression at medium effect (f² = 0.15) requires N = 92 usable responses.",
+      "Always oversample by 20% to 30% to insulate your dataset against survey non-response and missing data.",
+      "Never compute post-hoc power; always plan sample size a priori and document the protocol in Chapter 3."
+    ],
+    "mistakes": [
+      "Determining sample size by guessing or copying what an older student did without calculation.",
+      "Confusing Type I error (alpha = 0.05) with Type II error (beta = 0.20).",
+      "Distributing exactly 92 surveys when 92 are needed, resulting in an underpowered study after data screening.",
+      "Calculating post-hoc power after finding a non-significant p-value (statistically invalid).",
+      "Failing to cite G*Power (Faul et al., 2007) and Cohen (1988) in Chapter 3."
+    ]
+  }
+}

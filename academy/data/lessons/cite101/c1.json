@@ -1,0 +1,24 @@
+{
+  "id": "c1",
+  "course": "cite101",
+  "title": "Why We Cite and What Happens When We Don't",
+  "type": "video",
+  "minutes": 6,
+  "content": {
+    "vid": "V-CITE-01",
+    "len": "6 min",
+    "transcript": [
+      "Welcome to Module 1 of Citations and Referencing at Quick Services Academy. In this session, we answer the most fundamental question in academic writing: why do scholars cite, and what happens when you omit attribution in an empirical thesis?",
+      "Citing is not merely an administrative hurdle designed to satisfy university guidelines. Citations serve three profound academic functions. First, they trace the genealogical lineage of ideas, allowing examiners and peers to independently verify where an empirical claim originated.",
+      "Second, citations establish your own scholarly authority. When you assert that workplace burnout reduces nurse retention and cite Khan (2021) and Malik et al. (2022), you are no longer expressing a personal intuition—you are anchoring your research argument in peer-reviewed empirical evidence.",
+      "Third, citations establish an unmistakable boundary between the findings of existing scholars and your own unique research contribution. When external examiners evaluate your dissertation, they look for where the existing literature ends and where your original empirical data begins.",
+      "In this course, we will demystify APA 7th, Harvard, IEEE, and Vancouver styles, giving you the practical confidence to format every single citation and bibliography entry with absolute precision."
+    ],
+    "key": [
+      "Citations establish the empirical lineage of ideas and enable independent verification by external examiners.",
+      "Proper attribution protects the researcher from severe institutional plagiarism penalties under HEC policy.",
+      "Citations clearly delineate the boundary between existing scholarship and your original dissertation contribution.",
+      "Mastering reference management with tools like Zotero saves dozens of hours during thesis formatting."
+    ]
+  }
+}

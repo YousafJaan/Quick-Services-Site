@@ -1,0 +1,84 @@
+{
+  "id": "t4",
+  "course": "thesis101",
+  "title": "Writing the Research Proposal Step-by-Step",
+  "type": "read",
+  "minutes": 11,
+  "content": {
+    "quick": "A research proposal is a formal binding contract between you and your university. It establishes your research background, problem statement, research questions, theoretical framework, methodology, and ethical clearance protocol across 15 to 25 structured pages.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "A university research proposal functions as a methodological contract between the postgraduate candidate and the supervisory committee.",
+            "simple": "Your research proposal is a written promise to your university about what you will study and how you will do it.",
+            "plain": "A university research proposal functions as a methodological contract between the postgraduate candidate and the supervisory committee.",
+            "technical": "The academic research prospectus represents a binding epistemological and methodological covenant negotiated between the candidate and the institutional review board.",
+            "visual": {
+              "kind": "definition",
+              "title": "Proposal as Methodological Contract",
+              "data": {
+                "term": "Research Prospectus / Proposal",
+                "meaning": "A formalized academic document specifying research objectives, empirical methods, theoretical foundations, and feasibility metrics prior to empirical execution.",
+                "example": "Once signed by the Board of Advanced Studies and Research (BASR), your methodology is locked and protected."
+              },
+              "caption": "A formal proposal protects you from sudden supervisor demands to change your entire study later."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "Every section of the proposal must logically connect back to the primary research questions.",
+            "simple": "Every page in your proposal must connect straight to the main questions you want to answer.",
+            "plain": "Every section of the proposal must logically connect back to the primary research questions.",
+            "technical": "Nomological alignment demands that every structural component—from theoretical grounding to operational instruments—directly services the primary research questions.",
+            "visual": {
+              "kind": "funnel",
+              "title": "Nomological Proposal Alignment",
+              "data": {
+                "stages": [
+                  { "label": "Research Question", "desc": "The central anchor of your study" },
+                  { "label": "Theoretical Framework", "desc": "The lens that explains the relationship" },
+                  { "label": "Hypotheses / Objectives", "desc": "Testable sub-claims" },
+                  { "label": "Methodological Measures", "desc": "Survey items or interview protocols" }
+                ]
+              },
+              "caption": "If any chapter or variable fails to align with the core research question, examiners will flag it."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "compare",
+          "title": "Proposal Structure vs Final Thesis",
+          "data": {
+            "columns": ["Research Proposal (15-25 Pages)", "Completed Thesis (100-180 Pages)"],
+            "rows": [
+              { "metric": "Tense", "col1": "Future tense ('Data will be gathered')", "col2": "Past tense ('Data were gathered')" },
+              { "metric": "Chapters", "col1": "Chapters 1, 2, 3 (Proposed)", "col2": "Chapters 1 to 5 (Executed & Discussed)" },
+              { "metric": "Data", "col1": "Pilot / Sampling plan only", "col2": "Complete statistical or qualitative findings" }
+            ]
+          },
+          "caption": "Remember: A proposal is written in future tense because the study has not yet taken place."
+        },
+        "check": {
+          "questions": [
+            {
+              "id": "q1",
+              "type": "single",
+              "q": "In which grammatical tense must the methodology section of a research proposal be written?",
+              "options": [
+                "Past tense ('Data were collected')",
+                "Future tense ('Data will be collected')",
+                "Present continuous ('Data are being collected')",
+                "Conditional past ('Data would have been collected')"
+              ],
+              "answer": 1,
+              "explanation": "Because the proposal is submitted before fieldwork begins, all methodological actions must be described in future tense."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

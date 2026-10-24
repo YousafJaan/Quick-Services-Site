@@ -1,0 +1,86 @@
+{
+  "id": "e2",
+  "course": "edit101",
+  "title": "Pass 1: Argument Flow, Section Headings & Transitions",
+  "type": "read",
+  "minutes": 11,
+  "content": {
+    "quick": "Structural editing ensures your thesis forms a continuous, unbroken chain of reasoning. Check heading hierarchy, cross-chapter narrative linkages, and ensure that every major claim is grounded in empirical or theoretical evidence.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "Structural editing evaluates the overarching rhetorical architecture of an academic dissertation before granular phrasing is addressed.",
+            "simple": "Structural editing means looking at the big picture of your thesis before worrying about spelling or small grammar mistakes.",
+            "plain": "Structural editing evaluates the overarching rhetorical architecture of an academic dissertation before granular phrasing is addressed.",
+            "technical": "Macro-structural manuscript appraisal prioritizes global argumentative coherence and teleological progression over localized micro-syntactic rectification.",
+            "visual": {
+              "kind": "funnel",
+              "title": "The Three-Tier Editing Hierarchy",
+              "data": {
+                "stages": [
+                  { "label": "Pass 1: Macro-Structure", "desc": "Thesis flow, chapter balance & logic" },
+                  { "label": "Pass 2: Meso-Paragraph", "desc": "Topic sentences, cohesion & evidence" },
+                  { "label": "Pass 3: Micro-Mechanics", "desc": "Syntax, punctuation, citations & style" }
+                ]
+              },
+              "caption": "Always edit from the top down. Fixing words in a chapter that needs deletion wastes hours."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "Every section heading must accurately signal the analytical task performed in the text below it.",
+            "simple": "Your subheadings must tell the reader exactly what is inside each section.",
+            "plain": "Every section heading must accurately signal the analytical task performed in the text below it.",
+            "technical": "Section taxonomic signifiers must exhibit rigorous functional mapping onto the empirical sub-routines executed within the corresponding textual unit.",
+            "visual": {
+              "kind": "compare",
+              "title": "Vague vs Analytical Headings",
+              "data": {
+                "columns": ["Vague Heading (Weak)", "Analytical Heading (Defense-Ready)"],
+                "rows": [
+                  { "metric": "Literature", "col1": "2.3 Leadership", "col2": "2.3 Transformational Leadership and Faculty Retention in Higher Education" },
+                  { "metric": "Methodology", "col1": "3.4 Data", "col2": "3.4 Multi-Stage Stratified Sampling Frame and Sample Size Determination" },
+                  { "metric": "Discussion", "col1": "5.2 Discussion", "col2": "5.2 Theoretical Implications: Validating Social Exchange Theory in South Asia" }
+                ]
+              },
+              "caption": "Informative headings guide examiners through your methodology without confusion."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "checklist",
+          "title": "Pass 1 Structural Audit Checklist",
+          "data": {
+            "items": [
+              "Does Chapter 1 introduce every construct analyzed in Chapters 4 and 5?",
+              "Are all APA 7th heading levels strictly formatted (Level 1 Centered Bold, Level 2 Left Bold)?",
+              "Does the final paragraph of each chapter provide a bridge transition to the next?",
+              "Are chapter word counts balanced according to the university guidelines?"
+            ]
+          },
+          "caption": "Verify all structural requirements before starting sentence-level editing."
+        },
+        "check": {
+          "questions": [
+            {
+              "id": "q1",
+              "type": "single",
+              "q": "Why is it inefficient to correct punctuation and grammar before completing structural editing?",
+              "options": [
+                "Because supervisors prefer unedited grammar",
+                "Because whole paragraphs or sections may be deleted or reorganized during structural revisions",
+                "Because grammar rules change between thesis chapters",
+                "Because punctuation does not matter in academic writing"
+              ],
+              "answer": 1,
+              "explanation": "If a section is logically redundant and gets removed or rewritten during structural editing, any time spent polishing its commas is completely wasted."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

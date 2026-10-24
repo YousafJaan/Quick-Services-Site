@@ -1,0 +1,16 @@
+{
+  "id": "l3",
+  "course": "lit-search",
+  "title": "Multi-Database Boolean Query Builder",
+  "type": "visual",
+  "minutes": 12,
+  "content": {
+    "intro": "Use the interactive Boolean Builder below to construct structured search strings. Type your primary concepts and watch the syntax engine generate syntax-validated queries ready for Google Scholar, Scopus, Web of Science, and PubMed.",
+    "widget": "boolean",
+    "key": [
+      "Always group your synonyms inside parentheses: (term1 OR term2 OR term3).",
+      "Connect separate conceptual dimensions using capital 'AND'.",
+      "Test your search string in multiple academic engines to verify recall and precision."
+    ]
+  }
+}

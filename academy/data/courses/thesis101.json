@@ -1,0 +1,178 @@
+{
+  "id": "thesis101",
+  "title": "Thesis Writing 101",
+  "tagline": "From topic selection to an approved proposal and defense-ready thesis.",
+  "category": "Research Design",
+  "level": "All Levels",
+  "minutes": 215,
+  "outcomes": [
+    "Formulate an empirical research question using the FINER framework.",
+    "Structure an empirical thesis across five proportional chapters.",
+    "Synthesize empirical literature thematically instead of listing summaries.",
+    "Navigate supervisor feedback, timeline management, and departmental defense expectations."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: Finding Your Question & The Proposal",
+      "description": "Transform broad research interests into focused, defensible research problems.",
+      "lessons": [
+        {
+          "id": "t1",
+          "title": "What Makes a Thesis Topic Work?",
+          "type": "read",
+          "minutes": 10
+        },
+        {
+          "id": "t2",
+          "title": "The Topic Narrowing Funnel",
+          "type": "visual",
+          "widget": "funnel",
+          "minutes": 12
+        },
+        {
+          "id": "t3",
+          "title": "Crafting Defensible Problem Statements",
+          "type": "video",
+          "vid": "V-THESIS-01",
+          "minutes": 8
+        },
+        {
+          "id": "t4",
+          "title": "Writing the Research Proposal Step-by-Step",
+          "type": "read",
+          "minutes": 11
+        },
+        {
+          "id": "t5",
+          "title": "Module 1 Assessment: Topic & Proposal Mastery",
+          "type": "quiz",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Chapter Architecture & Literature Review",
+      "description": "Establish word budgets and synthesize scholarly sources thematically.",
+      "lessons": [
+        {
+          "id": "t6",
+          "title": "Thesis Word Budget & Chapter Planner",
+          "type": "visual",
+          "widget": "planner",
+          "minutes": 10
+        },
+        {
+          "id": "t7",
+          "title": "The Synthesis Matrix: Connecting Studies Thematically",
+          "type": "read",
+          "minutes": 12
+        },
+        {
+          "id": "t8",
+          "title": "Avoiding the Annotated Bibliography Trap",
+          "type": "video",
+          "vid": "V-THESIS-02",
+          "minutes": 7
+        },
+        {
+          "id": "t9",
+          "title": "Writing the Literature Review Chapter",
+          "type": "read",
+          "minutes": 11
+        },
+        {
+          "id": "t10",
+          "title": "Module 2 Assessment: Literature Review Synthesis",
+          "type": "quiz",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Methodology, Results & Discussion",
+      "description": "Align research designs with empirical questions and interpret data effectively.",
+      "lessons": [
+        {
+          "id": "t11",
+          "title": "Aligning Research Questions with Methodology",
+          "type": "read",
+          "minutes": 12
+        },
+        {
+          "id": "t12",
+          "title": "Reporting Quantitative & Qualitative Findings",
+          "type": "video",
+          "vid": "V-THESIS-03",
+          "minutes": 8
+        },
+        {
+          "id": "t13",
+          "title": "Writing the Discussion: Interpreting vs Repeating Results",
+          "type": "read",
+          "minutes": 12
+        },
+        {
+          "id": "t14",
+          "title": "Module 3 Assessment: Methods & Discussion",
+          "type": "quiz",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Introduction, Conclusion & Three-Pass Editing",
+      "description": "Frame your research contribution and execute rigorous structural passes.",
+      "lessons": [
+        {
+          "id": "t15",
+          "title": "Writing Abstract, Introduction & Conclusion Last",
+          "type": "read",
+          "minutes": 11
+        },
+        {
+          "id": "t16",
+          "title": "The Three-Pass Thesis Submission Checklist",
+          "type": "visual",
+          "widget": "checklist",
+          "minutes": 10
+        },
+        {
+          "id": "t17",
+          "title": "The Final Polish Before Supervisor Submission",
+          "type": "video",
+          "vid": "V-THESIS-04",
+          "minutes": 8
+        },
+        {
+          "id": "t18",
+          "title": "Module 4 Assessment: Final Chapter Polish",
+          "type": "quiz",
+          "minutes": 10
+        }
+      ]
+    },
+    {
+      "id": "m5",
+      "title": "Module 5: Supervisor Dynamics & Final Check",
+      "description": "Manage institutional feedback loops and verify readiness for examination.",
+      "lessons": [
+        {
+          "id": "t19",
+          "title": "Navigating Supervisor Feedback, Delays & Disagreements",
+          "type": "read",
+          "minutes": 11
+        },
+        {
+          "id": "t20",
+          "title": "Thesis Writing 101 Comprehensive Final Check",
+          "type": "quiz",
+          "minutes": 20
+        }
+      ]
+    }
+  ]
+}

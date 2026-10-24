@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Quick Services Academy — Design Tokens
+   Light Theme System Reverse-Engineered from Claude Academy (academy.claude.com)
+   Warm parchment canvas, soft paper cards, refined terracotta/clay accents
+   ========================================================================== */
+
+:root {
+  /* Surfaces & Canvas (Claude Academy Warm Light Paper System) */
+  --qsa-bg-page: #faf9f5;             /* Warm parchment cream canvas */
+  --qsa-bg-sidebar: #f2f0e9;          /* Soft warm stone for sidebars & rails */
+  --qsa-bg-card: #ffffff;             /* Crisp white paper card */
+  --qsa-bg-elevated: #fbfbf9;         /* Elevated panel */
+  --qsa-bg-subtle: #f5f4ef;           /* Soft muted container fill */
+  --qsa-bg-fill: #ece9df;             /* Active pill / tab background */
+  --qsa-bg-fill-hover: #e3e1d7;       /* Hover state fill */
+
+  /* Text & Ink (Warm Charcoal Scale — No Harsh #000) */
+  --qsa-text-primary: #141413;        /* Deep charcoal ink */
+  --qsa-text-secondary: #52514e;      /* Muted readable body ink */
+  --qsa-text-muted: #73726c;          /* Secondary metadata gray */
+  --qsa-text-tertiary: #a5a49a;       /* Subtle caption ink */
+
+  /* Brand Accents (Claude Clay & Quick Services Signature Warm Orange) */
+  --qsa-accent-clay: #d97757;         /* Claude terracotta clay */
+  --qsa-accent-clay-dark: #c6613f;    /* Emphasized clay */
+  --qsa-accent-orange: #ff6b2c;       /* Quick Services brand orange */
+  --qsa-accent-orange-hover: #e55a1f;
+  --qsa-accent-orange-soft: rgba(255, 107, 44, 0.08);
+  --qsa-accent-peach: #f4ae94;
+  --qsa-accent-peach-soft: #fcf4f0;   /* Light peach card tint */
+
+  /* Hairlines, Rings & Borders (Soft & Non-Contrasting) */
+  --qsa-border-line: rgba(31, 30, 29, 0.08);     /* Subtle hairline divider */
+  --qsa-border-card: rgba(31, 30, 29, 0.10);     /* Soft card ring */
+  --qsa-border-strong: rgba(31, 30, 29, 0.18);   /* Input & interactive border */
+  --qsa-focus-ring: #d97757;                     /* Accessible focus glow */
+
+  /* Status Colors (Muted Botanical Tones) */
+  --qsa-status-success: #1b873f;
+  --qsa-status-success-bg: #f0f9ef;
+  --qsa-status-success-border: #d0eccd;
+  --qsa-status-danger: #c53030;
+  --qsa-status-danger-bg: #fdf2f2;
+  --qsa-status-danger-border: #fadada;
+  --qsa-status-warning: #b77700;
+  --qsa-status-warning-bg: #fefcf0;
+  --qsa-status-warning-border: #faebd0;
+  --qsa-status-info: #2a78d6;
+  --qsa-status-info-bg: #f0f7fe;
+  --qsa-status-info-border: #cde2fb;
+
+  /* Highlights */
+  --qsa-hl-yellow: rgba(250, 227, 184, 0.6);
+  --qsa-hl-green: rgba(202, 234, 199, 0.6);
+  --qsa-hl-blue: rgba(205, 226, 251, 0.6);
+  --qsa-hl-clay: rgba(247, 216, 203, 0.6);
+
+  /* Premium High-Contrast Dark Gradient Tokens for Active Option States */
+  --qsa-grad-dark-active: linear-gradient(135deg, #181716 0%, #282724 100%);
+  --qsa-grad-dark-hover: linear-gradient(135deg, #242321 0%, #353330 100%);
+  --qsa-shadow-dark-active: 0 2px 8px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  --qsa-text-dark-active: #faf9f5;
+
+  /* Typography Pairing (Claude Academy: Editorial Newsreader Serif Headings + Modern Sans Body) */
+  --qsa-font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --qsa-font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --qsa-font-mono: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+
+  /* Crisp Edge Radii */
+  --qsa-radius-xs: 4px;
+  --qsa-radius-sm: 6px;
+  --qsa-radius-md: 8px;
+  --qsa-radius-lg: 12px;
+  --qsa-radius-card: 14px;
+  --qsa-radius-modal: 16px;
+  --qsa-radius-pill: 999px;
+
+  /* Shadows (Claude Academy Soft Card Rings) */
+  --qsa-shadow-card: inset 0 0 0 1px var(--qsa-border-card), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --qsa-shadow-lift: inset 0 0 0 1px rgba(217, 119, 87, 0.3), 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+  --qsa-shadow-modal: 0 24px 48px -12px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --qsa-shadow-dropdown: 0 10px 25px -5px rgba(0, 0, 0, 0.08), inset 0 0 0 1px var(--qsa-border-line);
+
+  /* Animation Physics (Spring & Snap Curves) */
+  --qsa-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --qsa-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --qsa-dur-fast: 150ms;
+  --qsa-dur-base: 220ms;
+  --qsa-dur-slow: 350ms;
+
+  /* Layout Constraints */
+  --qsa-max-width: 1200px;
+  --qsa-narrow-width: 820px;
+  --qsa-header-height: 64px;
+}

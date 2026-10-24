@@ -1,0 +1,577 @@
+{
+  "id": "t1",
+  "course": "thesis101",
+  "title": "What Makes a Thesis Topic Work?",
+  "type": "read",
+  "minutes": 10,
+  "content": {
+    "quick": "A defensible thesis topic must be strictly bounded across population, variables, and geographic context. It must satisfy the five FINER criteria—Feasible, Interesting, Novel, Ethical, and Relevant—before you invest months in data collection.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "Every successful academic thesis begins with a research problem that is both empirically investigable and clearly bounded.",
+            "simple": "A good thesis begins with a clear, specific problem that you can actually measure and finish on time.",
+            "plain": "Every successful academic thesis begins with a research problem that is both empirically investigable and clearly bounded.",
+            "technical": "A defensible dissertation inquiry requires an operationalized empirical problem circumscribed by explicit epistemological boundaries and measurable constructs.",
+            "visual": {
+              "kind": "definition",
+              "title": "Empirically Investigable Problem",
+              "data": {
+                "term": "Bounded Problem",
+                "meaning": "A research gap with specific population, variables, and geographic constraints that can be measured within available time and resources.",
+                "example": "E.g., turnover intention among private secondary school teachers in Multan during 2025."
+              },
+              "caption": "A defensible topic specifies who, what, and where before data collection begins."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "Many postgraduate students make the mistake of selecting broad thematic areas rather than focused research questions.",
+            "simple": "Many university students pick a huge topic like 'AI in Education' instead of one small, direct question.",
+            "plain": "Many postgraduate students make the mistake of selecting broad thematic areas rather than focused research questions.",
+            "technical": "Postgraduate researchers frequently confound macro-thematic domains with granular, hypothetico-deductive problem formulations.",
+            "visual": {
+              "kind": "compare",
+              "title": "Thematic Area vs Research Question",
+              "data": {
+                "columns": ["Broad Thematic Area (Fails)", "Focused Question (Succeeds)"],
+                "rows": [
+                  { "metric": "Scope", "col1": "Artificial Intelligence in Higher Education", "col2": "Does generative AI usage mediate student self-efficacy in BZU computer science cohorts?" },
+                  { "metric": "Boundary", "col1": "Infinite and unmanageable", "col2": "Strictly defined population and variables" },
+                  { "metric": "Defense Risk", "col1": "Examiners find endless gaps", "col2": "Examiners evaluate explicit boundary conditions" }
+                ]
+              },
+              "caption": "Narrowing your inquiry protects you from unanswerable examiner questions."
+            }
+          },
+          {
+            "id": "s3",
+            "text": "A broad topic invites endless criticism from examiners because you cannot thoroughly review every relevant publication.",
+            "simple": "If your topic is too big, examiners will attack you because you cannot read thousands of papers.",
+            "plain": "A broad topic invites endless criticism from examiners because you cannot thoroughly review every relevant publication.",
+            "technical": "An unbounded thematic scope exposes the candidate to epistemological vulnerabilities, rendering exhaustive literature synthesis methodologically intractable.",
+            "visual": {
+              "kind": "funnel",
+              "title": "The Scope Reduction Funnel",
+              "data": {
+                "stages": [
+                  { "label": "Broad Domain", "desc": "10,000+ papers (Overwhelming)" },
+                  { "label": "Specific Context", "desc": "500 papers (Emerging clarity)" },
+                  { "label": "Targeted Population", "desc": "80 papers (Manageable)" },
+                  { "label": "Empirical Problem", "desc": "25 core papers (Defensible thesis space)" }
+                ]
+              },
+              "caption": "Filtering down to a manageable literature base is essential for mastery."
+            }
+          },
+          {
+            "id": "s4",
+            "text": "When you establish clear boundaries, you protect yourself by defining exactly what your study covers and what lies outside its scope.",
+            "simple": "When you set boundaries, you tell the committee exactly who you are testing and who you are leaving out.",
+            "plain": "When you establish clear boundaries, you protect yourself by defining exactly what your study covers and what lies outside its scope.",
+            "technical": "Articulating explicit delimitations circumscribes inferential validity and insulates the researcher against methodological scope creep.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Anatomy of a Defensible Scope Statement",
+              "data": {
+                "lead": "This dissertation examines:",
+                "callouts": [
+                  { "text": "[Job burnout and turnover intention]", "label": "Defined Variables" },
+                  { "text": "[among permanent registered nurses]", "label": "Target Population" },
+                  { "text": "[in tertiary public hospitals in South Punjab]", "label": "Geographic Boundary" }
+                ]
+              },
+              "caption": "Explicit boundaries give examiners clear criteria for evaluation."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "hierarchy",
+          "title": "The Three Pillars of Topic Defensibility",
+          "data": {
+            "root": "Defensible Research Topic",
+            "children": [
+              {
+                "name": "Target Population",
+                "desc": "Accessible, distinct, and ethically reachable group"
+              },
+              {
+                "name": "Measurable Variables",
+                "desc": "Constructs with established, validated measurement instruments"
+              },
+              {
+                "name": "Contextual Boundary",
+                "desc": "Defined geographical or organizational setting"
+              }
+            ]
+          },
+          "caption": "All three pillars must stand together for a proposal to pass departmental review."
+        },
+        "explain": "Think of your topic as a fenced garden rather than an open forest. If you try to study all of healthcare or all of education, you will drown in data. Define the exact people, the exact town or university, and the exact two or three things you want to measure.",
+        "check": {
+          "topic": "topic-bounding",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "Which of the following represents an appropriately bounded research problem for an MS thesis?",
+              "options": [
+                "The psychological consequences of modern digital life on youth",
+                "How smartphone screen time correlates with sleep quality among undergraduate medical students in Lahore",
+                "Problems facing higher education institutions across Asia",
+                "An investigation into corporate management and leadership styles"
+              ],
+              "answer": 1,
+              "hint": "Identify the option that specifies distinct variables, a clear population, and a local context.",
+              "explanation": "Option 2 specifies exact variables (screen time and sleep quality), an accessible population (undergraduate medical students), and a geographic boundary (Lahore). The other options are too broad to investigate empirically within a thesis timeframe."
+            },
+            {
+              "type": "trueFalse",
+              "q": "True or False: Broad topics are safer for students because they allow you to change direction during data collection.",
+              "options": [
+                "True — broad topics provide greater flexibility if your initial plan fails.",
+                "False — broad topics prevent comprehensive literature synthesis and invite harsh examiner critiques."
+              ],
+              "answer": 1,
+              "hint": "Consider how examiners assess the literature review chapter.",
+              "explanation": "False. Broad topics make it impossible to write a thorough literature review and prevent you from establishing valid empirical boundaries."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p2",
+        "sentences": [
+          {
+            "id": "s5",
+            "text": "Academic evaluation boards evaluate proposed research topics using the established FINER framework.",
+            "simple": "University committees check research topics using a 5-step rule called FINER: Feasible, Interesting, Novel, Ethical, and Relevant.",
+            "plain": "Academic evaluation boards evaluate proposed research topics using the established FINER framework.",
+            "technical": "Institutional supervisory boards appraise prospective investigations against the psychometric and logistical parameters of the FINER heuristic.",
+            "visual": {
+              "kind": "checklist",
+              "title": "The FINER Criteria Overview",
+              "data": {
+                "items": [
+                  { "label": "F — Feasible", "desc": "Can be completed within time, budget, and sample constraints.", "checked": true },
+                  { "label": "I — Interesting", "desc": "Engages both the researcher and the broader academic discipline.", "checked": true },
+                  { "label": "N — Novel", "desc": "Extends, refutes, or contextualizes existing knowledge.", "checked": true },
+                  { "label": "E — Ethical", "desc": "Meets institutional review board guidelines with minimal subject risk.", "checked": true },
+                  { "label": "R — Relevant", "desc": "Advances scholarly theory or practical decision-making.", "checked": true }
+                ]
+              },
+              "caption": "A proposal that fails even one FINER test faces rejection or heavy revision."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "Feasibility is the most critical constraint because a brilliant topic is useless if you cannot recruit enough participants or finish before your university deadline.",
+            "simple": "Being doable is the most important thing, because a great idea is useless if you cannot find enough people to answer your questions.",
+            "plain": "Feasibility is the most critical constraint because a brilliant topic is useless if you cannot recruit enough participants or finish before your university deadline.",
+            "technical": "Methodological feasibility constitutes the primary deterministic constraint, as theoretical elegance remains non-viable without requisite sampling access and temporal margins.",
+            "visual": {
+              "kind": "scale",
+              "title": "Feasibility Risk Continuum",
+              "data": {
+                "min": "Low Risk (Feasible)",
+                "max": "High Risk (Fatal Delay)",
+                "markers": [
+                  { "pos": 20, "label": "Enrolled University Peers", "desc": "High response rate, verified access" },
+                  { "pos": 50, "label": "Regional School Teachers", "desc": "Requires formal departmental permissions" },
+                  { "pos": 85, "label": "C-Suite Corporate Executives", "desc": "Extremely low response rates; severe timeline risk" }
+                ]
+              },
+              "caption": "Assess participant accessibility before finalizing your proposal draft."
+            }
+          },
+          {
+            "id": "s7",
+            "text": "Novelty does not require discovering an entirely new scientific law; in a Master's thesis, it usually means testing an established model in a new context or population.",
+            "simple": "You do not need to invent a brand new theory; for a Master's degree, you can test a known theory on a new group of people in your city.",
+            "plain": "Novelty does not require discovering an entirely new scientific law; in a Master's thesis, it usually means testing an established model in a new context or population.",
+            "technical": "In Master's level scholarship, novelty is operationalized via contextual replication, boundary condition interrogation, and nomological network extension rather than radical paradigm discovery.",
+            "visual": {
+              "kind": "process",
+              "title": "How Master's Level Novelty is Established",
+              "data": {
+                "inputs": ["Established Western Theory", "Validated Scale"],
+                "transformation": "Rigorous Contextual Application (e.g. Pakistani SME Sector)",
+                "outputs": ["Empirical Contextual Findings", "Nuanced Practical Recommendations"]
+              },
+              "caption": "Replicating and contextualizing established models provides defensible novelty."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "Finally, the topic must remain ethically sound by securing informed participant consent and safeguarding confidential respondent data.",
+            "simple": "Lastly, your study must protect people by getting their permission and keeping their private answers secret.",
+            "plain": "Finally, the topic must remain ethically sound by securing informed participant consent and safeguarding confidential respondent data.",
+            "technical": "Rigorous ethical compliance mandates formal institutional review board adjudication, informed voluntary consent protocols, and strict data de-identification procedures.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Ethical Research Protocols",
+              "data": {
+                "dos": [
+                  "Provide a clear written informed consent form",
+                  "Anonymize all survey and interview response data",
+                  "Secure formal institutional review board approval prior to data collection"
+                ],
+                "donts": [
+                  "Collect data before your research proposal is formally approved",
+                  "Coerce subordinate employees or students into participation",
+                  "Store identifiable personal details on unencrypted devices"
+                ]
+              },
+              "caption": "Ethics violations can invalidate an entire dataset and delay graduation."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "matrix2x2",
+          "title": "Topic Selection Decision Matrix: Feasibility vs Relevance",
+          "data": {
+            "xAxis": "Methodological Feasibility (Low → High)",
+            "yAxis": "Theoretical Relevance (Low → High)",
+            "q1": { "title": "Golden Thesis Zone", "desc": "High Feasibility & High Relevance. Select this.", "status": "optimal" },
+            "q2": { "title": "Academic Trap", "desc": "High Relevance but Unfeasible. Will cause thesis delays.", "status": "danger" },
+            "q3": { "title": "Trivial Pursuit", "desc": "Easy to do but zero theoretical contribution. May fail defense.", "status": "warning" },
+            "q4": { "title": "Dead End", "desc": "Low Feasibility and Low Relevance. Reject immediately.", "status": "reject" }
+          },
+          "caption": "Aim directly for the Golden Thesis Zone in Quadrant 1."
+        },
+        "explain": "The FINER checklist is your safety net. Before you fall in love with an idea, ask: Do I actually have the permissions, the budget, and the time to reach these people? Novelty doesn't mean inventing a new planet; applying an existing leadership model to local schools in your district is perfectly acceptable for an MS thesis.",
+        "check": {
+          "topic": "finer-framework",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "multi",
+              "q": "Which of the following represent valid, defensible ways to achieve novelty in an MS or MPhil thesis?",
+              "options": [
+                "Applying an established organizational model to a previously unstudied local sector in Pakistan",
+                "Inventing a brand new statistical formula without theoretical grounding",
+                "Testing whether an existing relationship holds true during a period of economic crisis",
+                "Investigating a mediating variable that existing studies recommended for future research"
+              ],
+              "answer": [0, 2, 3],
+              "hint": "Select all options that build responsibly upon established literature rather than fabricating new mechanics.",
+              "explanation": "Contextual replication, boundary testing during crisis, and testing recommended mediating variables are legitimate, respected avenues for Master's level research novelty."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "sentences": [
+          {
+            "id": "s9",
+            "text": "A frequent hazard in research proposals is claiming that nobody has ever studied your topic before.",
+            "simple": "A big mistake students make is writing that 'no one has ever studied this before'.",
+            "plain": "A frequent hazard in research proposals is claiming that nobody has ever studied your topic before.",
+            "technical": "A pervasive heuristic vulnerability in nascent proposals is asserting an absolute empirical vacuum regarding the phenomenon under investigation.",
+            "visual": {
+              "kind": "quote",
+              "title": "The Golden Rule of Research Gaps",
+              "data": {
+                "text": "A total absence of literature is rarely a goldmine; it is usually a warning sign that the topic lacks theoretical substance or practical feasibility.",
+                "author": "Quick Services Academic Advisory"
+              },
+              "caption": "Ground your work in an established scholarly conversation."
+            }
+          },
+          {
+            "id": "s10",
+            "text": "When students make this claim, examiners almost always interpret it as evidence of an incomplete or lazy literature search.",
+            "simple": "When you claim this, professors will think you simply did not search the internet or library properly.",
+            "plain": "When students make this claim, examiners almost always interpret it as evidence of an incomplete or lazy literature search.",
+            "technical": "Committees invariably deconstruct absolute gap assertions as symptomatic of bibliographic truncation or deficient Boolean search parameterization.",
+            "visual": {
+              "kind": "mistakeFix",
+              "title": "The 'No One Studied This' Misconception",
+              "data": {
+                "mistake": "Claiming: 'Extensive search reveals zero prior studies on this topic.'",
+                "why": "Examiners will find 10 relevant papers within five minutes on Google Scholar.",
+                "fix": "Frame as: 'While foundational studies examine X in Western contexts, limited empirical research explores this phenomenon within South Asian retail settings.'"
+              },
+              "caption": "Acknowledge adjacent literature to demonstrate scholarly thoroughness."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "If a topic truly has no prior literature, you will struggle to find validated measurement instruments or theoretical foundations for your dissertation.",
+            "simple": "If nobody has studied it, you will have no proven questionnaire to measure your variables and no established theory to explain them.",
+            "plain": "If a topic truly has no prior literature, you will struggle to find validated measurement instruments or theoretical foundations for your dissertation.",
+            "technical": "Complete theoretical absence severely impairs construct operationalization, depriving the researcher of validated psychometric scales and structural nomologies.",
+            "visual": {
+              "kind": "cycle",
+              "title": "The Isolated Topic Vulnerability Cycle",
+              "data": {
+                "steps": [
+                  { "label": "No Prior Literature", "desc": "No theoretical framework exists to guide hypotheses" },
+                  { "label": "No Validated Scales", "desc": "Forced to invent unvalidated questionnaire items" },
+                  { "label": "Examiner Rejection", "desc": "Committee rejects measurement instrument validity" },
+                  { "label": "Restarting Project", "desc": "Six to twelve months of research time lost" }
+                ]
+              },
+              "caption": "Building upon validated scales prevents fatal measurement invalidity."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "Position your research as a logical continuation of an existing academic conversation rather than an isolated island.",
+            "simple": "Connect your research to what other professors have already written, like joining an ongoing conversation.",
+            "plain": "Position your research as a logical continuation of an existing academic conversation rather than an isolated island.",
+            "technical": "Situate your empirical inquiry as a dialectical and incremental contribution to an established epistemic discourse.",
+            "visual": {
+              "kind": "flow",
+              "title": "Positioning Your Contribution in the Scholarly Conversation",
+              "data": {
+                "steps": [
+                  { "title": "Established Foundation", "desc": "Foundational Theory (e.g., Social Exchange Theory)" },
+                  { "title": "Adjacent Literature", "desc": "Recent empirical studies examining core constructs" },
+                  { "title": "Your Specific Extension", "desc": "Testing boundary conditions in your local sample" }
+                ]
+              },
+              "caption": "Show how your study connects back to respected academic roots."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "beforeAfter",
+          "title": "Proposal Problem Statement Framing",
+          "data": {
+            "before": {
+              "title": "Flawed Gap Formulation",
+              "content": "No researcher in Pakistan has ever studied artificial intelligence adoption in rural banking. Therefore, this study fills a huge gap."
+            },
+            "after": {
+              "title": "Defensible Scholarly Formulation",
+              "content": "While Davis's Technology Acceptance Model has been extensively validated in metropolitan banking, empirical evidence regarding its explanatory power in rural microfinance remains sparse."
+            }
+          },
+          "caption": "Anchor your gap in validated theory rather than asserting an absolute absence of literature."
+        },
+        "explain": "Never tell an examiner 'no one has ever studied this.' In 99% of cases, someone has studied something very similar, and saying otherwise tells the examiner you didn't search properly. Instead, say: 'Professors A and B studied this in Europe, and Dr C looked at it in banking, but we don't yet know how it behaves in Pakistani schools.'",
+        "check": {
+          "topic": "literature-gaps",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "Why is claiming 'no literature exists on this topic' dangerous during a thesis proposal defense?",
+              "options": [
+                "It makes the thesis proposal too short to read.",
+                "Examiners will perceive it as a superficial literature search and challenge your academic diligence.",
+                "It automatically causes Turnitin similarity scores to exceed 50%.",
+                "It violates APA 7th formatting guidelines."
+              ],
+              "answer": 1,
+              "hint": "Consider how examiners assess a candidate's mastery of the scholarly field.",
+              "explanation": "Claiming that no literature exists is almost always a sign that the student used ineffective search terms or conducted an incomplete literature review. Examiners expect you to identify adjacent, foundational research."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "sentences": [
+          {
+            "id": "s13",
+            "text": "Before you submit a research proposal, you must physically confirm that you have reliable access to your required data sample.",
+            "simple": "Before turning in your proposal, make sure the company or school will actually let you collect their data.",
+            "plain": "Before you submit a research proposal, you must physically confirm that you have reliable access to your required data sample.",
+            "technical": "Prior to formal prospectus defense, empirical viability mandates empirical verification of gatekeeper access to the defined sampling frame.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Pre-Proposal Sample Verification Checklist",
+              "data": {
+                "items": [
+                  { "label": "Organizational Permission", "desc": "Signed gatekeeper letter or verbal consent from facility head", "checked": true },
+                  { "label": "Participant Population Size", "desc": "Confirmed sampling frame meets minimum sample size requirements", "checked": true },
+                  { "label": "Distribution Protocol", "desc": "Established method to deliver physical or electronic survey instruments", "checked": true }
+                ]
+              },
+              "caption": "Do not wait until proposal approval to discover that your target sample is inaccessible."
+            }
+          },
+          {
+            "id": "s14",
+            "text": "Dozens of research students face months of delay because an organization verbally agreed to share data but refused once formal data collection began.",
+            "simple": "Many students get delayed for months because a manager said 'yes' informally, but then said 'no' when the real survey arrived.",
+            "plain": "Dozens of research students face months of delay because an organization verbally agreed to share data but refused once formal data collection began.",
+            "technical": "Candidates routinely incur extensive programmatic delays when informal managerial concurrence fails to survive institutional corporate governance scrutiny.",
+            "visual": {
+              "kind": "timeline",
+              "title": "The Gatekeeper Refusal Delay Trap",
+              "data": {
+                "events": [
+                  { "time": "Month 1", "title": "Verbal Agreement", "desc": "HR manager informally says 'yes, you can survey our staff'" },
+                  { "time": "Month 4", "title": "Proposal Approved", "desc": "University formally registers the specific company name" },
+                  { "time": "Month 5", "title": "Corporate Refusal", "desc": "Company policy blocks employee data release; project stalls" },
+                  { "time": "Month 8", "title": "Board Revision", "desc": "Months wasted applying for a formal change of topic" }
+                ]
+              },
+              "caption": "Protect your academic timeline by obtaining written gatekeeper consent early."
+            }
+          },
+          {
+            "id": "s15",
+            "text": "Always secure written permission or a formal gatekeeper letter from participating institutions before defending your proposal.",
+            "simple": "Always get a signed, official letter on company letterhead giving you permission before your proposal defense.",
+            "plain": "Always secure written permission or a formal gatekeeper letter from participating institutions before defending your proposal.",
+            "technical": "Procuring an institutional gatekeeper letter bearing administrative endorsement and data governance clearance is prerequisite to proposal registration.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Essential Elements of an Institutional Gatekeeper Letter",
+              "data": {
+                "lead": "The letter must confirm:",
+                "callouts": [
+                  { "text": "[Explicit permission to survey or interview employees]", "label": "Scope of Access" },
+                  { "text": "[Commitment to protect organizational anonymity]", "label": "Confidentiality Clause" },
+                  { "text": "[Signature and official stamp of authorized department head]", "label": "Institutional Authority" }
+                ]
+              },
+              "caption": "Keep a signed gatekeeper letter in your appendix to satisfy external examiners."
+            }
+          },
+          {
+            "id": "s16",
+            "text": "Having a backup sampling strategy in place ensures that unforeseen access hurdles will not derail your graduation timeline.",
+            "simple": "Always keep a Plan B school or company ready in case your first choice cancels.",
+            "plain": "Having a backup sampling strategy in place ensures that unforeseen access hurdles will not derail your graduation timeline.",
+            "technical": "Formulating an ex-ante contingency sampling architecture safeguards longitudinal project milestones against exogenous access failure.",
+            "visual": {
+              "kind": "decisionTree",
+              "title": "Sampling Contingency Protocol",
+              "data": {
+                "condition": "Primary Target Organization Grants Access?",
+                "yes": "Proceed immediately with scheduled data collection plan.",
+                "no": "Activate pre-identified secondary sampling frame (e.g. cross-sectional industry association)."
+              },
+              "caption": "A planned contingency strategy prevents panic when organizational policies change."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "stack",
+          "title": "Data Access Risk Mitigation Hierarchy",
+          "data": {
+            "layers": [
+              { "name": "Tier 3: Contingency Backup Frame", "desc": "Alternative institutions identified in advance" },
+              { "name": "Tier 2: Formal Written Gatekeeper Letter", "desc": "Signed and stamped consent from institutional leadership" },
+              { "name": "Tier 1: Initial Relationship & Pilot Rapport", "desc": "Early contact with HR or departmental gatekeepers" }
+            ]
+          },
+          "caption": "Layer your sample access protections before defending your research proposal."
+        },
+        "explain": "Never assume you can collect data just because a friend or uncle works at an office. When official questionnaires arrive, companies often get nervous about privacy and shut the door. Always get a signed letter from the manager before your university approves your topic, and always have a Plan B company ready.",
+        "check": {
+          "topic": "sample-access",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "trueFalse",
+              "q": "True or False: An informal verbal promise from an office manager is sufficient justification to register a thesis proposal.",
+              "options": [
+                "True — verbal agreements are standard academic protocol in preliminary stages.",
+                "False — organizations frequently revoke informal access, requiring written institutional consent."
+              ],
+              "answer": 1,
+              "hint": "Think about what happens if personnel change at the target company.",
+              "explanation": "False. Personnel changes or corporate compliance policies routinely revoke verbal permissions. Securing a formal gatekeeper letter protects you from fatal project delays."
+            }
+          ]
+        }
+      }
+    ],
+    "deep": [
+      {
+        "title": "Go deeper: The FINER Framework in Institutional Proposal Review",
+        "blocks": [
+          {
+            "id": "dp1",
+            "sentences": [
+              {
+                "id": "ds1",
+                "text": "The FINER criteria (Feasible, Interesting, Novel, Ethical, Relevant) are used globally and across Pakistani universities to evaluate postgraduate research proposals.",
+                "visual": {
+                  "kind": "hierarchy",
+                  "title": "The Institutional Review Matrix",
+                  "data": {
+                    "root": "Proposal Board Evaluation",
+                    "children": [
+                      { "name": "Methodological Feasibility", "desc": "Is the sample size calculated correctly using Cochran or G*Power?" },
+                      { "name": "Theoretical Grounding", "desc": "Does the proposal cite current, peer-reviewed journal literature?" },
+                      { "name": "Ethical Compliance", "desc": "Does the study protect human participants and adhere to HEC integrity policies?" }
+                    ]
+                  },
+                  "caption": "Align your proposal with the explicit rubric used by your departmental committee."
+                }
+              },
+              {
+                "id": "ds2",
+                "text": "When framing your proposal for departmental committees, demonstrate that your sample size has been calculated using standard power analysis rather than guesswork.",
+                "visual": {
+                  "kind": "quote",
+                  "title": "Examiner Expectation on Sample Justification",
+                  "data": {
+                    "text": "Guessing your sample size is the quickest route to proposal rejection. Specify your statistical power (0.80), alpha level (0.05), and expected effect size using G*Power.",
+                    "author": "Quick Services Methodology Coaching"
+                  },
+                  "caption": "Statistical rigor in your proposal establishes immediate credibility."
+                }
+              }
+            ],
+            "visual": {
+              "kind": "scale",
+              "title": "Proposal Readiness Evaluation Scale",
+              "data": {
+                "min": "Unready (Rejection Likely)",
+                "max": "Defense Ready (Approval Likely)",
+                "markers": [
+                  { "pos": 25, "label": "Vague Topic", "desc": "Unbounded idea without validated instruments" },
+                  { "pos": 65, "label": "Drafted Proposal", "desc": "Literature gathered but sample access unverified" },
+                  { "pos": 95, "label": "Full FINER Alignment", "desc": "Bounded scope, validated scales, written access letter" }
+                ]
+              },
+              "caption": "Evaluate your own draft against this progression before scheduling your defense."
+            },
+            "explain": "Institutional proposal committees look at cold, hard facts: Do you have the numbers? Do you have the access letter? Do you have the scales? If you can demonstrate these three things, your defense will be calm and successful.",
+            "check": {
+              "topic": "finer-deep",
+              "confidence": true,
+              "questions": [
+                {
+                  "type": "single",
+                  "q": "What should accompany your sample size specification in an empirical proposal?",
+                  "options": [
+                    "A personal statement about why you enjoy the topic.",
+                    "A formal power analysis (e.g., G*Power or Cochran's formula) detailing alpha and effect size.",
+                    "A list of Wikipedia articles discussing the subject.",
+                    "A Turnitin report showing exactly 0% similarity."
+                  ],
+                  "answer": 1,
+                  "hint": "Identify the standard quantitative justification required by research evaluation boards.",
+                  "explanation": "Quantitative proposals require a formal power analysis or sampling formula calculation to prove that the study will have adequate statistical power to detect meaningful effects."
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "mistakes": [
+      "Choosing a topic solely because 'no one has written about it before'—often this means there is no theoretical foundation to build upon.",
+      "Relying on informal verbal permission from an organization instead of obtaining a written gatekeeper letter.",
+      "Formulating a problem statement that describes a broad societal issue rather than a measurable relationship between specific variables."
+    ],
+    "key": [
+      "A defensible thesis topic must have explicit boundaries defining the target population, measurable constructs, and local setting.",
+      "The FINER framework ensures your research can realistically be completed within university deadlines and ethical guidelines.",
+      "Confirm physical access to your participant sample in writing before defending your proposal."
+    ]
+  }
+}

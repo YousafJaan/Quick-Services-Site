@@ -1,0 +1,23 @@
+{
+  "id": "pls1",
+  "course": "smartpls",
+  "title": "When to Use PLS-SEM vs Covariance-Based CB-SEM",
+  "type": "video",
+  "minutes": 8,
+  "content": {
+    "len": "8 min",
+    "vid": "V-PLS-01",
+    "transcript": [
+      "Welcome to Course 8: SmartPLS 4 & Structural Equation Modeling. In this opening lecture, we resolve the decisive methodological debate: When should you use Partial Least Squares (PLS-SEM) and when should you use Covariance-Based SEM (AMOS / LISREL)?",
+      "Both methods belong to the second generation of multivariate data analysis, but they serve fundamentally distinct scientific philosophies. Covariance-Based SEM (CB-SEM) is a confirmatory, theory-testing technique that aims to minimize the difference between the sample covariance matrix and the theoretical covariance matrix. It strictly requires multivariate normal distributions and large sample sizes (typically N > 250).",
+      "Partial Least Squares (PLS-SEM), by contrast, is a variance-based, prediction-oriented approach. It maximizes the explained variance (R-squared) of the endogenous constructs. According to Hair, Hult, Ringle, and Sarstedt (2022), PLS-SEM is the superior choice when your research goal is exploratory theory development or prediction, when models are complex with multiple mediators or moderators, when data is non-normal, or when sample sizes are small to moderate.",
+      "In Pakistan universities, business and social science dissertations frequently utilize SmartPLS because empirical survey data in emerging markets almost always departs from strict multivariate normality."
+    ],
+    "key": [
+      "CB-SEM (AMOS) tests goodness-of-fit for established theories under strict multivariate normality assumptions.",
+      "PLS-SEM (SmartPLS 4) maximizes explained variance (R²) for prediction and exploratory research models.",
+      "Choose PLS-SEM when models contain complex mediating/moderating paths, formative constructs, or non-normal data.",
+      "Never claim PLS-SEM 'does not need any sample size'—it still requires adequate power determined by G*Power or minimum R² rules."
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "id": "edit101",
+  "title": "Proofreading & Academic Editing",
+  "tagline": "Transform rough thesis drafts into publication-ready academic manuscripts.",
+  "category": "Academic Writing",
+  "level": "Intermediate",
+  "minutes": 190,
+  "outcomes": [
+    "Execute the Three-Pass editing framework across argument structure, paragraphs, and sentences.",
+    "Eliminate nominalizations, wordiness, and bureaucratic academic fluff to achieve crisp prose.",
+    "Resolve common ESL grammatical errors including article omissions and subject-verb disagreements.",
+    "Format APA 7 tables, figures, and front matter to professional publication standards."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: The Three-Pass Editing Architecture",
+      "description": "Separate global structural evaluation from granular sentence-level polishing.",
+      "lessons": [
+        { "id": "e1", "title": "The Structural, Paragraph, and Sentence Passes", "type": "video", "vid": "V-EDIT-01", "minutes": 7 },
+        { "id": "e2", "title": "Pass 1: Argument Flow, Section Headings & Transitions", "type": "read", "minutes": 11 },
+        { "id": "e3", "title": "Pass 2: Topic Sentences and Paragraph Cohesion", "type": "read", "minutes": 10 },
+        { "id": "e4", "title": "Module 1 Assessment: Structural Editing", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Sentence-Level Clarity & Concision",
+      "description": "Techniques for pruning redundant words and strengthening academic verbs.",
+      "lessons": [
+        { "id": "e5", "title": "Cutting Nominalizations and Bureaucratic Fluff", "type": "read", "minutes": 12 },
+        { "id": "e6", "title": "Active vs Passive Voice in Empirical Papers", "type": "video", "vid": "V-EDIT-02", "minutes": 8 },
+        { "id": "e7", "title": "Eliminating Dangling Modifiers and Ambiguous Pronouns", "type": "read", "minutes": 11 },
+        { "id": "e8", "title": "Module 2 Assessment: Sentence Mechanics", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Grammar Traps for Second-Language Writers",
+      "description": "Direct solutions for English as a second language grammar and syntax hurdles.",
+      "lessons": [
+        { "id": "e9", "title": "Article Usage (A, An, The) in Academic Contexts", "type": "read", "minutes": 11 },
+        { "id": "e10", "title": "Subject-Verb Agreement in Complex Compound Sentences", "type": "read", "minutes": 11 },
+        { "id": "e11", "title": "Academic Tense Shift Across Chapters", "type": "video", "vid": "V-EDIT-03", "minutes": 7 },
+        { "id": "e12", "title": "Module 3 Assessment: ESL Academic Grammar", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Tables, Figures & Final Submission",
+      "description": "Format tables, inspect typography, and execute pre-binding verification.",
+      "lessons": [
+        { "id": "e13", "title": "APA 7th Table and Figure Formatting", "type": "read", "minutes": 11 },
+        { "id": "e14", "title": "Front Matter, Page Numbering & Heading Styles", "type": "read", "minutes": 10 },
+        { "id": "e15", "title": "Master Academic Submission Checklist", "type": "visual", "widget": "checklist", "minutes": 10 },
+        { "id": "e16", "title": "The Final PDF Inspection Routine", "type": "video", "vid": "V-EDIT-04", "minutes": 6 },
+        { "id": "e17", "title": "Proofreading Under Tight Submission Deadlines", "type": "read", "minutes": 9 },
+        { "id": "e18", "title": "Proofreading & Editing Comprehensive Final Check", "type": "quiz", "minutes": 20 }
+      ]
+    }
+  ]
+}

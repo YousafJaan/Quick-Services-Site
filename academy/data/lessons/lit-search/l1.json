@@ -1,0 +1,23 @@
+{
+  "id": "l1",
+  "course": "lit-search",
+  "title": "Developing Search Strings from Research Questions",
+  "type": "video",
+  "minutes": 7,
+  "content": {
+    "len": "7 min",
+    "vid": "V-LIT-01",
+    "transcript": [
+      "Welcome to Course 4: Literature Search & Systematic Review. In this video, we tackle the most common error research students make: typing natural language sentences directly into Google Scholar.",
+      "Academic databases are not conversational chat engines. They operate on Boolean indexing principles. If you type 'What are the main problems faced by female entrepreneurs in Punjab', the database attempts to match all eight words, filtering out hundreds of seminal publications.",
+      "To find comprehensive literature, you must break down your research question into core conceptual facets: Construct A (Female Entrepreneurship), Construct B (Financial Constraints), and Context (Developing Economies).",
+      "Next, generate exhaustive synonyms, related terms, and truncation stems for each facet. Finally, join synonyms within each facet with 'OR', and combine the facet blocks with 'AND'. This ensures you capture every relevant paper regardless of the specific terminology the author chose."
+    ],
+    "key": [
+      "Never type full natural language sentences into academic research databases.",
+      "Deconstruct research inquiries into distinct conceptual facets using the PICO / PCC framework.",
+      "Expand each facet with synonyms, international terminology, and root word wildcards (*).",
+      "Connect internal facet synonyms with 'OR', and join overarching facets with 'AND'."
+    ]
+  }
+}

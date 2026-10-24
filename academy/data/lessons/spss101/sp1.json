@@ -1,0 +1,23 @@
+{
+  "id": "sp1",
+  "course": "spss101",
+  "title": "Data View vs Variable View Demystified",
+  "type": "video",
+  "minutes": 8,
+  "content": {
+    "len": "8 min",
+    "vid": "V-SPSS-01",
+    "transcript": [
+      "Welcome to Course 7: SPSS Basics for Research Students. In this opening hands-on lecture, we explore the dual-interface architecture of IBM SPSS Statistics.",
+      "SPSS is built around two synchronized tabs located in the bottom-left corner of your screen: Data View and Variable View. Understanding their distinct functions is the first step toward error-free statistical analysis.",
+      "Variable View is your architectural blueprint. Each row in Variable View represents a single variable (such as Gender, Age, or Question 1 of your survey). Here you define the variable name, specify numeric or string types, assign value labels (such as 1 = Male, 2 = Female), and designate the measurement level: Nominal, Ordinal, or Scale.",
+      "Data View is your empirical matrix. Here, each row represents an individual respondent or observation (Case 1, Case 2), and each column corresponds to the variables configured in Variable View. Never enter survey numbers into Data View until your Variable View metadata is fully structured."
+    ],
+    "key": [
+      "SPSS operates on two synchronized interfaces: Variable View (Metadata blueprint) and Data View (Observation matrix).",
+      "In Variable View: Rows are variables; columns are metadata attributes (Name, Type, Width, Decimals, Label, Values, Measure).",
+      "In Data View: Rows are individual respondents (cases); columns are measured variables.",
+      "Always configure Variable View fully before pasting or importing questionnaire data."
+    ]
+  }
+}

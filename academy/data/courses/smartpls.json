@@ -1,0 +1,71 @@
+{
+  "id": "smartpls",
+  "title": "SmartPLS & SEM Introduction",
+  "tagline": "Structural equation modeling, measurement validation, bootstrapping, and mediation analysis.",
+  "category": "Advanced Statistics",
+  "level": "Advanced",
+  "minutes": 240,
+  "outcomes": [
+    "Determine when Partial Least Squares SEM is superior to Covariance-Based SEM (CB-SEM).",
+    "Evaluate reflective measurement models using indicator reliability, AVE, CR, and the HTMT criterion.",
+    "Assess structural models using bootstrapping (5,000 samples), path coefficients, R-squared, and f-squared.",
+    "Test mediation and moderation hypotheses and draft complete Chapter 4 reporting tables."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: Foundations of PLS-SEM",
+      "description": "Philosophical differences between PLS-SEM and CB-SEM, reflective vs formative models, and model setup.",
+      "lessons": [
+        { "id": "pls1", "title": "When to Use PLS-SEM vs Covariance-Based CB-SEM", "type": "video", "vid": "V-PLS-01", "minutes": 8 },
+        { "id": "pls2", "title": "Reflective vs Formative Measurement Models", "type": "read", "minutes": 12 },
+        { "id": "pls3", "title": "Setting Up Project, Importing CSV Data & Specifying Indicators", "type": "read", "minutes": 11 },
+        { "id": "pls4", "title": "Module 1 Assessment: PLS-SEM Foundations", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Reflective Measurement Model Assessment",
+      "description": "Outer loadings, Cronbach's alpha, composite reliability, convergent validity (AVE), and HTMT.",
+      "lessons": [
+        { "id": "pls5", "title": "Interactive PLS Model & Path Diagram Explorer", "type": "visual", "widget": "plsModel", "minutes": 15 },
+        { "id": "pls6", "title": "Indicator Reliability (Outer Loadings >= 0.708) & Cronbach's Alpha", "type": "read", "minutes": 13 },
+        { "id": "pls7", "title": "Convergent Validity (AVE >= 0.50) & Composite Reliability (rho_a, rho_c)", "type": "read", "minutes": 12 },
+        { "id": "pls8", "title": "Discriminant Validity: HTMT Criterion vs Fornell-Larcker", "type": "video", "vid": "V-PLS-02", "minutes": 9 },
+        { "id": "pls9", "title": "Module 2 Assessment: Measurement Evaluation", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Structural Model Assessment",
+      "description": "Collinearity (VIF), bootstrapping for p-values, R-squared, f-squared, and predictive relevance.",
+      "lessons": [
+        { "id": "pls10", "title": "Assessing Collinearity (VIF < 3.3 or < 5.0)", "type": "read", "minutes": 13 },
+        { "id": "pls11", "title": "Running Bootstrapping (5,000 Subsamples) for Path Coefficients", "type": "video", "vid": "V-PLS-03", "minutes": 9 },
+        { "id": "pls12", "title": "Coefficient of Determination (R Square) & Effect Size (f Square)", "type": "read", "minutes": 12 },
+        { "id": "pls13", "title": "Module 3 Assessment: Structural Model Evaluation", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Mediation, Moderation & Reporting",
+      "description": "Specific indirect effects, interaction terms, comprehensive criteria tables, and Chapter 4 writing.",
+      "lessons": [
+        { "id": "pls14", "title": "Testing Mediation: Direct, Indirect, and Total Effects", "type": "read", "minutes": 13 },
+        { "id": "pls15", "title": "Two-Stage Moderation Analysis in SmartPLS", "type": "video", "vid": "V-PLS-04", "minutes": 8 },
+        { "id": "pls16", "title": "Complete PLS-SEM Quality Criteria Thresholds Table", "type": "visual", "widget": "thresholds", "minutes": 14 },
+        { "id": "pls17", "title": "Drafting the Chapter 4 SEM Results Section in APA Style", "type": "read", "minutes": 11 },
+        { "id": "pls18", "title": "Module 4 Assessment: Advanced Modeling", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m5",
+      "title": "Module 5: Common Traps & Final Check",
+      "description": "Examiner traps in PLS reporting, model over-fitting, and comprehensive final examination.",
+      "lessons": [
+        { "id": "pls19", "title": "Common SmartPLS Errors Examiner Reports Point Out", "type": "read", "minutes": 11 },
+        { "id": "pls20", "title": "SmartPLS & SEM Comprehensive Final Check", "type": "quiz", "minutes": 22 }
+      ]
+    }
+  ]
+}

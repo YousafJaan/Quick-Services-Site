@@ -1,0 +1,84 @@
+{
+  "id": "sp2",
+  "course": "spss101",
+  "title": "Variable Properties: Naming, Types, Labels, and Values",
+  "type": "read",
+  "minutes": 12,
+  "content": {
+    "quick": "Variable View in SPSS defines how the software interprets your questionnaire responses. Variable names cannot start with numbers or contain spaces; labels provide full survey text; value labels map numeric codes to categories; and measurement scales govern which statistical tests SPSS allows you to run.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "Correctly configuring variable properties in SPSS prevents catastrophic syntax errors and miscalculated statistical tests.",
+            "simple": "Setting up your variable settings in SPSS properly stops mistakes before you run any calculations.",
+            "plain": "Correctly configuring variable properties in SPSS prevents catastrophic syntax errors and miscalculated statistical tests.",
+            "technical": "Proper variable parameterization within the SPSS data dictionary establishes mathematical constraints essential for parametric test validity.",
+            "visual": {
+              "kind": "compare",
+              "title": "SPSS Variable Name vs Variable Label",
+              "data": {
+                "columns": ["Variable Name (Strict Syntax)", "Variable Label (Descriptive Text)"],
+                "rows": [
+                  { "metric": "Spaces Allowed", "col1": "No (Use underscores: Job_Sat_1)", "col2": "Yes ('I am satisfied with my job.')" },
+                  { "metric": "Starting Character", "col1": "Must begin with a letter", "col2": "Can begin with any character" },
+                  { "metric": "Output Display", "col1": "Used in syntax commands", "col2": "Printed in tables and charts" }
+                ]
+              },
+              "caption": "SPSS uses the 'Label' column to make your output tables readable in APA format."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "The Measure column tells SPSS whether a variable represents categorical grouping data or continuous numerical quantities.",
+            "simple": "The Measure column tells SPSS if a column is categories (like Gender) or continuous numbers (like Age or test scores).",
+            "plain": "The Measure column tells SPSS whether a variable represents categorical grouping data or continuous numerical quantities.",
+            "technical": "The scale taxonomy dictates whether mathematical operations like mean calculation or standard deviation estimation are mathematically legitimate.",
+            "visual": {
+              "kind": "table",
+              "title": "The 3 SPSS Measurement Levels",
+              "data": {
+                "headers": ["SPSS Measure", "Mathematical Property", "Survey Example", "Valid Statistics"],
+                "rows": [
+                  ["Nominal", "Discrete unordered categories", "Gender (1=Male, 2=Female)", "Frequencies, Mode, Chi-Square"],
+                  ["Ordinal", "Ordered rank categories", "Education (1=Matric, 2=FA, 3=BS)", "Median, Percentiles, Mann-Whitney"],
+                  ["Scale", "Continuous interval or ratio metric", "Age, Salary, Likert composite score", "Mean, SD, Correlation, Regression"]
+                ]
+              },
+              "caption": "Always set 5-point and 7-point Likert composite variables to 'Scale' in SPSS."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "definition",
+          "title": "Value Labels Mapping",
+          "data": {
+            "term": "Value Labels",
+            "meaning": "Mapping internal storage numbers to human-readable categories so you don't type strings.",
+            "example": "Value: 1 → Label: Strongly Disagree | Value: 5 → Label: Strongly Agree"
+          },
+          "caption": "Typing numbers (1-5) is 10x faster than typing text words and avoids spelling typos in data entry."
+        },
+        "check": {
+          "questions": [
+            {
+              "id": "q1",
+              "type": "single",
+              "q": "Which of the following is an INVALID variable name in SPSS?",
+              "options": [
+                "Gender_2025",
+                "1_JobSatisfaction",
+                "Salary_PKR",
+                "Q1_Item"
+              ],
+              "answer": 1,
+              "explanation": "SPSS variable names cannot begin with a number. They must start with an alphabetical letter or an @ symbol."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

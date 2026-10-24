@@ -1,0 +1,23 @@
+{
+  "id": "v1",
+  "course": "viva",
+  "title": "The 15-Minute Defense Architecture",
+  "type": "video",
+  "minutes": 7,
+  "content": {
+    "len": "7 min",
+    "vid": "V-VIVA-01",
+    "transcript": [
+      "Welcome to Course 9: Viva Voce & Presentation Coaching. In this capstone lecture, we dissect the anatomy of an unforgettable, defense-ready 15-minute presentation.",
+      "The most catastrophic mistake candidates make in their final viva is reading 45 text-crammed slides. Examiners have already read your dissertation. Your presentation is not a summary of 150 pages—it is an executive oral defense of your scientific contribution.",
+      "Strictly budget your time: Exactly 12 to 15 slides maximum. Slide 1 is your title and author. Slides 2 and 3 cover your research problem and empirical objectives. Slides 4 and 5 establish theoretical framing and conceptual model. Slides 6, 7, and 8 justify your methodology, sampling frame, and statistical validity. Slides 9, 10, and 11 present core findings and hypothesis testing. Slides 12 and 13 discuss theoretical and practical contributions. Slide 14 covers limitations and future work. Slide 15 is your conclusion.",
+      "Keep your presentation strictly under 14 minutes. Finishing with 60 seconds to spare signals absolute executive command of your research and opens the Q&A session on your terms."
+    ],
+    "key": [
+      "A viva presentation is not a 150-page summary—it is an executive defense of your unique scientific contribution.",
+      "Strict slide budget: 12 to 15 slides maximum for a 15-minute presentation (roughly 1 minute per slide).",
+      "Do not copy-paste paragraphs onto slides; use diagrams, model path arrows, and bold takeaway metrics.",
+      "Never exceed your allotted presentation time; exceeding time frustrates examiners and reveals lack of focus."
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "id": "spss101",
+  "title": "SPSS Basics for Research Students",
+  "tagline": "Clean data, run statistical tests, interpret output tables, and report in APA 7th style.",
+  "category": "Statistical Analysis",
+  "level": "All Levels",
+  "minutes": 255,
+  "outcomes": [
+    "Navigate SPSS Data View and Variable View, code survey items, and handle missing values.",
+    "Screen for outliers, test assumptions of normality, and select appropriate parametric tests.",
+    "Conduct and interpret independent samples t-tests, one-way ANOVA, and post-hoc analyses.",
+    "Run Pearson correlations, multiple regression models, and report statistical findings in APA style."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: SPSS Environment, Data Entry & Cleaning",
+      "description": "Master data coding, reverse-scoring negative items, and missing value imputation.",
+      "lessons": [
+        { "id": "sp1", "title": "Data View vs Variable View Demystified", "type": "video", "vid": "V-SPSS-01", "minutes": 8 },
+        { "id": "sp2", "title": "Variable Properties: Naming, Types, Labels, and Values", "type": "read", "minutes": 12 },
+        { "id": "sp3", "title": "Screening for Outliers and Handling Missing Data", "type": "read", "minutes": 11 },
+        { "id": "sp4", "title": "Computing Composite Variables and Recoding Reverse Items", "type": "read", "minutes": 10 },
+        { "id": "sp5", "title": "Module 1 Assessment: SPSS Data Management", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Descriptive Statistics & Test Selection",
+      "description": "Frequencies, measures of central tendency, skewness, kurtosis, and test selection trees.",
+      "lessons": [
+        { "id": "sp6", "title": "Frequencies, Means, and Standard Deviations", "type": "video", "vid": "V-SPSS-02", "minutes": 8 },
+        { "id": "sp7", "title": "Testing Assumptions: Normality (Skewness, Kurtosis, Shapiro-Wilk)", "type": "read", "minutes": 11 },
+        { "id": "sp8", "title": "The Statistical Test Selector Decision Tree", "type": "visual", "widget": "testPicker", "minutes": 14 },
+        { "id": "sp9", "title": "Module 2 Assessment: Descriptives & Assumptions", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Mean Comparisons: t-Tests & ANOVA",
+      "description": "Independent t-tests, paired tests, ANOVA, Levene's test of equality, and post-hoc comparisons.",
+      "lessons": [
+        { "id": "sp10", "title": "Independent Samples t-Test: Levene's Test and APA Reporting", "type": "read", "minutes": 13 },
+        { "id": "sp11", "title": "Interactive SPSS Output Annotator: t-Test & ANOVA", "type": "visual", "widget": "spssOutput", "minutes": 14 },
+        { "id": "sp12", "title": "One-Way ANOVA and Post-Hoc Tests (Tukey vs Bonferroni)", "type": "video", "vid": "V-SPSS-03", "minutes": 9 },
+        { "id": "sp13", "title": "Paired Samples t-Test for Pre-Post Designs", "type": "read", "minutes": 11 },
+        { "id": "sp14", "title": "Module 3 Assessment: Group Comparisons", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Correlation & Regression Analysis",
+      "description": "Bivariate Pearson correlations, simple regression, and multiple linear regression with VIF checks.",
+      "lessons": [
+        { "id": "sp15", "title": "Pearson Correlation: Strength, Direction, and Significance", "type": "read", "minutes": 12 },
+        { "id": "sp16", "title": "Simple Linear Regression: R Square, ANOVA, and Coefficients", "type": "video", "vid": "V-SPSS-04", "minutes": 9 },
+        { "id": "sp17", "title": "Multiple Linear Regression: Multicollinearity and VIF Diagnostics", "type": "read", "minutes": 13 },
+        { "id": "sp18", "title": "Module 4 Assessment: Correlation & Regression", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m5",
+      "title": "Module 5: Scale Reliability & Final Check",
+      "description": "Assess Cronbach's alpha, format APA 7 results tables, and complete final examination.",
+      "lessons": [
+        { "id": "sp19", "title": "Internal Consistency: Cronbach's Alpha and Item-Total Statistics", "type": "read", "minutes": 11 },
+        { "id": "sp20", "title": "Formatting SPSS Output into Publication-Ready APA Tables", "type": "video", "vid": "V-SPSS-05", "minutes": 7 },
+        { "id": "sp21", "title": "SPSS Results Section Audit Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "sp22", "title": "SPSS Basics Comprehensive Final Check", "type": "quiz", "minutes": 22 }
+      ]
+    }
+  ]
+}

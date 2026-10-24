@@ -1,0 +1,14 @@
+# INSTRUCTIONAL MOCK DATASET — QUICK SERVICES ACADEMY
+# NOTE: This data is completely fictional and created solely for teaching statistical tests in SPSS and SmartPLS.
+# Do not cite as empirical research.
+StudentID,Gender,AgeGroup,DigitalToolUsage_Hours,SelfEfficacy_Score,AcademicPerformance_GPA,TurnoverIntention_Score
+STU_1001,Female,20-22,4.5,78,3.45,2.1
+STU_1002,Male,23-25,6.2,84,3.62,1.8
+STU_1003,Female,20-22,3.1,65,2.89,3.4
+STU_1004,Male,26-28,8.0,91,3.88,1.5
+STU_1005,Male,20-22,5.0,72,3.15,2.7
+STU_1006,Female,23-25,7.1,88,3.75,1.9
+STU_1007,Female,20-22,2.5,60,2.65,3.8
+STU_1008,Male,23-25,5.5,76,3.22,2.4
+STU_1009,Female,26-28,4.0,81,3.50,2.0
+STU_1010,Male,20-22,6.8,85,3.68,1.7

@@ -1,0 +1,68 @@
+{
+  "id": "t5",
+  "course": "thesis101",
+  "title": "Module 1 Assessment: Topic & Proposal Mastery",
+  "type": "quiz",
+  "minutes": 10,
+  "content": {
+    "show": 5,
+    "pass": 70,
+    "bank": [
+      {
+        "id": "q1",
+        "type": "single",
+        "q": "What does the 'F' stand for in the FINER research topic feasibility criteria?",
+        "options": ["Famous", "Feasible", "Functional", "Fundamental"],
+        "answer": 1,
+        "explanation": "FINER stands for Feasible, Interesting, Novel, Ethical, and Relevant."
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "q": "Which of the following is considered an empirically bounded thesis topic?",
+        "options": [
+          "Leadership in Developing Countries",
+          "Impact of Transformational Leadership on Faculty Job Satisfaction in Public Universities of South Punjab (2025)",
+          "How Management Works in Modern Organizations",
+          "A Study on Organizational Success"
+        ],
+        "answer": 1,
+        "explanation": "A bounded topic specifies the exact construct, target population, organizational context, and geographic region."
+      },
+      {
+        "id": "q3",
+        "type": "trueFalse",
+        "q": "A research proposal submitted to the Departmental Board of Studies should describe data collection in the past tense.",
+        "options": ["True", "False"],
+        "answer": 1,
+        "explanation": "False. Proposals outline future investigations and must be written in the future tense ('Data will be collected')."
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "q": "What is the recommended overall similarity threshold set by the HEC Pakistan Plagiarism Policy 2020?",
+        "options": [
+          "No higher than 19% overall, with no single source exceeding 5%",
+          "No higher than 30% overall",
+          "Exactly 0% similarity",
+          "No higher than 25% overall, with no single source exceeding 10%"
+        ],
+        "answer": 0,
+        "explanation": "The official HEC Pakistan 2020 policy allows a maximum similarity index of 19% overall, with single-source similarity capped at 5%."
+      },
+      {
+        "id": "q5",
+        "type": "single",
+        "q": "What constitutes an authentic research gap in academic literature?",
+        "options": [
+          "A topic that no one in the world has ever mentioned before",
+          "A documented empirical or conceptual contradiction/omission in high-impact peer-reviewed literature",
+          "A personal opinion that has not been proven on social media",
+          "A topic chosen solely because data is easy to download"
+        ],
+        "answer": 1,
+        "explanation": "An authentic research gap is identified through systematic analysis of peer-reviewed literature where findings conflict, boundary conditions remain untested, or populations are empirically omitted."
+      }
+    ]
+  }
+}

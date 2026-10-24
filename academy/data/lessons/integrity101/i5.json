@@ -1,0 +1,16 @@
+{
+  "id": "i5",
+  "course": "integrity101",
+  "title": "The Interactive Similarity Report Simulator",
+  "type": "visual",
+  "minutes": 14,
+  "content": {
+    "intro": "Experiment with the interactive Turnitin Similarity Report Simulator below to see how overall percentages, single-source thresholds, and exclusion filters (references, small matches, quotes) change your official compliance status under HEC Pakistan rules.",
+    "widget": "sim",
+    "key": [
+      "The HEC similarity ceiling is 19% overall, but no single primary source may exceed 5%.",
+      "If a paper has 12% overall similarity but 7% comes from a single student paper in Lahore, it FAILS HEC compliance.",
+      "Bibliography and properly punctuated direct quotations with page numbers must be excluded by the institutional Turnitin administrator."
+    ]
+  }
+}

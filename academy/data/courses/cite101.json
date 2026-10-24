@@ -1,0 +1,62 @@
+{
+  "id": "cite101",
+  "title": "Citations & Referencing",
+  "tagline": "Master APA 7th, Harvard, IEEE, and Vancouver with zero guesswork.",
+  "category": "Academic Writing",
+  "level": "All Levels",
+  "minutes": 185,
+  "outcomes": [
+    "Differentiate between parenthetical and narrative in-text citation styles across single and multiple authors.",
+    "Format references correctly for journal articles, books, chapters, online reports, and datasets in APA 7th.",
+    "Understand the author-date rules of Harvard style and the numeric systems of IEEE and Vancouver.",
+    "Integrate Zotero with word processors to automate citation generation and resolve reference discrepancies."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: Principles of Citation & In-Text Mechanics",
+      "description": "Master why we cite and the precise mechanics of parenthetical vs narrative citation.",
+      "lessons": [
+        { "id": "c1", "title": "Why We Cite and What Happens When We Don't", "type": "video", "vid": "V-CITE-01", "minutes": 6 },
+        { "id": "c2", "title": "In-Text Citation Rules: Parenthetical vs Narrative", "type": "read", "minutes": 10 },
+        { "id": "c3", "title": "Handling Multiple Authors, Et Al., and Corporate Authors", "type": "read", "minutes": 10 },
+        { "id": "c4", "title": "Module 1 Assessment: In-Text Rules", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: APA 7th Reference List Dissection",
+      "description": "Dissect the four core components of any APA 7 reference: Author, Date, Title, and Source.",
+      "lessons": [
+        { "id": "c5", "title": "The Interactive APA 7 Reference Dissecter", "type": "visual", "widget": "apa", "minutes": 12 },
+        { "id": "c6", "title": "Citing Journal Articles, DOIs, and URLs", "type": "read", "minutes": 11 },
+        { "id": "c7", "title": "Citing Books, Edited Chapters, and Theses", "type": "read", "minutes": 10 },
+        { "id": "c8", "title": "Citing Online Reports, Government Data, and Web Pages", "type": "read", "minutes": 10 },
+        { "id": "c9", "title": "Module 2 Assessment: APA 7th Reference Lists", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Alternative Styles: Harvard, IEEE & Vancouver",
+      "description": "Understand variations across faculties: author-date Harvard, bracketed numeric IEEE, and medical Vancouver.",
+      "lessons": [
+        { "id": "c10", "title": "Navigating Institutional Citation Styles", "type": "video", "vid": "V-CITE-02", "minutes": 7 },
+        { "id": "c11", "title": "Harvard Style: Author-Date Nuances", "type": "read", "minutes": 11 },
+        { "id": "c12", "title": "IEEE & Vancouver: Numeric & Bracketed Citations", "type": "read", "minutes": 11 },
+        { "id": "c13", "title": "Module 3 Assessment: Style Comparison", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Formatting, Zotero Integration & Final Check",
+      "description": "Audit references, link citations to the bibliography, and verify submission readiness.",
+      "lessons": [
+        { "id": "c14", "title": "Matching In-Text Citations to Reference Lists", "type": "read", "minutes": 10 },
+        { "id": "c15", "title": "Automated Citation Formatting in Zotero", "type": "video", "vid": "V-CITE-03", "minutes": 8 },
+        { "id": "c16", "title": "Top 10 Referencing Mistakes and How to Catch Them", "type": "read", "minutes": 10 },
+        { "id": "c17", "title": "Citation Verification Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "c18", "title": "Citations & Referencing Comprehensive Final Check", "type": "quiz", "minutes": 20 }
+      ]
+    }
+  ]
+}

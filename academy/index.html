@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Quick Services Academy: Free, premium academic writing, statistics, and research methodology training for university students in Pakistan. Make your research make sense.">
+  <meta property="og:title" content="Quick Services Academy | Make your research make sense.">
+  <meta property="og:description" content="Free academic courses on thesis writing, citations (APA 7th), plagiarism policies, SPSS, SmartPLS, and viva defense by Quick Services.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quick-services-academy.pages.dev/">
+  
+  <title>Quick Services Academy | Make your research make sense.</title>
+
+  <!-- Google Fonts: Newsreader (Claude Academy Editorial Serif) + Plus Jakarta Sans (Modern UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/visuals.css">
+  <link rel="stylesheet" href="./css/quiz.css">
+</head>
+<body>
+  <!-- Header matching live site -->
+  <header class="hd">
+    <div class="wrap in">
+      <a href="#/" class="logo-link">
+        <span class="logo-q">Q</span>
+        <span class="logo-title">Quick Academy</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="dnav">
+        <a href="#/">Courses</a>
+        <a href="#learning">My Learning</a>
+        <a href="#certificates">Certificates</a>
+        <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" style="color: var(--qsa-accent-clay);">Field Guide</a>
+      </nav>
+
+      <!-- English Proficiency Style Switcher -->
+      <div class="lang-level-switcher" id="header-lang-switcher" title="Choose Reading English Style">
+        <button type="button" class="lang-btn" data-lang="simple" title="Simple English for easy comprehension">Simple</button>
+        <button type="button" class="lang-btn active" data-lang="plain" title="Plain academic English">Plain</button>
+        <button type="button" class="lang-btn" data-lang="technical" title="Advanced technical dissertation register">Tech</button>
+      </div>
+
+      <!-- Sleek Advisor CTA -->
+      <a class="cta-advisor-pill" href="https://wa.me/923296646824" target="_blank" title="Connect directly with academic advisor M. Yousaf">
+        <span>Advisor</span> <span class="arrow">↗</span>
+      </a>
+
+      <!-- Mobile Menu Details -->
+      <details class="menu">
+        <summary aria-label="Open menu">☰</summary>
+        <div class="links">
+          <a href="#/">Courses</a>
+          <a href="#learning">My Learning</a>
+          <a href="#certificates">Certificates</a>
+          <div style="padding: 10px 0; border-bottom: 1px solid var(--qsa-border-line);">
+            <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--qsa-text-muted); margin-bottom: 6px;">Reading English Style</div>
+            <div class="lang-level-switcher" id="mobile-lang-switcher">
+              <button type="button" class="lang-btn" data-lang="simple">Simple</button>
+              <button type="button" class="lang-btn active" data-lang="plain">Plain</button>
+              <button type="button" class="lang-btn" data-lang="technical">Tech</button>
+            </div>
+          </div>
+          <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" style="color: var(--qsa-accent-clay);">Field Guide (PDF)</a>
+          <a href="https://wa.me/923296646824" target="_blank" style="color: var(--qsa-accent-clay); font-weight: 600;">Advisor WhatsApp ↗</a>
+        </div>
+      </details>
+    </div>
+  </header>
+
+  <!-- Mount Point for Single Page Router -->
+  <main id="app-main"></main>
+
+  <!-- Footer matching sleek paper aesthetic -->
+  <footer class="ft">
+    <div class="wrap">
+      <div>
+        <strong style="color: var(--qsa-text-primary); font-family: var(--qsa-font-serif); font-size: 16px;">Quick Academy</strong> • 
+        <span>Research Consulting &amp; Methodology • Led by M. Yousaf (MS English, BZU)</span>
+      </div>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" style="color: var(--qsa-accent-clay);">Field Guide</a> •
+        <a href="mailto:quickservices489@gmail.com">quickservices489@gmail.com</a> •
+        <a href="https://wa.me/923296646824" target="_blank">Advisor: +92 329 6646824</a>
+      </div>
+    </div>
+    <div class="wrap" style="padding-top: 0; padding-bottom: 24px; font-size: 12px; color: var(--qsa-text-muted); border-top: 1px solid var(--qsa-border-line); margin-top: 16px;">
+      Payment methods: JazzCash • EasyPaisa • SadaPay • NayaPay • Bank Transfer • Western Union. Multan, Pakistan.
+    </div>
+  </footer>
+
+  <!-- Modal Portal -->
+  <div id="app-modal-portal"></div>
+
+  <!-- Application Entry Point -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

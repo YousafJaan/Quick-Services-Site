@@ -1,0 +1,71 @@
+{
+  "id": "sample-size",
+  "title": "Sample Size & Research Methodology",
+  "tagline": "G*Power calculations, sampling designs, instrument validity, and ethical research.",
+  "category": "Research Methodology",
+  "level": "Intermediate",
+  "minutes": 230,
+  "outcomes": [
+    "Differentiate quantitative, qualitative, and mixed-methods research paradigms.",
+    "Calculate required sample sizes using Cochran's formula with finite population correction.",
+    "Execute a priori statistical power analyses in G*Power for t-tests, ANOVA, and regression models.",
+    "Design valid survey questionnaires, pilot test items, and establish ethical research protocols."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: Research Designs & Measurement Scales",
+      "description": "Align epistemological paradigms with research questions and variable measurement scales.",
+      "lessons": [
+        { "id": "s1", "title": "Aligning Design with Research Questions", "type": "video", "vid": "V-SAMP-01", "minutes": 7 },
+        { "id": "s2", "title": "Quantitative, Qualitative, and Mixed-Method Paradigms", "type": "read", "minutes": 11 },
+        { "id": "s3", "title": "Scales of Measurement: Nominal, Ordinal, Interval, Ratio", "type": "read", "minutes": 10 },
+        { "id": "s4", "title": "Module 1 Assessment: Research Paradigms", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Sampling Techniques & Cochran's Formula",
+      "description": "Probability vs non-probability sampling, and statistical sample size calculations.",
+      "lessons": [
+        { "id": "s5", "title": "Probability vs Non-Probability Sampling Strategies", "type": "read", "minutes": 12 },
+        { "id": "s6", "title": "Cochran's Formula & Finite Population Calculator", "type": "visual", "widget": "sampleSize", "minutes": 14 },
+        { "id": "s7", "title": "Calculating Sample Size for Unknown Populations", "type": "video", "vid": "V-SAMP-02", "minutes": 8 },
+        { "id": "s8", "title": "Module 2 Assessment: Sampling Methods", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: G*Power & Statistical Power Analysis",
+      "description": "Compute statistical power, alpha, effect size, and required sample sizes across test families.",
+      "lessons": [
+        { "id": "s9", "title": "Statistical Power & Effect Size Visualizer", "type": "visual", "widget": "powerExplainer", "minutes": 14 },
+        { "id": "s10", "title": "A Priori Power Analysis for t-tests, ANOVA, and Regression", "type": "read", "minutes": 13 },
+        { "id": "s11", "title": "Step-by-Step G*Power Walkthrough", "type": "video", "vid": "V-SAMP-03", "minutes": 9 },
+        { "id": "s12", "title": "Module 3 Assessment: G*Power Calculations", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Questionnaire Design & Pilot Testing",
+      "description": "Draft valid Likert items, conduct expert face validity, and run pilot studies.",
+      "lessons": [
+        { "id": "s13", "title": "Drafting Likert Items & Avoiding Leading Questions", "type": "read", "minutes": 12 },
+        { "id": "s14", "title": "Pilot Study Procedures and Sample Requirements", "type": "read", "minutes": 11 },
+        { "id": "s15", "title": "Content & Face Validity with Subject Matter Experts", "type": "video", "vid": "V-SAMP-04", "minutes": 7 },
+        { "id": "s16", "title": "Module 4 Assessment: Instrumentation", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m5",
+      "title": "Module 5: Research Ethics & Final Check",
+      "description": "Ensure institutional compliance, consent protocols, and methodological integrity.",
+      "lessons": [
+        { "id": "s17", "title": "Informed Consent, Confidentiality, and Institutional Review Boards", "type": "read", "minutes": 11 },
+        { "id": "s18", "title": "Common Methodology Flaws Caught by External Examiners", "type": "read", "minutes": 10 },
+        { "id": "s19", "title": "Methodology Chapter Audit Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "s20", "title": "Sample Size & Methodology Comprehensive Final Check", "type": "quiz", "minutes": 22 }
+      ]
+    }
+  ]
+}

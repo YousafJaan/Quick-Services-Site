@@ -1,0 +1,492 @@
+{
+  "id": "c2",
+  "course": "cite101",
+  "title": "In-Text Citation Rules: Parenthetical vs Narrative",
+  "type": "read",
+  "minutes": 10,
+  "content": {
+    "quick": "APA 7th requires citing author and year in one of two formats: Parenthetical (all in parentheses, using an ampersand '&') or Narrative (author in running text using 'and', year in parentheses). For works with 3 or more authors, use 'et al.' from the very first citation.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "Every in-text citation in APA 7th format takes either a parenthetical or a narrative grammatical structure.",
+            "simple": "When you credit an author in your sentence, you can either put their name in brackets or use it directly in your sentence.",
+            "plain": "Every in-text citation in APA 7th format takes either a parenthetical or a narrative grammatical structure.",
+            "technical": "In-text attribution under the APA 7th stylistic framework is strictly dichotomized into parenthetical and narrative syntactic structures.",
+            "visual": {
+              "kind": "compare",
+              "title": "Parenthetical vs Narrative Structure",
+              "data": {
+                "columns": ["Parenthetical Citation", "Narrative Citation"],
+                "rows": [
+                  { "metric": "Author Position", "col1": "Enclosed completely in parentheses", "col2": "Integrated into running sentence text" },
+                  { "metric": "Conjunction", "col1": "Ampersand (&) between names", "col2": "Spelled-out word 'and' in text" },
+                  { "metric": "Example", "col1": "(Bass & Avolio, 2020)", "col2": "Bass and Avolio (2020) demonstrated..." }
+                ]
+              },
+              "caption": "Choose the format that creates the smoothest reading flow for your thesis paragraph."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "In parenthetical citations, the author surname and publication year appear together inside parentheses, joined by an ampersand.",
+            "simple": "In bracketed citations, both the author's last name and the year go inside brackets with an '&' sign.",
+            "plain": "In parenthetical citations, the author surname and publication year appear together inside parentheses, joined by an ampersand.",
+            "technical": "Parenthetical citations require full encapsulation of the author surname and temporal identifier, conjoined via an ampersand character.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Anatomy of a Parenthetical Citation",
+              "data": {
+                "lead": "Parenthetical Structure:",
+                "callouts": [
+                  { "text": "[Bass]", "label": "First Author" },
+                  { "text": "[&]", "label": "Ampersand Conjunction" },
+                  { "text": "[Avolio,]", "label": "Second Author" },
+                  { "text": "[2020]", "label": "Publication Year" }
+                ]
+              },
+              "caption": "Never spell out 'and' inside citation parentheses in APA style."
+            }
+          },
+          {
+            "id": "s3",
+            "text": "In narrative citations, the author's name forms part of your running sentence, followed immediately by the year in parentheses.",
+            "simple": "In story-style citations, you mention the author's name as the subject of your sentence and put just the year in brackets.",
+            "plain": "In narrative citations, the author's name forms part of your running sentence, followed immediately by the year in parentheses.",
+            "technical": "Narrative attribution incorporates the nominative entity directly into running prose, subordinating the chronometer into adjacent parentheses.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Anatomy of a Narrative Citation",
+              "data": {
+                "lead": "Narrative Structure:",
+                "callouts": [
+                  { "text": "[Bass and Avolio]", "label": "Authors in Running Text ('and')" },
+                  { "text": "[(2020)]", "label": "Year in Parentheses" },
+                  { "text": "[demonstrated that...]", "label": "Active Academic Verb" }
+                ]
+              },
+              "caption": "Use narrative citations to highlight prominent scholars or introduce contrasting viewpoints."
+            }
+          },
+          {
+            "id": "s4",
+            "text": "Varying between parenthetical and narrative formats prevents your literature review from feeling repetitive and mechanically formulaic.",
+            "simple": "Switching between these two styles makes your writing sound natural and engaging instead of boring.",
+            "plain": "Varying between parenthetical and narrative formats prevents your literature review from feeling repetitive and mechanically formulaic.",
+            "technical": "Alternating between parenthetical and narrative attribution optimizes stylistic cadence and avoids monotonous rhetorical patterning in literature reviews.",
+            "visual": {
+              "kind": "flow",
+              "title": "Rhetorical Balance in Synthesis",
+              "data": {
+                "steps": [
+                  { "title": "Narrative Lead", "desc": "Khan and Ahmed (2021) argued that employee burnout reduces productivity..." },
+                  { "title": "Evidence Synthesis", "desc": "This decline is particularly acute during organizational restructuring..." },
+                  { "title": "Parenthetical Support", "desc": "as evidenced across regional banking cohorts (Malik et al., 2022)." }
+                ]
+              },
+              "caption": "A balanced academic paragraph seamlessly blends both citation styles."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "matrix2x2",
+          "title": "Citation Style Decision Matrix",
+          "data": {
+            "xAxis": "Author Prominence (Low → High)",
+            "yAxis": "Focus on Finding (Low → High)",
+            "q1": { "title": "Narrative Citation", "desc": "Focus on the researcher: Field (2018) argues...", "status": "optimal" },
+            "q2": { "title": "Parenthetical Citation", "desc": "Focus on empirical fact: ...was confirmed (Field, 2018).", "status": "optimal" },
+            "q3": { "title": "Direct Quotation", "desc": "When exact wording is irreplaceable (include page number).", "status": "warning" },
+            "q4": { "title": "Secondary Citation", "desc": "Avoid: cite primary sources directly whenever possible.", "status": "danger" }
+          },
+          "caption": "Choose parenthetical when emphasizing findings; choose narrative when contrasting specific theorists."
+        },
+        "explain": "The rule is simple: if the authors are inside parentheses, use the symbol '&'. If the authors are outside in your normal English sentence, spell out the word 'and'. Mixing these two up is the single most common red pen mark on thesis drafts in Pakistan.",
+        "check": {
+          "topic": "parenthetical-vs-narrative",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "Which of the following in-text citations correctly adheres to APA 7th style?",
+              "options": [
+                "According to (Bass & Avolio, 2020), transformational leadership improves performance.",
+                "According to Bass & Avolio (2020), transformational leadership improves performance.",
+                "According to Bass and Avolio (2020), transformational leadership improves performance.",
+                "Transformational leadership improves performance (Bass and Avolio, 2020)."
+              ],
+              "answer": 2,
+              "hint": "Check whether the authors are inside or outside the parentheses and which conjunction is used.",
+              "explanation": "Option 3 is correct. In narrative citations, the authors are outside parentheses and joined by the word 'and'. Option 1 incorrectly puts the author in parentheses after 'According to'. Option 2 incorrectly uses an ampersand '&' in running text. Option 4 incorrectly spells out 'and' inside parentheses."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p2",
+        "sentences": [
+          {
+            "id": "s5",
+            "text": "A major revision in APA 7th is the treatment of works with three or more authors.",
+            "simple": "APA 7th introduced an important new rule for papers written by three or more people.",
+            "plain": "A major revision in APA 7th is the treatment of works with three or more authors.",
+            "technical": "A seminal taxonomic revision in APA 7th governs the attribution of works authored by tripartite or higher-order collaborative teams.",
+            "visual": {
+              "kind": "timeline",
+              "title": "Evolution of the 'Et Al.' Rule",
+              "data": {
+                "events": [
+                  { "time": "APA 6th (Archaic)", "title": "List All Up to 5 Authors First", "desc": "Write all names on first citation, then shorten to et al. on second citation." },
+                  { "time": "APA 7th (Current)", "title": "Immediate 'Et Al.' From First Citation", "desc": "Write first author plus 'et al.' from the very first time you cite the source." }
+                ]
+              },
+              "caption": "Never list 3 to 5 authors on first citation in APA 7th—use 'et al.' immediately."
+            }
+          },
+          {
+            "id": "s6",
+            "text": "For any work with three or more authors, you must include only the surname of the first author followed by 'et al.' from the very first citation.",
+            "simple": "If a paper has 3, 4, or 10 authors, just write the first author's last name followed by 'et al.' right from the start.",
+            "plain": "For any work with three or more authors, you must include only the surname of the first author followed by 'et al.' from the very first citation.",
+            "technical": "Bibliographic references comprising three or more authors require immediate truncation: first author patronymic accompanied by the Latin abbreviation 'et al.' in all occurrences.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "The APA 7th 'Et Al.' Mechanics",
+              "data": {
+                "lead": "Correct Citation Format:",
+                "callouts": [
+                  { "text": "[Khan]", "label": "First Author Only" },
+                  { "text": "[et al.,]", "label": "Latin 'and others' (no period on 'et', period on 'al.')" },
+                  { "text": "[2021]", "label": "Year" }
+                ]
+              },
+              "caption": "Notice that 'et' has no period, but 'al.' always has a period followed by a comma."
+            }
+          },
+          {
+            "id": "s7",
+            "text": "Works with exactly two authors must always name both authors in every single citation throughout your entire thesis.",
+            "simple": "If a paper has 2 authors, you must always name both of them every time you cite them.",
+            "plain": "Works with exactly two authors must always name both authors in every single citation throughout your entire thesis.",
+            "technical": "Co-authored publications with precisely two contributors remain invariant against truncation, requiring dual nominative attribution across all text instances.",
+            "visual": {
+              "kind": "checklist",
+              "title": "Author Count Rule Check",
+              "data": {
+                "items": [
+                  { "label": "1 Author: (Khan, 2021)", "desc": "Always just the single author and year", "checked": true },
+                  { "label": "2 Authors: (Khan & Ahmed, 2021)", "desc": "Always both authors, never use et al.", "checked": true },
+                  { "label": "3+ Authors: (Khan et al., 2021)", "desc": "Always first author + et al. from citation #1", "checked": true }
+                ]
+              },
+              "caption": "Never use 'et al.' for a study that only has two authors."
+            }
+          },
+          {
+            "id": "s8",
+            "text": "The Latin abbreviation 'et al.' stands for 'et alia', meaning 'and others', and must always feature a period after 'al' but never after 'et'.",
+            "simple": "'Et al.' means 'and others'; remember that 'et' has no dot, and 'al.' always has a dot.",
+            "plain": "The Latin abbreviation 'et al.' stands for 'et alia', meaning 'and others', and must always feature a period after 'al' but never after 'et'.",
+            "technical": "The Latin abbreviation 'et al.' derived from 'et alia' necessitates rigorous punctuation: an unpunctuated conjunction 'et' followed by the abbreviated particle 'al.' with terminal period.",
+            "visual": {
+              "kind": "mistakeFix",
+              "title": "Common 'Et Al.' Punctuation Errors",
+              "data": {
+                "mistake": "Writing 'et. al.', 'et al', or 'et, al.'",
+                "why": "'et' is a complete Latin word (meaning 'and'), while 'al.' is an abbreviation of 'alia'.",
+                "fix": "Write: 'et al.' (Period only on 'al.')"
+              },
+              "caption": "External examiners frequently look for this exact punctuation test."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "table",
+          "title": "APA 7th Author In-Text Citation Master Table",
+          "data": {
+            "headers": ["Author Quantity", "Parenthetical Citation", "Narrative Citation"],
+            "rows": [
+              ["1 Author", "(Khan, 2021)", "Khan (2021)"],
+              ["2 Authors", "(Khan & Ahmed, 2021)", "Khan and Ahmed (2021)"],
+              ["3 or More Authors", "(Khan et al., 2021)", "Khan et al. (2021)"],
+              ["Institutional (Acronym)", "(Higher Education Commission [HEC], 2020)", "Higher Education Commission (HEC, 2020)"],
+              ["Institutional Subsequent", "(HEC, 2020)", "HEC (2020)"]
+            ]
+          },
+          "caption": "Print or bookmark this table for reference while writing your literature review."
+        },
+        "explain": "In the old APA 6th manual, students had to list up to 5 authors the first time and then switch to 'et al.' In APA 7th, that headache is gone! If there are 3, 4, 5, or 20 authors, you write the first author plus 'et al.' right from sentence one.",
+        "check": {
+          "topic": "author-counts",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "trueFalse",
+              "q": "True or False: Under APA 7th edition, you must list all authors (up to 5) the first time you cite a paper, and only use 'et al.' on the second citation.",
+              "options": [
+                "True — full attribution is required on first mention.",
+                "False — APA 7th uses 'et al.' from the very first citation for 3 or more authors."
+              ],
+              "answer": 1,
+              "hint": "Recall the major update from APA 6th to APA 7th.",
+              "explanation": "False. That was the rule in the obsolete APA 6th edition. In APA 7th, any paper with 3 or more authors uses 'et al.' from the first citation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p3",
+        "sentences": [
+          {
+            "id": "s9",
+            "text": "When incorporating direct word-for-word quotations, you must provide a specific page or paragraph number alongside the author and year.",
+            "simple": "If you copy the exact words of an author, you must give the page number where you found those words.",
+            "plain": "When incorporating direct word-for-word quotations, you must provide a specific page or paragraph number alongside the author and year.",
+            "technical": "Verbatim textual reproduction mandates explicit page-level localization (p. or pp.) or paragraph enumeration (para.) to preserve attribution veracity.",
+            "visual": {
+              "kind": "definition",
+              "title": "Verbatim Citation Attribution",
+              "data": {
+                "term": "Direct Quote Attribution",
+                "meaning": "Author, publication year, and specific page (p. 45) or page range (pp. 45-46) indicating the exact location of the excerpted words.",
+                "example": "According to Field (2018), 'the assumption of normality is critical' (p. 248)."
+              },
+              "caption": "Never include a direct quotation without a page number."
+            }
+          },
+          {
+            "id": "s10",
+            "text": "Direct quotations containing fewer than 40 words must be enclosed in double quotation marks and embedded directly within your sentence.",
+            "simple": "If your quote is less than 40 words, put quotation marks around it and keep it inside your normal paragraph.",
+            "plain": "Direct quotations containing fewer than 40 words must be enclosed in double quotation marks and embedded directly within your sentence.",
+            "technical": "Short verbatim quotations under 40 words remain embedded within the syntactic flow, demarcated by double quotation glyphs.",
+            "visual": {
+              "kind": "compare",
+              "title": "Short Quote (<40 words) vs Block Quote (40+ words)",
+              "data": {
+                "columns": ["Short Quote (< 40 words)", "Block Quote (40+ words)"],
+                "rows": [
+                  { "metric": "Quotation Marks", "col1": "Enclosed in \"...\"", "col2": "Zero quotation marks" },
+                  { "metric": "Indentation", "col1": "Standard paragraph text", "col2": "Indented 0.5 inches from left margin" },
+                  { "metric": "Punctuation Rule", "col1": "Period goes AFTER citation: ...\" (p. 45).", "col2": "Period goes BEFORE citation: ...sentence. (p. 45)" }
+                ]
+              },
+              "caption": "The 40-word boundary changes both visual indentation and punctuation placement."
+            }
+          },
+          {
+            "id": "s11",
+            "text": "Quotations of 40 words or more must be formatted as a freestanding block indented 0.5 inches from the left margin without quotation marks.",
+            "simple": "If a quote is 40 words or longer, start a new line, indent the whole block by half an inch, and do not use quotation marks.",
+            "plain": "Quotations of 40 words or more must be formatted as a freestanding block indented 0.5 inches from the left margin without quotation marks.",
+            "technical": "Quotations exceeding the 40-word threshold require transposition into an autonomous block quote, indented 0.5 inches (1.27 cm) with quotation marks expunged.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Anatomy of an APA 7th Block Quote",
+              "data": {
+                "lead": "Block Quote Layout:",
+                "callouts": [
+                  { "text": "[Indented 0.5 inches]", "label": "Full Block Indent" },
+                  { "text": "[No quotation marks anywhere]", "label": "Clean Margins" },
+                  { "text": "[Final sentence ends with period.]", "label": "Terminal Punctuation" },
+                  { "text": "[(Field, 2018, p. 248)]", "label": "Citation Placed Outside Period" }
+                ]
+              },
+              "caption": "In block quotes, the citation sits outside the final period—the opposite of short quotes."
+            }
+          },
+          {
+            "id": "s12",
+            "text": "In empirical research theses, excessive direct quoting is discouraged; examiners favor thorough paraphrasing that demonstrates synthesis.",
+            "simple": "Try not to use too many quotes; examiners prefer when you explain ideas in your own words to prove you understand them.",
+            "plain": "In empirical research theses, excessive direct quoting is discouraged; examiners favor thorough paraphrasing that demonstrates synthesis.",
+            "technical": "In empirical dissertations, excessive verbatim citation reflects interpretive immaturity; committees reward rigorous paraphrastic synthesis.",
+            "visual": {
+              "kind": "dosDonts",
+              "title": "Quoting vs Paraphrasing in Theses",
+              "data": {
+                "dos": [
+                  "Paraphrase 95% of theoretical concepts in your own academic voice",
+                  "Use direct quotes only for official definitions or controversial claims",
+                  "Always provide page numbers when quoting word-for-word"
+                ],
+                "donts": [
+                  "String multiple long block quotes together to fill chapter word count",
+                  "Use direct quotes for statistical results or standard empirical findings",
+                  "Forget page numbers on verbatim excerpts"
+                ]
+              },
+              "caption": "Turnitin will flag excessive direct quotes, inflating your raw similarity score."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "beforeAfter",
+          "title": "Punctuation Placement: Short Quote vs Block Quote",
+          "data": {
+            "before": {
+              "title": "Short Quote (<40 Words)",
+              "content": "As Field (2018) noted, \"normality is critical for parametric tests\" (p. 248). [Period is outside the parenthesis]"
+            },
+            "after": {
+              "title": "Block Quote (40+ Words)",
+              "content": "...essential for all subsequent structural equation modeling. (Hair et al., 2022, p. 14) [Period is inside; citation is outside]"
+            }
+          },
+          "caption": "Notice how the position of the period flips depending on quote length."
+        },
+        "explain": "Remember the 40-word rule. If you copy a long paragraph, don't use quotation marks! Press Tab to indent the entire block by half an inch. And here is a sneaky trick examiners look for: in a normal short quote, the period goes after the page number. In a block quote, the period goes before the page number!",
+        "check": {
+          "topic": "direct-quotes",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "Where does the final punctuation (period) go when formatting a 50-word block quotation in APA 7th style?",
+              "options": [
+                "After the closing quotation marks, before the page citation.",
+                "After the parenthetical page citation at the very end.",
+                "At the end of the final sentence, before the parenthetical citation.",
+                "Block quotes do not use periods."
+              ],
+              "answer": 2,
+              "hint": "Remember that block quotes reverse the standard punctuation order of short quotes.",
+              "explanation": "In block quotes (40+ words), the final sentence ends with its normal period, and the parenthetical citation is placed outside and after that period without any additional trailing punctuation."
+            }
+          ]
+        }
+      },
+      {
+        "id": "p4",
+        "sentences": [
+          {
+            "id": "s13",
+            "text": "When citing multiple independent works within the same set of parentheses, you must arrange them in alphabetical order by the first author's surname.",
+            "simple": "When you put several studies inside one bracket, list them alphabetically by the first author's last name, separated by semicolons.",
+            "plain": "When citing multiple independent works within the same set of parentheses, you must arrange them in alphabetical order by the first author's surname.",
+            "technical": "Aggregated parenthetical citations containing multiple independent sources mandate strict alphabetical ordering governed by the primary author's surname.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Ordering Multiple Works in One Parenthesis",
+              "data": {
+                "lead": "Correct Alphabetical Sequence:",
+                "callouts": [
+                  { "text": "[(Ahmed & Khan, 2018;]", "label": "Starts with 'A'" },
+                  { "text": "[Bilal et al., 2020;]", "label": "Follows with 'B'" },
+                  { "text": "[Zafar, 2019)]", "label": "Ends with 'Z'" }
+                ]
+              },
+              "caption": "Separate different studies with semicolons, never with commas or ampersands."
+            }
+          },
+          {
+            "id": "s14",
+            "text": "Do not arrange multiple citations chronologically by year; APA style strictly prioritizes alphabetical order.",
+            "simple": "Do not put the oldest study first; always follow the alphabet from A to Z.",
+            "plain": "Do not arrange multiple citations chronologically by year; APA style strictly prioritizes alphabetical order.",
+            "technical": "Chronological ordering of parenthetical clusters is prohibited under APA guidelines; alphabetical precedence strictly supercedes temporal sequence.",
+            "visual": {
+              "kind": "mistakeFix",
+              "title": "Chronological vs Alphabetical Citation Order",
+              "data": {
+                "mistake": "(Zafar, 2015; Ahmed, 2019; Bilal, 2023) — Ordered by date",
+                "why": "APA requires alphabetical sorting so examiners can quickly match in-text citations to the reference list.",
+                "fix": "(Ahmed, 2019; Bilal, 2023; Zafar, 2015) — Alphabetical by surname"
+              },
+              "caption": "Reference management software like Zotero does this sorting automatically."
+            }
+          },
+          {
+            "id": "s15",
+            "text": "When citing multiple publications by the exact same author published in the same year, distinguish them by adding lowercase letters to the year.",
+            "simple": "If an author published two papers in the same year, label them '2021a' and '2021b'.",
+            "plain": "When citing multiple publications by the exact same author published in the same year, distinguish them by adding lowercase letters to the year.",
+            "technical": "Same-author publications sharing an identical publication year are disambiguated by appending alphabetical suffixes (a, b, c) to the chronometer.",
+            "visual": {
+              "kind": "annotatedExample",
+              "title": "Same Author, Same Year Disambiguation",
+              "data": {
+                "lead": "In-text Citation:",
+                "callouts": [
+                  { "text": "[(Malik, 2021a,", "label": "First Paper in Reference List" },
+                  { "text": "[2021b)]", "label": "Second Paper (Year Only)" }
+                ]
+              },
+              "caption": "The letter assigned depends on the alphabetical order of the article titles in your reference list."
+            }
+          },
+          {
+            "id": "s16",
+            "text": "Every source cited in your text must match an entry in your reference list, and every reference list entry must be cited in your text.",
+            "simple": "Every name in your thesis must be in your reference list, and every reference in your list must appear somewhere in your thesis.",
+            "plain": "Every source cited in your text must match an entry in your reference list, and every reference list entry must be cited in your text.",
+            "technical": "Scholarly rigor requires bi-directional isomorphism between in-text citations and the terminal bibliographic reference list.",
+            "visual": {
+              "kind": "cycle",
+              "title": "The 100% Citation Match Principle",
+              "data": {
+                "steps": [
+                  { "label": "In-Text Citation", "desc": "Mentioned in Chapter 1, 2, or 4" },
+                  { "label": "Reference List Entry", "desc": "Full bibliographic details in terminal bibliography" },
+                  { "label": "Audit Verification", "desc": "Zero orphan references; zero uncited bibliographic entries" }
+                ]
+              },
+              "caption": "Quick Services Academy tools can automate reference list cross-checking in minutes."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "checklist",
+          "title": "Pre-Submission In-Text Citation Audit",
+          "data": {
+            "items": [
+              { "label": "Parenthetical vs Narrative Conjunctions", "desc": "& inside brackets, 'and' in text", "checked": true },
+              { "label": "Et Al. Rule Applied for 3+ Authors", "desc": "Used from first citation without listing all authors", "checked": true },
+              { "label": "Page Numbers on Direct Quotes", "desc": "Every quote has p. or pp. included", "checked": true },
+              { "label": "Block Quotes Indented at 40 Words", "desc": "No quotation marks on quotes 40+ words", "checked": true },
+              { "label": "Multi-Citation Clusters Alphabetized", "desc": "Sorted A to Z, separated by semicolons", "checked": true }
+            ]
+          },
+          "caption": "Run this checklist before sending your draft to your research supervisor."
+        },
+        "explain": "Never sort citations inside brackets by year! Always sort them by the first author's last name from A to Z, separated by semicolons: '(Ahmed, 2019; Bilal, 2021; Zafar, 2015)'. If you use Zotero, it handles this automatically. If you write by hand, this is the easiest mistake for an examiner to catch.",
+        "check": {
+          "topic": "multiple-citations",
+          "confidence": true,
+          "questions": [
+            {
+              "type": "single",
+              "q": "How should multiple studies by different authors be arranged inside a single parenthetical citation in APA 7th?",
+              "options": [
+                "Chronologically from oldest publication year to newest.",
+                "Alphabetically by the first author's surname, separated by semicolons.",
+                "In order of importance to your research argument.",
+                "Chronologically from newest publication year to oldest."
+              ],
+              "answer": 1,
+              "hint": "Think about how examiners locate entries in your bibliography.",
+              "explanation": "APA 7th mandates that multiple works in the same parenthetical citation must be ordered alphabetically by the first author's surname, with distinct works separated by semicolons."
+            }
+          ]
+        }
+      }
+    ],
+    "key": [
+      "Use an ampersand '&' in parenthetical citations; spell out 'and' in narrative citations.",
+      "For works with 3 or more authors, use 'et al.' from the very first in-text citation.",
+      "For works with 2 authors, always write both author surnames in every citation.",
+      "Quotes under 40 words use quotation marks; quotes 40 words or longer become indented block quotes with zero quotation marks.",
+      "Multiple citations in one bracket must be alphabetized by author surname (A to Z), separated by semicolons."
+    ],
+    "mistakes": [
+      "Using an ampersand '&' in normal running text: 'Bass & Avolio (2020) argued...'",
+      "Listing all 3 to 5 authors on the first citation (the obsolete APA 6th rule).",
+      "Writing 'et. al.' with a period after 'et' instead of 'et al.' with a period only on 'al.'",
+      "Forgetting page numbers on direct quotes: '(Field, 2018)' instead of '(Field, 2018, p. 248)'.",
+      "Sorting multiple parenthetical citations by date instead of alphabetically."
+    ]
+  }
+}

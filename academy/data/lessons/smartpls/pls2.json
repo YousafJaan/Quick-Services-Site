@@ -1,0 +1,85 @@
+{
+  "id": "pls2",
+  "course": "smartpls",
+  "title": "Reflective vs Formative Measurement Models",
+  "type": "read",
+  "minutes": 12,
+  "content": {
+    "quick": "In reflective measurement models, indicators are manifestations caused by the latent construct (arrows point outward from circle to boxes). In formative models, indicators collectively define and cause the construct (arrows point inward from boxes to circle). Misidentifying measurement direction is a critical methodological error.",
+    "blocks": [
+      {
+        "id": "p1",
+        "sentences": [
+          {
+            "id": "s1",
+            "text": "The distinction between reflective and formative measurement models is the most critical conceptual foundation in structural equation modeling.",
+            "simple": "Knowing whether arrows point out or in between your concepts and questions is the most important rule in SmartPLS.",
+            "plain": "The distinction between reflective and formative measurement models is the most critical conceptual foundation in structural equation modeling.",
+            "technical": "Correct epistemic specification of auxiliary measurement theories represents an indispensable prerequisite for construct validity in structural equation models.",
+            "visual": {
+              "kind": "compare",
+              "title": "Reflective vs Formative Measurement",
+              "data": {
+                "columns": ["Reflective (Mode A)", "Formative (Mode B)"],
+                "rows": [
+                  { "metric": "Causality Direction", "col1": "Construct causes items (Circle → Boxes)", "col2": "Items cause construct (Boxes → Circle)" },
+                  { "metric": "Item Correlation", "col1": "High correlation expected (Interchangeable)", "col2": "No correlation required (Independent components)" },
+                  { "metric": "Removal of Item", "col1": "Does not alter construct meaning", "col2": "Destroys a fundamental aspect of construct" },
+                  { "metric": "Quality Metric", "col1": "Outer loadings, Cronbach's alpha, AVE", "col2": "Outer weights, collinearity (VIF), significance" }
+                ]
+              },
+              "caption": "90% of business and social science surveys use reflective measurement (arrows pointing out)."
+            }
+          },
+          {
+            "id": "s2",
+            "text": "In a reflective model, all questionnaire items share a common underlying cause and are expected to correlate positively with one another.",
+            "simple": "In a reflective construct, all your survey questions measure different angles of the same underlying feeling or idea.",
+            "plain": "In a reflective model, all questionnaire items share a common underlying cause and are expected to correlate positively with one another.",
+            "technical": "Reflective measurement posits that item covariance stems exclusively from variation in the unobserved latent variable, yielding highly collinear indicator sets.",
+            "visual": {
+              "kind": "definition",
+              "title": "The Reflective Mental Model",
+              "data": {
+                "term": "Reflective Indicator",
+                "meaning": "An observable manifestation that reflects the latent construct. Like symptoms reflecting an underlying virus.",
+                "example": "Construct: Job Satisfaction | Items: 'I enjoy my work', 'I look forward to work', 'I am happy with my role'."
+              },
+              "caption": "Because all items reflect satisfaction, a happy employee will score high on all three."
+            }
+          }
+        ],
+        "visual": {
+          "kind": "funnel",
+          "title": "Hair et al. (2022) Measurement Decision Rule",
+          "data": {
+            "stages": [
+              { "label": "Are items manifestations or drivers?", "desc": "Manifestations = Reflective; Drivers = Formative" },
+              { "label": "Should items correlate strongly?", "desc": "Yes = Reflective (Mode A); No = Formative (Mode B)" },
+              { "label": "Does dropping an item alter meaning?", "desc": "No = Reflective; Yes = Formative" },
+              { "label": "Arrow Direction in SmartPLS", "desc": "Reflective: Latent → Indicator; Formative: Indicator → Latent" }
+            ]
+          },
+          "caption": "Check your arrows in SmartPLS: right-click any construct to switch between Invert measurement model."
+        },
+        "check": {
+          "questions": [
+            {
+              "id": "q1",
+              "type": "single",
+              "q": "In SmartPLS 4, which direction do the measurement arrows point for a standard reflective construct?",
+              "options": [
+                "From the indicators (rectangles) to the latent construct (circle)",
+                "From the latent construct (circle) to the indicators (rectangles)",
+                "Bidirectional arrows between indicators",
+                "No arrows are used in reflective models"
+              ],
+              "answer": 1,
+              "explanation": "In reflective models (Mode A), the latent variable is assumed to cause the indicators, so arrows point outward from the circle to the rectangles."
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

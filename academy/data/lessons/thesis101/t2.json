@@ -1,0 +1,16 @@
+{
+  "id": "t2",
+  "course": "thesis101",
+  "title": "The Topic Narrowing Funnel",
+  "type": "visual",
+  "minutes": 12,
+  "content": {
+    "intro": "Use the interactive Topic Narrowing Funnel below to filter an overwhelming research interest into an operationalized, defensible empirical problem statement.",
+    "widget": "funnel",
+    "key": [
+      "Broad interest areas cannot be defended in an oral examination without boundary parameters.",
+      "A rigorous topic defines four boundary anchors: Context (Where), Target Population (Who), Measured Constructs (What), and Longitudinal Horizon.",
+      "The FINER criteria (Feasible, Interesting, Novel, Ethical, Relevant) must be met before proposal submission."
+    ]
+  }
+}

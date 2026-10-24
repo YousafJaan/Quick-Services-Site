@@ -1,0 +1,16 @@
+{
+  "id": "v3",
+  "course": "viva",
+  "title": "Defense Slide Budget & Speaking Pace Planner",
+  "type": "visual",
+  "minutes": 12,
+  "content": {
+    "intro": "Use the interactive Defense Slide Budget & Speaking Pace Planner below to rehearse your 15-minute presentation. Set your planned slide count and speaking words-per-minute rate to verify that you finish with confidence inside your committee's strict time limit.",
+    "widget": "slideTimer",
+    "key": [
+      "Standard speaking rate under mild adrenaline is 130 to 140 words per minute.",
+      "A 15-minute defense allows a maximum spoken script of 1,800 to 2,000 words across all slides.",
+      "Always leave 60 seconds of buffer before the 15:00 buzzer sounds."
+    ]
+  }
+}

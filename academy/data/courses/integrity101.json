@@ -1,0 +1,60 @@
+{
+  "id": "integrity101",
+  "title": "Academic Integrity & Similarity Reports",
+  "tagline": "Understand plagiarism policies, interpret Turnitin reports, and use AI ethically.",
+  "category": "Ethics & Integrity",
+  "level": "All Levels",
+  "minutes": 170,
+  "outcomes": [
+    "Navigate HEC Pakistan plagiarism thresholds (maximum 19% overall, 5% single source) and institutional variations.",
+    "Distinguish between superficial textual overlap and genuine plagiarism in Turnitin reports.",
+    "Master the 4-step paraphrasing method to express complex research findings in your own scholarly voice.",
+    "Draft transparent, compliant AI tool usage disclosure statements for thesis submission."
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "title": "Module 1: Forms of Plagiarism & HEC Policy",
+      "description": "Understand direct plagiarism, mosaic borrowing, self-plagiarism, and official HEC regulations.",
+      "lessons": [
+        { "id": "i1", "title": "The Spectrum of Plagiarism", "type": "video", "vid": "V-INTEG-01", "minutes": 7 },
+        { "id": "i2", "title": "HEC Pakistan Plagiarism Policy & Thresholds Explained", "type": "read", "minutes": 11 },
+        { "id": "i3", "title": "Self-Plagiarism, Duplicate Submission & Data Slicing", "type": "read", "minutes": 10 },
+        { "id": "i4", "title": "Module 1 Assessment: Policies & Standards", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m2",
+      "title": "Module 2: Reading Turnitin & Similarity Reports",
+      "description": "Analyze similarity percentages, interpret source match breakdowns, and understand legitimate exclusions.",
+      "lessons": [
+        { "id": "i5", "title": "The Interactive Similarity Report Simulator", "type": "visual", "widget": "sim", "minutes": 14 },
+        { "id": "i6", "title": "Overall Index vs Individual Source Matching", "type": "read", "minutes": 11 },
+        { "id": "i7", "title": "Legitimate Exclusions (Quotes, References, Methods)", "type": "video", "vid": "V-INTEG-02", "minutes": 8 },
+        { "id": "i8", "title": "Module 2 Assessment: Interpreting Reports", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m3",
+      "title": "Module 3: Paraphrasing & Academic Synthesis",
+      "description": "Transform source texts using structural restructuring, synonymization, and synthesis without plagiarizing.",
+      "lessons": [
+        { "id": "i9", "title": "The 4-Step Paraphrasing Technique That Never Fails", "type": "read", "minutes": 12 },
+        { "id": "i10", "title": "When to Quote Directly vs When to Synthesize", "type": "read", "minutes": 10 },
+        { "id": "i11", "title": "Synthesizing Multiple Conflicting Sources", "type": "video", "vid": "V-INTEG-03", "minutes": 7 },
+        { "id": "i12", "title": "Module 3 Assessment: Paraphrasing Mastery", "type": "quiz", "minutes": 10 }
+      ]
+    },
+    {
+      "id": "m4",
+      "title": "Module 4: Generative AI Ethics, Disclosure & Final Check",
+      "description": "Learn ethical boundaries for GenAI assistance, institutional declaration requirements, and pre-submission checks.",
+      "lessons": [
+        { "id": "i13", "title": "AI Tools in Academic Research: Ethical Boundaries", "type": "read", "minutes": 12 },
+        { "id": "i14", "title": "How to Write an AI Assistance Disclosure Statement", "type": "read", "minutes": 10 },
+        { "id": "i15", "title": "Pre-Submission Integrity Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "i16", "title": "Academic Integrity Comprehensive Final Check", "type": "quiz", "minutes": 20 }
+      ]
+    }
+  ]
+}

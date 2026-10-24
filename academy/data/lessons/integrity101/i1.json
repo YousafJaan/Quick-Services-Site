@@ -1,0 +1,23 @@
+{
+  "id": "i1",
+  "course": "integrity101",
+  "title": "The Spectrum of Plagiarism",
+  "type": "video",
+  "minutes": 7,
+  "content": {
+    "len": "7 min",
+    "vid": "V-INTEG-01",
+    "transcript": [
+      "Welcome to Course 3: Plagiarism, Turnitin & Research Integrity. In this opening lecture, we demystify what plagiarism actually means in contemporary higher education.",
+      "Most students believe plagiarism is only word-for-word copy-pasting without quotation marks. However, Turnitin and university ethics committees define plagiarism along a broad spectrum: from verbatim copying, to 'patchwriting' where sentence structure is preserved while substituting synonyms, to structural and conceptual appropriation without citation.",
+      "Under the Higher Education Commission (HEC) of Pakistan, submitting someone else's work, paying third-party commercial essay mills to write your dissertation, or recycling your own previously graded coursework without authorization can result in blacklisting, degree revocation, and disciplinary expulsion.",
+      "True academic integrity is not merely about beating an algorithm or keeping your similarity below 19%. It is about honest scholarship: transparently attributing every fact, definition, and idea that did not originate in your own mind."
+    ],
+    "key": [
+      "Plagiarism is an ethical breach covering verbatim copying, patchwriting, idea theft, and unauthorized self-recycling.",
+      "Turnitin does not detect 'plagiarism'—it calculates text similarity against millions of web pages, student papers, and subscription journals.",
+      "Patchwriting (swapping synonyms while retaining another author's exact clause structure) is classified as plagiarism even if a citation is present.",
+      "The HEC policy enforces penalties ranging from thesis revision and grade failure to public blacklisting and degree cancellation."
+    ]
+  }
+}
