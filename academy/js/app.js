@@ -119,12 +119,15 @@ function initCookieConsentBanner() {
     <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
       <span style="font-size: 20px; flex-shrink: 0; line-height: 1;">🛡️</span>
       <div style="font-size: 13.5px; color: var(--qsa-text-secondary); line-height: 1.5;">
-        We use secure local device storage to remember your reading preferences, course progress, and verify your credentials.
+        We use secure local device storage to remember your reading preferences (Simple/Plain/Technical), track lesson progress, and verify certificates.
       </div>
     </div>
     <div style="display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
+      <button type="button" class="btn btn-secondary btn-sm" id="dismiss-cookie-consent-btn" style="white-space: nowrap; padding: 6px 14px; font-size: 12.5px;">
+        Dismiss
+      </button>
       <button type="button" class="btn btn-primary btn-sm" id="accept-cookie-consent-btn" style="white-space: nowrap; padding: 8px 18px; font-size: 13px;">
-        Accept &amp; Continue
+        Accept &amp; Save Preferences
       </button>
     </div>
   `;
@@ -136,11 +139,22 @@ function initCookieConsentBanner() {
     banner.style.transform = 'translateX(-50%) translateY(0)';
   });
 
-  banner.querySelector('#accept-cookie-consent-btn')?.addEventListener('click', () => {
-    store.acceptCookies();
+  const dismiss = () => {
     banner.style.opacity = '0';
     banner.style.transform = 'translateX(-50%) translateY(24px)';
     setTimeout(() => banner.remove(), 260);
+  };
+
+  banner.querySelector('#accept-cookie-consent-btn')?.addEventListener('click', () => {
+    store.acceptCookies();
+    dismiss();
+    if (typeof window.showGlobalToast === 'function') {
+      window.showGlobalToast('Device storage enabled. Preferences and progress saved.');
+    }
+  });
+
+  banner.querySelector('#dismiss-cookie-consent-btn')?.addEventListener('click', () => {
+    dismiss();
   });
 }
 
@@ -150,6 +164,11 @@ function initCookieConsentBanner() {
 function initLanguageSwitchers() {
   const syncButtons = () => {
     const current = store.getEnglishLevel();
+    const labels = {
+      simple: 'Simple English (ESL)',
+      plain: 'Plain (Standard)',
+      technical: 'Technical (Scholarly)'
+    };
     document.querySelectorAll('.lang-level-switcher').forEach(switcher => {
       switcher.querySelectorAll('.lang-btn').forEach(btn => {
         const lang = btn.dataset.lang;
@@ -160,6 +179,11 @@ function initLanguageSwitchers() {
         }
       });
     });
+
+    const activeBadge = document.getElementById('catalog-active-lang-label');
+    if (activeBadge) {
+      activeBadge.textContent = labels[current] || current;
+    }
   };
 
   // Delegated click handler on document
@@ -176,7 +200,7 @@ function initLanguageSwitchers() {
         technical: 'Technical English (Scholarly Register)'
       };
       if (typeof window.showGlobalToast === 'function') {
-        window.showGlobalToast(`Reading style set to: ${labels[lang] || lang}`);
+        window.showGlobalToast(`Reading style set to: ${labels[lang] || lang} & saved`);
       }
     }
   });
@@ -291,11 +315,21 @@ function checkLanguageOnboarding(force = false) {
 
   modalPortal.querySelector('#confirm-lang-btn')?.addEventListener('click', () => {
     store.setEnglishLevel(selectedLang);
+    store.acceptCookies();
     closeModal();
+    const labels = {
+      simple: 'Simple English (ESL & Clarity)',
+      plain: 'Plain English (Standard Academic)',
+      technical: 'Technical English (Scholarly Register)'
+    };
+    if (typeof window.showGlobalToast === 'function') {
+      window.showGlobalToast(`Reading register set to: ${labels[selectedLang] || selectedLang} & saved to device`);
+    }
   });
 
   modalPortal.querySelector('#close-onboarding-btn')?.addEventListener('click', () => {
     store.setEnglishLevel(selectedLang);
+    store.acceptCookies();
     closeModal();
   });
 }
@@ -304,48 +338,71 @@ function checkLanguageOnboarding(force = false) {
 window.openLanguagePreferenceModal = () => checkLanguageOnboarding(true);
 
 /* ==========================================================================
-   Catalog Rendering (Claude Academy Warm Light Paper Aesthetic)
+   Catalog Rendering (Stripe Press & Substack High-Legibility Aesthetic)
    ========================================================================== */
 function renderCatalog(courses) {
   const active = store.getActiveLesson();
   const currentLang = store.getEnglishLevel();
 
   const langLabels = {
-    simple: 'Simple',
-    plain: 'Plain',
-    technical: 'Tech'
+    simple: 'Simple English (ESL)',
+    plain: 'Plain (Standard)',
+    technical: 'Technical (Scholarly)'
   };
 
   mainEl.innerHTML = `
     <!-- Hero Banner -->
-    <section style="background: #ffffff; padding: 68px 0 48px; border-bottom: 1px solid var(--qsa-border-line);">
+    <section style="background: #ffffff; padding: 64px 0 44px; border-bottom: 1px solid var(--qsa-border-line);">
       <div class="wrap" style="text-align: center;">
-        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-          <span class="tag tag-clay">Quick Services Academy</span>
-          <button type="button" onclick="window.openLanguagePreferenceModal()" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 5px 14px; font-size: 12px; font-weight: 600; color: var(--qsa-text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: var(--qsa-shadow-card);">
-            <span>Reading Style:</span>
-            <strong style="color: var(--qsa-accent-clay);">${langLabels[currentLang]}</strong>
+        
+        <!-- Live Academic Register Switcher on Hero -->
+        <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; justify-content: center;">
+          <span class="tag tag-clay" style="font-weight: 700; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px;">Reading Register</span>
+          <div class="lang-level-switcher" id="catalog-hero-lang-switcher" style="background: #ffffff; border: 1.5px solid var(--qsa-border-strong); padding: 4px; box-shadow: var(--qsa-shadow-card);" title="Switch reading register immediately">
+            <button type="button" class="lang-btn ${currentLang === 'simple' ? 'active' : ''}" data-lang="simple" title="Simple English for easy ESL comprehension">🌱 Simple</button>
+            <button type="button" class="lang-btn ${currentLang === 'plain' ? 'active' : ''}" data-lang="plain" title="Plain academic English (Standard)">📘 Plain</button>
+            <button type="button" class="lang-btn ${currentLang === 'technical' ? 'active' : ''}" data-lang="technical" title="Advanced technical dissertation register">🎓 Technical</button>
+          </div>
+          <button type="button" onclick="window.openLanguagePreferenceModal()" style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 14px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-secondary); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: var(--qsa-shadow-card);" title="Configure reading preferences">
+            <span>Active:</span>
+            <strong id="catalog-active-lang-label" style="color: var(--qsa-accent-clay);">${langLabels[currentLang]}</strong>
             <span style="font-size: 11px; opacity: 0.7;">⚙</span>
           </button>
         </div>
 
-        <h1 style="font-size: clamp(34px, 5.5vw, 52px); color: var(--qsa-text-primary); max-width: 820px; margin: 8px auto 16px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;">
+        <h1 style="font-size: clamp(34px, 5.2vw, 50px); color: var(--qsa-text-primary); max-width: 840px; margin: 8px auto 16px; font-weight: 400; line-height: 1.15; letter-spacing: -0.02em;">
           Make your research make sense.
         </h1>
-        <p style="font-size: clamp(16px, 2vw, 18px); color: var(--qsa-text-secondary); max-width: 680px; margin: 0 auto 32px; line-height: 1.6;">
-          Free, premium academic training for postgraduate and research students in Pakistan. Master thesis structure, APA 7th citations, G*Power calculations, SPSS, and SmartPLS with interactive visuals for every single sentence.
+        <p style="font-size: clamp(16px, 2vw, 18px); color: var(--qsa-text-secondary); max-width: 700px; margin: 0 auto 30px; line-height: 1.65;">
+          Free, university-grade academic research training for postgraduate (MS/MPhil &amp; PhD) researchers in Pakistan. Master dissertation problem formulation, APA 7th referencing, Turnitin defense, G*Power calculations, SPSS, and SmartPLS 4 with sentence-level interactive models.
         </p>
+
+        <!-- Quick Value Metrics Strip -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 30px;">
+          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+            <span>🎓</span> <span>9 Complete Tracks</span>
+          </div>
+          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+            <span>📖</span> <span>168 Multi-Register Lessons</span>
+          </div>
+          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+            <span>📜</span> <span>Canva-Grade Verifiable Credentials</span>
+          </div>
+          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-pill); padding: 6px 16px; font-size: 12.5px; font-weight: 600; color: var(--qsa-text-primary); display: flex; align-items: center; gap: 6px;">
+            <span>🛡️</span> <span>HEC Pakistan Compliant</span>
+          </div>
+        </div>
 
         <!-- Search & Filter Controls -->
         <div style="max-width: 580px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap;">
-          <input type="text" id="catalog-search" placeholder="Search topics (e.g. Turnitin, G*Power, ANOVA, APA 7)..." style="flex: 1; min-width: 260px; padding: 13px 20px; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); font-size: 14.5px; outline: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);">
+          <input type="text" id="catalog-search" placeholder="Search topics (e.g. Turnitin, G*Power, ANOVA, APA 7, SmartPLS)..." style="flex: 1; min-width: 260px; padding: 13px 20px; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); font-size: 14.5px; outline: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);">
         </div>
       </div>
     </section>
 
     <!-- Resume Banner (If Active) -->
     ${active && active.courseId ? `
-      <section style="background: var(--qsa-accent-peach-soft); border-bottom: 1px solid rgba(217, 119, 87, 0.15); padding: 14px 0;">
+      <section style="background: #ffffff; border-bottom: 1px solid var(--qsa-border-line); padding: 14px 0;">
         <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
           <div style="font-size: 14px; color: var(--qsa-text-secondary);">
             <strong>Resume where you left off:</strong> Lesson <code>${active.lessonId.toUpperCase()}</code> in <em>${active.courseId.toUpperCase()}</em>

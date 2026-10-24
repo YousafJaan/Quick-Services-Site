@@ -52,8 +52,19 @@ class Store {
     }
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
-      if (!saved) return JSON.parse(JSON.stringify(DEFAULT_STATE));
-      const parsed = JSON.parse(saved);
+      let parsed = {};
+      if (saved) {
+        try { parsed = JSON.parse(saved); } catch (e) {}
+      }
+      const directLang = window.localStorage.getItem('qsa_english_level');
+      if (directLang && ['simple', 'plain', 'technical'].includes(directLang)) {
+        parsed.englishLevel = directLang;
+        parsed.hasChosenEnglishLevel = true;
+      }
+      const directCookie = window.localStorage.getItem('qsa_cookies_accepted');
+      if (directCookie === 'true') {
+        parsed.cookiesAccepted = true;
+      }
       return { ...DEFAULT_STATE, ...parsed };
     } catch (e) {
       console.error('Failed to parse localStorage state:', e);
