@@ -176,6 +176,10 @@ a:focus-visible,summary:focus-visible,input:focus-visible+label,button:focus-vis
   .bar{display:none}.pad{display:none}
   .guide-banner{flex-direction:row;align-items:center;justify-content:space-between}
 }
+.academy-promo-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center;margin-bottom:40px}
+@media (min-width:860px){
+  .academy-promo-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px}
+}
 @media (prefers-reduced-motion:reduce){
   .mq{animation:none}html{scroll-behavior:auto}
   .btn:hover{transform:none}
@@ -348,50 +352,77 @@ a:focus-visible,summary:focus-visible,input:focus-visible+label,button:focus-vis
 </div>
 </div>
 
-<!-- Quick Academy Feature Section -->
-<div id="academy" class="sec" style="background:#faf9f5;color:#141413;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">
+<!-- Quick Academy Feature Section (Claude Academy Style) -->
+<div id="academy" class="sec" style="background:#FAF7F1;color:#172536;border-top:1px solid #E8E1D8;border-bottom:1px solid #E8E1D8">
   <div class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:32px">
+    <div class="academy-promo-grid">
       <div>
-        <span class="tag" style="color:#d97757;border-color:rgba(217,119,87,0.3);background:#fcf4f0">Free Interactive LMS</span>
-        <h2 class="d h2" style="color:#141413;margin:12px 0 8px">Quick Academy</h2>
-        <p style="font-size:17px;color:#52514e;max-width:720px;margin:0">
-          Reverse-engineered Claude Academy aesthetic with warm parchment light theme, multi-register English (Simple, Plain, Technical), and pre-defined visual breakdowns for every sentence. Free for all research students.
+        <div style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#B95335;background:rgba(185,83,53,0.08);padding:6px 14px;border-radius:999px;border:1px solid rgba(185,83,53,0.25);margin-bottom:14px">
+          <span>🎓</span> <span>Free Postgraduate Research LMS • HEC Aligned</span>
+        </div>
+        <h2 style="font-family:'Newsreader','Playfair Display',Georgia,serif;font-size:clamp(32px,5vw,50px);line-height:1.15;color:#102B4E;margin:8px 0 14px;font-weight:500">
+          Quick Academy
+        </h2>
+        <p style="font-size:16.5px;color:#637083;line-height:1.68;margin:0 0 24px">
+          Transforming academic research with Anthropic Claude-inspired editorial design, multi-register syntax breakdowns (Simple, Plain, Technical), and interactive data tools. Completely free for all university scholars.
         </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <a href="/academy/" class="btn" style="background:#102B4E;color:#ffffff;border-radius:999px;padding:12px 26px;font-weight:700;box-shadow:0 4px 14px rgba(16,43,78,0.2);text-decoration:none">
+            ➔ Explore All 9 Courses
+          </a>
+          <a href="/academy/#certificates" class="btn" style="background:#ffffff;border:1px solid #E8E1D8;color:#102B4E;border-radius:999px;padding:12px 22px;font-weight:600;text-decoration:none">
+            📄 View Credentials
+          </a>
+        </div>
       </div>
-      <div>
-        <a href="/academy/" class="btn" style="background:#d97757;color:#fff;box-shadow:0 4px 14px rgba(217,119,87,0.35)">Explore All 9 Courses ➔</a>
+      
+      <!-- Right Side: Master Academy Emblem Decagon -->
+      <div style="display:flex;align-items:center;justify-content:center">
+        <div style="width:100%;max-width:240px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 10px 24px rgba(16,43,78,0.09))">
+          <img src="/academy/assets/images/hero-academy-emblem.svg" alt="Quick Academy Master Emblem" style="width:100%;height:100%;object-fit:contain" width="240" height="240">
+        </div>
       </div>
     </div>
 
-    <!-- 3 Featured Course Highlights -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
-      <div style="background:#fff;border:1px solid rgba(31,30,29,0.1);border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.03)">
-        <div>
-          <span style="font-size:11px;font-weight:800;color:#d97757;letter-spacing:1px;text-transform:uppercase">Course 01</span>
-          <h3 class="d" style="font-size:20px;margin:8px 0 6px;color:#141413">Thesis Writing 101</h3>
-          <p style="font-size:14px;color:#52514e;line-height:1.55;margin:0 0 16px">From topic narrowing and the FINER criteria to proposal approval and 5-chapter thesis structure.</p>
+    <!-- 3 Featured Course Highlights with Hosted Decagonal Badges -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+      
+      <div style="background:#ffffff;border:1px solid #E8E1D8;border-radius:18px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 8px rgba(16,43,78,0.04);transition:all .2s">
+        <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:14px">
+          <img src="/academy/assets/images/badge-thesis101.svg" alt="Thesis 101 Badge" style="width:58px;height:58px;flex-shrink:0" width="58" height="58">
+          <div>
+            <span style="font-size:11px;font-weight:800;color:#B95335;letter-spacing:1px;text-transform:uppercase">Track 01 • Design</span>
+            <h3 style="font-family:'Newsreader',Georgia,serif;font-size:20px;margin:4px 0 0;color:#102B4E;font-weight:500">Thesis Writing 101</h3>
+          </div>
         </div>
-        <a href="/academy/#course-thesis101" style="color:#d97757;font-weight:700;font-size:13.5px;text-decoration:none">Start Course ➔</a>
+        <p style="font-size:14px;color:#637083;line-height:1.6;margin:0 0 18px">From research topic narrowing and FINER criteria to proposal approval and 5-chapter thesis architecture.</p>
+        <a href="/academy/#course-thesis101" style="display:inline-flex;align-items:center;gap:6px;color:#B95335;font-weight:700;font-size:13.5px;text-decoration:none">Start Course ➔</a>
       </div>
 
-      <div style="background:#fff;border:1px solid rgba(31,30,29,0.1);border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.03)">
-        <div>
-          <span style="font-size:11px;font-weight:800;color:#d97757;letter-spacing:1px;text-transform:uppercase">Course 02</span>
-          <h3 class="d" style="font-size:20px;margin:8px 0 6px;color:#141413">APA 7th &amp; Citations</h3>
-          <p style="font-size:14px;color:#52514e;line-height:1.55;margin:0 0 16px">Interactive reference dissections, parenthetical vs narrative rules, and automated Zotero workflows.</p>
+      <div style="background:#ffffff;border:1px solid #E8E1D8;border-radius:18px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 8px rgba(16,43,78,0.04);transition:all .2s">
+        <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:14px">
+          <img src="/academy/assets/images/badge-cite101.svg" alt="APA 7th Badge" style="width:58px;height:58px;flex-shrink:0" width="58" height="58">
+          <div>
+            <span style="font-size:11px;font-weight:800;color:#B95335;letter-spacing:1px;text-transform:uppercase">Track 03 • Writing</span>
+            <h3 style="font-family:'Newsreader',Georgia,serif;font-size:20px;margin:4px 0 0;color:#102B4E;font-weight:500">APA 7th &amp; Citations</h3>
+          </div>
         </div>
-        <a href="/academy/#course-cite101" style="color:#d97757;font-weight:700;font-size:13.5px;text-decoration:none">Start Course ➔</a>
+        <p style="font-size:14px;color:#637083;line-height:1.6;margin:0 0 18px">Interactive parenthetical vs narrative referencing dissections, DOI resolution, and automated Zotero library workflows.</p>
+        <a href="/academy/#course-cite101" style="display:inline-flex;align-items:center;gap:6px;color:#B95335;font-weight:700;font-size:13.5px;text-decoration:none">Start Course ➔</a>
       </div>
 
-      <div style="background:#fff;border:1px solid rgba(31,30,29,0.1);border-radius:16px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 6px rgba(0,0,0,0.03)">
-        <div>
-          <span style="font-size:11px;font-weight:800;color:#d97757;letter-spacing:1px;text-transform:uppercase">Course 08</span>
-          <h3 class="d" style="font-size:20px;margin:8px 0 6px;color:#141413">SmartPLS 4 &amp; SEM</h3>
-          <p style="font-size:14px;color:#52514e;line-height:1.55;margin:0 0 16px">Interactive path models, reflective outer loadings (&ge;0.708), HTMT discriminant validity, and mediation.</p>
+      <div style="background:#ffffff;border:1px solid #E8E1D8;border-radius:18px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 8px rgba(16,43,78,0.04);transition:all .2s">
+        <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:14px">
+          <img src="/academy/assets/images/badge-smartpls.svg" alt="SmartPLS 4 Badge" style="width:58px;height:58px;flex-shrink:0" width="58" height="58">
+          <div>
+            <span style="font-size:11px;font-weight:800;color:#B95335;letter-spacing:1px;text-transform:uppercase">Track 02 • Stats</span>
+            <h3 style="font-family:'Newsreader',Georgia,serif;font-size:20px;margin:4px 0 0;color:#102B4E;font-weight:500">SmartPLS 4 &amp; SEM</h3>
+          </div>
         </div>
-        <a href="/academy/#course-smartpls" style="color:#d97757;font-weight:700;font-size:13.5px;text-decoration:none">Start Course ➔</a>
+        <p style="font-size:14px;color:#637083;line-height:1.6;margin:0 0 18px">Interactive path models, reflective outer loadings (&ge;0.708), HTMT discriminant validity, and mediation bootstrapping.</p>
+        <a href="/academy/#course-smartpls" style="display:inline-flex;align-items:center;gap:6px;color:#B95335;font-weight:700;font-size:13.5px;text-decoration:none">Start Course ➔</a>
       </div>
+
     </div>
   </div>
 </div>

@@ -998,16 +998,20 @@ function initClarityLabListeners() {
 }
 
 /* ==========================================================================
-   Course Card Renderer
+   Course Card Renderer (Claude Academy Aligned Architecture)
    ========================================================================== */
 function renderCourseCard(c) {
   const progress = store.getCourseProgress(c.id, c.lessonsCount);
   const hours = (c.minutes / 60).toFixed(1);
+  const baseAsset = getBaseAssetPath();
 
   return `
     <div class="qsa-card">
       <div class="qsa-card-banner">
         ${getCourseThumbnailSvg(c.id)}
+        <div class="qsa-card-emblem-badge" title="${c.title} • Accredited Track">
+          <img src="${baseAsset}/images/badge-${c.id}.svg" alt="${c.title} Badge" width="54" height="54" onerror="this.onerror=null; this.src='${baseAsset}/images/hero-academy-emblem.svg';">
+        </div>
       </div>
 
       <div class="qsa-card-body">

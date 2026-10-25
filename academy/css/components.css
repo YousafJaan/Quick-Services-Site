@@ -447,6 +447,28 @@
   height: 100%;
 }
 
+.qsa-card-emblem-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  width: 54px;
+  height: 54px;
+  filter: drop-shadow(0 4px 10px rgba(16, 43, 78, 0.16));
+  transition: transform var(--qsa-dur-base) var(--qsa-ease-spring);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.qsa-card:hover .qsa-card-emblem-badge {
+  transform: scale(1.1) translateY(-2px);
+}
+
+.qsa-card-emblem-badge img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .qsa-card-body {
   padding: 24px;
   flex: 1;

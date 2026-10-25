@@ -1,11 +1,13 @@
 import os
+import html
 
 DEST_DIR = r"C:\Users\Huzaifa Mahi\quick-services-site\academy\assets\images"
 os.makedirs(DEST_DIR, exist_ok=True)
 
 # Common SVG wrapper with chamfered octagon shape and inner styling
 def make_badge(filename, title, inner_svg):
-    svg_content = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" aria-label="{title}" role="img">
+    safe_title = html.escape(title, quote=True)
+    svg_content = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%" aria-label="{safe_title}" role="img">
   <defs>
     <filter id="soft-shadow" x="-8%" y="-8%" width="120%" height="120%">
       <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.06"/>
