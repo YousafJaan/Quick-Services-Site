@@ -1,0 +1,54 @@
+{
+  "name": "Quick Academy - Postgraduate Research LMS",
+  "short_name": "Quick Academy",
+  "description": "Practical academic writing, statistics, and research methodology training for postgraduate scholars.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FAF7F1",
+  "theme_color": "#102B4E",
+  "icons": [
+    {
+      "src": "./assets/images/hero-academy-emblem.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "../favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Course Catalogue",
+      "short_name": "Courses",
+      "description": "View all 9 accredited research courses",
+      "url": "./#/",
+      "icons": [{ "src": "./assets/images/hero-academy-emblem.svg", "sizes": "any" }]
+    },
+    {
+      "name": "My Learning Dashboard",
+      "short_name": "My Learning",
+      "description": "Resume active courses and progress",
+      "url": "./#learning",
+      "icons": [{ "src": "./assets/images/hero-academy-emblem.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Sentence Clarity Lab",
+      "short_name": "Clarity Lab",
+      "description": "Academic syntax refiner and register transformer",
+      "url": "./#sentence-clarity-lab",
+      "icons": [{ "src": "./assets/images/hero-academy-emblem.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Academic Credentials",
+      "short_name": "Certificates",
+      "description": "View and verify earned academic certificates",
+      "url": "./#certificates",
+      "icons": [{ "src": "./assets/images/hero-academy-emblem.svg", "sizes": "any" }]
+    }
+  ]
+}

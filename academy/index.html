@@ -11,6 +11,13 @@
   
   <title>Quick Services Academy | Make your research make sense.</title>
 
+  <!-- PWA Manifest & App Metadata -->
+  <meta name="theme-color" content="#102B4E">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.json">
+
   <!-- Google Fonts: Newsreader + Plus Jakarta Sans + Alex Brush (Calligraphy) + Cinzel (Classical Roman) + Playfair Display & Cormorant Garamond (Academic Prestige) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,8 +50,11 @@
         <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="nav-item">Field Guide</a>
       </nav>
 
-      <!-- Right Header Actions (Theme Toggle & Advisor Button) -->
+      <!-- Right Header Actions (Avatar, Theme Toggle & Advisor Button) -->
       <div class="header-right-actions">
+        <!-- User Profile Avatar Pill -->
+        <div id="header-avatar-slot"></div>
+
         <!-- Light / Dark Theme Switcher Pill -->
         <div class="theme-toggle-pill" id="header-theme-switcher" title="Toggle Light / Dark mode">
           <button type="button" class="theme-pill-btn active" data-set-theme="light">

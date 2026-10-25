@@ -11,8 +11,9 @@
  */
 
 import { store } from './store.js';
+import { getUserProfile } from './storage/idb.js';
 
-export function renderCertificateView(container, { certId, courseId }) {
+export async function renderCertificateView(container, { certId, courseId }) {
   const courses = [
     { id: 'thesis101', title: 'Thesis Writing 101: Problem Formulation & Defense', hours: 3.5, code: 'THESIS' },
     { id: 'cite101', title: 'Citations & Referencing: APA 7th Masterclass', hours: 3.0, code: 'CITE' },
@@ -36,6 +37,7 @@ export function renderCertificateView(container, { certId, courseId }) {
   const isLocked = store.isStudentNameLocked();
   const lockedName = store.getVerifiedStudentName();
   const regId = store.getStudentRegistrationId() || 'QSA-REG-VERIFIED';
+  const userProfile = await getUserProfile();
 
   container.innerHTML = `
     <div class="wrap" style="padding: 40px 20px 80px; max-width: 1040px;">
@@ -148,6 +150,15 @@ export function renderCertificateView(container, { certId, courseId }) {
         <p style="font-family: 'Cormorant Garamond', var(--qsa-font-serif); font-size: 17px; color: #57534e; margin-bottom: 16px; font-style: italic; position: relative; z-index: 2;">
           This official academic credential is conferred upon
         </p>
+
+        <!-- Optional Verified Scholar Decagonal Portrait -->
+        ${userProfile && userProfile.dataUrl ? `
+          <div style="margin: 0 auto 12px; display: inline-block; position: relative; z-index: 2;">
+            <div style="width: 64px; height: 64px; margin: 0 auto; clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); border: 2px solid #b45309; background: #FAF7F1; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
+              <img src="${userProfile.dataUrl}" alt="Verified Scholar" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div style="font-size: 8.5px; font-weight: 800; text-transform: uppercase; color: #b45309; letter-spacing: 0.8px; margin-top: 4px;">Verified Identity</div>
+          </div>` : ''}
 
         <!-- Recipient Name in Prestigious Calligraphy Script -->
         <div style="margin: 0 auto 16px; position: relative; z-index: 2; display: inline-block;">

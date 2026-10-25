@@ -12,6 +12,9 @@ import { QuizEngine } from './quiz/index.js';
 import { renderWidget } from './widgets/index.js';
 import { router } from './router.js';
 import { synthesizeLesson } from './curriculum-synthesizer.js';
+import { saveLessonNote, getLessonNotes, deleteLessonNote } from './storage/idb.js';
+import { processImageFile } from './components/uploader.js';
+import { openLightboxModal } from './app.js';
 
 let activeDepth = 'standard';
 
@@ -180,6 +183,42 @@ function renderLessonPlayer(container, course, lesson) {
                 <button type="button" class="claude-helpful-btn" data-helpful="no">
                   <span>👎</span> <span>Needs more explanation</span>
                 </button>
+              </div>
+            </div>
+
+            <!-- Interactive Lesson Notes & Figure Attachments -->
+            <div class="claude-notes-panel" id="lesson-notes-panel">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                <div>
+                  <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.6px;">
+                    Empirical Workspace
+                  </div>
+                  <h3 style="margin: 2px 0 0; font-size: 18px; font-family: var(--qsa-font-serif); color: var(--qsa-primary-navy);">
+                    My Lesson Notes &amp; Attached Work
+                  </h3>
+                </div>
+                <span style="font-size: 12px; color: var(--qsa-text-muted);">Saved in offline storage</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <textarea id="lesson-note-text" class="claude-search-input" rows="2" placeholder="Record your methodology reflection or thesis notes for this lesson..." style="border-radius: 8px; resize: vertical;"></textarea>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="file" id="lesson-note-file-input" accept="image/png,image/jpeg,image/webp" style="display: none;">
+                    <button type="button" class="btn btn-secondary btn-sm" id="lesson-note-attach-btn" style="font-size: 12px; padding: 5px 12px;">
+                      <span>📎</span> <span id="lesson-note-attach-label">Attach Screenshot</span>
+                    </button>
+                    <span id="lesson-note-attached-indicator" style="display: none; font-size: 12px; color: var(--qsa-status-success); font-weight: 600;">✓ Attached</span>
+                  </div>
+                  <button type="button" class="claude-btn-dark btn-sm" id="lesson-note-save-btn">
+                    Save Note
+                  </button>
+                </div>
+              </div>
+
+              <div class="claude-notes-list" id="lesson-notes-list-mount">
+                <!-- Populated dynamically from IndexedDB -->
               </div>
             </div>
 
@@ -434,6 +473,7 @@ function renderLessonPlayer(container, course, lesson) {
   // Setup Claude Academy Reverse-Engineered Features
   setupClaudePromptListeners(container);
   setupClaudeKnowledgeCheckListeners(container, course.id, lesson.id);
+  setupLessonNotes(container, course.id, lesson.id);
 
   // Setup Smooth Scrolling for "On this page" TOC
   container.querySelectorAll('.claude-toc-link').forEach(link => {
@@ -759,6 +799,117 @@ function setupClaudeKnowledgeCheckListeners(container, courseId, lessonId) {
     submitBtn.setAttribute('disabled', 'true');
     submitBtn.style.opacity = '0.6';
     submitBtn.style.cursor = 'default';
+  });
+}
+
+async function setupLessonNotes(container, courseId, lessonId) {
+  const mount = container.querySelector('#lesson-notes-list-mount');
+  const input = container.querySelector('#lesson-note-text');
+  const fileInput = container.querySelector('#lesson-note-file-input');
+  const attachBtn = container.querySelector('#lesson-note-attach-btn');
+  const attachLabel = container.querySelector('#lesson-note-attach-label');
+  const attachedIndicator = container.querySelector('#lesson-note-attached-indicator');
+  const saveBtn = container.querySelector('#lesson-note-save-btn');
+
+  if (!mount || !input || !saveBtn) return;
+
+  let attachedImageData = null;
+
+  const renderNotesList = async () => {
+    const notes = await getLessonNotes(courseId, lessonId);
+    if (!notes.length) {
+      mount.innerHTML = `
+        <div style="font-size: 13px; color: var(--qsa-text-muted); font-style: italic; padding: 6px 0;">
+          No personal notes or screenshots attached to this lesson yet.
+        </div>`;
+      return;
+    }
+
+    mount.innerHTML = notes.map(n => `
+      <div class="claude-note-item" data-note-id="${n.id}">
+        ${n.dataUrl ? `
+          <img src="${n.dataUrl}" alt="Attached screenshot" class="claude-note-thumb" data-full-img="${n.dataUrl}">
+        ` : ''}
+        <div style="flex: 1;">
+          <p style="margin: 0 0 4px; font-size: 14px; color: var(--qsa-text-primary); line-height: 1.5; white-space: pre-wrap;">${n.text}</p>
+          <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11.5px; color: var(--qsa-text-muted); margin-top: 6px;">
+            <span>${new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • ${new Date(n.createdAt).toLocaleDateString()}</span>
+            <button type="button" class="btn btn-secondary btn-sm delete-note-btn" data-note-id="${n.id}" style="padding: 1px 6px; font-size: 11px; color: #dc2626;">Delete</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    mount.querySelectorAll('.delete-note-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const id = btn.dataset.noteId;
+        await deleteLessonNote(id);
+        showGlobalToast('Note deleted');
+        renderNotesList();
+      });
+    });
+
+    mount.querySelectorAll('.claude-note-thumb').forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        const url = thumb.dataset.fullImg;
+        if (url && openLightboxModal) {
+          openLightboxModal(url, 'Attached Lesson Screenshot');
+        }
+      });
+    });
+  };
+
+  await renderNotesList();
+
+  attachBtn?.addEventListener('click', () => {
+    fileInput?.click();
+  });
+
+  fileInput?.addEventListener('change', async (e) => {
+    const files = e.target.files;
+    if (files && files.length) {
+      try {
+        attachLabel.innerText = 'Compressing...';
+        const res = await processImageFile(files[0], { maxWidth: 900, maxHeight: 900 });
+        attachedImageData = res.dataUrl;
+        attachLabel.innerText = 'Image Attached';
+        attachedIndicator.style.display = 'inline';
+        showGlobalToast('Screenshot ready to attach');
+      } catch (err) {
+        attachLabel.innerText = 'Attach Screenshot';
+        attachedIndicator.style.display = 'none';
+        showGlobalToast(err.message);
+      }
+    }
+  });
+
+  saveBtn.addEventListener('click', async () => {
+    const text = input.value.trim();
+    if (!text && !attachedImageData) {
+      showGlobalToast('Please enter note text or attach a screenshot');
+      return;
+    }
+
+    saveBtn.innerText = 'Saving...';
+    saveBtn.setAttribute('disabled', 'true');
+
+    await saveLessonNote({
+      courseId,
+      lessonId,
+      text: text || 'Attached research screenshot',
+      dataUrl: attachedImageData
+    });
+
+    input.value = '';
+    attachedImageData = null;
+    if (fileInput) fileInput.value = '';
+    if (attachLabel) attachLabel.innerText = 'Attach Screenshot';
+    if (attachedIndicator) attachedIndicator.style.display = 'none';
+    saveBtn.innerText = 'Save Note';
+    saveBtn.removeAttribute('disabled');
+
+    showGlobalToast('Scholarly note saved');
+    await renderNotesList();
   });
 }
 

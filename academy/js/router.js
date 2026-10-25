@@ -78,6 +78,10 @@ class Router {
   start() {
     this._handleRoute();
   }
+
+  resolve() {
+    this._handleRoute();
+  }
 }
 
 export const router = new Router();

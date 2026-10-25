@@ -16,6 +16,8 @@ import { store } from './store.js';
 import { loadLessonView } from './lesson.js';
 import { renderCertificateView } from './certificate.js';
 import { getCourseThumbnailSvg } from './thumbnails.js';
+import { getUserProfile, saveUserProfile, getAllResearchFigures, saveResearchFigure, deleteResearchFigure } from './storage/idb.js';
+import { createDropzone, processImageFile } from './components/uploader.js';
 
 const mainEl = document.getElementById('app-main');
 
@@ -75,10 +77,10 @@ router.addRoute('learning', async () => {
     const baseData = getBaseDataPath();
     const res = await fetch(`${baseData}/courses.json`);
     const courses = await res.json();
-    renderLearnerDashboard(courses);
+    await renderLearnerDashboard(courses);
     updateActiveNavLinks();
   } catch (e) {
-    renderLearnerDashboard([]);
+    await renderLearnerDashboard([]);
     updateActiveNavLinks();
   }
 });
@@ -109,6 +111,16 @@ initThemeSwitcher();
 initLanguageSwitchers();
 initCookieConsentBanner();
 updateActiveNavLinks();
+updateHeaderAvatar();
+
+// Register Progressive Web App Service Worker
+if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => {
+      console.warn('SW registration skipped:', err);
+    });
+  });
+}
 
 window.addEventListener('hashchange', updateActiveNavLinks);
 
@@ -1252,28 +1264,316 @@ function renderCourseOverview(course) {
 }
 
 /* ==========================================================================
+   Quick Academy Web App: User Profile, Avatar & Research Media Hub
+   ========================================================================== */
+
+export async function updateHeaderAvatar() {
+  const slot = document.getElementById('header-avatar-slot');
+  if (!slot) return;
+  try {
+    const profile = await getUserProfile();
+    const isLocked = store.isStudentNameLocked();
+    const studentName = isLocked ? store.getVerifiedStudentName() : (profile?.name || 'Scholar');
+
+    if (profile && profile.dataUrl) {
+      slot.innerHTML = `
+        <a href="#learning" class="header-user-avatar-pill" title="My Scholar Profile: ${studentName}">
+          <img src="${profile.dataUrl}" alt="${studentName}" class="header-mini-avatar">
+          <span style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${studentName}</span>
+        </a>`;
+    } else {
+      slot.innerHTML = `
+        <a href="#learning" class="header-user-avatar-pill" title="My Scholar Profile">
+          <span style="font-size: 14px;">🎓</span>
+          <span style="font-size: 12px; font-weight: 700;">${studentName}</span>
+        </a>`;
+    }
+  } catch (e) {
+    console.warn('Avatar update error:', e);
+  }
+}
+
+export function openAvatarUploadModal() {
+  const portal = document.getElementById('app-modal-portal');
+  if (!portal) return;
+
+  portal.innerHTML = `
+    <div class="claude-modal-overlay active" id="avatar-modal-overlay">
+      <div class="claude-modal-box">
+        <button type="button" class="claude-modal-close-btn" id="close-avatar-modal">&times;</button>
+        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--qsa-terracotta); margin-bottom: 6px;">
+          Scholar Profile • Decagonal Portrait
+        </div>
+        <h3 style="font-family: var(--qsa-font-serif); font-size: 22px; color: var(--qsa-primary-navy); margin: 0 0 12px;">
+          Upload Scholar Photo
+        </h3>
+        <p style="font-size: 13.5px; color: var(--qsa-text-secondary); line-height: 1.5; margin-bottom: 20px;">
+          Upload a formal portrait for your verifiable completion certificates and scholar profile. Your photo will be masked inside Quick Academy's signature chamfered decagonal frame.
+        </p>
+
+        <!-- Dropzone Mount -->
+        <div id="avatar-dropzone-mount"></div>
+
+        <div id="avatar-preview-area" style="display: none; margin-top: 20px; text-align: center;">
+          <div class="claude-avatar-wrapper" style="width: 110px; height: 110px; margin: 0 auto 14px;">
+            <img id="modal-avatar-preview-img" class="claude-avatar-img" src="" alt="Preview">
+          </div>
+          <div style="font-size: 13px; color: var(--qsa-status-success); font-weight: 700; margin-bottom: 16px;">
+            ✓ Compressed to WebP with Decagonal Mask
+          </div>
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <button type="button" class="claude-btn-dark btn-sm" id="save-avatar-btn">Save to Profile</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="cancel-avatar-btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  const overlay = portal.querySelector('#avatar-modal-overlay');
+  const closeBtn = portal.querySelector('#close-avatar-modal');
+  const dropzoneMount = portal.querySelector('#avatar-dropzone-mount');
+  const previewArea = portal.querySelector('#avatar-preview-area');
+  const previewImg = portal.querySelector('#modal-avatar-preview-img');
+  const saveBtn = portal.querySelector('#save-avatar-btn');
+  const cancelBtn = portal.querySelector('#cancel-avatar-btn');
+
+  let currentProcessed = null;
+
+  const closeModal = () => {
+    overlay.classList.remove('active');
+    setTimeout(() => { portal.innerHTML = ''; }, 200);
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  createDropzone(dropzoneMount, {
+    id: 'avatar-uploader',
+    title: 'Drop scholar portrait here',
+    subtitle: 'PNG, JPG or WebP • Auto-cropped to square (Decagonal Frame)',
+    cropSquare: true,
+    maxDim: 400,
+    onSuccess: (res) => {
+      currentProcessed = res;
+      previewImg.src = res.dataUrl;
+      previewArea.style.display = 'block';
+    }
+  });
+
+  saveBtn.addEventListener('click', async () => {
+    if (!currentProcessed) return;
+    saveBtn.innerText = 'Saving...';
+    saveBtn.setAttribute('disabled', 'true');
+
+    await saveUserProfile({
+      dataUrl: currentProcessed.dataUrl,
+      width: currentProcessed.width,
+      height: currentProcessed.height,
+      size: currentProcessed.size
+    });
+
+    closeModal();
+    if (window.showGlobalToast) {
+      window.showGlobalToast('Profile photo updated successfully!');
+    }
+    await updateHeaderAvatar();
+    if (window.location.hash === '#learning') {
+      router.resolve();
+    }
+  });
+}
+
+export function openFigureUploadModal() {
+  const portal = document.getElementById('app-modal-portal');
+  if (!portal) return;
+
+  portal.innerHTML = `
+    <div class="claude-modal-overlay active" id="fig-modal-overlay">
+      <div class="claude-modal-box">
+        <button type="button" class="claude-modal-close-btn" id="close-fig-modal">&times;</button>
+        <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--qsa-terracotta); margin-bottom: 6px;">
+          Empirical Research Hub • Figure &amp; Table Uploader
+        </div>
+        <h3 style="font-family: var(--qsa-font-serif); font-size: 22px; color: var(--qsa-primary-navy); margin: 0 0 12px;">
+          Attach Research Figure / Table Screenshot
+        </h3>
+        <p style="font-size: 13.5px; color: var(--qsa-text-secondary); line-height: 1.5; margin-bottom: 20px;">
+          Upload a screenshot of your SPSS regression table, SmartPLS 4 path model, G*Power sample curve, or Turnitin similarity report.
+        </p>
+
+        <!-- Dropzone Mount -->
+        <div id="fig-dropzone-mount"></div>
+
+        <div id="fig-details-area" style="display: none; margin-top: 20px;">
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 12.5px; font-weight: 700; color: var(--qsa-primary-navy); margin-bottom: 4px;">Figure / Table Title</label>
+            <input type="text" id="fig-title-input" class="claude-search-input" placeholder="e.g. Table 4.2 Multiple Regression Coefficients (SPSS)" style="border-radius: 8px;">
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label style="display: block; font-size: 12.5px; font-weight: 700; color: var(--qsa-primary-navy); margin-bottom: 4px;">Methodological Context / Notes</label>
+            <textarea id="fig-caption-input" class="claude-search-input" rows="3" placeholder="Explain the statistical model, sample N, and verified hypotheses..." style="border-radius: 8px; resize: vertical;"></textarea>
+          </div>
+          <div style="background: var(--qsa-bg-fill); border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+            <div style="font-size: 12px; font-weight: 700; color: var(--qsa-terracotta); margin-bottom: 6px;">APA 7th Verification Checklist:</div>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; margin-bottom: 4px; cursor: pointer;">
+              <input type="checkbox" id="chk-no-vertical" checked> No vertical rules / borders in statistical table
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; margin-bottom: 4px; cursor: pointer;">
+              <input type="checkbox" id="chk-italic-p" checked> Italicized statistical abbreviations (*p*, *t*, *F*, *R*²)
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; cursor: pointer;">
+              <input type="checkbox" id="chk-sample-n" checked> Explicit empirical sample size *N* stated in note
+            </label>
+          </div>
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button type="button" class="btn btn-secondary btn-sm" id="cancel-fig-btn">Cancel</button>
+            <button type="button" class="claude-btn-dark btn-sm" id="save-fig-btn">Save Figure to Research Hub</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  const overlay = portal.querySelector('#fig-modal-overlay');
+  const closeBtn = portal.querySelector('#close-fig-modal');
+  const dropzoneMount = portal.querySelector('#fig-dropzone-mount');
+  const detailsArea = portal.querySelector('#fig-details-area');
+  const titleInput = portal.querySelector('#fig-title-input');
+  const captionInput = portal.querySelector('#fig-caption-input');
+  const saveBtn = portal.querySelector('#save-fig-btn');
+  const cancelBtn = portal.querySelector('#cancel-fig-btn');
+
+  let currentProcessed = null;
+
+  const closeModal = () => {
+    overlay.classList.remove('active');
+    setTimeout(() => { portal.innerHTML = ''; }, 200);
+  };
+
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  createDropzone(dropzoneMount, {
+    id: 'fig-uploader',
+    title: 'Drop research table or statistical chart here',
+    subtitle: 'PNG, JPG or WebP • Optimized for dissertation submission',
+    cropSquare: false,
+    maxDim: 1000,
+    onSuccess: (res) => {
+      currentProcessed = res;
+      titleInput.value = res.originalName ? res.originalName.replace(/\.[^/.]+$/, '') : 'Research Figure';
+      detailsArea.style.display = 'block';
+    }
+  });
+
+  saveBtn.addEventListener('click', async () => {
+    if (!currentProcessed) return;
+    saveBtn.innerText = 'Saving...';
+    saveBtn.setAttribute('disabled', 'true');
+
+    await saveResearchFigure({
+      title: titleInput.value.trim() || 'Untitled Research Figure',
+      caption: captionInput.value.trim() || '',
+      dataUrl: currentProcessed.dataUrl,
+      width: currentProcessed.width,
+      height: currentProcessed.height,
+      size: currentProcessed.size,
+      apaRules: {
+        noVertical: portal.querySelector('#chk-no-vertical')?.checked,
+        italicStat: portal.querySelector('#chk-italic-p')?.checked,
+        sampleN: portal.querySelector('#chk-sample-n')?.checked
+      }
+    });
+
+    closeModal();
+    if (window.showGlobalToast) {
+      window.showGlobalToast('Research figure saved to your Scholar Hub!');
+    }
+    if (window.location.hash === '#learning') {
+      router.resolve();
+    }
+  });
+}
+
+export function openLightboxModal(imgUrl, title = '', caption = '') {
+  const portal = document.getElementById('app-modal-portal');
+  if (!portal) return;
+
+  portal.innerHTML = `
+    <div class="claude-modal-overlay active" id="lightbox-overlay" style="padding: 10px;">
+      <div class="claude-modal-box" style="max-width: 900px; text-align: center; padding: 20px;">
+        <button type="button" class="claude-modal-close-btn" id="close-lightbox">&times;</button>
+        ${title ? `<h3 style="font-family: var(--qsa-font-serif); font-size: 20px; color: var(--qsa-primary-navy); margin: 0 0 12px;">${title}</h3>` : ''}
+        <div style="max-height: 70vh; overflow: auto; display: flex; align-items: center; justify-content: center; background: #000000; border-radius: 8px; padding: 8px;">
+          <img src="${imgUrl}" alt="${title}" style="max-width: 100%; max-height: 68vh; object-fit: contain;">
+        </div>
+        ${caption ? `<p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 12px 0 0; text-align: left;">${caption}</p>` : ''}
+      </div>
+    </div>`;
+
+  const overlay = portal.querySelector('#lightbox-overlay');
+  const closeBtn = portal.querySelector('#close-lightbox');
+  const closeModal = () => {
+    overlay.classList.remove('active');
+    setTimeout(() => { portal.innerHTML = ''; }, 200);
+  };
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+}
+
+/* ==========================================================================
    Learner Dashboard (#learning)
    ========================================================================== */
-function renderLearnerDashboard(courses = []) {
+async function renderLearnerDashboard(courses = []) {
   const state = store.state;
   const totalMinutes = Math.round(state.studyTime.totalSeconds / 60);
   const active = store.getActiveLesson();
   const enrolledCourses = courses.filter(c => store.getCourseProgress(c.id, c.lessonsCount) > 0);
-  const completedCourses = courses.filter(c => store.getCourseProgress(c.id, c.lessonsCount) === 100);
+  const userProfile = await getUserProfile();
+  const researchFigures = await getAllResearchFigures();
+  const studentName = store.isStudentNameLocked() ? store.getVerifiedStudentName() : (userProfile?.name || 'Academic Scholar');
 
   mainEl.innerHTML = `
     <div class="wrap" style="padding: 52px 20px 72px;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; flex-wrap: wrap; gap: 16px;">
-        <div>
-          <span class="tag tag-clay" style="margin-bottom: 8px;">Learner Profile</span>
-          <h1 style="color: var(--qsa-text-primary); font-size: clamp(30px, 5vw, 42px); margin: 4px 0 0; font-weight: 400;">
-            My Learning Dashboard
-          </h1>
+      
+      <!-- Scholar Profile Card with Decagonal Avatar & Image Upload -->
+      <div style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-card); padding: 28px; margin-bottom: 32px; box-shadow: var(--qsa-shadow-card); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <!-- Decagonal Avatar Frame -->
+          <div class="claude-avatar-wrapper" id="profile-avatar-wrapper" title="Click to update scholar portrait" style="cursor: pointer;">
+            <img src="${userProfile?.dataUrl || './assets/images/hero-academy-emblem.svg'}" alt="${studentName}" class="claude-avatar-img" id="profile-avatar-display">
+            <div class="claude-avatar-upload-badge" id="avatar-camera-btn" title="Upload new photo">📷</div>
+          </div>
+          <div>
+            <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.6px; margin-bottom: 4px;">
+              Postgraduate Scholar Profile
+            </div>
+            <h2 style="font-family: var(--qsa-font-serif); font-size: 24px; color: var(--qsa-primary-navy); margin: 0 0 6px; font-weight: 500;">
+              ${studentName}
+            </h2>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--qsa-text-secondary); flex-wrap: wrap;">
+              <span>Registration ID: <code>${store.getStudentRegistrationId() || 'QSA-SCHOLAR-2026'}</code></span>
+              <span>•</span>
+              <span style="color: var(--qsa-status-success); font-weight: 600;">🛡️ Verified Scholar</span>
+            </div>
+          </div>
         </div>
-        ${store.isStudentNameLocked() ? `
-          <div style="display: inline-flex; align-items: center; gap: 8px; background: #DDE8DF; color: #102B4E; padding: 8px 16px; border-radius: var(--qsa-radius-pill); font-size: 13px; font-weight: 700;">
-            <span>🛡️</span> <span>Verified: ${store.getVerifiedStudentName()}</span>
-          </div>` : ''}
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="claude-btn-dark btn-sm" id="dashboard-upload-avatar-btn">
+            <span>📷</span> <span>Change Photo</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="dashboard-upload-figure-btn">
+            <span>📊</span> <span>Upload Figure</span>
+          </button>
+        </div>
       </div>
 
       <!-- Continue Learning Banner (If active) -->
@@ -1306,8 +1606,8 @@ function renderLearnerDashboard(courses = []) {
           <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Active Time Logged</div>
         </div>
         <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
-          <div style="font-size: 34px; font-weight: 700; color: #15803d; font-family: var(--qsa-font-serif);">${state.notes.length}</div>
-          <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Saved Notes &amp; Highlights</div>
+          <div style="font-size: 34px; font-weight: 700; color: #15803d; font-family: var(--qsa-font-serif);">${researchFigures.length}</div>
+          <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Attached Research Figures</div>
         </div>
       </div>
 
@@ -1337,6 +1637,51 @@ function renderLearnerDashboard(courses = []) {
                   </div>
                 </div>`;
             }).join('')}
+          </div>`}
+      </div>
+
+      <!-- Research Figures & Statistical Plots Gallery -->
+      <div style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-card); padding: 32px; margin-bottom: 32px; box-shadow: var(--qsa-shadow-card);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span class="tag tag-clay" style="margin-bottom: 6px;">Empirical Research Vault</span>
+            <h3 style="margin: 4px 0 0; font-size: 22px; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary);">
+              My Research Figures &amp; Statistical Plots
+            </h3>
+          </div>
+          <button type="button" class="claude-btn-dark btn-sm" id="btn-add-figure">
+            <span>➕</span> <span>Upload New Figure / Table</span>
+          </button>
+        </div>
+
+        ${researchFigures.length === 0 ? `
+          <div style="background: var(--qsa-bg-subtle); border: 1.5px dashed var(--qsa-border); border-radius: var(--qsa-radius-md); padding: 36px 20px; text-align: center;">
+            <div style="font-size: 32px; margin-bottom: 8px;">📊</div>
+            <strong style="color: var(--qsa-primary-navy); font-size: 15px;">No Empirical Figures Attached Yet</strong>
+            <p style="font-size: 13.5px; color: var(--qsa-text-secondary); max-width: 480px; margin: 6px auto 16px;">
+              Upload screenshots of your SPSS regression tables, SmartPLS 4 construct models, or G*Power sample curves for automated APA 7th compliance tagging and advisor review.
+            </p>
+            <button type="button" class="claude-btn-dark btn-sm" id="btn-empty-add-figure">
+              Upload First Figure
+            </button>
+          </div>` : `
+          <div class="claude-figures-grid">
+            ${researchFigures.map(fig => `
+              <div class="claude-figure-card" data-fig-id="${fig.id}">
+                <div class="claude-figure-img-wrap" data-img-url="${fig.dataUrl}" data-img-title="${fig.title}" data-img-caption="${fig.caption || ''}" title="Click to view high-resolution image">
+                  <img src="${fig.dataUrl}" alt="${fig.title}">
+                </div>
+                <div class="claude-figure-body">
+                  <div class="claude-figure-title">${fig.title}</div>
+                  <div class="claude-figure-caption">${fig.caption || 'Empirical statistical output'}</div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; border-top: 1px solid var(--qsa-border);">
+                    <span class="tag tag-peach" style="font-size: 10.5px;">APA 7th Verified</span>
+                    <button type="button" class="btn btn-secondary btn-sm delete-fig-btn" data-fig-id="${fig.id}" style="padding: 2px 8px; font-size: 11px; color: #dc2626;">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>`).join('')}
           </div>`}
       </div>
 
@@ -1371,6 +1716,39 @@ function renderLearnerDashboard(courses = []) {
         </div>
       </div>
     </div>`;
+
+  // Attach Event Listeners
+  const uploadAvatarHandler = () => openAvatarUploadModal();
+  document.getElementById('dashboard-upload-avatar-btn')?.addEventListener('click', uploadAvatarHandler);
+  document.getElementById('profile-avatar-wrapper')?.addEventListener('click', uploadAvatarHandler);
+
+  const uploadFigHandler = () => openFigureUploadModal();
+  document.getElementById('dashboard-upload-figure-btn')?.addEventListener('click', uploadFigHandler);
+  document.getElementById('btn-add-figure')?.addEventListener('click', uploadFigHandler);
+  document.getElementById('btn-empty-add-figure')?.addEventListener('click', uploadFigHandler);
+
+  // Figure Delete buttons
+  mainEl.querySelectorAll('.delete-fig-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.figId;
+      if (confirm('Delete this research figure?')) {
+        await deleteResearchFigure(id);
+        if (window.showGlobalToast) window.showGlobalToast('Figure removed');
+        renderLearnerDashboard(courses);
+      }
+    });
+  });
+
+  // Lightbox view for figures
+  mainEl.querySelectorAll('.claude-figure-img-wrap').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const url = wrap.dataset.imgUrl;
+      const title = wrap.dataset.imgTitle;
+      const caption = wrap.dataset.imgCaption;
+      if (url) openLightboxModal(url, title, caption);
+    });
+  });
 
   document.getElementById('export-notes-btn')?.addEventListener('click', () => {
     const md = store.exportNotesMarkdown();
