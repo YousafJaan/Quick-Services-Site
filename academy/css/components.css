@@ -2478,3 +2478,356 @@ details.menu:not([open]) .links {
   margin: 0;
   line-height: 1.35;
 }
+
+/* ==========================================================================
+   Claude Academy Extended Pedagogical Components (Reverse Engineered)
+   ========================================================================== */
+
+/* 8. Anthropic Callout Boxes (Tip, Note, Important) */
+.claude-callout {
+  border-radius: var(--qsa-radius-md);
+  padding: 16px 20px;
+  margin: 24px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(16, 43, 78, 0.03);
+}
+
+.claude-callout-icon {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.claude-callout-content {
+  font-size: 14px;
+  line-height: 1.62;
+  color: var(--qsa-text-primary);
+  flex: 1;
+}
+
+.claude-callout-content strong {
+  color: var(--qsa-primary-navy);
+  font-weight: 700;
+}
+
+.claude-callout-tip {
+  background: var(--qsa-sage-soft);
+  border: 1px solid var(--qsa-sage);
+}
+
+.claude-callout-note {
+  background: var(--qsa-status-info-bg);
+  border: 1px solid var(--qsa-status-info-border);
+}
+
+.claude-callout-important {
+  background: var(--qsa-terracotta-soft);
+  border: 1px solid var(--qsa-hl-clay);
+}
+
+/* 9. Claude Academy Interactive Prompt / Research Sandbox Card */
+.claude-prompt-card {
+  background: var(--qsa-bg-card);
+  border: 1px solid var(--qsa-border);
+  border-radius: var(--qsa-radius-card);
+  margin: 28px 0;
+  overflow: hidden;
+  box-shadow: var(--qsa-shadow-card);
+}
+
+.claude-prompt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--qsa-bg-fill);
+  border-bottom: 1px solid var(--qsa-border);
+}
+
+.claude-prompt-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--qsa-terracotta);
+}
+
+.claude-prompt-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--qsa-bg-card);
+  border: 1px solid var(--qsa-border);
+  border-radius: var(--qsa-radius-pill);
+  padding: 4px 12px;
+  font-family: var(--qsa-font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--qsa-text-secondary);
+  cursor: pointer;
+  transition: all var(--qsa-dur-fast) var(--qsa-ease-out);
+}
+
+.claude-prompt-copy-btn:hover {
+  border-color: var(--qsa-terracotta);
+  color: var(--qsa-terracotta);
+}
+
+.claude-prompt-content {
+  padding: 18px;
+  font-family: var(--qsa-font-mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--qsa-text-primary);
+  background: var(--qsa-bg-subtle);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.claude-prompt-output-preview {
+  padding: 16px 18px;
+  background: var(--qsa-bg-card);
+  border-top: 1px dashed var(--qsa-border);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--qsa-text-secondary);
+}
+
+/* 10. End-of-Lesson Knowledge Check Quiz */
+.claude-kc-card {
+  background: var(--qsa-bg-card);
+  border: 1.5px solid var(--qsa-border);
+  border-radius: var(--qsa-radius-card);
+  padding: 28px;
+  margin: 36px 0 24px;
+  box-shadow: var(--qsa-shadow-card);
+}
+
+.claude-kc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--qsa-terracotta);
+  margin-bottom: 8px;
+}
+
+.claude-kc-title {
+  font-family: var(--qsa-font-serif);
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--qsa-primary-navy);
+  margin: 0 0 16px 0;
+}
+
+.claude-kc-question-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--qsa-text-primary);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.claude-kc-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.claude-kc-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--qsa-radius-md);
+  border: 1px solid var(--qsa-border);
+  background: var(--qsa-bg-card);
+  cursor: pointer;
+  transition: all var(--qsa-dur-fast) var(--qsa-ease-out);
+  font-size: 14px;
+  color: var(--qsa-text-primary);
+  user-select: none;
+}
+
+.claude-kc-option:hover {
+  background: var(--qsa-bg-fill);
+  border-color: var(--qsa-border-strong);
+}
+
+.claude-kc-option.selected {
+  border-color: var(--qsa-terracotta);
+  background: var(--qsa-terracotta-soft);
+  font-weight: 600;
+}
+
+.claude-kc-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--qsa-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.claude-kc-option.selected .claude-kc-radio {
+  border-color: var(--qsa-terracotta);
+  background: var(--qsa-terracotta);
+}
+
+.claude-kc-option.selected .claude-kc-radio::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.claude-kc-feedback {
+  padding: 16px 18px;
+  border-radius: var(--qsa-radius-md);
+  margin-top: 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  display: none;
+}
+
+.claude-kc-feedback.correct {
+  display: block;
+  background: var(--qsa-status-success-bg);
+  border: 1px solid var(--qsa-status-success-border);
+  color: var(--qsa-status-success);
+}
+
+.claude-kc-feedback.incorrect {
+  display: block;
+  background: var(--qsa-status-danger-bg);
+  border: 1px solid var(--qsa-status-danger-border);
+  color: var(--qsa-status-danger);
+}
+
+/* 11. "On This Page" In-Page TOC in Sticky Sidebar */
+.claude-toc-block {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--qsa-border);
+}
+
+.claude-toc-heading {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--qsa-text-muted);
+  margin-bottom: 10px;
+}
+
+.claude-toc-link {
+  display: block;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: var(--qsa-text-secondary);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: all var(--qsa-dur-fast) var(--qsa-ease-out);
+}
+
+.claude-toc-link:hover {
+  color: var(--qsa-terracotta);
+  background: var(--qsa-bg-fill);
+}
+
+.claude-toc-link.active {
+  color: var(--qsa-terracotta);
+  font-weight: 700;
+}
+
+/* 12. Live Search & Category Filter Bar */
+.claude-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.claude-search-input-wrap {
+  position: relative;
+  min-width: 260px;
+  max-width: 380px;
+  flex: 1;
+}
+
+.claude-search-input {
+  width: 100%;
+  padding: 10px 16px 10px 38px;
+  font-family: var(--qsa-font-sans);
+  font-size: 13.5px;
+  border: 1px solid var(--qsa-border);
+  border-radius: var(--qsa-radius-pill);
+  background: var(--qsa-bg-card);
+  color: var(--qsa-text-primary);
+  outline: none;
+  transition: border-color var(--qsa-dur-fast) var(--qsa-ease-out);
+}
+
+.claude-search-input:focus {
+  border-color: var(--qsa-terracotta);
+  box-shadow: 0 0 0 3px rgba(185, 83, 53, 0.12);
+}
+
+.claude-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: var(--qsa-text-muted);
+  pointer-events: none;
+}
+
+.claude-filter-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.claude-filter-chip {
+  padding: 7px 16px;
+  border-radius: var(--qsa-radius-pill);
+  background: var(--qsa-bg-card);
+  border: 1px solid var(--qsa-border);
+  font-family: var(--qsa-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--qsa-text-secondary);
+  cursor: pointer;
+  transition: all var(--qsa-dur-fast) var(--qsa-ease-out);
+  user-select: none;
+}
+
+.claude-filter-chip:hover {
+  background: var(--qsa-bg-fill);
+  border-color: var(--qsa-border-strong);
+  color: var(--qsa-text-primary);
+}
+
+.claude-filter-chip.active {
+  background: var(--qsa-primary-navy);
+  border-color: var(--qsa-primary-navy);
+  color: #ffffff;
+}

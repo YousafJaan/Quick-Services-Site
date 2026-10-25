@@ -785,29 +785,29 @@ function renderCatalog(courses) {
       </div>
     </section>
 
-    <!-- Main Course Catalogue Section with Live Filter Chips & Search -->
+    <!-- Main Course Catalogue Section with Claude Academy Live Filter Chips & Search -->
     <section id="courses-section" style="padding: 40px 0 72px; border-top: 1px solid var(--qsa-border);">
       <div class="wrap">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
-          <div>
-            <span class="tag tag-clay" style="margin-bottom: 8px;">Curriculum</span>
-            <h2 style="font-size: clamp(26px, 4vw, 34px); color: var(--qsa-text-primary); margin: 4px 0 0;">
-              All 9 Academy Courses
-            </h2>
-          </div>
-          
-          <!-- Search Bar -->
-          <div style="width: 100%; max-width: 360px;">
-            <input type="text" id="catalog-search" placeholder="Search topics (e.g. Turnitin, G*Power, ANOVA, APA 7, SmartPLS)..." style="width: 100%; box-sizing: border-box; padding: 11px 18px; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); font-size: 14px; outline: none; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);">
-          </div>
+        <div style="margin-bottom: 24px;">
+          <span class="tag tag-clay" style="margin-bottom: 8px;">Curriculum</span>
+          <h2 style="font-size: clamp(26px, 4vw, 34px); color: var(--qsa-text-primary); margin: 4px 0 0;">
+            All 9 Academy Courses
+          </h2>
         </div>
 
-        <!-- Topic Filter Chips Strip -->
-        <div class="hero-chips-wrap" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; overflow-x: auto; padding-bottom: 4px;">
-          <button type="button" class="hero-topic-chip active" data-topic="all">All Tracks (9)</button>
-          <button type="button" class="hero-topic-chip" data-topic="Research Design">Research Design (3)</button>
-          <button type="button" class="hero-topic-chip" data-topic="Statistical Analysis">Statistical Analysis (3)</button>
-          <button type="button" class="hero-topic-chip" data-topic="Academic Writing">Academic Writing (3)</button>
+        <!-- Claude Academy Filter & Search Bar -->
+        <div class="claude-filter-bar">
+          <div class="claude-filter-chips">
+            <button type="button" class="claude-filter-chip active" data-topic="all">All Tracks (9)</button>
+            <button type="button" class="claude-filter-chip" data-topic="Research Design">Research Design (3)</button>
+            <button type="button" class="claude-filter-chip" data-topic="Statistical Analysis">Statistical Analysis (3)</button>
+            <button type="button" class="claude-filter-chip" data-topic="Academic Writing">Academic Writing (3)</button>
+          </div>
+
+          <div class="claude-search-input-wrap">
+            <span class="claude-search-icon">🔍</span>
+            <input type="text" id="catalog-search" class="claude-search-input" placeholder="Search courses (Press &quot;/&quot; to focus)..." aria-label="Search courses">
+          </div>
         </div>
 
         <!-- Reusable Course Cards Grid -->
@@ -836,7 +836,7 @@ function renderCatalog(courses) {
   initClarityLabListeners();
 
   // Attach Live Topic Chip Filtering
-  const chips = document.querySelectorAll('.hero-topic-chip');
+  const chips = document.querySelectorAll('.claude-filter-chip');
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
       chips.forEach(c => c.classList.remove('active'));
@@ -861,7 +861,7 @@ function renderCatalog(courses) {
     });
   });
 
-  // Live Catalog Search Filter
+  // Live Catalog Search Filter with "/" keyboard shortcut
   const searchInput = document.getElementById('catalog-search');
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
@@ -876,6 +876,16 @@ function renderCatalog(courses) {
       );
       mount.innerHTML = filtered.map(c => renderCourseCard(c)).join('');
     });
+
+    const handleSearchKey = (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    };
+    document.removeEventListener('keydown', window.__qsaSearchKeyHandler);
+    window.__qsaSearchKeyHandler = handleSearchKey;
+    document.addEventListener('keydown', window.__qsaSearchKeyHandler);
   }
 }
 
@@ -1155,40 +1165,90 @@ function renderCourseOverview(course) {
         </div>
       </div>
 
-      <!-- Curriculum by Module Breakdown -->
+      <!-- Curriculum by Module Breakdown with Claude Academy Accordions -->
       <div id="curriculum-breakdown">
-        <h3 style="font-family: var(--qsa-font-serif); color: var(--qsa-primary-navy); margin-bottom: 22px; font-size: 26px; font-weight: 500;">
-          Curriculum by Module
-        </h3>
-        <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap: wrap; gap: 12px;">
+          <h3 style="font-family: var(--qsa-font-serif); color: var(--qsa-primary-navy); margin: 0; font-size: 26px; font-weight: 500;">
+            Curriculum by Module
+          </h3>
+          <button type="button" class="claude-prompt-copy-btn" id="claude-toggle-all-modules" style="font-size: 12.5px;">
+            <span>⊟</span> <span id="claude-toggle-all-text">Collapse All</span>
+          </button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
           ${course.modules.map((m, idx) => `
-            <div style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-card); padding: 26px 28px; box-shadow: var(--qsa-shadow-card);">
-              <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.6px; margin-bottom: 6px;">
-                Module ${idx + 1}
+            <div class="claude-module-accordion-card" style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-card); overflow: hidden; box-shadow: var(--qsa-shadow-card);">
+              <div class="claude-module-header" data-mod-idx="${idx}" style="padding: 22px 28px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; background: var(--qsa-bg-card); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
+                <div>
+                  <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.6px; margin-bottom: 4px;">
+                    Module ${idx + 1} • ${(m.lessons || []).length} Lessons
+                  </div>
+                  <h4 style="font-size: 19px; margin: 0; font-family: var(--qsa-font-serif); font-weight: 500; color: var(--qsa-primary-navy);">${m.title}</h4>
+                  <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 6px 0 0; line-height: 1.5;">${m.description}</p>
+                </div>
+                <div class="claude-module-chevron" style="font-size: 16px; color: var(--qsa-text-muted); transition: transform 0.2s ease;">
+                  ▼
+                </div>
               </div>
-              <h4 style="font-size: 20px; margin: 0 0 6px; font-family: var(--qsa-font-serif); font-weight: 500; color: var(--qsa-primary-navy);">${m.title}</h4>
-              <p style="font-size: 14px; color: var(--qsa-text-secondary); margin-bottom: 18px; line-height: 1.6;">${m.description}</p>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                ${(m.lessons || []).map(l => {
-                  const done = store.isLessonComplete(course.id, l.id);
-                  return `
-                    <a href="#lesson-${course.id}-${l.id}" style="display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; background: var(--qsa-bg-subtle); border-radius: 8px; text-decoration: none; font-size: 14px; color: var(--qsa-text-primary); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
-                      <div style="display: flex; align-items: center; gap: 12px;">
-                        <span style="color: ${done ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'}; font-weight: 800; font-size: 15px;">
-                          ${done ? '✓' : '○'}
-                        </span>
-                        <span style="font-weight: 500;">${l.title}</span>
-                        <span class="tag tag-peach" style="font-size: 10px; padding: 2px 7px;">${l.type}</span>
-                      </div>
-                      <span style="font-size: 12.5px; color: var(--qsa-text-muted); font-weight: 600;">${l.minutes}m</span>
-                    </a>`;
-                }).join('')}
+              <div class="claude-module-body" id="claude-mod-body-${idx}" style="padding: 0 28px 24px; display: block; border-top: 1px dashed var(--qsa-border);">
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 16px;">
+                  ${(m.lessons || []).map(l => {
+                    const done = store.isLessonComplete(course.id, l.id);
+                    return `
+                      <a href="#lesson-${course.id}-${l.id}" style="display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; background: var(--qsa-bg-subtle); border-radius: 8px; text-decoration: none; font-size: 14px; color: var(--qsa-text-primary); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                          <span style="color: ${done ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'}; font-weight: 800; font-size: 15px;">
+                            ${done ? '✓' : '○'}
+                          </span>
+                          <span style="font-weight: 500;">${l.title}</span>
+                          <span class="tag tag-peach" style="font-size: 10px; padding: 2px 7px;">${l.type}</span>
+                        </div>
+                        <span style="font-size: 12.5px; color: var(--qsa-text-muted); font-weight: 600;">${l.minutes}m</span>
+                      </a>`;
+                  }).join('')}
+                </div>
               </div>
             </div>`).join('')}
         </div>
       </div>
 
     </div>`;
+
+  // Setup Module Accordion Toggles
+  const moduleCards = mainEl.querySelectorAll('.claude-module-accordion-card');
+  moduleCards.forEach(card => {
+    const header = card.querySelector('.claude-module-header');
+    const body = card.querySelector('.claude-module-body');
+    const chevron = card.querySelector('.claude-module-chevron');
+    if (header && body && chevron) {
+      header.addEventListener('click', () => {
+        const isCollapsed = body.style.display === 'none';
+        body.style.display = isCollapsed ? 'block' : 'none';
+        chevron.style.transform = isCollapsed ? 'rotate(0deg)' : 'rotate(-90deg)';
+      });
+    }
+  });
+
+  // Setup Expand All / Collapse All Toggle
+  const toggleAllBtn = mainEl.querySelector('#claude-toggle-all-modules');
+  const toggleAllText = mainEl.querySelector('#claude-toggle-all-text');
+  if (toggleAllBtn && toggleAllText) {
+    let allExpanded = true;
+    toggleAllBtn.addEventListener('click', () => {
+      allExpanded = !allExpanded;
+      toggleAllBtn.querySelector('span:first-child').innerText = allExpanded ? '⊟' : '⊞';
+      toggleAllText.innerText = allExpanded ? 'Collapse All' : 'Expand All';
+      moduleCards.forEach(card => {
+        const body = card.querySelector('.claude-module-body');
+        const chevron = card.querySelector('.claude-module-chevron');
+        if (body && chevron) {
+          body.style.display = allExpanded ? 'block' : 'none';
+          chevron.style.transform = allExpanded ? 'rotate(0deg)' : 'rotate(-90deg)';
+        }
+      });
+    });
+  }
 }
 
 /* ==========================================================================
