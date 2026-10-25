@@ -103,6 +103,12 @@ router.addRoute('verify', ({ certId }) => {
   updateActiveNavLinks();
 });
 
+// Route 8: Sentence Clarity Lab (#clarity)
+router.addRoute('clarity', () => {
+  renderClarityLabPage();
+  updateActiveNavLinks();
+});
+
 // Initialize router
 router.start();
 
@@ -184,10 +190,12 @@ function updateActiveNavLinks() {
   const navCourses = document.getElementById('nav-courses');
   const navLearning = document.getElementById('nav-learning');
   const navCertificates = document.getElementById('nav-certificates');
+  const navClarity = document.getElementById('nav-clarity');
 
   if (navCourses) navCourses.classList.remove('active');
   if (navLearning) navLearning.classList.remove('active');
   if (navCertificates) navCertificates.classList.remove('active');
+  if (navClarity) navClarity.classList.remove('active');
 
   if (hash === '#/' || hash.startsWith('#course-') || hash.startsWith('#courses')) {
     if (navCourses) navCourses.classList.add('active');
@@ -195,6 +203,8 @@ function updateActiveNavLinks() {
     if (navLearning) navLearning.classList.add('active');
   } else if (hash === '#certificates' || hash.startsWith('#certificate-')) {
     if (navCertificates) navCertificates.classList.add('active');
+  } else if (hash === '#clarity') {
+    if (navClarity) navClarity.classList.add('active');
   }
 }
 
@@ -346,210 +356,237 @@ function initLanguageSwitchers() {
 }
 
 /* ==========================================================================
-   Academic Research Desk Visual SVG (Desktop Right Column Visual)
+   Claude Academy Software Mockups (Contour Topographic Lines + Micro-UI Windows)
    ========================================================================== */
-function getAcademicDeskSvg() {
+
+function getThesisMockupSvg() {
   return `
-    <svg viewBox="0 0 540 440" style="width: 100%; height: auto; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Academic Research Desk with books, laptop, notebook and coffee">
+    <svg viewBox="0 0 400 156" style="width: 100%; height: 100%; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Thesis Outline Software Mockup">
       <defs>
-        <linearGradient id="desk-mat-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#FAF7F1" stop-opacity="0.95"/>
-          <stop offset="100%" stop-color="#EFE8DE" stop-opacity="0.9"/>
-        </linearGradient>
-        <linearGradient id="book-terracotta" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#9C3F24"/>
-          <stop offset="25%" stop-color="#B95335"/>
-          <stop offset="85%" stop-color="#B95335"/>
-          <stop offset="100%" stop-color="#802F19"/>
-        </linearGradient>
-        <linearGradient id="book-navy" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#0A1C33"/>
-          <stop offset="25%" stop-color="#102B4E"/>
-          <stop offset="85%" stop-color="#102B4E"/>
-          <stop offset="100%" stop-color="#081526"/>
-        </linearGradient>
-        <linearGradient id="book-sage" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#3F634E"/>
-          <stop offset="25%" stop-color="#557F67"/>
-          <stop offset="85%" stop-color="#557F67"/>
-          <stop offset="100%" stop-color="#345240"/>
-        </linearGradient>
-        <linearGradient id="book-clay" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#A8572A"/>
-          <stop offset="25%" stop-color="#D97736"/>
-          <stop offset="85%" stop-color="#D97736"/>
-          <stop offset="100%" stop-color="#8F461E"/>
-        </linearGradient>
-        <linearGradient id="laptop-screen-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#111B27"/>
-          <stop offset="100%" stop-color="#1B293A"/>
-        </linearGradient>
-        <filter id="desk-shadow" x="-8%" y="-8%" width="116%" height="116%">
-          <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#102B4E" flood-opacity="0.08"/>
-        </filter>
-        <filter id="float-card-shadow" x="-10%" y="-10%" width="120%" height="120%">
-          <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#102B4E" flood-opacity="0.12"/>
+        <filter id="topo-thesis-shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.08"/>
         </filter>
       </defs>
-
-      <!-- Background Desk Mat / Architectural Surface -->
-      <rect x="15" y="15" width="510" height="410" rx="20" fill="url(#desk-mat-grad)" stroke="#E8E1D8" stroke-width="1.5" filter="url(#desk-shadow)"/>
-      
-      <!-- Subtle Architectural Grid Pattern -->
-      <g stroke="#E8E1D8" stroke-width="0.75" stroke-dasharray="4,4" opacity="0.6">
-        <line x1="40" y1="110" x2="500" y2="110"/>
-        <line x1="40" y1="210" x2="500" y2="210"/>
-        <line x1="40" y1="310" x2="500" y2="310"/>
-        <line x1="160" y1="30" x2="160" y2="400"/>
-        <line x1="360" y1="30" x2="360" y2="400"/>
+      <!-- Background Topo Lines -->
+      <g stroke="#102B4E" stroke-width="1.2" stroke-opacity="0.07" fill="none">
+        <path d="M -20,30 Q 80,10 180,45 T 380,20 T 440,60"/>
+        <path d="M -20,60 Q 90,40 200,80 T 400,50 T 440,90"/>
+        <path d="M -20,90 Q 110,75 220,110 T 410,80 T 440,120"/>
+        <path d="M -20,120 Q 130,105 240,140 T 420,110 T 440,150"/>
       </g>
-
-      <!-- LAPTOP (Upper Right & Center) -->
-      <g transform="translate(210, 48)">
-        <!-- Laptop Display Body -->
-        <rect x="0" y="0" width="280" height="180" rx="8" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
-        <!-- Laptop Screen Inner -->
-        <rect x="10" y="10" width="260" height="160" rx="4" fill="url(#laptop-screen-grad)"/>
-        
-        <!-- Screen Header Bar -->
-        <rect x="10" y="10" width="260" height="22" fill="#0D1520"/>
-        <circle cx="22" cy="21" r="3" fill="#EF4444"/>
-        <circle cx="32" cy="21" r="3" fill="#F59E0B"/>
-        <circle cx="42" cy="21" r="3" fill="#10B981"/>
-        <text x="140" y="24" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#94A3B8" text-anchor="middle" letter-spacing="0.5">Quick Academy • SmartPLS 4 Workspace</text>
-
-        <!-- Screen Content: Structural Equation Model & Regression Chart -->
-        <!-- Latent Constructs (Circles) -->
-        <circle cx="65" cy="80" r="22" fill="#102B4E" stroke="#38BDF8" stroke-width="1.5"/>
-        <text x="65" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#BAE6FD" text-anchor="middle">INSTITUTIONAL</text>
-        <text x="65" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#BAE6FD" text-anchor="middle">SUPPORT</text>
-
-        <circle cx="140" cy="80" r="22" fill="#102B4E" stroke="#34D399" stroke-width="1.5"/>
-        <text x="140" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#A7F3D0" text-anchor="middle">RESEARCH</text>
-        <text x="140" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#A7F3D0" text-anchor="middle">EFFICACY</text>
-
-        <circle cx="215" cy="80" r="22" fill="#102B4E" stroke="#FBBF24" stroke-width="1.5"/>
-        <text x="215" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#FDE68A" text-anchor="middle">PUBLICATION</text>
-        <text x="215" y="87" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#FDE68A" text-anchor="middle">OUTPUT</text>
-
-        <!-- Structural Paths / Beta Arrows -->
-        <line x1="87" y1="80" x2="116" y2="80" stroke="#38BDF8" stroke-width="1.75"/>
-        <polygon points="116,77 122,80 116,83" fill="#38BDF8"/>
-        <text x="102" y="74" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#38BDF8" text-anchor="middle">β=.48***</text>
-
-        <line x1="162" y1="80" x2="191" y2="80" stroke="#34D399" stroke-width="1.75"/>
-        <polygon points="191,77 197,80 191,83" fill="#34D399"/>
-        <text x="177" y="74" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#34D399" text-anchor="middle">β=.56***</text>
-
-        <!-- Indirect Mediation Arch -->
-        <path d="M 65,58 Q 140,36 215,58" fill="none" stroke="#F87171" stroke-width="1.5" stroke-dasharray="3,3"/>
-        <text x="140" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="800" fill="#FCA5A5" text-anchor="middle">Indirect Effect β=.27 (p &lt; .001)</text>
-
-        <!-- Bottom Metric Dashboard on Screen -->
-        <rect x="20" y="120" width="70" height="38" rx="4" fill="#0F172A" stroke="#334155"/>
-        <text x="26" y="132" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="700" fill="#64748B">R² VARIANCE</text>
-        <text x="26" y="148" font-family="'Newsreader', serif" font-size="14" font-weight="600" fill="#38BDF8">0.684</text>
-
-        <rect x="100" y="120" width="70" height="38" rx="4" fill="#0F172A" stroke="#334155"/>
-        <text x="106" y="132" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="700" fill="#64748B">HTMT RATIO</text>
-        <text x="106" y="148" font-family="'Newsreader', serif" font-size="14" font-weight="600" fill="#34D399">&lt; 0.85</text>
-
-        <rect x="180" y="120" width="75" height="38" rx="4" fill="#0F172A" stroke="#334155"/>
-        <text x="186" y="132" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="700" fill="#64748B">G*POWER N</text>
-        <text x="186" y="148" font-family="'Newsreader', serif" font-size="14" font-weight="600" fill="#FBBF24">N = 384</text>
-
-        <!-- Laptop Base / Keyboard Hinge -->
-        <path d="M -24,180 L 304,180 L 284,204 L -4,204 Z" fill="#94A3B8" stroke="#64748B" stroke-width="1.5"/>
-        <!-- Trackpad -->
-        <rect x="110" y="184" width="60" height="15" rx="2" fill="#CBD5E1" stroke="#94A3B8" stroke-width="0.75"/>
-      </g>
-
-      <!-- STACK OF 4 ACADEMIC BOOKS (Left & Foreground) -->
-      <g transform="translate(42, 175)">
-        <!-- Book 1 (Bottom): Research Methods & Design (Terracotta #B95335) -->
-        <g transform="translate(0, 150)">
-          <path d="M 0,0 L 220,0 L 232,18 L 12,18 Z" fill="url(#book-terracotta)" stroke="#802F19" stroke-width="1.2"/>
-          <rect x="0" y="18" width="224" height="34" rx="3" fill="url(#book-terracotta)" stroke="#802F19" stroke-width="1.2"/>
-          <line x1="8" y1="23" x2="216" y2="23" stroke="#FDE68A" stroke-width="1" opacity="0.6"/>
-          <line x1="8" y1="47" x2="216" y2="47" stroke="#FDE68A" stroke-width="1" opacity="0.6"/>
-          <text x="112" y="38" font-family="'Cinzel', serif" font-size="9.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.2">RESEARCH METHODS &amp; DESIGN</text>
-          <polygon points="224,18 244,18 244,48 224,52" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
-          <line x1="228" y1="22" x2="228" y2="48" stroke="#E2D9CC" stroke-width="0.5"/>
-          <line x1="234" y1="22" x2="234" y2="48" stroke="#E2D9CC" stroke-width="0.5"/>
-          <line x1="240" y1="22" x2="240" y2="48" stroke="#E2D9CC" stroke-width="0.5"/>
-        </g>
-
-        <!-- Book 2: Statistical Inference & SPSS (Oxford Navy #102B4E) -->
-        <g transform="translate(8, 108)">
-          <path d="M 0,0 L 214,0 L 226,16 L 12,16 Z" fill="url(#book-navy)" stroke="#081526" stroke-width="1.2"/>
-          <rect x="0" y="16" width="218" height="32" rx="3" fill="url(#book-navy)" stroke="#081526" stroke-width="1.2"/>
-          <line x1="8" y1="20" x2="210" y2="20" stroke="#93C5FD" stroke-width="0.75" opacity="0.5"/>
-          <line x1="8" y1="44" x2="210" y2="44" stroke="#93C5FD" stroke-width="0.75" opacity="0.5"/>
-          <text x="109" y="35" font-family="'Cinzel', serif" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">STATISTICAL INFERENCE &amp; SPSS</text>
-          <polygon points="218,16 236,16 236,44 218,48" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
-        </g>
-
-        <!-- Book 3: SmartPLS 4: SEM (Sage Green #557F67) -->
-        <g transform="translate(18, 68)">
-          <path d="M 0,0 L 204,0 L 214,15 L 10,15 Z" fill="url(#book-sage)" stroke="#345240" stroke-width="1.2"/>
-          <rect x="0" y="15" width="208" height="30" rx="3" fill="url(#book-sage)" stroke="#345240" stroke-width="1.2"/>
-          <text x="104" y="33" font-family="'Cinzel', serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">SmartPLS 4 : STRUCTURAL MODELING</text>
-          <polygon points="208,15 224,15 224,42 208,45" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
-        </g>
-
-        <!-- Book 4 (Top): Academic Writing & APA 7th (Warm Clay #D97736) -->
-        <g transform="translate(26, 30)">
-          <path d="M 0,0 L 194,0 L 204,14 L 10,14 Z" fill="url(#book-clay)" stroke="#8F461E" stroke-width="1.2"/>
-          <rect x="0" y="14" width="198" height="28" rx="3" fill="url(#book-clay)" stroke="#8F461E" stroke-width="1.2"/>
-          <text x="99" y="31" font-family="'Cinzel', serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.8">ACADEMIC PROSE &amp; APA 7TH</text>
-          <polygon points="198,14 212,14 212,39 198,42" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1"/>
-          <!-- Silk Bookmark Ribbon draping down -->
-          <path d="M 120,42 L 126,76 L 132,70 L 138,76 L 140,42 Z" fill="#B95335" stroke="#802F19" stroke-width="0.75"/>
+      <!-- Floating Software Card -->
+      <g transform="translate(60, 18)" filter="url(#topo-thesis-shadow)">
+        <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="280" height="24" rx="8" fill="#FAF7F2"/>
+        <circle cx="14" cy="12" r="3" fill="#EF4444"/>
+        <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
+        <circle cx="32" cy="12" r="3" fill="#10B981"/>
+        <text x="140" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#637083" text-anchor="middle">thesis-proposal-ch1.docx</text>
+        <line x1="0" y1="24" x2="280" y2="24" stroke="#E8E1D8" stroke-width="1"/>
+        <!-- Content -->
+        <rect x="16" y="34" width="88" height="14" rx="3" fill="#DDE8DF"/>
+        <text x="60" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#2E5A44" text-anchor="middle">1.1 PROBLEM STATEMENT</text>
+        <rect x="16" y="54" width="220" height="4" rx="2" fill="#E8E1D8"/>
+        <rect x="16" y="62" width="248" height="4" rx="2" fill="#E8E1D8"/>
+        <rect x="16" y="70" width="180" height="4" rx="2" fill="#E8E1D8"/>
+        <g transform="translate(16, 82)">
+          <rect width="140" height="24" rx="4" fill="#FAF7F2" stroke="#B95335" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="10" y="15" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="700" fill="#B95335">H1: β = .48 (p &lt; .001)</text>
+          <text x="96" y="15" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#637083">• N = 384</text>
         </g>
       </g>
+    </svg>
+  `;
+}
 
-      <!-- RESEARCHER COFFEE MUG (Bottom Center-Right) -->
-      <g transform="translate(305, 305)">
-        <ellipse cx="28" cy="62" rx="28" ry="7" fill="#102B4E" opacity="0.12"/>
-        <path d="M 6,10 L 10,54 C 10,60 18,64 28,64 C 38,64 46,60 46,54 L 50,10 Z" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
-        <ellipse cx="28" cy="10" rx="22" ry="6" fill="#FAF7F1" stroke="#E8E1D8" stroke-width="1.5"/>
-        <ellipse cx="28" cy="12" rx="19" ry="4.5" fill="#582C12"/>
-        <path d="M 47,18 C 60,18 62,44 45,46" fill="none" stroke="#E8E1D8" stroke-width="4.5" stroke-linecap="round"/>
-        <path d="M 47,18 C 60,18 62,44 45,46" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-        <rect x="21" y="26" width="14" height="18" rx="2" fill="#B95335"/>
-        <text x="28" y="39" font-family="'Newsreader', serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Q</text>
-        <path d="M 23,2 C 21,-6 27,-10 24,-18" fill="none" stroke="#B95335" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
-        <path d="M 33,0 C 35,-8 29,-14 33,-22" fill="none" stroke="#B95335" stroke-width="1.2" stroke-linecap="round" opacity="0.35"/>
+function getSpssMockupSvg() {
+  return `
+    <svg viewBox="0 0 400 156" style="width: 100%; height: 100%; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SPSS Statistical Software Mockup">
+      <defs>
+        <filter id="topo-spss-shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.08"/>
+        </filter>
+      </defs>
+      <!-- Topo Lines -->
+      <g stroke="#102B4E" stroke-width="1.2" stroke-opacity="0.07" fill="none">
+        <ellipse cx="200" cy="80" rx="220" ry="60"/>
+        <ellipse cx="200" cy="80" rx="160" ry="42"/>
+        <ellipse cx="200" cy="80" rx="100" ry="25"/>
       </g>
+      <!-- Floating SPSS Window -->
+      <g transform="translate(55, 18)" filter="url(#topo-spss-shadow)">
+        <rect width="290" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="290" height="24" rx="8" fill="#102B4E"/>
+        <circle cx="14" cy="12" r="3" fill="#EF4444"/>
+        <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
+        <circle cx="32" cy="12" r="3" fill="#10B981"/>
+        <text x="145" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">IBM SPSS Statistics • Regression_ANOVA.spv</text>
+        <!-- Table Grid -->
+        <g transform="translate(14, 34)">
+          <rect width="262" height="18" fill="#FAF7F2" stroke="#E8E1D8" stroke-width="0.75"/>
+          <text x="8" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">Model</text>
+          <text x="70" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">R Square</text>
+          <text x="140" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">F-Stat</text>
+          <text x="210" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">Sig. (p)</text>
 
-      <!-- OPEN NOTEBOOK & FOUNTAIN PEN (Bottom Right) -->
-      <g transform="translate(375, 280)">
-        <rect x="0" y="0" width="130" height="95" rx="6" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5" transform="rotate(-6 65 47)"/>
-        <line x1="65" y1="2" x2="65" y2="92" stroke="#E8E1D8" stroke-width="1" stroke-dasharray="2,2" transform="rotate(-6 65 47)"/>
-        <g stroke="#E8E1D8" stroke-width="0.75" transform="rotate(-6 65 47)">
-          <line x1="12" y1="20" x2="55" y2="20"/>
-          <line x1="12" y1="32" x2="55" y2="32"/>
-          <line x1="12" y1="44" x2="50" y2="44"/>
-          <line x1="12" y1="56" x2="55" y2="56"/>
-          <line x1="75" y1="20" x2="118" y2="20"/>
-          <line x1="75" y1="32" x2="118" y2="32"/>
-          <line x1="75" y1="44" x2="115" y2="44"/>
+          <rect y="18" width="262" height="18" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="0.75"/>
+          <text x="8" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#637083">1 (Linear)</text>
+          <text x="70" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#B95335">.648</text>
+          <text x="140" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#172536">42.18</text>
+          <text x="210" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#15803D">&lt; .001</text>
+
+          <rect y="36" width="262" height="18" fill="#FAF7F2" stroke="#E8E1D8" stroke-width="0.75"/>
+          <text x="8" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#637083">2 (Moderated)</text>
+          <text x="70" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#B95335">.712</text>
+          <text x="140" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#172536">56.40</text>
+          <text x="210" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#15803D">&lt; .001</text>
         </g>
-        <g transform="translate(50, 10) rotate(32)">
-          <rect x="0" y="0" width="8" height="70" rx="3" fill="#102B4E"/>
-          <rect x="0" y="45" width="8" height="6" fill="#FDE68A"/>
-          <polygon points="1,70 7,70 4,82" fill="#FDE68A" stroke="#B45309" stroke-width="0.5"/>
-          <line x1="4" y1="70" x2="4" y2="78" stroke="#102B4E" stroke-width="0.5"/>
+        <!-- Bottom Stat Pill -->
+        <rect x="14" y="94" width="130" height="16" rx="8" fill="#DDE8DF"/>
+        <text x="79" y="105" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#2E5A44" text-anchor="middle">✓ Normality Assumption Met</text>
+      </g>
+    </svg>
+  `;
+}
+
+function getSmartplsMockupSvg() {
+  return `
+    <svg viewBox="0 0 400 156" style="width: 100%; height: 100%; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SmartPLS 4 SEM Path Diagram Mockup">
+      <defs>
+        <filter id="topo-pls-shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.08"/>
+        </filter>
+      </defs>
+      <!-- Background Topo Lines -->
+      <g stroke="#102B4E" stroke-width="1.2" stroke-opacity="0.07" fill="none">
+        <path d="M 0,20 C 100,50 150,0 260,30 S 360,70 400,20"/>
+        <path d="M 0,60 C 120,90 170,40 280,70 S 370,110 400,60"/>
+        <path d="M 0,100 C 140,130 190,80 300,110 S 380,150 400,100"/>
+      </g>
+      <!-- Floating SmartPLS Card -->
+      <g transform="translate(50, 18)" filter="url(#topo-pls-shadow)">
+        <rect width="300" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="300" height="24" rx="8" fill="#1E293B"/>
+        <circle cx="14" cy="12" r="3" fill="#EF4444"/>
+        <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
+        <circle cx="32" cy="12" r="3" fill="#10B981"/>
+        <text x="150" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#94A3B8" text-anchor="middle">SmartPLS 4 • PLS-SEM Algorithm Run #1</text>
+        <!-- Structural Equation Diagram -->
+        <g transform="translate(10, 24)">
+          <!-- Construct 1: Exogenous -->
+          <circle cx="50" cy="50" r="22" fill="#FAF7F2" stroke="#102B4E" stroke-width="1.5"/>
+          <text x="50" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#102B4E" text-anchor="middle">LEADERSHIP</text>
+          <text x="50" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="#637083" text-anchor="middle">AVE=.62</text>
+          <!-- Construct 2: Mediator -->
+          <circle cx="140" cy="50" r="22" fill="#FAF7F2" stroke="#B95335" stroke-width="1.5"/>
+          <text x="140" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#B95335" text-anchor="middle">CLIMATE</text>
+          <text x="140" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="#637083" text-anchor="middle">R²=.48</text>
+          <!-- Construct 3: Endogenous -->
+          <circle cx="230" cy="50" r="22" fill="#FAF7F2" stroke="#15803D" stroke-width="1.5"/>
+          <text x="230" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#15803D" text-anchor="middle">PERFORMANCE</text>
+          <text x="230" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="#637083" text-anchor="middle">R²=.64</text>
+          <!-- Path Arrows -->
+          <line x1="72" y1="50" x2="114" y2="50" stroke="#102B4E" stroke-width="1.5"/>
+          <polygon points="114,47 118,50 114,53" fill="#102B4E"/>
+          <text x="95" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#102B4E" text-anchor="middle">.54***</text>
+
+          <line x1="162" y1="50" x2="204" y2="50" stroke="#B95335" stroke-width="1.5"/>
+          <polygon points="204,47 208,50 204,53" fill="#B95335"/>
+          <text x="185" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#B95335" text-anchor="middle">.46***</text>
+
+          <!-- Direct path arch -->
+          <path d="M 50,28 Q 140,4 230,28" fill="none" stroke="#637083" stroke-width="1" stroke-dasharray="2,2"/>
+          <text x="140" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="700" fill="#637083" text-anchor="middle">Indirect: .25 (p &lt; .001)</text>
         </g>
       </g>
+    </svg>
+  `;
+}
 
-      <!-- FLOATING ANNOTATION CARD (Matching Mockup) -->
-      <g transform="translate(16, 26)" filter="url(#float-card-shadow)">
-        <rect x="0" y="0" width="194" height="52" rx="10" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
-        <circle cx="22" cy="26" r="12" fill="#DDE8DF"/>
-        <text x="22" y="30.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#2E5A44" text-anchor="middle">✓</text>
-        <text x="42" y="21" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="800" fill="#B95335" letter-spacing="0.5">POSTGRADUATE EXCELLENCE</text>
-        <text x="42" y="37" font-family="'Newsreader', serif" font-size="12" font-weight="600" fill="#102B4E">Better Research. Bigger Opportunities.</text>
+function getTurnitinMockupSvg() {
+  return `
+    <svg viewBox="0 0 540 156" style="width: 100%; height: 100%; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Turnitin Similarity Report Mockup">
+      <defs>
+        <filter id="topo-turnitin-shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.08"/>
+        </filter>
+      </defs>
+      <!-- Background Topo Lines -->
+      <g stroke="#102B4E" stroke-width="1.2" stroke-opacity="0.07" fill="none">
+        <path d="M 0,35 Q 120,5 250,45 T 540,25"/>
+        <path d="M 0,75 Q 140,45 280,85 T 540,65"/>
+        <path d="M 0,115 Q 160,85 310,125 T 540,105"/>
+      </g>
+      <!-- Floating Turnitin Report Card -->
+      <g transform="translate(60, 18)" filter="url(#topo-turnitin-shadow)">
+        <rect width="420" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="420" height="24" rx="8" fill="#FAF7F2"/>
+        <circle cx="14" cy="12" r="3" fill="#EF4444"/>
+        <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
+        <circle cx="32" cy="12" r="3" fill="#10B981"/>
+        <text x="210" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#172536" text-anchor="middle">Turnitin Feedback Studio • Dissertation_Final_Draft.pdf</text>
+        <line x1="0" y1="24" x2="420" y2="24" stroke="#E8E1D8" stroke-width="1"/>
+        <!-- Report Content -->
+        <g transform="translate(20, 36)">
+          <!-- Similarity Badge -->
+          <rect width="90" height="26" rx="4" fill="#DDE8DF" stroke="#86efac" stroke-width="1"/>
+          <text x="14" y="17" font-family="'Newsreader', serif" font-size="14" font-weight="700" fill="#15803D">11%</text>
+          <text x="44" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#15803D">SIMILARITY</text>
+          <!-- HEC Compliance Tag -->
+          <rect x="100" y="0" width="160" height="26" rx="4" fill="#FAF7F2" stroke="#E8E1D8" stroke-width="1"/>
+          <text x="110" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="700" fill="#102B4E">✓ HEC Standard: &lt; 19% Passed</text>
+          <!-- Simulated Text Lines with Highlighting -->
+          <rect y="38" width="380" height="4" rx="2" fill="#E8E1D8"/>
+          <rect y="48" width="160" height="14" rx="2" fill="rgba(185, 83, 53, 0.15)"/>
+          <text x="6" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="600" fill="#B95335">[1] Primary empirical sample of 384 participants</text>
+          <rect x="168" y="48" width="212" height="4" rx="2" fill="#E8E1D8"/>
+          <rect y="68" width="350" height="4" rx="2" fill="#E8E1D8"/>
+        </g>
+      </g>
+    </svg>
+  `;
+}
+
+function getApaMockupSvg() {
+  return `
+    <svg viewBox="0 0 540 156" style="width: 100%; height: 100%; display: block;" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="APA 7th Reference Engine Mockup">
+      <defs>
+        <filter id="topo-apa-shadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#102B4E" flood-opacity="0.08"/>
+        </filter>
+      </defs>
+      <!-- Background Topo Lines -->
+      <g stroke="#102B4E" stroke-width="1.2" stroke-opacity="0.07" fill="none">
+        <path d="M 0,25 C 150,55 240,10 380,45 S 480,85 540,25"/>
+        <path d="M 0,65 C 160,95 260,50 400,85 S 500,125 540,65"/>
+        <path d="M 0,105 C 170,135 280,90 420,125 S 520,165 540,105"/>
+      </g>
+      <!-- Floating APA Reference Card -->
+      <g transform="translate(60, 18)" filter="url(#topo-apa-shadow)">
+        <rect width="420" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="420" height="24" rx="8" fill="#102B4E"/>
+        <circle cx="14" cy="12" r="3" fill="#EF4444"/>
+        <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
+        <circle cx="32" cy="12" r="3" fill="#10B981"/>
+        <text x="210" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">Zotero Reference Formatter • APA 7th Edition</text>
+        <!-- Reference Entry -->
+        <g transform="translate(18, 38)">
+          <rect width="90" height="18" rx="3" fill="#DDE8DF"/>
+          <text x="45" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#2E5A44" text-anchor="middle">✓ HANGING INDENT</text>
+          <!-- APA text with italicized journal -->
+          <text x="0" y="32" font-family="'Newsreader', serif" font-size="10.5" fill="#172536">
+            Yousaf, M., &amp; Hair, J. F. (2026). Methodological rigor in structural modeling.
+          </text>
+          <text x="0" y="46" font-family="'Newsreader', serif" font-size="10.5" font-style="italic" fill="#B95335">
+            Journal of Academic Research &amp; Inquiry, 14
+          </text>
+          <text x="210" y="46" font-family="'Newsreader', serif" font-size="10.5" fill="#172536">
+            (2), 104–122.
+          </text>
+          <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="#637083">
+            https://doi.org/10.1016/j.jari.2026.01.004
+          </text>
+        </g>
       </g>
     </svg>
   `;
@@ -560,66 +597,36 @@ function getAcademicDeskSvg() {
    ========================================================================== */
 function renderCatalog(courses) {
   const active = store.getActiveLesson();
-  const currentLang = store.getEnglishLevel();
 
   mainEl.innerHTML = `
-    <!-- Top Hero Section: Claude Academy Warm Blush Banner -->
-    <section class="claude-hero-banner">
+    <!-- Serene Claude Academy Hero Section -->
+    <section class="claude-home-hero">
       <div class="wrap">
-        <div class="claude-hero-grid">
-          
-          <!-- Left Column: Copy & Actions -->
-          <div class="claude-hero-copy">
-            <!-- Verified HEC Alignment Pill -->
-            <div class="claude-breadcrumb-tag">
-              <span class="dot"></span>
-              <span>HEC Pakistan Aligned • Free Postgraduate Research LMS</span>
-            </div>
-
-            <!-- Master Headline in Editorial Serif -->
-            <h1 class="claude-hero-title">
-              Build stronger research. Write with <em>clarity.</em>
-            </h1>
-
-            <!-- Supporting Text -->
-            <p class="claude-hero-desc">
-              Practical academic training for postgraduate researchers. Strengthen your research design, academic writing, statistical analysis and reporting skills through guided lessons and interactive learning tools.
-            </p>
-
-            <!-- Claude Academy Metadata Pills Strip -->
-            <div class="claude-meta-strip">
-              <span class="claude-meta-pill">📖 9 Complete Tracks</span>
-              <span class="claude-meta-pill">⏱️ 32 Accredited Hours</span>
-              <span class="claude-meta-pill">📝 168 Modular Lessons</span>
-              <span class="claude-meta-pill">🎓 Verifiable Credentials</span>
-              <span class="claude-meta-pill">🔬 Sentence Clarity Lab</span>
-            </div>
-
-            <!-- Claude Academy Action Pills -->
-            <div class="claude-hero-actions">
-              <a href="#courses-section" class="claude-btn-dark">
-                ➔ Explore Courses
-              </a>
-              <a href="#certificates" class="claude-btn-subtle">
-                <span>📄</span> View Credentials
-              </a>
-              <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="claude-btn-subtle">
-                <span>📖</span> Open Field Guide
-              </a>
-            </div>
+        <div class="claude-home-hero-inner">
+          <div class="claude-breadcrumb-tag" style="margin-bottom: 16px;">
+            <span class="dot"></span>
+            <span>HEC Pakistan Aligned • Free Postgraduate Research LMS</span>
           </div>
-
-          <!-- Right Column: Claude Academy Signature Decagonal Emblem -->
-          <div class="claude-hero-badge-wrap">
-            <div class="claude-badge-decagon">
-              <img src="${getBaseAssetPath()}/images/hero-academy-emblem.svg" 
-                   alt="Quick Academy Master Academic Emblem" 
-                   class="claude-badge-img" 
-                   width="260" 
-                   height="260">
-            </div>
+          <h1 class="claude-home-hero-title">
+            Welcome to Quick Academy
+          </h1>
+          <p class="claude-home-hero-desc">
+            Practical academic training for postgraduate researchers. Strengthen your research design, academic writing, statistical analysis, and reporting skills through guided lessons, real-world datasets, and interactive learning tools.
+          </p>
+          <div class="claude-home-hero-actions">
+            <a href="#courses-section" class="claude-btn-dark">
+              Browse all courses
+            </a>
+            <a href="#clarity" class="claude-btn-subtle">
+              <span>🔬</span> Sentence Clarity Lab ➔
+            </a>
+            <a href="#certificates" class="claude-btn-subtle">
+              <span>📄</span> View Credentials
+            </a>
+            <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="claude-btn-subtle">
+              <span>📖</span> Open Field Guide
+            </a>
           </div>
-
         </div>
       </div>
     </section>
@@ -635,164 +642,146 @@ function renderCatalog(courses) {
         </div>
       </section>` : ''}
 
-    <!-- Core Feature: Dedicated Sentence Clarity Lab Card -->
-    <section style="padding: 24px 0 56px;">
+    <!-- Claude Academy Section 1: "Go deeper with Research & Methodology" (3 + 2 Grid) -->
+    <section class="claude-section" style="padding-top: 56px;">
       <div class="wrap">
-        <div class="clarity-lab-card" id="sentence-clarity-lab">
-          
-          <!-- Lab Card Header -->
-          <div class="clarity-lab-header">
-            <div>
-              <div class="clarity-lab-badge">
-                <span>🔬</span> <span>CORE LEARNING TOOL • SENTENCE CLARITY LAB</span>
-              </div>
-              <h2 style="font-size: clamp(22px, 3.2vw, 30px); margin: 6px 0 4px; font-weight: 500; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary);">
-                Academic Paraphraser &amp; Syntax Refiner
-              </h2>
-              <p style="font-size: 14px; color: var(--qsa-text-secondary); margin: 0;">
-                See how passive, nominalized sentences transform into clear, bounded scholarly prose across registers.
-              </p>
-            </div>
-
-            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-              <!-- Register Switcher Tabs -->
-              <div class="clarity-tabs-wrap" role="tablist">
-                <button type="button" class="clarity-tab-btn ${currentLang === 'simple' ? 'active' : ''}" data-clarity-lang="simple">🌱 Simple (ESL)</button>
-                <button type="button" class="clarity-tab-btn ${currentLang === 'plain' ? 'active' : ''}" data-clarity-lang="plain">📘 Plain (Standard)</button>
-                <button type="button" class="clarity-tab-btn ${currentLang === 'technical' ? 'active' : ''}" data-clarity-lang="technical">🎓 Technical (Scholarly)</button>
-              </div>
-              <!-- Preset Selector -->
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--qsa-text-muted);">Preset:</span>
-                <select id="clarity-preset-select" style="padding: 5px 12px; font-size: 12.5px; font-weight: 600; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); cursor: pointer; outline: none;">
-                  <option value="empirical">Empirical Problem Statement (Thesis 101)</option>
-                  <option value="methodology">Statistical Sample &amp; Power (G*Power)</option>
-                  <option value="sem">Structural Equation Modeling (SmartPLS 4)</option>
-                </select>
-              </div>
-            </div>
+        <div class="claude-section-header-split">
+          <div>
+            <h2 class="claude-section-title">Go deeper with Research &amp; Methodology</h2>
+            <p class="claude-section-subtitle">Specialized tracks engineered for MPhil, MS, and PhD scholars preparing for defense and publication.</p>
           </div>
+        </div>
 
-          <!-- Two-Panel Comparison Grid -->
-          <div class="clarity-lab-grid">
-            
-            <!-- Left Panel: Original Weak Sentence -->
-            <div class="clarity-panel original-panel">
-              <div class="clarity-panel-header">
-                <span class="clarity-panel-title">Original Academic Sentence</span>
-                <span class="tag tag-peach" id="clarity-weakness-badge" style="font-size: 11px;">⚠️ Passive / Nominalized</span>
-              </div>
-              <div class="clarity-sentence-box" id="clarity-original-text">
-                “It has been observed by <span class="syntax-badge-peach">various researchers</span> that the implementation of <span class="syntax-badge-peach">certain training initiatives</span> has an impact upon the <span class="syntax-badge-peach">overall performance</span> of employees <span class="syntax-badge-peach">in an organizational setting</span>.”
-              </div>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; font-size: 12px; color: var(--qsa-text-muted);">
-                <span>📏 28 words</span> • <span>Fog Index: 16.4</span> • <span>Dangling Subject Detected</span>
-              </div>
+        <!-- Top Row: 3 Illustrated Cards with Topo Lines & UI Mockups -->
+        <div class="claude-deep-grid-top">
+          <!-- Card 1: Thesis Writing 101 -->
+          <a href="#course-thesis101" class="claude-deep-card">
+            <div class="claude-deep-banner">
+              ${getThesisMockupSvg()}
             </div>
-
-            <!-- Right Panel: Improved Sentence -->
-            <div class="clarity-panel improved-panel">
-              <div class="clarity-panel-header">
-                <span class="clarity-panel-title">Improved Formulation</span>
-                <div class="clarity-benefit-tags" id="clarity-benefit-tags">
-                  <span class="syntax-badge-blue">✓ Active Voice</span>
-                  <span class="syntax-badge-blue">✓ Agent-Action</span>
-                  <span class="syntax-badge-blue">✓ Bounded Context</span>
-                </div>
-              </div>
-              <div class="clarity-sentence-box" id="clarity-improved-text" style="font-weight: 500;">
-                “This empirical study investigates how institutional capital allocation and pedagogical training predict student standardized test achievement across 50 public secondary schools.”
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 10px;">
-                <div style="font-size: 12px; color: var(--qsa-text-muted);">
-                  <span>Directness: <strong>+38%</strong></span> • <span>Zero Nominalization</span>
-                </div>
-                <button type="button" class="btn btn-secondary btn-sm" id="clarity-copy-btn" style="padding: 6px 14px; font-size: 12px;">
-                  <span>📋</span> <span>Copy Sentence</span>
-                </button>
-              </div>
+            <div class="claude-deep-body">
+              <h3 class="claude-deep-title">Thesis Writing 101</h3>
+              <p class="claude-deep-desc">Structure your empirical problem statement, theoretical framework, and proposal defense.</p>
             </div>
+          </a>
 
-          </div>
+          <!-- Card 2: SPSS Quantitative Analysis -->
+          <a href="#course-spss101" class="claude-deep-card">
+            <div class="claude-deep-banner">
+              ${getSpssMockupSvg()}
+            </div>
+            <div class="claude-deep-body">
+              <h3 class="claude-deep-title">SPSS Quantitative Analysis</h3>
+              <p class="claude-deep-desc">Data screening, normality, ANOVA, regression diagnostics, and hypothesis testing.</p>
+            </div>
+          </a>
 
-          <!-- Explanation Box -->
-          <div class="clarity-explanation-box" id="clarity-explanation-text">
-            <strong>Key Revisions:</strong> Replaced the empty passive subject <em>“It has been observed”</em> with an active empirical agent (<em>“This empirical study investigates”</em>). Eliminated the vague nominalization <em>“overall performance”</em> and anchored the context to <em>“50 public secondary schools”</em> for defensible scoping.
-          </div>
+          <!-- Card 3: SmartPLS 4 SEM -->
+          <a href="#course-smartpls" class="claude-deep-card">
+            <div class="claude-deep-banner">
+              ${getSmartplsMockupSvg()}
+            </div>
+            <div class="claude-deep-body">
+              <h3 class="claude-deep-title">SmartPLS 4 SEM Modeling</h3>
+              <p class="claude-deep-desc">Measurement models, reflective validity, bootstrapping, and mediation analysis.</p>
+            </div>
+          </a>
+        </div>
 
-          <!-- Mandatory Integrity & Verification Disclaimer -->
-          <div class="clarity-disclaimer">
-            <span>⚠️</span>
-            <span><strong>Academic Integrity Notice:</strong> Paraphrasing and syntax tools refine clarity but do not replace critical scholarly judgment or verify empirical findings. Users must independently verify evidence, definitions, and citations. Paraphrasing does not guarantee plagiarism exemption or bypass AI detection.</span>
-          </div>
+        <!-- Bottom Row: 2 Wide Illustrated Cards -->
+        <div class="claude-deep-grid-bottom">
+          <!-- Card 4: Academic Integrity & Similarity -->
+          <a href="#course-integrity101" class="claude-deep-card">
+            <div class="claude-deep-banner">
+              ${getTurnitinMockupSvg()}
+            </div>
+            <div class="claude-deep-body">
+              <h3 class="claude-deep-title">Academic Integrity &amp; Turnitin</h3>
+              <p class="claude-deep-desc">Interpret similarity reports, prevent accidental plagiarism, and defend originality with HEC guidelines.</p>
+            </div>
+          </a>
 
+          <!-- Card 5: APA 7th Referencing Masterclass -->
+          <a href="#course-cite101" class="claude-deep-card">
+            <div class="claude-deep-banner">
+              ${getApaMockupSvg()}
+            </div>
+            <div class="claude-deep-body">
+              <h3 class="claude-deep-title">APA 7th Referencing Mastery</h3>
+              <p class="claude-deep-desc">Parenthetical mechanics, multi-author rules, and flawless citation tables.</p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Three Track Pillar Cards Grid matching Mockup -->
-    <section style="padding: 10px 0 48px;">
+    <!-- Claude Academy Section 2: "Develop Methodological Rigor" (3 Cards with Decagonal Badges) -->
+    <section class="claude-section" style="padding-top: 24px; padding-bottom: 56px;">
       <div class="wrap">
-        <div style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
-          <span class="tag tag-clay" style="margin-bottom: 8px;">Academic Architecture</span>
-          <h2 style="font-size: clamp(26px, 3.8vw, 34px); margin: 6px 0 8px; color: var(--qsa-text-primary);">
-            Three Pillars of Postgraduate Research
-          </h2>
-          <p style="color: var(--qsa-text-secondary); font-size: 15px; margin: 0;">
-            A sequential scholarly curriculum designed to take researchers from problem formulation to rigorous statistical defense.
-          </p>
+        <div class="claude-section-header-split">
+          <div>
+            <h2 class="claude-section-title">Develop Methodological Rigor</h2>
+            <p class="claude-section-subtitle">Core foundational competencies for credible research design and empirical defense.</p>
+          </div>
+          <a href="#courses-section" class="claude-section-arrow-link">
+            <span>More about empirical methods</span> <span>➔</span>
+          </a>
         </div>
 
-        <div class="pillar-cards-grid">
-          
-          <!-- Pillar 1 -->
-          <div class="pillar-card">
-            <div class="pillar-icon-box">📐</div>
-            <div class="pillar-track-num">TRACK 01 • METHODOLOGY</div>
-            <h3 class="pillar-card-title">Research Design &amp; Scoping</h3>
-            <p class="pillar-card-desc">
-              From initial topic bounding to proposal defense, systematic PRISMA literature synthesis, and defending your research questions.
-            </p>
-            <div class="pillar-courses-list">
-              Includes: <strong>Thesis Writing 101</strong> • <strong>Literature Search with Zotero</strong> • <strong>Viva Voce Defense</strong>
+        <div class="claude-rigor-grid">
+          <!-- Card 1: Literature Search & Zotero -->
+          <a href="#course-lit-search" class="claude-rigor-card">
+            <div class="claude-rigor-banner" style="background: #F5EFE6;">
+              <div class="claude-rigor-badge">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#102B4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  <path d="M11 8v6M8 11h6"/>
+                </svg>
+              </div>
             </div>
-            <button type="button" class="pillar-card-action filter-pillar-btn" data-pillar-filter="Research Design">
-              <span>Explore Research Track (3)</span> ➔
-            </button>
-          </div>
-
-          <!-- Pillar 2 -->
-          <div class="pillar-card">
-            <div class="pillar-icon-box">📊</div>
-            <div class="pillar-track-num">TRACK 02 • EMPIRICAL RIGOR</div>
-            <h3 class="pillar-card-title">Statistical Analysis &amp; Power</h3>
-            <p class="pillar-card-desc">
-              Empirical quantitative methods: G*Power statistical power calculation, SPSS data screening, hypothesis testing, and SmartPLS 4 SEM path models.
-            </p>
-            <div class="pillar-courses-list">
-              Includes: <strong>Sample Size Determination</strong> • <strong>SPSS Quantitative Research</strong> • <strong>SmartPLS 4 SEM</strong>
+            <div class="claude-rigor-body">
+              <h3 class="claude-rigor-title">Literature Search &amp; Zotero</h3>
+              <p class="claude-rigor-desc">Master PRISMA 2020 workflows, Boolean queries in Scopus/WoS, and citation indexing.</p>
+              <div class="claude-rigor-meta">Self-paced • 3.2 Hours • Intermediate</div>
             </div>
-            <button type="button" class="pillar-card-action filter-pillar-btn" data-pillar-filter="Statistical Analysis">
-              <span>Explore Statistics Track (3)</span> ➔
-            </button>
-          </div>
+          </a>
 
-          <!-- Pillar 3 -->
-          <div class="pillar-card">
-            <div class="pillar-icon-box">✍️</div>
-            <div class="pillar-track-num">TRACK 03 • SCHOLARLY COMMUNICATION</div>
-            <h3 class="pillar-card-title">Academic Writing &amp; Integrity</h3>
-            <p class="pillar-card-desc">
-              International publication standards: APA 7th parenthetical mechanics, Turnitin similarity report interpretation, and structural editing.
-            </p>
-            <div class="pillar-courses-list">
-              Includes: <strong>APA 7th Referencing</strong> • <strong>Turnitin &amp; Integrity</strong> • <strong>Proofreading &amp; Style</strong>
+          <!-- Card 2: Sample Size Determination (G*Power) -->
+          <a href="#course-sample-size" class="claude-rigor-card">
+            <div class="claude-rigor-banner" style="background: #FBECE8;">
+              <div class="claude-rigor-badge">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#B95335" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 20h18"/>
+                  <path d="M6 16a6 6 0 0 1 12 0"/>
+                  <line x1="12" y1="4" x2="12" y2="10"/>
+                  <circle cx="12" cy="10" r="2" fill="#B95335"/>
+                </svg>
+              </div>
             </div>
-            <button type="button" class="pillar-card-action filter-pillar-btn" data-pillar-filter="Academic Writing">
-              <span>Explore Writing Track (3)</span> ➔
-            </button>
-          </div>
+            <div class="claude-rigor-body">
+              <h3 class="claude-rigor-title">Sample Size (G*Power)</h3>
+              <p class="claude-rigor-desc">Calculate defensible statistical power, Cohen's effect sizes, and Krejcie-Morgan tables.</p>
+              <div class="claude-rigor-meta">Self-paced • 3.8 Hours • Advanced</div>
+            </div>
+          </a>
 
+          <!-- Card 3: Viva Voce & Defense -->
+          <a href="#course-viva" class="claude-rigor-card">
+            <div class="claude-rigor-banner" style="background: #EBF2ED;">
+              <div class="claude-rigor-badge">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2E5A44" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="claude-rigor-body">
+              <h3 class="claude-rigor-title">Viva Voce &amp; Defense</h3>
+              <p class="claude-rigor-desc">Master slide deck timing, anticipate harsh examiner questions, and pass your defense.</p>
+              <div class="claude-rigor-meta">Self-paced • 2.8 Hours • Intermediate</div>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -844,9 +833,6 @@ function renderCatalog(courses) {
     </section>
   `;
 
-  // Attach Clarity Lab Event Handlers
-  initClarityLabListeners();
-
   // Attach Live Topic Chip Filtering
   const chips = document.querySelectorAll('.claude-filter-chip');
   chips.forEach(chip => {
@@ -855,21 +841,6 @@ function renderCatalog(courses) {
       chip.classList.add('active');
       const topic = chip.dataset.topic;
       filterCatalogCourses(courses, topic);
-    });
-  });
-
-  // Attach Pillar Card Action Buttons (Direct Filter & Smooth Scroll)
-  document.querySelectorAll('.filter-pillar-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.pillarFilter;
-      chips.forEach(c => {
-        c.classList.toggle('active', c.dataset.topic === filter);
-      });
-      filterCatalogCourses(courses, filter);
-      const targetEl = document.getElementById('courses-section');
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth' });
-      }
     });
   });
 
@@ -1015,6 +986,179 @@ function initClarityLabListeners() {
           window.showGlobalToast('Press Ctrl+C to copy');
         });
       }
+    });
+  }
+}
+
+/* ==========================================================================
+   Sentence Clarity Lab Dedicated Page View (#clarity)
+   ========================================================================== */
+function renderClarityLabPage() {
+  const currentLang = store.getEnglishLevel();
+  mainEl.innerHTML = `
+    <div class="wrap" style="padding: 48px 20px 80px;">
+      <div style="max-width: 960px; margin: 0 auto;">
+        
+        <div style="margin-bottom: 28px;">
+          <a href="#/" class="btn btn-secondary btn-sm" style="margin-bottom: 16px; display: inline-flex; align-items: center; gap: 6px;">
+            <span>←</span> Back to Academy Courses
+          </a>
+          <div class="clarity-lab-badge">
+            <span>🔬</span> <span>CORE LEARNING TOOL • SENTENCE CLARITY LAB</span>
+          </div>
+          <h1 style="font-size: clamp(30px, 4.5vw, 42px); margin: 8px 0 10px; font-weight: 500; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary); letter-spacing: -0.02em;">
+            Academic Paraphraser &amp; Syntax Refiner
+          </h1>
+          <p style="font-size: 16px; color: var(--qsa-text-secondary); margin: 0; line-height: 1.6; max-width: 720px;">
+            Learn how passive, nominalized sentences transform into clear, bounded scholarly prose across registers. Switch between ESL Simple, Standard Plain, and Technical Scholarly registers.
+          </p>
+        </div>
+
+        <div class="clarity-lab-card" id="sentence-clarity-lab" style="margin-top: 24px;">
+          
+          <!-- Lab Card Header -->
+          <div class="clarity-lab-header">
+            <div>
+              <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--qsa-text-muted); letter-spacing: 0.5px;">Interactive Register Switcher</span>
+              <div style="font-size: 14px; color: var(--qsa-text-secondary); margin-top: 4px;">
+                Select your reading level to inspect syntax transformations:
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+              <!-- Register Switcher Tabs -->
+              <div class="clarity-tabs-wrap" role="tablist">
+                <button type="button" class="clarity-tab-btn ${currentLang === 'simple' ? 'active' : ''}" data-clarity-lang="simple">🌱 Simple (ESL)</button>
+                <button type="button" class="clarity-tab-btn ${currentLang === 'plain' ? 'active' : ''}" data-clarity-lang="plain">📘 Plain (Standard)</button>
+                <button type="button" class="clarity-tab-btn ${currentLang === 'technical' ? 'active' : ''}" data-clarity-lang="technical">🎓 Technical (Scholarly)</button>
+              </div>
+              <!-- Preset Selector -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--qsa-text-muted);">Preset:</span>
+                <select id="clarity-preset-select" style="padding: 5px 12px; font-size: 12.5px; font-weight: 600; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); cursor: pointer; outline: none;">
+                  <option value="empirical">Empirical Problem Statement (Thesis 101)</option>
+                  <option value="methodology">Statistical Sample &amp; Power (G*Power)</option>
+                  <option value="sem">Structural Equation Modeling (SmartPLS 4)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Two-Panel Comparison Grid -->
+          <div class="clarity-lab-grid">
+            
+            <!-- Left Panel: Original Weak Sentence -->
+            <div class="clarity-panel original-panel">
+              <div class="clarity-panel-header">
+                <span class="clarity-panel-title">Original Academic Sentence</span>
+                <span class="tag tag-peach" id="clarity-weakness-badge" style="font-size: 11px;">⚠️ Passive / Nominalized</span>
+              </div>
+              <div class="clarity-sentence-box" id="clarity-original-text">
+                “It has been observed by <span class="syntax-badge-peach">various researchers</span> that the implementation of <span class="syntax-badge-peach">certain training initiatives</span> has an impact upon the <span class="syntax-badge-peach">overall performance</span> of employees <span class="syntax-badge-peach">in an organizational setting</span>.”
+              </div>
+              <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; font-size: 12px; color: var(--qsa-text-muted);">
+                <span>📏 28 words</span> • <span>Fog Index: 16.4</span> • <span>Dangling Subject Detected</span>
+              </div>
+            </div>
+
+            <!-- Right Panel: Improved Sentence -->
+            <div class="clarity-panel improved-panel">
+              <div class="clarity-panel-header">
+                <span class="clarity-panel-title">Improved Formulation</span>
+                <div class="clarity-benefit-tags" id="clarity-benefit-tags">
+                  <span class="syntax-badge-blue">✓ Active Voice</span>
+                  <span class="syntax-badge-blue">✓ Agent-Action</span>
+                  <span class="syntax-badge-blue">✓ Bounded Context</span>
+                </div>
+              </div>
+              <div class="clarity-sentence-box" id="clarity-improved-text" style="font-weight: 500;">
+                “This empirical study investigates how institutional capital allocation and pedagogical training predict student standardized test achievement across 50 public secondary schools.”
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; flex-wrap: wrap; gap: 10px;">
+                <div style="font-size: 12px; color: var(--qsa-text-muted);">
+                  <span>Directness: <strong>+38%</strong></span> • <span>Zero Nominalization</span>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm" id="clarity-copy-btn" style="padding: 6px 14px; font-size: 12px;">
+                  <span>📋</span> <span>Copy Sentence</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Explanation Box -->
+          <div class="clarity-explanation-box" id="clarity-explanation-text">
+            <strong>Key Revisions:</strong> Replaced the empty passive subject <em>“It has been observed”</em> with an active empirical agent (<em>“This empirical study investigates”</em>). Eliminated the vague nominalization <em>“overall performance”</em> and anchored the context to <em>“50 public secondary schools”</em> for defensible scoping.
+          </div>
+
+          <!-- Custom Sentence Interactive Input Area -->
+          <div style="background: var(--qsa-bg-subtle); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-md); padding: 20px; margin-top: 20px;">
+            <div style="font-weight: 700; font-size: 13.5px; margin-bottom: 8px; color: var(--qsa-text-primary);">
+              ✍️ Test Your Own Academic Sentence
+            </div>
+            <div style="font-size: 13px; color: var(--qsa-text-secondary); margin-bottom: 12px;">
+              Paste an academic sentence to analyze passive voice, nominalization, and readability:
+            </div>
+            <textarea id="custom-clarity-input" rows="3" style="width: 100%; border: 1px solid var(--qsa-border-strong); border-radius: 6px; padding: 10px; font-family: var(--qsa-font-sans); font-size: 14px; color: var(--qsa-text-primary); background: #ffffff; resize: vertical; box-sizing: border-box;" placeholder="e.g. It was shown by the authors that a significant correlation was observed between..."></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 10px;">
+              <span id="custom-clarity-metrics" style="font-size: 12.5px; color: var(--qsa-text-muted);">Word count: 0 words</span>
+              <button type="button" class="btn btn-primary btn-sm" id="custom-clarity-analyze-btn">Analyze Sentence ➔</button>
+            </div>
+            <div id="custom-clarity-result" style="margin-top: 14px; display: none; padding: 12px; background: #ffffff; border-radius: 6px; border: 1px solid var(--qsa-border); font-size: 13.5px;"></div>
+          </div>
+
+          <!-- Mandatory Integrity & Verification Disclaimer -->
+          <div class="clarity-disclaimer" style="margin-top: 20px;">
+            <span>⚠️</span>
+            <span><strong>Academic Integrity Notice:</strong> Paraphrasing and syntax tools refine clarity but do not replace critical scholarly judgment or verify empirical findings. Users must independently verify evidence, definitions, and citations. Paraphrasing does not guarantee plagiarism exemption or bypass AI detection.</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  // Attach clarity lab listeners
+  initClarityLabListeners();
+
+  // Attach custom sentence analysis listener
+  const customInput = document.getElementById('custom-clarity-input');
+  const analyzeBtn = document.getElementById('custom-clarity-analyze-btn');
+  const metricsEl = document.getElementById('custom-clarity-metrics');
+  const resultEl = document.getElementById('custom-clarity-result');
+
+  if (customInput && metricsEl) {
+    customInput.addEventListener('input', () => {
+      const words = customInput.value.trim().split(/\s+/).filter(Boolean).length;
+      metricsEl.textContent = `Word count: ${words} words`;
+    });
+  }
+
+  if (analyzeBtn && customInput && resultEl) {
+    analyzeBtn.addEventListener('click', () => {
+      const text = customInput.value.trim();
+      if (!text) {
+        window.showGlobalToast('Please enter an academic sentence to analyze');
+        return;
+      }
+      const words = text.split(/\s+/).filter(Boolean).length;
+      const hasPassive = /\b(was|were|been|being|is|are)\s+\w+ed\b/i.test(text);
+      const hasNominalization = /\b\w+(tion|ment|ence|ance|ity)\b/i.test(text);
+
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = `
+        <div style="font-weight: 700; color: var(--qsa-primary-navy); margin-bottom: 6px;">Diagnostic Assessment:</div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
+          <span class="tag ${hasPassive ? 'tag-peach' : 'tag-green'}">${hasPassive ? '⚠️ Passive Voice Found' : '✓ Active Voice'}</span>
+          <span class="tag ${hasNominalization ? 'tag-peach' : 'tag-green'}">${hasNominalization ? '⚠️ Heavy Nominalization' : '✓ Direct Verbs'}</span>
+          <span class="tag tag-clay">${words} words</span>
+        </div>
+        <p style="margin: 0; color: var(--qsa-text-secondary); line-height: 1.5;">
+          ${hasPassive ? 'Consider identifying the human actor or empirical agent and placing them at the head of the sentence. ' : ''}
+          ${hasNominalization ? 'Convert abstract nouns ending in -tion/-ment back into active verbs to sharpen sentence momentum.' : 'Clear sentence structure detected.'}
+        </p>
+      `;
     });
   }
 }

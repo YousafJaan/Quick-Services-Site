@@ -23,30 +23,6 @@
   gap: 16px;
 }
 
-@media (max-width: 1120px) {
-  .hd .in {
-    gap: 8px;
-  }
-  .header-right-actions {
-    gap: 8px;
-  }
-  .dnav {
-    gap: 4px;
-  }
-  .dnav .nav-item {
-    padding: 6px 10px;
-    font-size: 13.5px;
-  }
-  .btn-advisor-action {
-    padding: 7px 12px;
-    font-size: 12.5px;
-  }
-  .theme-pill-btn {
-    padding: 4px 8px;
-    font-size: 11.5px;
-  }
-}
-
 .logo-link {
   display: flex;
   align-items: center;
@@ -202,6 +178,41 @@
   height: 2.5px;
   background: var(--qsa-terracotta);
   border-radius: 2px;
+}
+
+/* Header Responsive Adaptations (Cascade Override) */
+@media (max-width: 1120px) {
+  .hd .wrap {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .hd .in {
+    gap: 8px;
+  }
+  .logo-tagline {
+    display: none;
+  }
+  .header-right-actions {
+    gap: 6px;
+  }
+  .theme-pill-btn span:last-child {
+    display: none;
+  }
+  .theme-pill-btn {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  .dnav {
+    gap: 2px;
+  }
+  .dnav .nav-item {
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+  .btn-advisor-action {
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
 }
 
 /* English Proficiency Level Selector (Header & Reader) */
@@ -3155,4 +3166,321 @@ details.menu:not([open]) .links {
   flex-shrink: 0;
   cursor: pointer;
   border: 1px solid var(--qsa-border);
+}
+
+/* ==========================================================================
+   19. Claude Academy Homepage Clone (Faithful Reverse-Engineered System)
+   ========================================================================== */
+
+/* Clean Serene Hero matching academy.claude.com */
+.claude-home-hero {
+  background: var(--qsa-bg-warm);
+  border-bottom: 1px solid var(--qsa-border);
+  padding: 72px 0 64px;
+}
+
+.claude-home-hero-inner {
+  max-width: 840px;
+}
+
+.claude-home-hero-title {
+  font-family: var(--qsa-font-serif);
+  font-size: clamp(36px, 5.2vw, 54px);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: var(--qsa-primary-navy);
+  margin: 0 0 16px 0;
+}
+
+.claude-home-hero-desc {
+  font-family: var(--qsa-font-sans);
+  font-size: clamp(16px, 1.8vw, 17.5px);
+  line-height: 1.65;
+  color: var(--qsa-text-secondary);
+  margin: 0 0 32px 0;
+  max-width: 740px;
+}
+
+.claude-home-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Claude Section Typography */
+.claude-section {
+  padding: 64px 0 56px;
+}
+
+.claude-section-title {
+  font-family: var(--qsa-font-serif);
+  font-size: clamp(26px, 3.6vw, 34px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--qsa-primary-navy);
+  margin: 0 0 8px 0;
+}
+
+.claude-section-subtitle {
+  font-family: var(--qsa-font-sans);
+  font-size: 15px;
+  color: var(--qsa-text-secondary);
+  margin: 0 0 28px 0;
+  line-height: 1.5;
+}
+
+.claude-section-header-split {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.claude-section-arrow-link {
+  font-family: var(--qsa-font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--qsa-primary-navy);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--qsa-dur-fast) var(--qsa-ease-out), transform var(--qsa-dur-fast) var(--qsa-ease-out);
+}
+
+.claude-section-arrow-link:hover {
+  color: var(--qsa-terracotta);
+  transform: translateX(3px);
+}
+
+/* "Go deeper with Research" Grid (3 top + 2 bottom) */
+.claude-deep-grid-top {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.claude-deep-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .claude-deep-grid-top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .claude-deep-grid-top,
+  .claude-deep-grid-bottom {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.claude-deep-card {
+  background: #ffffff;
+  border: 1px solid var(--qsa-border);
+  border-radius: var(--qsa-radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--qsa-dur-base) var(--qsa-ease-spring), box-shadow var(--qsa-dur-base) var(--qsa-ease-spring), border-color var(--qsa-dur-fast);
+}
+
+.claude-deep-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--qsa-border-strong);
+  box-shadow: 0 12px 30px rgba(16, 43, 78, 0.08);
+}
+
+.claude-deep-banner {
+  height: 156px;
+  background: #EFE8DE;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .claude-deep-card {
+  background: var(--qsa-bg-card);
+}
+
+[data-theme="dark"] .claude-deep-banner {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.claude-deep-body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.claude-deep-title {
+  font-family: var(--qsa-font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--qsa-primary-navy);
+  margin: 0 0 8px 0;
+  line-height: 1.25;
+}
+
+.claude-deep-desc {
+  font-family: var(--qsa-font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--qsa-text-secondary);
+  margin: 0;
+}
+
+/* "Develop Methodological Rigor" Grid (3 cards with decagonal badges) */
+.claude-rigor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 960px) {
+  .claude-rigor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .claude-rigor-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.claude-rigor-card {
+  background: #ffffff;
+  border: 1px solid var(--qsa-border);
+  border-radius: var(--qsa-radius-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--qsa-dur-base) var(--qsa-ease-spring), box-shadow var(--qsa-dur-base) var(--qsa-ease-spring), border-color var(--qsa-dur-fast);
+}
+
+.claude-rigor-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--qsa-border-strong);
+  box-shadow: 0 12px 30px rgba(16, 43, 78, 0.08);
+}
+
+.claude-rigor-banner {
+  height: 156px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.claude-rigor-badge {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 1.5px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .claude-rigor-card {
+  background: var(--qsa-bg-card);
+}
+
+.claude-rigor-body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.claude-rigor-title {
+  font-family: var(--qsa-font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--qsa-primary-navy);
+  margin: 0 0 8px 0;
+  line-height: 1.25;
+}
+
+.claude-rigor-desc {
+  font-family: var(--qsa-font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--qsa-text-secondary);
+  margin: 0 0 16px 0;
+  flex: 1;
+}
+
+.claude-rigor-meta {
+  font-family: var(--qsa-font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--qsa-text-muted);
+}
+
+/* Claude Academy Minimal Footer */
+.claude-footer {
+  background: var(--qsa-bg-warm);
+  border-top: 1px solid var(--qsa-border);
+  padding: 32px 0 40px;
+  font-size: 13.5px;
+  color: var(--qsa-text-secondary);
+}
+
+.claude-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.claude-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.claude-footer-links a {
+  color: var(--qsa-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--qsa-dur-fast);
+}
+
+.claude-footer-links a:hover {
+  color: var(--qsa-primary-navy);
+}
+
+.claude-footer-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--qsa-text-primary);
 }
