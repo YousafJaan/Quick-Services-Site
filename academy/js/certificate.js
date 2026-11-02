@@ -13,6 +13,38 @@
 import { store } from './store.js';
 import { getUserProfile } from './storage/idb.js';
 
+
+export function computeFnv1a32(str) {
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash = (hash * 0x01000193) >>> 0;
+  }
+  return hash.toString(16).toUpperCase().padStart(8, '0');
+}
+
+export function generateVerifiableCertId(courseCode, timestamp = Date.now()) {
+  const d = new Date(timestamp);
+  const ym = d.getFullYear().toString() + String(d.getMonth() + 1).padStart(2, '0');
+  const tsHex = (timestamp % 0xFFFFFF).toString(16).toUpperCase().padStart(6, '0');
+  const checksum = computeFnv1a32(`${courseCode}:${ym}:${tsHex}:QSA-VERIFIED-2026`).substring(0, 4);
+  return `QSA-${courseCode.toUpperCase()}-${ym}-${tsHex}-${checksum}`;
+}
+
+export function verifyCertId(certId) {
+  if (!certId || typeof certId !== 'string') return { valid: false, reason: 'Empty ID' };
+  const parts = certId.trim().split('-');
+  if (parts.length !== 5 || parts[0] !== 'QSA') {
+    return { valid: false, reason: 'Invalid format prefix' };
+  }
+  const [_, courseCode, ym, tsHex, checksum] = parts;
+  const expectedChecksum = computeFnv1a32(`${courseCode}:${ym}:${tsHex}:QSA-VERIFIED-2026`).substring(0, 4);
+  if (checksum !== expectedChecksum) {
+    return { valid: false, reason: 'Checksum mismatch', courseCode, ym, tsHex };
+  }
+  return { valid: true, courseCode, ym, tsHex };
+}
+
 export async function renderCertificateView(container, { certId, courseId }) {
   const courses = [
     { id: 'thesis101', title: 'Thesis Writing 101: Problem Formulation & Defense', hours: 3.5, code: 'THESIS' },
@@ -31,7 +63,7 @@ export async function renderCertificateView(container, { certId, courseId }) {
   const dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const isGenericCourseCert = certId && courses.some(c => c.id === certId);
   const idStr = (!certId || isGenericCourseCert)
-    ? `QSA-${course.code}-2026-${Math.random().toString(36).substring(2, 7).toUpperCase()}`
+    ? generateVerifiableCertId(course.code)
     : certId;
 
   const isLocked = store.isStudentNameLocked();

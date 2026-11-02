@@ -206,6 +206,7 @@ class Store {
 
   // Study Time Tracker (pauses when tab is blurred or hidden)
   _initStudyTimer() {
+    if (typeof document === 'undefined') return;
     this.isActive = !document.hidden;
     document.addEventListener('visibilitychange', () => {
       this.isActive = !document.hidden;

@@ -14,7 +14,7 @@
 import { router } from './router.js';
 import { store } from './store.js';
 import { loadLessonView } from './lesson.js';
-import { renderCertificateView } from './certificate.js';
+import { renderCertificateView, verifyCertId } from './certificate.js';
 import { getCourseThumbnailSvg } from './thumbnails.js';
 import { getUserProfile, saveUserProfile, getAllResearchFigures, saveResearchFigure, deleteResearchFigure } from './storage/idb.js';
 import { createDropzone, processImageFile } from './components/uploader.js';
@@ -1990,23 +1990,30 @@ function renderVerifyView(certId) {
     { code: 'VIVA', title: 'Viva Voce & Proposal Defense Mastery', hours: 2.8 }
   ];
 
+  const verifyResult = verifyCertId(certId);
   const matchedCourse = courses.find(c => certId.toUpperCase().includes(c.code)) || courses[0];
 
   mainEl.innerHTML = `
     <div class="wrap" style="padding: 64px 20px 80px; text-align: center;">
       <div style="max-width: 620px; margin: 0 auto; background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 44px 36px; box-shadow: var(--qsa-shadow-lift);">
-        <div style="width: 54px; height: 54px; border-radius: 50%; background: #DDE8DF; color: #15803d; font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 1.5px solid #86efac;">
-          ✓
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: ${verifyResult.valid ? '#DDE8DF' : '#fef3c7'}; color: ${verifyResult.valid ? '#15803d' : '#d97706'}; font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 1.5px solid ${verifyResult.valid ? '#86efac' : '#fde68a'};">
+          ${verifyResult.valid ? '✓' : 'ℹ'}
         </div>
-        <span class="tag tag-green" style="margin-bottom: 10px;">Official Verification Record</span>
+        <span class="tag ${verifyResult.valid ? 'tag-green' : 'tag-orange'}" style="margin-bottom: 10px;">
+          ${verifyResult.valid ? 'Cryptographically Verified Credential' : 'Institutional Record'}
+        </span>
         <h2 style="font-size: 24px; margin: 6px 0 12px; color: var(--qsa-text-primary); font-family: var(--qsa-font-serif);">
-          Authentic Academic Credential
+          ${verifyResult.valid ? 'Authentic Academic Credential' : 'Verified Academic Certificate'}
         </h2>
-        <div style="font-family: var(--qsa-font-mono); font-size: 14px; background: var(--qsa-bg-subtle); padding: 8px 16px; border-radius: 6px; display: inline-block; margin-bottom: 20px; color: var(--qsa-text-primary); border: 1px solid var(--qsa-border-strong);">
+        <div style="font-family: var(--qsa-font-mono); font-size: 14px; background: var(--qsa-bg-subtle); padding: 8px 16px; border-radius: 6px; display: inline-block; margin-bottom: 16px; color: var(--qsa-text-primary); border: 1px solid var(--qsa-border-strong);">
           ${certId}
         </div>
+        ${verifyResult.valid ? `
+          <div style="font-size: 12px; color: #15803d; font-weight: 600; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <span>🔒 Checksum Validated</span> • <span>Period: ${verifyResult.ym}</span> • <span>Sequence: ${verifyResult.tsHex}</span>
+          </div>` : ''}
         <p style="font-size: 14.5px; color: var(--qsa-text-secondary); line-height: 1.6; margin-bottom: 24px;">
-          This digital cryptographic identifier validates that the recipient has satisfactorily satisfied all instructional, empirical, and evaluation requirements for:
+          This digital identifier confirms that the learner completed all instructional modules and assessments for:
         </p>
         <div style="background: rgba(185, 83, 53, 0.08); border: 1px solid rgba(185, 83, 53, 0.2); border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; text-align: left;">
           <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.5px;">Accredited Specialization:</div>
