@@ -3,7 +3,7 @@
  * Provides offline-first caching for courses, lessons, decagonal vector badges, and scripts.
  */
 
-const CACHE_NAME = 'qsa-pwa-v1';
+const CACHE_NAME = 'qsa-pwa-v2';
 
 const STATIC_ASSETS = [
   './',
@@ -21,6 +21,9 @@ const STATIC_ASSETS = [
   './js/certificate.js',
   './js/thumbnails.js',
   './js/curriculum-synthesizer.js',
+  './js/visuals/index.js',
+  './js/quiz/index.js',
+  './js/widgets/index.js',
   './js/storage/idb.js',
   './js/components/uploader.js',
   './data/courses.json',
