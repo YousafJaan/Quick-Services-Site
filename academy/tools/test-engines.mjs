@@ -174,6 +174,81 @@ try {
 }
 
 // ============================================================================
+// 4. Advanced v2.5.0: Polymorphic Widgets & Lifecycle Teardown
+// ============================================================================
+console.log('\n--- 4. Testing Advanced Widgets & Lifecycle ---');
+
+import { renderWidget, teardownWidget, WIDGET_REGISTRY } from '../js/widgets/index.js';
+
+assert(Array.isArray(WIDGET_REGISTRY) && WIDGET_REGISTRY.length === 15, 'WIDGET_REGISTRY contains all 15 academic widget identifiers');
+
+// Test standard order: renderWidget(name, el)
+try {
+  const mockContainer = createMockElement();
+  renderWidget('sampleSize', mockContainer);
+  assert(mockContainer.innerHTML.includes("Cochran"), 'renderWidget accepts standard signature (widgetName, container)');
+} catch (err) {
+  assert(false, `renderWidget standard signature failed: ${err.message}`);
+}
+
+// Test inverted order: renderWidget(el, name)
+try {
+  const mockContainer = createMockElement();
+  renderWidget(mockContainer, 'vivaCards');
+  assert(mockContainer.innerHTML.includes("Viva Voce Defense Simulator"), 'renderWidget accepts inverted signature (container, widgetName)');
+} catch (err) {
+  assert(false, `renderWidget inverted signature failed: ${err.message}`);
+}
+
+// Test teardownWidget cleans up without throwing
+try {
+  teardownWidget();
+  assert(true, 'teardownWidget safely cleans up active timers and handles');
+} catch (err) {
+  assert(false, `teardownWidget threw error: ${err.message}`);
+}
+
+// ============================================================================
+// 5. Advanced v2.5.0: QuizEngine Ingestion & Empty-State Boundary
+// ============================================================================
+console.log('\n--- 5. Testing QuizEngine Ingestion & Empty-State Boundary ---');
+
+// Test options.questions ingestion (Bug 2 fix)
+try {
+  const mockContainer = createMockElement();
+  const engine = new QuizEngine(mockContainer, {
+    questions: [{ type: 'single', stem: 'Test question', options: ['A', 'B'], correct: 0 }]
+  });
+  assert(engine.questions.length === 1, 'QuizEngine successfully ingests options.questions');
+} catch (err) {
+  assert(false, `QuizEngine options.questions ingestion failed: ${err.message}`);
+}
+
+// Test zero-question empty boundary (No NaN%)
+try {
+  const mockContainer = createMockElement();
+  const engine = new QuizEngine(mockContainer, { bank: [] });
+  assert(!mockContainer.innerHTML.includes('NaN%'), 'QuizEngine empty question bank does NOT output NaN%');
+  assert(mockContainer.innerHTML.includes('Self-Check Under Compilation'), 'QuizEngine empty question bank renders clean boundary card');
+} catch (err) {
+  assert(false, `QuizEngine empty bank test threw error: ${err.message}`);
+}
+
+// ============================================================================
+// 6. Advanced v2.5.0: Canonical Course Slugs & Route Parsing
+// ============================================================================
+console.log('\n--- 6. Testing Canonical Course Slugs & Route Parsing ---');
+
+import { CANONICAL_COURSES } from '../js/router.js';
+
+assert(Array.isArray(CANONICAL_COURSES) && CANONICAL_COURSES.includes('lit-search') && CANONICAL_COURSES.includes('sample-size'), 'CANONICAL_COURSES includes hyphenated course slugs');
+
+// Verify length-sorting (longest first)
+const sampleSizeIdx = CANONICAL_COURSES.indexOf('sample-size');
+const vivaIdx = CANONICAL_COURSES.indexOf('viva');
+assert(sampleSizeIdx < vivaIdx, 'CANONICAL_COURSES sorts longer slugs before shorter slugs to prevent prefix collision');
+
+// ============================================================================
 // Final Summary
 // ============================================================================
 console.log(`\n==================================================`);

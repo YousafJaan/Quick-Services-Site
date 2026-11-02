@@ -53,6 +53,11 @@
 
       <!-- Right Header Actions (Avatar, Theme Toggle & Advisor Button) -->
       <div class="header-right-actions">
+        <!-- Omnipresent Global Search Trigger (Ctrl+K) -->
+        <button type="button" class="header-search-btn" id="cmd-palette-trigger" aria-label="Search Academy (Ctrl+K)" title="Search all courses, lessons, and topics (Ctrl+K or /)">
+          <span>🔍</span> <span class="search-kbd-pill">Ctrl+K</span>
+        </button>
+
         <!-- User Profile Avatar Pill -->
         <div id="header-avatar-slot"></div>
 
@@ -119,6 +124,10 @@
         <a href="https://quick-services-site.pages.dev/guide.html" target="_blank">Field Guide</a>
         <a href="https://wa.me/923296646824" target="_blank">Advisor WhatsApp</a>
         <span class="claude-footer-lang">🌐 English</span>
+        <!-- PWA Offline Sentinel Status Badge -->
+        <span id="pwa-offline-sentinel" class="offline-sentinel-chip" title="Live connection & local storage status">
+          <span class="sentinel-dot">🟢</span> <span class="sentinel-text">Online</span>
+        </span>
       </div>
     </div>
   </footer>
@@ -127,6 +136,6 @@
   <div id="app-modal-portal"></div>
 
   <!-- Application Entry Point -->
-  <script type="module" src="./js/app.js?v=20261102b"></script>
+  <script type="module" src="./js/app.js?v=20261102c"></script>
 </body>
 </html>

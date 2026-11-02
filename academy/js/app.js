@@ -118,6 +118,8 @@ initLanguageSwitchers();
 initCookieConsentBanner();
 updateActiveNavLinks();
 updateHeaderAvatar();
+initCommandPalette();
+initOfflineSentinel();
 
 // Register Progressive Web App Service Worker
 if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
@@ -2029,5 +2031,280 @@ function renderVerifyView(certId) {
 }
 
 function showShortcutsHelp() {
-  alert(`Quick Services Academy — Keyboard Shortcuts:\n\n• V: Visualise selected sentence\n• ?: Open this help dialog\n• Esc: Close active modal\n• Tab: Focus navigation controls`);
+  alert(`Quick Services Academy — Keyboard Shortcuts:\n\n• Ctrl+K or /: Open Search & Command Palette\n• V: Visualise selected sentence\n• ?: Open this help dialog\n• Esc: Close active modal\n• Tab: Focus navigation controls`);
+}
+
+/* ==========================================================================
+   Advanced v2.5.0: Omnipresent Command Palette & Search (Ctrl+K / Cmd+K / /)
+   ========================================================================== */
+let searchIndex = null;
+let commandPaletteOpen = false;
+let previousActiveElement = null;
+
+async function loadSearchIndex() {
+  if (searchIndex) return searchIndex;
+  const baseData = getBaseDataPath();
+  try {
+    const res = await fetch(`${baseData}/courses.json`);
+    const courses = await res.json();
+    const items = [];
+    
+    // Core Navigation items
+    items.push({
+      title: 'Sentence Clarity Lab',
+      sub: 'Academic Paraphrasing & Multi-Register Comparison',
+      tag: 'Lab',
+      href: '#clarity',
+      keywords: 'sentence clarity paraphrasing active passive voice academic style grammar'
+    });
+    items.push({
+      title: 'My Learning Dashboard',
+      sub: 'Track streaks, study time, and personal notes',
+      tag: 'Hub',
+      href: '#learning',
+      keywords: 'progress streak notes study time bookmarks certificates hub'
+    });
+    items.push({
+      title: 'Verifiable Credentials & Certificates',
+      sub: 'Authentic cryptographic student credentials with FNV-1a checksums',
+      tag: 'Certs',
+      href: '#certificates',
+      keywords: 'certificates diploma verification credential seal'
+    });
+
+    for (const c of courses) {
+      items.push({
+        title: c.title,
+        sub: `${c.hours} Hours • ${c.tagline || 'Postgraduate Track'}`,
+        tag: 'Course',
+        href: `#course-${c.id}`,
+        keywords: `${c.title} ${c.id} ${c.description || ''} methodology`
+      });
+
+      try {
+        const cRes = await fetch(`${baseData}/courses/${c.id}.json`);
+        if (cRes.ok) {
+          const cData = await cRes.json();
+          for (const m of (cData.modules || [])) {
+            for (const l of (m.lessons || [])) {
+              items.push({
+                title: l.title,
+                sub: `${c.title} • Module: ${m.title}`,
+                tag: (l.type || 'read').toUpperCase(),
+                href: `#lesson-${c.id}-${l.id}`,
+                keywords: `${l.title} ${c.title} ${m.title} ${l.type || ''}`
+              });
+            }
+          }
+        }
+      } catch (err) {}
+    }
+    searchIndex = items;
+    return items;
+  } catch (err) {
+    return [];
+  }
+}
+
+function openCommandPalette() {
+  if (commandPaletteOpen) return;
+  commandPaletteOpen = true;
+  previousActiveElement = document.activeElement;
+
+  const portal = document.getElementById('app-modal-portal');
+  if (!portal) return;
+
+  portal.innerHTML = `
+    <div class="cmd-palette-backdrop" id="cmd-palette-backdrop" role="presentation">
+      <div class="cmd-palette-dialog" role="dialog" aria-modal="true" aria-label="Search Quick Services Academy">
+        <div class="cmd-palette-header">
+          <span class="cmd-palette-icon">🔍</span>
+          <input type="search" id="cmd-palette-search-input" class="cmd-palette-input" placeholder="Search courses, lessons, topics (e.g. G*Power, APA, Turnitin)..." autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmd-palette-results">
+          <button type="button" class="cmd-palette-close-btn" id="cmd-palette-close" aria-label="Close search (Esc)">✕</button>
+        </div>
+        <div class="cmd-palette-results" id="cmd-palette-results" role="listbox">
+          <div class="cmd-palette-empty">Loading academic curriculum...</div>
+        </div>
+        <div class="cmd-palette-footer">
+          <span>Navigate with <kbd style="font-family:inherit;font-weight:700;">↑</kbd> <kbd style="font-family:inherit;font-weight:700;">↓</kbd> • Select with <kbd style="font-family:inherit;font-weight:700;">↵</kbd></span>
+          <span>Close with <kbd style="font-family:inherit;font-weight:700;">Esc</kbd></span>
+        </div>
+      </div>
+    </div>`;
+
+  const backdrop = portal.querySelector('#cmd-palette-backdrop');
+  const input = portal.querySelector('#cmd-palette-search-input');
+  const closeBtn = portal.querySelector('#cmd-palette-close');
+  const resultsContainer = portal.querySelector('#cmd-palette-results');
+  let selectedIndex = 0;
+  let currentResults = [];
+
+  const closePalette = () => {
+    portal.innerHTML = '';
+    commandPaletteOpen = false;
+    if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+      previousActiveElement.focus();
+    }
+  };
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closePalette();
+  });
+  closeBtn.addEventListener('click', closePalette);
+
+  const renderResults = (items) => {
+    currentResults = items;
+    selectedIndex = 0;
+    if (!items.length) {
+      resultsContainer.innerHTML = `<div class="cmd-palette-empty">No matching academic topics found. Try "G*Power", "Turnitin", "APA", or "Thesis".</div>`;
+      return;
+    }
+    resultsContainer.innerHTML = items.map((item, idx) => `
+      <a href="${item.href}" class="cmd-palette-item ${idx === 0 ? 'active' : ''}" data-idx="${idx}" role="option" aria-selected="${idx === 0 ? 'true' : 'false'}">
+        <div class="cmd-palette-item-left">
+          <div class="cmd-palette-item-title">${item.title}</div>
+          <div class="cmd-palette-item-sub">${item.sub}</div>
+        </div>
+        <span class="cmd-palette-item-tag">${item.tag}</span>
+      </a>
+    `).join('');
+
+    resultsContainer.querySelectorAll('.cmd-palette-item').forEach(link => {
+      link.addEventListener('click', () => {
+        closePalette();
+      });
+      link.addEventListener('mouseenter', () => {
+        const idx = parseInt(link.dataset.idx, 10);
+        updateSelection(idx);
+      });
+    });
+  };
+
+  const updateSelection = (idx) => {
+    selectedIndex = idx;
+    const all = resultsContainer.querySelectorAll('.cmd-palette-item');
+    all.forEach((el, i) => {
+      el.classList.toggle('active', i === selectedIndex);
+      el.setAttribute('aria-selected', i === selectedIndex ? 'true' : 'false');
+      if (i === selectedIndex) {
+        el.scrollIntoView({ block: 'nearest' });
+      }
+    });
+  };
+
+  // Keyboard navigation & trap
+  portal.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closePalette();
+      return;
+    }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (currentResults.length > 0) {
+        updateSelection((selectedIndex + 1) % currentResults.length);
+      }
+      return;
+    }
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (currentResults.length > 0) {
+        updateSelection((selectedIndex - 1 + currentResults.length) % currentResults.length);
+      }
+      return;
+    }
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (currentResults[selectedIndex]) {
+        window.location.hash = currentResults[selectedIndex].href;
+        closePalette();
+      }
+      return;
+    }
+    // Trap Tab focus inside dialog
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      if (document.activeElement === input) {
+        closeBtn.focus();
+      } else {
+        input.focus();
+      }
+    }
+  });
+
+  loadSearchIndex().then(items => {
+    renderResults(items.slice(0, 8)); // Top results initially
+    input.focus();
+  });
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) {
+      if (searchIndex) renderResults(searchIndex.slice(0, 8));
+      return;
+    }
+    if (searchIndex) {
+      const filtered = searchIndex.filter(it => 
+        it.title.toLowerCase().includes(q) ||
+        it.sub.toLowerCase().includes(q) ||
+        it.keywords.toLowerCase().includes(q)
+      );
+      renderResults(filtered.slice(0, 15));
+    }
+  });
+}
+
+function initCommandPalette() {
+  window.addEventListener('keydown', (e) => {
+    const isEditing = e.target.matches('input, textarea, select, [contenteditable="true"]');
+    if (isEditing && e.key !== 'Escape') return; // Do not intercept typing
+    
+    const isCmdK = (e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K');
+    const isSlash = e.key === '/' && !isEditing;
+
+    if (isCmdK || isSlash) {
+      e.preventDefault();
+      if (commandPaletteOpen) {
+        const portal = document.getElementById('app-modal-portal');
+        if (portal) portal.innerHTML = '';
+        commandPaletteOpen = false;
+      } else {
+        openCommandPalette();
+      }
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#cmd-palette-trigger')) {
+      e.preventDefault();
+      openCommandPalette();
+    }
+  });
+}
+
+/* ==========================================================================
+   Advanced v2.5.0: PWA Live Offline Sentinel
+   ========================================================================== */
+function initOfflineSentinel() {
+  const sentinel = document.getElementById('pwa-offline-sentinel');
+  if (!sentinel) return;
+
+  const update = () => {
+    const isOnline = typeof navigator !== 'undefined' ? navigator.onLine : true;
+    sentinel.classList.toggle('offline', !isOnline);
+    sentinel.innerHTML = isOnline
+      ? `<span class="sentinel-dot">🟢</span> <span class="sentinel-text">Online</span>`
+      : `<span class="sentinel-dot">🟠</span> <span class="sentinel-text">Offline</span>`;
+  };
+
+  window.addEventListener('online', () => {
+    update();
+    if (window.showGlobalToast) window.showGlobalToast('Internet connection restored. Synchronized.');
+  });
+  window.addEventListener('offline', () => {
+    update();
+    if (window.showGlobalToast) window.showGlobalToast('Working offline. All progress saved to device.');
+  });
+
+  update();
 }

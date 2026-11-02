@@ -9,8 +9,8 @@
 import { store } from './store.js';
 import { renderVisual, renderFallback } from './visuals/index.js';
 import { QuizEngine } from './quiz/index.js';
-import { renderWidget } from './widgets/index.js';
-import { router } from './router.js';
+import { renderWidget, teardownWidget } from './widgets/index.js';
+import { router, CANONICAL_COURSES } from './router.js';
 import { synthesizeLesson } from './curriculum-synthesizer.js';
 import { saveLessonNote, getLessonNotes, deleteLessonNote } from './storage/idb.js';
 import { processImageFile } from './components/uploader.js';
@@ -381,6 +381,7 @@ function renderLessonPlayer(container, course, lesson) {
 
   // Live listener for English style changes
   const handleLangChange = () => {
+    teardownWidget();
     const newLang = store.getEnglishLevel();
     const articleBody = document.getElementById('lesson-article-body');
     if (articleBody) {
@@ -922,7 +923,12 @@ function getSentenceText(s, level) {
 
 function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
   const c = lesson.content || lesson.c || {};
-  const courseId = lesson.course || (typeof window !== 'undefined' && window.location.hash ? window.location.hash.split('-')[1] : 'thesis101') || 'thesis101';
+  let courseId = lesson.course;
+  if (!courseId && typeof window !== 'undefined' && window.location.hash) {
+    const h = window.location.hash;
+    courseId = CANONICAL_COURSES.find(c => h.includes(`-${c}-`) || h.endsWith(`-${c}`) || h.startsWith(`#course-${c}`) || h.startsWith(`#lesson-${c}-`));
+  }
+  if (!courseId) courseId = 'thesis101';
 
   if (lesson.type === 'video') {
     let videoHtml = `
@@ -1472,7 +1478,7 @@ function setupInteractiveWidgets(lesson) {
   const mount = document.getElementById('interactive-widget-mount');
   if (mount && lesson.type === 'visual') {
     const widgetType = lesson.content?.widget || 'funnel';
-    renderWidget(mount, widgetType, lesson);
+    renderWidget(widgetType, mount, lesson);
   }
 
   const quizMount = document.getElementById('interactive-quiz-mount');
@@ -1480,7 +1486,7 @@ function setupInteractiveWidgets(lesson) {
     new QuizEngine(quizMount, {
       courseId: lesson.course,
       lessonId: lesson.id,
-      questions: lesson.content?.questions || []
+      bank: lesson.content?.questions || []
     });
   }
 }

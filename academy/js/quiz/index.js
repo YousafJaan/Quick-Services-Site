@@ -6,7 +6,7 @@
 export class QuizEngine {
   constructor(container, options = {}) {
     this.container = typeof container === 'string' ? document.getElementById(container) : container;
-    this.bank = options.bank || [];
+    this.bank = options.bank || options.questions || (Array.isArray(options) ? options : []);
     this.showCount = options.show || this.bank.length;
     this.passThreshold = options.pass || 70;
     this.onComplete = options.onComplete || (() => {});
@@ -31,6 +31,17 @@ export class QuizEngine {
 
   render() {
     if (!this.container) return;
+
+    if (!this.questions || this.questions.length === 0) {
+      this.container.innerHTML = `
+        <div class="quiz-empty-card" style="padding: 32px 24px; text-align: center; border: 1.5px dashed var(--qsa-border-card, #cbd5e1); border-radius: 14px; background: var(--qsa-bg-card, #FAF7F1);">
+          <div style="font-size: 28px; margin-bottom: 8px;">📋</div>
+          <h4 style="margin: 0 0 6px; color: var(--qsa-primary-navy, #102B4E); font-size: 17px; font-family: var(--qsa-font-serif, Georgia, serif);">Self-Check Under Compilation</h4>
+          <p style="color: var(--qsa-text-muted, #64748b); font-size: 13.5px; margin: 0; max-width: 440px; margin: 0 auto;">Practice examination questions for this module are currently being compiled according to HEC syllabus guidelines.</p>
+        </div>`;
+      return;
+    }
+
     if (this.currentIndex >= this.questions.length) {
       this.renderResults();
       return;
