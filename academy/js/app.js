@@ -284,7 +284,7 @@ function initCookieConsentBanner() {
     transform: translateX(-50%) translateY(24px);
     width: calc(100% - 32px);
     max-width: 680px;
-    background: #ffffff;
+    background: var(--qsa-bg-elevated);
     border: 1px solid var(--qsa-border-strong);
     border-radius: var(--qsa-radius-card);
     box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
@@ -407,23 +407,23 @@ function getThesisMockupSvg() {
       </g>
       <!-- Floating Software Card -->
       <g transform="translate(60, 18)" filter="url(#topo-thesis-shadow)">
-        <rect width="280" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
-        <rect width="280" height="24" rx="8" fill="#FAF7F2"/>
+        <rect width="280" height="120" rx="8" fill="var(--qsa-bg-card, #FFFFFF)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1.5"/>
+        <rect width="280" height="24" rx="8" fill="var(--qsa-bg-subtle, #FAF7F2)"/>
         <circle cx="14" cy="12" r="3" fill="#EF4444"/>
         <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
         <circle cx="32" cy="12" r="3" fill="#10B981"/>
-        <text x="140" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#637083" text-anchor="middle">thesis-proposal-ch1.docx</text>
-        <line x1="0" y1="24" x2="280" y2="24" stroke="#E8E1D8" stroke-width="1"/>
+        <text x="140" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="var(--qsa-text-secondary, #637083)" text-anchor="middle">thesis-proposal-ch1.docx</text>
+        <line x1="0" y1="24" x2="280" y2="24" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1"/>
         <!-- Content -->
         <rect x="16" y="34" width="88" height="14" rx="3" fill="#DDE8DF"/>
         <text x="60" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#2E5A44" text-anchor="middle">1.1 PROBLEM STATEMENT</text>
-        <rect x="16" y="54" width="220" height="4" rx="2" fill="#E8E1D8"/>
-        <rect x="16" y="62" width="248" height="4" rx="2" fill="#E8E1D8"/>
-        <rect x="16" y="70" width="180" height="4" rx="2" fill="#E8E1D8"/>
+        <rect x="16" y="54" width="220" height="4" rx="2" fill="var(--qsa-border, #E8E1D8)"/>
+        <rect x="16" y="62" width="248" height="4" rx="2" fill="var(--qsa-border, #E8E1D8)"/>
+        <rect x="16" y="70" width="180" height="4" rx="2" fill="var(--qsa-border, #E8E1D8)"/>
         <g transform="translate(16, 82)">
-          <rect width="140" height="24" rx="4" fill="#FAF7F2" stroke="#B95335" stroke-width="1" stroke-dasharray="3,2"/>
+          <rect width="140" height="24" rx="4" fill="var(--qsa-bg-subtle, #FAF7F2)" stroke="#B95335" stroke-width="1" stroke-dasharray="3,2"/>
           <text x="10" y="15" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="700" fill="#B95335">H1: β = .48 (p &lt; .001)</text>
-          <text x="96" y="15" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#637083">• N = 384</text>
+          <text x="96" y="15" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="var(--qsa-text-secondary, #637083)">• N = 384</text>
         </g>
       </g>
     </svg>
@@ -446,7 +446,7 @@ function getSpssMockupSvg() {
       </g>
       <!-- Floating SPSS Window -->
       <g transform="translate(55, 18)" filter="url(#topo-spss-shadow)">
-        <rect width="290" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="290" height="120" rx="8" fill="var(--qsa-bg-card, #FFFFFF)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1.5"/>
         <rect width="290" height="24" rx="8" fill="#102B4E"/>
         <circle cx="14" cy="12" r="3" fill="#EF4444"/>
         <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
@@ -454,22 +454,22 @@ function getSpssMockupSvg() {
         <text x="145" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">IBM SPSS Statistics • Regression_ANOVA.spv</text>
         <!-- Table Grid -->
         <g transform="translate(14, 34)">
-          <rect width="262" height="18" fill="#FAF7F2" stroke="#E8E1D8" stroke-width="0.75"/>
-          <text x="8" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">Model</text>
-          <text x="70" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">R Square</text>
-          <text x="140" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">F-Stat</text>
-          <text x="210" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#102B4E">Sig. (p)</text>
+          <rect width="262" height="18" fill="var(--qsa-bg-subtle, #FAF7F2)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="0.75"/>
+          <text x="8" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="var(--qsa-text-primary, #102B4E)">Model</text>
+          <text x="70" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="var(--qsa-text-primary, #102B4E)">R Square</text>
+          <text x="140" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="var(--qsa-text-primary, #102B4E)">F-Stat</text>
+          <text x="210" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="var(--qsa-text-primary, #102B4E)">Sig. (p)</text>
 
-          <rect y="18" width="262" height="18" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="0.75"/>
-          <text x="8" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#637083">1 (Linear)</text>
+          <rect y="18" width="262" height="18" fill="var(--qsa-bg-card, #FFFFFF)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="0.75"/>
+          <text x="8" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="var(--qsa-text-secondary, #637083)">1 (Linear)</text>
           <text x="70" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#B95335">.648</text>
-          <text x="140" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#172536">42.18</text>
+          <text x="140" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="var(--qsa-text-primary, #172536)">42.18</text>
           <text x="210" y="30" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#15803D">&lt; .001</text>
 
-          <rect y="36" width="262" height="18" fill="#FAF7F2" stroke="#E8E1D8" stroke-width="0.75"/>
-          <text x="8" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#637083">2 (Moderated)</text>
+          <rect y="36" width="262" height="18" fill="var(--qsa-bg-subtle, #FAF7F2)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="0.75"/>
+          <text x="8" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="var(--qsa-text-secondary, #637083)">2 (Moderated)</text>
           <text x="70" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#B95335">.712</text>
-          <text x="140" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="#172536">56.40</text>
+          <text x="140" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="600" fill="var(--qsa-text-primary, #172536)">56.40</text>
           <text x="210" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#15803D">&lt; .001</text>
         </g>
         <!-- Bottom Stat Pill -->
@@ -496,7 +496,7 @@ function getSmartplsMockupSvg() {
       </g>
       <!-- Floating SmartPLS Card -->
       <g transform="translate(50, 18)" filter="url(#topo-pls-shadow)">
-        <rect width="300" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="300" height="120" rx="8" fill="var(--qsa-bg-card, #FFFFFF)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1.5"/>
         <rect width="300" height="24" rx="8" fill="#1E293B"/>
         <circle cx="14" cy="12" r="3" fill="#EF4444"/>
         <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
@@ -505,29 +505,29 @@ function getSmartplsMockupSvg() {
         <!-- Structural Equation Diagram -->
         <g transform="translate(10, 24)">
           <!-- Construct 1: Exogenous -->
-          <circle cx="50" cy="50" r="22" fill="#FAF7F2" stroke="#102B4E" stroke-width="1.5"/>
-          <text x="50" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#102B4E" text-anchor="middle">LEADERSHIP</text>
-          <text x="50" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="#637083" text-anchor="middle">AVE=.62</text>
+          <circle cx="50" cy="50" r="22" fill="var(--qsa-bg-subtle, #FAF7F2)" stroke="var(--qsa-navy, #102B4E)" stroke-width="1.5"/>
+          <text x="50" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="var(--qsa-text-primary, #102B4E)" text-anchor="middle">LEADERSHIP</text>
+          <text x="50" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="var(--qsa-text-secondary, #637083)" text-anchor="middle">AVE=.62</text>
           <!-- Construct 2: Mediator -->
-          <circle cx="140" cy="50" r="22" fill="#FAF7F2" stroke="#B95335" stroke-width="1.5"/>
+          <circle cx="140" cy="50" r="22" fill="var(--qsa-bg-subtle, #FAF7F2)" stroke="#B95335" stroke-width="1.5"/>
           <text x="140" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#B95335" text-anchor="middle">CLIMATE</text>
-          <text x="140" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="#637083" text-anchor="middle">R²=.48</text>
+          <text x="140" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="var(--qsa-text-secondary, #637083)" text-anchor="middle">R²=.48</text>
           <!-- Construct 3: Endogenous -->
-          <circle cx="230" cy="50" r="22" fill="#FAF7F2" stroke="#15803D" stroke-width="1.5"/>
+          <circle cx="230" cy="50" r="22" fill="var(--qsa-bg-subtle, #FAF7F2)" stroke="#15803D" stroke-width="1.5"/>
           <text x="230" y="48" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#15803D" text-anchor="middle">PERFORMANCE</text>
-          <text x="230" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="#637083" text-anchor="middle">R²=.64</text>
+          <text x="230" y="57" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="600" fill="var(--qsa-text-secondary, #637083)" text-anchor="middle">R²=.64</text>
           <!-- Path Arrows -->
-          <line x1="72" y1="50" x2="114" y2="50" stroke="#102B4E" stroke-width="1.5"/>
-          <polygon points="114,47 118,50 114,53" fill="#102B4E"/>
-          <text x="95" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#102B4E" text-anchor="middle">.54***</text>
+          <line x1="72" y1="50" x2="114" y2="50" stroke="var(--qsa-navy, #102B4E)" stroke-width="1.5"/>
+          <polygon points="114,47 118,50 114,53" fill="var(--qsa-navy, #102B4E)"/>
+          <text x="95" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="var(--qsa-navy, #102B4E)" text-anchor="middle">.54***</text>
 
           <line x1="162" y1="50" x2="204" y2="50" stroke="#B95335" stroke-width="1.5"/>
           <polygon points="204,47 208,50 204,53" fill="#B95335"/>
           <text x="185" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="800" fill="#B95335" text-anchor="middle">.46***</text>
 
           <!-- Direct path arch -->
-          <path d="M 50,28 Q 140,4 230,28" fill="none" stroke="#637083" stroke-width="1" stroke-dasharray="2,2"/>
-          <text x="140" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="700" fill="#637083" text-anchor="middle">Indirect: .25 (p &lt; .001)</text>
+          <path d="M 50,28 Q 140,4 230,28" fill="none" stroke="var(--qsa-text-secondary, #637083)" stroke-width="1" stroke-dasharray="2,2"/>
+          <text x="140" y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="700" fill="var(--qsa-text-secondary, #637083)" text-anchor="middle">Indirect: .25 (p &lt; .001)</text>
         </g>
       </g>
     </svg>
@@ -550,13 +550,13 @@ function getTurnitinMockupSvg() {
       </g>
       <!-- Floating Turnitin Report Card -->
       <g transform="translate(60, 18)" filter="url(#topo-turnitin-shadow)">
-        <rect width="420" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
-        <rect width="420" height="24" rx="8" fill="#FAF7F2"/>
+        <rect width="420" height="120" rx="8" fill="var(--qsa-bg-card, #FFFFFF)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1.5"/>
+        <rect width="420" height="24" rx="8" fill="var(--qsa-bg-subtle, #FAF7F2)"/>
         <circle cx="14" cy="12" r="3" fill="#EF4444"/>
         <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
         <circle cx="32" cy="12" r="3" fill="#10B981"/>
-        <text x="210" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#172536" text-anchor="middle">Turnitin Feedback Studio • Dissertation_Final_Draft.pdf</text>
-        <line x1="0" y1="24" x2="420" y2="24" stroke="#E8E1D8" stroke-width="1"/>
+        <text x="210" y="15.5" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="var(--qsa-text-primary, #172536)" text-anchor="middle">Turnitin Feedback Studio • Dissertation_Final_Draft.pdf</text>
+        <line x1="0" y1="24" x2="420" y2="24" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1"/>
         <!-- Report Content -->
         <g transform="translate(20, 36)">
           <!-- Similarity Badge -->
@@ -564,14 +564,14 @@ function getTurnitinMockupSvg() {
           <text x="14" y="17" font-family="'Newsreader', serif" font-size="14" font-weight="700" fill="#15803D">11%</text>
           <text x="44" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="700" fill="#15803D">SIMILARITY</text>
           <!-- HEC Compliance Tag -->
-          <rect x="100" y="0" width="160" height="26" rx="4" fill="#FAF7F2" stroke="#E8E1D8" stroke-width="1"/>
-          <text x="110" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="700" fill="#102B4E">✓ HEC Standard: &lt; 19% Passed</text>
+          <rect x="100" y="0" width="160" height="26" rx="4" fill="var(--qsa-bg-subtle, #FAF7F2)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1"/>
+          <text x="110" y="16" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="700" fill="var(--qsa-text-primary, #102B4E)">✓ HEC Standard: &lt; 19% Passed</text>
           <!-- Simulated Text Lines with Highlighting -->
-          <rect y="38" width="380" height="4" rx="2" fill="#E8E1D8"/>
+          <rect y="38" width="380" height="4" rx="2" fill="var(--qsa-border, #E8E1D8)"/>
           <rect y="48" width="160" height="14" rx="2" fill="rgba(185, 83, 53, 0.15)"/>
           <text x="6" y="58" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="600" fill="#B95335">[1] Primary empirical sample of 384 participants</text>
-          <rect x="168" y="48" width="212" height="4" rx="2" fill="#E8E1D8"/>
-          <rect y="68" width="350" height="4" rx="2" fill="#E8E1D8"/>
+          <rect x="168" y="48" width="212" height="4" rx="2" fill="var(--qsa-border, #E8E1D8)"/>
+          <rect y="68" width="350" height="4" rx="2" fill="var(--qsa-border, #E8E1D8)"/>
         </g>
       </g>
     </svg>
@@ -594,7 +594,7 @@ function getApaMockupSvg() {
       </g>
       <!-- Floating APA Reference Card -->
       <g transform="translate(60, 18)" filter="url(#topo-apa-shadow)">
-        <rect width="420" height="120" rx="8" fill="#FFFFFF" stroke="#E8E1D8" stroke-width="1.5"/>
+        <rect width="420" height="120" rx="8" fill="var(--qsa-bg-card, #FFFFFF)" stroke="var(--qsa-border, #E8E1D8)" stroke-width="1.5"/>
         <rect width="420" height="24" rx="8" fill="#102B4E"/>
         <circle cx="14" cy="12" r="3" fill="#EF4444"/>
         <circle cx="23" cy="12" r="3" fill="#F59E0B"/>
@@ -605,16 +605,16 @@ function getApaMockupSvg() {
           <rect width="90" height="18" rx="3" fill="#DDE8DF"/>
           <text x="45" y="12" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="800" fill="#2E5A44" text-anchor="middle">✓ HANGING INDENT</text>
           <!-- APA text with italicized journal -->
-          <text x="0" y="32" font-family="'Newsreader', serif" font-size="10.5" fill="#172536">
+          <text x="0" y="32" font-family="'Newsreader', serif" font-size="10.5" fill="var(--qsa-text-primary, #172536)">
             Yousaf, M., &amp; Hair, J. F. (2026). Methodological rigor in structural modeling.
           </text>
           <text x="0" y="46" font-family="'Newsreader', serif" font-size="10.5" font-style="italic" fill="#B95335">
             Journal of Academic Research &amp; Inquiry, 14
           </text>
-          <text x="210" y="46" font-family="'Newsreader', serif" font-size="10.5" fill="#172536">
+          <text x="210" y="46" font-family="'Newsreader', serif" font-size="10.5" fill="var(--qsa-text-primary, #172536)">
             (2), 104–122.
           </text>
-          <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="#637083">
+          <text x="0" y="60" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" fill="var(--qsa-text-secondary, #637083)">
             https://doi.org/10.1016/j.jari.2026.01.004
           </text>
         </g>
@@ -636,13 +636,13 @@ function renderCatalog(courses) {
         <div class="claude-home-hero-inner">
           <div class="claude-breadcrumb-tag" style="margin-bottom: 16px;">
             <span class="dot"></span>
-            <span>HEC Pakistan Aligned • Free Postgraduate Research LMS</span>
+            <span>HEC Pakistan Aligned Postgraduate Academic Fellowship</span>
           </div>
           <h1 class="claude-home-hero-title">
-            Welcome to Quick Academy
+            Make your research <em>make sense.</em>
           </h1>
           <p class="claude-home-hero-desc">
-            Practical academic training for postgraduate researchers. Strengthen your research design, academic writing, statistical analysis, and reporting skills through guided lessons, real-world datasets, and interactive learning tools.
+            Rigorous research methodology, empirical statistics, and thesis writing instruction for postgraduate scholars.
           </p>
           <div class="claude-home-hero-actions">
             <a href="#courses-section" class="claude-btn-dark">
@@ -851,7 +851,7 @@ function renderCatalog(courses) {
 
     <!-- Consultation CTA -->
     <section style="padding: 40px 0 80px;">
-      <div class="wrap-narrow" style="text-align: center; background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 48px 24px;">
+      <div class="wrap-narrow" style="text-align: center; background: var(--qsa-bg-card); box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 48px 24px;">
         <span class="tag tag-clay" style="margin-bottom: 14px;">Direct Academic Support</span>
         <h2 style="font-size: clamp(24px, 4vw, 32px); color: var(--qsa-text-primary); margin-bottom: 14px;">Need Personal Coaching with M. Yousaf?</h2>
         <p style="color: var(--qsa-text-secondary); font-size: 15.5px; line-height: 1.6; max-width: 560px; margin: 0 auto 26px;">
@@ -1066,7 +1066,7 @@ function renderClarityLabPage() {
               <!-- Preset Selector -->
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--qsa-text-muted);">Preset:</span>
-                <select id="clarity-preset-select" style="padding: 5px 12px; font-size: 12.5px; font-weight: 600; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: #ffffff; color: var(--qsa-text-primary); cursor: pointer; outline: none;">
+                <select id="clarity-preset-select" style="padding: 5px 12px; font-size: 12.5px; font-weight: 600; border-radius: var(--qsa-radius-pill); border: 1.5px solid var(--qsa-border-strong); background: var(--qsa-bg-card); color: var(--qsa-text-primary); cursor: pointer; outline: none;">
                   <option value="empirical">Empirical Problem Statement (Thesis 101)</option>
                   <option value="methodology">Statistical Sample &amp; Power (G*Power)</option>
                   <option value="sem">Structural Equation Modeling (SmartPLS 4)</option>
@@ -1130,12 +1130,12 @@ function renderClarityLabPage() {
             <div style="font-size: 13px; color: var(--qsa-text-secondary); margin-bottom: 12px;">
               Paste an academic sentence to analyze passive voice, nominalization, and readability:
             </div>
-            <textarea id="custom-clarity-input" rows="3" style="width: 100%; border: 1px solid var(--qsa-border-strong); border-radius: 6px; padding: 10px; font-family: var(--qsa-font-sans); font-size: 14px; color: var(--qsa-text-primary); background: #ffffff; resize: vertical; box-sizing: border-box;" placeholder="e.g. It was shown by the authors that a significant correlation was observed between..."></textarea>
+            <textarea id="custom-clarity-input" rows="3" style="width: 100%; border: 1px solid var(--qsa-border-strong); border-radius: 6px; padding: 10px; font-family: var(--qsa-font-sans); font-size: 14px; color: var(--qsa-text-primary); background: var(--qsa-bg-card); resize: vertical; box-sizing: border-box;" placeholder="e.g. It was shown by the authors that a significant correlation was observed between..."></textarea>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 10px;">
               <span id="custom-clarity-metrics" style="font-size: 12.5px; color: var(--qsa-text-muted);">Word count: 0 words</span>
               <button type="button" class="btn btn-primary btn-sm" id="custom-clarity-analyze-btn">Analyze Sentence ➔</button>
             </div>
-            <div id="custom-clarity-result" style="margin-top: 14px; display: none; padding: 12px; background: #ffffff; border-radius: 6px; border: 1px solid var(--qsa-border); font-size: 13.5px;"></div>
+            <div id="custom-clarity-result" style="margin-top: 14px; display: none; padding: 12px; background: var(--qsa-bg-card); border-radius: 6px; border: 1px solid var(--qsa-border); font-size: 13.5px;"></div>
           </div>
 
           <!-- Mandatory Integrity & Verification Disclaimer -->
@@ -1436,58 +1436,57 @@ function renderCourseOverview(course) {
   const baseAsset = getBaseAssetPath();
 
   mainEl.innerHTML = `
-    <!-- Course Overview Hero Banner: Claude Academy Blush Banner -->
+    <!-- Course Overview Hero Banner: Claude Academy Editorial Header -->
     <div class="claude-hero-banner">
       <div class="wrap">
-        <div class="claude-hero-grid">
+        <div class="claude-hero-single" style="max-width: 920px;">
           
-          <!-- Left: Breadcrumb, Title, Tagline, Pills, Action -->
-          <div class="claude-hero-copy">
-            <a href="#/" class="claude-breadcrumb-tag" style="text-decoration: none; margin-bottom: 16px;">
-              <span style="font-size: 15px;">←</span> <span>Academy / Courses</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+            <a href="#/" class="claude-breadcrumb-tag" style="text-decoration: none;">
+              <span style="font-size: 15px;">←</span> <span>Academy Catalog</span>
             </a>
-            
-            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 10px;">
+            <div style="display: flex; gap: 8px; align-items: center;">
               <span class="tag tag-clay">${course.category}</span>
               <span class="tag tag-peach">${course.level}</span>
-            </div>
-
-            <h1 class="claude-hero-title">
-              ${course.title}
-            </h1>
-
-            <p class="claude-hero-desc">
-              ${course.tagline || course.description}
-            </p>
-
-            <div class="claude-meta-strip">
-              <span class="claude-meta-pill">📖 ${totalLessons} Lessons</span>
-              <span class="claude-meta-pill">⏱️ ${hours} Hours total</span>
-              <span class="claude-meta-pill">📝 Practical Quizzes</span>
-              <span class="claude-meta-pill">🎓 Verifiable Badge</span>
-              ${progress > 0 ? `<span class="claude-meta-pill" style="color: var(--qsa-terracotta); font-weight: 700;">✓ ${progress}% Completed</span>` : ''}
-            </div>
-
-            <div class="claude-hero-actions">
-              <a href="#lesson-${course.id}-${firstLessonId}" class="claude-btn-dark">
-                ${progress > 0 ? 'Continue Course ➔' : 'Start Course ➔'}
-              </a>
-              <a href="#curriculum-breakdown" class="claude-btn-subtle">
-                <span>📑</span> View Syllabus
-              </a>
+              <span class="tag tag-green">HEC 2026 Aligned</span>
             </div>
           </div>
 
-          <!-- Right: Hosted Decagonal Course Badge -->
-          <div class="claude-hero-badge-wrap">
-            <div class="claude-badge-decagon">
+          <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 14px;">
+            <div style="width: 58px; height: 58px; border-radius: 12px; background: var(--qsa-bg-card); border: 1.5px solid var(--qsa-border-strong); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: var(--qsa-shadow-card);">
               <img src="${baseAsset}/images/badge-${course.id}.svg" 
-                   alt="${course.title} Badge" 
-                   class="claude-badge-img" 
-                   width="250" 
-                   height="250"
+                   alt="${course.title} Emblem" 
+                   width="42" 
+                   height="42"
                    onerror="this.onerror=null; this.src='${baseAsset}/images/hero-academy-emblem.svg';">
             </div>
+            <h1 class="claude-hero-title" style="margin: 0; font-size: clamp(26px, 3.4vw, 36px); letter-spacing: -0.02em;">
+              ${course.title}
+            </h1>
+          </div>
+
+          <p class="claude-hero-desc" style="margin-bottom: 20px; max-width: 820px; font-size: 15.5px; line-height: 1.65;">
+            ${course.tagline || course.description}
+          </p>
+
+          <div class="claude-meta-strip" style="margin-bottom: 24px;">
+            <span class="claude-meta-pill">📖 ${totalLessons} Lessons</span>
+            <span class="claude-meta-pill">⏱️ ${hours} Accredited Hours</span>
+            <span class="claude-meta-pill">🔬 Multi-Modal Quizzes</span>
+            <span class="claude-meta-pill">🎓 Verifiable Fellowship Credential</span>
+            ${progress > 0 ? `<span class="claude-meta-pill" style="color: var(--qsa-terracotta); font-weight: 700;">✓ ${progress}% Completed</span>` : ''}
+          </div>
+
+          <div class="claude-hero-actions">
+            <a href="#lesson-${course.id}-${firstLessonId}" class="claude-btn-dark">
+              ${progress > 0 ? 'Continue Course ➔' : 'Start Course ➔'}
+            </a>
+            <a href="#curriculum-breakdown" class="claude-btn-subtle">
+              <span>📑</span> View Syllabus
+            </a>
+            <a href="#certificate-${course.id}" class="claude-btn-subtle" title="Check your exam and time requirements">
+              <span>🔒</span> Credential Audit
+            </a>
           </div>
 
         </div>
@@ -1954,7 +1953,7 @@ async function renderLearnerDashboard(courses = []) {
 
       <!-- Continue Learning Banner (If active) -->
       ${active && active.courseId ? `
-        <div style="background: #ffffff; border: 1.5px solid var(--qsa-terracotta); border-radius: var(--qsa-radius-card); padding: 24px; margin-bottom: 32px; box-shadow: var(--qsa-shadow-card); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div style="background: var(--qsa-bg-card); border: 1.5px solid var(--qsa-terracotta); border-radius: var(--qsa-radius-card); padding: 24px; margin-bottom: 32px; box-shadow: var(--qsa-shadow-card); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>
             <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); margin-bottom: 4px;">
               Active Course in Progress
@@ -1973,22 +1972,22 @@ async function renderLearnerDashboard(courses = []) {
 
       <!-- Stats Grid -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 36px;">
-        <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
+        <div style="background: var(--qsa-bg-card); box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
           <div style="font-size: 34px; font-weight: 700; color: var(--qsa-terracotta); font-family: var(--qsa-font-serif);">${state.streak.current} Days</div>
           <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Daily Study Streak</div>
         </div>
-        <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
+        <div style="background: var(--qsa-bg-card); box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
           <div style="font-size: 34px; font-weight: 700; color: var(--qsa-navy); font-family: var(--qsa-font-serif);">${totalMinutes} Min</div>
           <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Active Time Logged</div>
         </div>
-        <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
-          <div style="font-size: 34px; font-weight: 700; color: #15803d; font-family: var(--qsa-font-serif);">${researchFigures.length}</div>
+        <div style="background: var(--qsa-bg-card); box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 22px; text-align: center;">
+          <div style="font-size: 34px; font-weight: 700; color: var(--qsa-status-success); font-family: var(--qsa-font-serif);">${researchFigures.length}</div>
           <div style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 500;">Attached Research Figures</div>
         </div>
       </div>
 
       <!-- Enrolled Courses & Progress -->
-      <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 32px; margin-bottom: 32px;">
+      <div style="background: var(--qsa-bg-card); box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 32px; margin-bottom: 32px;">
         <h3 style="margin: 0 0 18px; font-size: 22px; color: var(--qsa-text-primary);">Enrolled Courses &amp; Progress</h3>
         ${enrolledCourses.length === 0 ? `
           <p style="color: var(--qsa-text-muted); font-style: italic; margin: 0 0 16px;">You haven't started any courses yet. Choose a course from the catalog to begin tracking your progress.</p>
@@ -2062,7 +2061,7 @@ async function renderLearnerDashboard(courses = []) {
       </div>
 
       <!-- Notes Management -->
-      <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 32px; margin-bottom: 32px;">
+      <div style="background: var(--qsa-bg-card); box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 32px; margin-bottom: 32px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
           <h3 style="margin: 0; font-size: 22px; color: var(--qsa-text-primary);">My Notes &amp; Highlights</h3>
           <button type="button" class="btn btn-secondary btn-sm" id="export-notes-btn">📥 Export as Markdown</button>
@@ -2081,7 +2080,7 @@ async function renderLearnerDashboard(courses = []) {
       </div>
 
       <!-- Backup & Restore -->
-      <div style="background: #ffffff; box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div style="background: var(--qsa-bg-card); box-shadow: inset 0 0 0 1px var(--qsa-border-card); border-radius: 16px; padding: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
         <div>
           <h4 style="color: var(--qsa-text-primary); margin: 0 0 4px; font-size: 16px;">Local Progress Backup</h4>
           <p style="color: var(--qsa-text-muted); font-size: 13.5px; margin: 0;">Export your study records as a JSON file to transfer between devices.</p>
@@ -2183,25 +2182,48 @@ function renderCertificatesList() {
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-        ${courses.map(c => `
-          <div style="background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--qsa-shadow-card);">
+        ${courses.map(c => {
+          const elig = store.getCertificateEligibility ? store.getCertificateEligibility(c.id, c.lessonsCount || 20, c.hours) : { eligible: false, overallProgressPct: 0, completedLessons: 0, totalLessons: 20, bestExamScore: 0, studySeconds: 0, requiredStudySeconds: 600 };
+          return `
+          <div style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--qsa-shadow-card);">
             <div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
                 <span class="tag tag-clay" style="font-size: 11px;">${c.hours} Accredited Hours</span>
-                <span class="tag tag-green" style="font-size: 11px;">Official Credential</span>
+                ${elig.eligible ? `
+                  <span class="tag tag-green" style="font-size: 11px;">✓ Conferred &amp; Unlocked</span>
+                ` : `
+                  <span class="tag" style="font-size: 11px; background: var(--qsa-bg-subtle); color: var(--qsa-text-muted); border: 1px solid var(--qsa-border);">🔒 Requirements: ${elig.overallProgressPct}%</span>
+                `}
               </div>
               <h3 style="font-size: 19px; margin: 8px 0 10px; color: var(--qsa-text-primary); font-family: var(--qsa-font-serif);">
                 ${c.title}
               </h3>
-              <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin-bottom: 20px; line-height: 1.55;">
+              <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin-bottom: 16px; line-height: 1.55;">
                 ${c.desc}
               </p>
+              <div style="background: var(--qsa-bg-subtle); border-radius: 8px; padding: 10px 14px; margin-bottom: 18px; font-size: 12px; color: var(--qsa-text-secondary); display: flex; flex-direction: column; gap: 4px;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span>Curriculum:</span> <strong>${elig.completedLessons}/${elig.totalLessons} Lessons</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span>Comprehensive Exam:</span> <strong>${elig.bestExamScore}% (${elig.bestExamScore >= 80 ? 'Passed' : '80% Min'})</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span>Active Study Time:</span> <strong>${Math.round(elig.studySeconds / 60)}m / ${Math.round(elig.requiredStudySeconds / 60)}m</strong>
+                </div>
+              </div>
             </div>
-            <a href="#certificate-${c.id}" class="btn btn-primary btn-sm" style="width: 100%; text-align: center;">
-              View &amp; Generate Certificate ➔
-            </a>
-          </div>
-        `).join('')}
+            ${elig.eligible ? `
+              <a href="#certificate-${c.id}" class="btn btn-primary btn-sm" style="width: 100%; text-align: center;">
+                🎓 View &amp; Download Diploma ➔
+              </a>
+            ` : `
+              <a href="#certificate-${c.id}" class="btn btn-secondary btn-sm" style="width: 100%; text-align: center;">
+                🔒 View Requirements &amp; Audit ➔
+              </a>
+            `}
+          </div>`;
+        }).join('')}
       </div>
     </div>`;
 }
@@ -2227,7 +2249,7 @@ function renderVerifyView(certId) {
 
   mainEl.innerHTML = `
     <div class="wrap" style="padding: 64px 20px 80px; text-align: center;">
-      <div style="max-width: 620px; margin: 0 auto; background: #ffffff; border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 44px 36px; box-shadow: var(--qsa-shadow-lift);">
+      <div style="max-width: 620px; margin: 0 auto; background: var(--qsa-bg-card); border: 1px solid var(--qsa-border-card); border-radius: var(--qsa-radius-card); padding: 44px 36px; box-shadow: var(--qsa-shadow-lift);">
         <div style="width: 54px; height: 54px; border-radius: 50%; background: ${verifyResult.valid ? '#DDE8DF' : '#fef3c7'}; color: ${verifyResult.valid ? '#15803d' : '#d97706'}; font-size: 26px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; border: 1.5px solid ${verifyResult.valid ? '#86efac' : '#fde68a'};">
           ${verifyResult.valid ? '✓' : 'ℹ'}
         </div>

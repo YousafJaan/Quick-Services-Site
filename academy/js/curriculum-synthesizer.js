@@ -1299,6 +1299,290 @@ const MODULE_KNOWLEDGE = {
 };
 
 // ============================================================================
+// Multi-Modal Interactive Question Generators (Order, Match, SpotError, Scenario, Calculation)
+// ============================================================================
+
+function getModuleOrderQuestion(courseId, modId, lessonTitle) {
+  if (courseId === 'thesis101') {
+    return {
+      type: 'order',
+      q: 'Arrange the canonical phases of dissertation proposal formulation in standard chronological sequence (Creswell, 2014):',
+      correctOrder: [
+        'Delimit Empirical Problem & Population',
+        'Synthesize Thematic Literature Matrix',
+        'Deduce Theoretical & Conceptual Framework',
+        'Operationalize Measurement Instrumentation',
+        'Submit for Ethical & Departmental Approval'
+      ],
+      explanation: 'Empirical problem framing precedes literature matrix synthesis, which enables theoretical deduction before instrument operationalization and committee approval.'
+    };
+  }
+  if (courseId === 'cite101') {
+    return {
+      type: 'order',
+      q: 'Arrange the elements of an APA 7th journal article reference entry in exact standard order:',
+      correctOrder: [
+        'Author(s) Surname and Initials',
+        'Publication Year in Parentheses',
+        'Article Title in Sentence Case',
+        'Periodical Title in Italics with Volume Number',
+        'Page Range with Permanent DOI Link'
+      ],
+      explanation: 'Per APA 7th Manual, reference entries follow: Author(s) -> (Year) -> Article title -> Journal Name & Volume -> Page Range -> DOI.'
+    };
+  }
+  if (courseId === 'integ101') {
+    return {
+      type: 'order',
+      q: 'Arrange the institutional workflow for thesis similarity screening and Turnitin clearance:',
+      correctOrder: [
+        'Configure Document Filters (Exclude Bibliography & Matches < 1%)',
+        'Run Pre-Submission Similarity Audit',
+        'Inspect Clustered Matches & Rewrite Patchwritten Passages',
+        'Confirm Net Similarity Index is <= 19% (Single Source < 5%)',
+        'Obtain Supervisor Counter-Signature and Certificate'
+      ],
+      explanation: 'Filter configuration must precede similarity analysis, followed by remediation of flagged clusters before final supervisor sign-off.'
+    };
+  }
+  if (courseId === 'edit101') {
+    return {
+      type: 'order',
+      q: 'Arrange Hayot’s (2014) 3-pass academic editing sequence from macro to micro level:',
+      correctOrder: [
+        'Macro-Structure Audit (Chapter Balance & Word Budget)',
+        'Paragraph Architecture (Topic Sentence & Agent Momentum)',
+        'Sentence Clarity (Passive Voice & Nominalization Removal)',
+        'Micro-Mechanics (APA 7th Punctuation, Figures & Tables)',
+        'Final Proofreading of Front/Back Matter & Appendices'
+      ],
+      explanation: 'Effective editing moves hierarchically from overarching macro-structure down through paragraph coherence to sentence syntax and micro-mechanics.'
+    };
+  }
+  if (courseId === 'lit-search') {
+    return {
+      type: 'order',
+      q: 'Arrange the PRISMA 2020 systematic literature identification and screening phases:',
+      correctOrder: [
+        'Comprehensive Database Search via Boolean Syntax',
+        'Deduplication across Scopus, WoS, and PubMed',
+        'Title and Abstract Screening against Criteria',
+        'Full-Text Eligibility Assessment & Reasons for Exclusion',
+        'Final Study Corpus Synthesis in Extraction Matrix'
+      ],
+      explanation: 'PRISMA 2020 dictates systematic flow: Identification -> Deduplication -> Title/Abstract Screening -> Full-Text Eligibility -> Synthesis.'
+    };
+  }
+  if (courseId === 'sample-size') {
+    return {
+      type: 'order',
+      q: 'Order the steps required to execute an a priori statistical power analysis in G*Power:',
+      correctOrder: [
+        'Select Statistical Test Family (e.g. F-tests / t-tests)',
+        'Specify Anticipated Effect Size (f² or Cohen d)',
+        'Calibrate Type I Error Rate (alpha = 0.05)',
+        'Specify Target Statistical Power (1 - beta = 0.80)',
+        'Compute Required Minimum Total Sample Size'
+      ],
+      explanation: 'Test family and effect size must be specified first, followed by alpha and desired power to calculate required sample size.'
+    };
+  }
+  if (courseId === 'spss101') {
+    return {
+      type: 'order',
+      q: 'Arrange the data preparation stages in SPSS before estimating regression models (Field, 2018):',
+      correctOrder: [
+        'Variable View Definition (Scale, Nominal, Labels)',
+        'Data Screening for Missingness (MCAR vs MAR)',
+        'Multivariate Outlier Screening (Mahalanobis Distance D²)',
+        'Normality & Multicollinearity Diagnostics (VIF < 5)',
+        'Compute Composite Variable Scores & Run Model'
+      ],
+      explanation: 'Variable definition, missingness screening, and outlier detection must precede composite variable calculation and inferential modeling.'
+    };
+  }
+  if (courseId === 'smartpls') {
+    return {
+      type: 'order',
+      q: 'Arrange the two-step PLS-SEM evaluation stages according to Hair et al. (2022):',
+      correctOrder: [
+        'Evaluate Reflective Indicator Loadings (>= 0.708)',
+        'Establish Internal Consistency (Cronbach Alpha & CR >= 0.70)',
+        'Confirm Convergent Validity (AVE >= 0.50)',
+        'Assess Discriminant Validity (HTMT < 0.85 / 0.90)',
+        'Estimate Structural Model (Collinearity VIF, Path Coefficients, R², f²)'
+      ],
+      explanation: 'Measurement model reliability and validity must be verified before proceeding to structural model evaluation.'
+    };
+  }
+  return {
+    type: 'order',
+    q: 'Arrange the 4-stage examiner challenge de-escalation protocol during oral defense:',
+    correctOrder: [
+      'Acknowledge: Thank examiner and validate the inquiry',
+      'Frame Boundary: Reference explicit Chapter 1 delimitations',
+      'Present Evidence: Cite literature authority and empirical results',
+      'Receptive Closure: Welcome committee guidance for final revisions'
+    ],
+    explanation: 'The de-escalation protocol establishes doctoral poise by validating the inquiry, defending delimitations with evidence, and closing receptively.'
+  };
+}
+
+function getModuleMatchQuestion(courseId, modId, lessonTitle) {
+  if (courseId === 'smartpls') {
+    return {
+      type: 'match',
+      q: 'Match each PLS-SEM quality criterion to its authoritative benchmark threshold (Hair et al., 2022):',
+      pairs: [
+        { key: 'Indicator Reliability', value: 'Outer loading >= 0.708' },
+        { key: 'Convergent Validity (AVE)', value: 'Average Variance Extracted >= 0.50' },
+        { key: 'Discriminant Validity (HTMT)', value: 'Ratio < 0.85 (conservative) or < 0.90' },
+        { key: 'Structural Collinearity', value: 'Inner VIF < 3.0 (ideal) or < 5.0' }
+      ],
+      explanation: 'Hair et al. (2022) establish outer loadings >= 0.708, AVE >= 0.50, HTMT < 0.85, and inner VIF < 3.0 as standard PLS-SEM benchmarks.'
+    };
+  }
+  if (courseId === 'spss101') {
+    return {
+      type: 'match',
+      q: 'Match each inferential statistical test in SPSS to its primary analytical objective (Field, 2018):',
+      pairs: [
+        { key: 'Independent Samples t-test', value: 'Compare means between 2 independent groups' },
+        { key: 'One-Way ANOVA', value: 'Compare means across 3 or more independent groups' },
+        { key: 'Pearson Correlation (r)', value: 'Examine linear association between continuous variables' },
+        { key: 'Multiple Linear Regression', value: 'Predict continuous outcome from multiple predictors' }
+      ],
+      explanation: 'Choosing the correct test depends on the measurement scale and number of groups being compared.'
+    };
+  }
+  if (courseId === 'cite101') {
+    return {
+      type: 'match',
+      q: 'Match each citation circumstance to its exact APA 7th in-text format:',
+      pairs: [
+        { key: 'Parenthetical (One Author)', value: '(Creswell, 2014)' },
+        { key: 'Narrative (Two Authors)', value: 'Hair and Sarstedt (2021) observed...' },
+        { key: 'Three or More Authors', value: 'Field et al. (2018) from first mention' },
+        { key: 'Direct Quote with Page Number', value: '(Hayot, 2014, p. 89)' }
+      ],
+      explanation: 'In narrative citations, spell out “and”; in parenthetical citations, use ampersands (&). Three or more authors use et al. immediately.'
+    };
+  }
+  if (courseId === 'integ101') {
+    return {
+      type: 'match',
+      q: 'Match each academic misconduct category to its formal definition (HEC Pakistan Guidelines):',
+      pairs: [
+        { key: 'Verbatim Plagiarism', value: 'Word-for-word reproduction without quotes or citation' },
+        { key: 'Patchwriting', value: 'Superficial synonym swaps while retaining original syntax' },
+        { key: 'Self-Plagiarism', value: 'Recycling own previously submitted work without cross-citation' },
+        { key: 'Contract Cheating', value: 'Paying a third-party service to author academic text' }
+      ],
+      explanation: 'Academic integrity policies treat both direct copying and unacknowledged paraphrasing/contract work as punishable infractions.'
+    };
+  }
+  if (courseId === 'sample-size') {
+    return {
+      type: 'match',
+      q: 'Match each statistical power concept to its formal definition (Faul et al., 2009):',
+      pairs: [
+        { key: 'Statistical Power (1 - beta)', value: 'Probability of correctly rejecting a false null hypothesis' },
+        { key: 'Type I Error Rate (alpha)', value: 'Probability of rejecting a true null hypothesis (false positive)' },
+        { key: 'Type II Error Rate (beta)', value: 'Failing to detect a genuine empirical effect (false negative)' },
+        { key: "Cochran's n0 (1977)", value: 'Sample size baseline for infinite population with z = 1.96' }
+      ],
+      explanation: 'Standard doctoral conventions target statistical power >= 0.80 at alpha = 0.05 to minimize both Type I and Type II errors.'
+    };
+  }
+  return {
+    type: 'match',
+    q: 'Match each thesis component to its governing defense requirement:',
+    pairs: [
+      { key: 'Chapter 1: Problem Statement', value: 'Hook, empirical anchor, and delimited contextual gap' },
+      { key: 'Chapter 2: Conceptual Framework', value: 'Deductive theoretical logic linking operational variables' },
+      { key: 'Chapter 3: Methodology', value: 'Replicable sampling, instrumentation, and screening rules' },
+      { key: 'Chapter 5: Discussion', value: 'Triangulation with literature and defense of delimitations' }
+    ],
+    explanation: 'A doctoral dissertation must maintain structural symmetry across all 5 chapters to withstand external examination.'
+  };
+}
+
+function getModuleSpotErrorQuestion(courseId, modId, lessonTitle) {
+  if (courseId === 'cite101') {
+    return {
+      type: 'spotError',
+      q: 'Tap the token in this sentence that violates APA 7th narrative citation formatting:',
+      sentence: 'According to Hair & Sarstedt (2021), collinearity must be evaluated before structural estimation.',
+      errorWord: '&',
+      explanation: 'In APA 7th narrative citations (in-text prose), the word “and” must be spelled out. The ampersand (&) is reserved exclusively for parenthetical citations.'
+    };
+  }
+  if (courseId === 'spss101') {
+    return {
+      type: 'spotError',
+      q: 'Tap the word in this empirical results summary that makes an invalid methodological claim:',
+      sentence: 'The Pearson correlation was statistically significant, proving that social media usage causes academic anxiety.',
+      errorWord: 'causes',
+      explanation: 'Correlation does not establish causality. Cross-sectional correlational data can only demonstrate an empirical association, never causation.'
+    };
+  }
+  if (courseId === 'smartpls') {
+    return {
+      type: 'spotError',
+      q: 'Tap the token that violates PLS-SEM reporting standards for discriminant validity:',
+      sentence: 'Discriminant validity was established because the HTMT ratio between both constructs was 0.94 across bootstraps.',
+      errorWord: '0.94',
+      explanation: 'Per Henseler et al. (2015) and Hair et al. (2022), an HTMT ratio of 0.94 exceeds both the 0.85 conservative and 0.90 liberal thresholds, indicating discriminant validity failure.'
+    };
+  }
+  return {
+    type: 'spotError',
+    q: 'Tap the auxiliary verb in this sentence that creates an unnecessary passive voice construction:',
+    sentence: 'It was demonstrated by the empirical findings that employee engagement predicts organizational retention.',
+    errorWord: 'was',
+    explanation: '“It was demonstrated by” is a weak passive construction with an empty subject. Revise to active agent: “Empirical findings demonstrate that employee engagement predicts organizational retention.”'
+  };
+}
+
+function getModuleScenarioQuestion(courseId, modId, lessonTitle) {
+  if (courseId === 'smartpls') {
+    return {
+      type: 'scenario',
+      q: 'SmartPLS 4 Collinearity Diagnosis Dilemma',
+      scenarioText: 'You estimate your structural model in SmartPLS 4. The path coefficient between Transformational Leadership and Team Performance is beta = 0.45 (p < 0.001), but the predictor construct has an inner VIF of 5.6.',
+      options: [
+        { text: 'Acknowledge critical collinearity: A VIF of 5.6 indicates severe multi-collinearity with other predictors; evaluate overlapping indicators or consolidate redundant dimensions before reporting path coefficients.', isCorrect: true },
+        { text: 'Ignore the VIF because the path coefficient is statistically significant at p < 0.001.', isCorrect: false },
+        { text: 'Arbitrarily delete random survey respondents until the VIF drops below 3.0.', isCorrect: false }
+      ],
+      explanation: 'Per Hair et al. (2022), a VIF > 3.0 (and especially > 5.0) indicates critical collinearity that inflates standard errors and destabilizes path estimates.'
+    };
+  }
+  if (courseId === 'sample-size') {
+    return {
+      type: 'calculation',
+      q: 'Using Cochran’s formula n0 = (z² * p * q) / e² with a 95% confidence level (z = 1.96), maximum variability (p = 0.5, q = 0.5), and a 5% margin of error (e = 0.05), compute the minimum required sample size for an infinite population:',
+      formulaHint: 'n0 = (1.96² * 0.25) / 0.05²',
+      expected: 384.16,
+      tolerance: 1.0,
+      unit: 'respondents',
+      explanation: 'Cochran’s formula yields (3.8416 * 0.25) / 0.0025 = 384.16. Graduate scholars round up to 385 respondents to ensure statistical precision.'
+    };
+  }
+  return {
+    type: 'scenario',
+    q: 'Viva Voce Defense Committee Inquiry',
+    scenarioText: 'During your thesis defense, the external examiner asks: “Your study surveyed 320 educators in Multan. Why did you not expand data collection to Lahore and Rawalpindi as well?”',
+    options: [
+      { text: 'Respectfully state that the geographical boundary was deliberately delimited in Chapter 1 due to logistical feasibility and regional educational disparities, while proposing cross-divisional comparisons as a compelling avenue for future research.', isCorrect: true },
+      { text: 'Blame your university supervisor for not providing enough travel funding.', isCorrect: false },
+      { text: 'Argue that Lahore and Rawalpindi schools are completely irrelevant to education research.', isCorrect: false }
+    ],
+    explanation: 'Examiners respect candidates who defend their deliberate delimitations as bounded research choices while acknowledging them as fertile ground for future research.'
+  };
+}
+
+// ============================================================================
 // Domain Knowledge Generator with Module-Level Granularity
 // ============================================================================
 
@@ -1383,18 +1667,7 @@ function getDomainKnowledge(courseId, lessonTitle, modTitle, modId, lessonId) {
           topic: 'epistemological-alignment',
           confidence: true,
           questions: [
-            {
-              type: 'single',
-              q: `Why is explicit operational delimitation essential when addressing ${lessonTitle}?`,
-              options: [
-                'It defines exact boundary conditions, protecting the candidate from unfair examiner scope creep during oral defense',
-                'It allows students to artificially inflate their thesis word count without adding citations',
-                'It eliminates the requirement to collect empirical data or perform statistical checks',
-                'It ensures that no other researcher can replicate the research workflow'
-              ],
-              answer: 0,
-              explanation: 'Explicit delimitation establishes exactly what is inside and outside the scope of the thesis, preventing examiners from criticizing the study for uninvestigated peripheral topics.'
-            }
+            getModuleOrderQuestion(courseId, modId, lessonTitle)
           ]
         }
       },
@@ -1469,18 +1742,7 @@ function getDomainKnowledge(courseId, lessonTitle, modTitle, modId, lessonId) {
           topic: 'procedural-execution',
           confidence: true,
           questions: [
-            {
-              type: 'single',
-              q: `What should a graduate researcher do when an empirical metric falls below the recommended textbook benchmark?`,
-              options: [
-                'Transparently report the diagnostic value, diagnose potential causes (e.g. sample size or scale phrasing), and cite methodological authorities regarding boundary conditions',
-                'Delete the problematic variables silently and falsify the output table to match textbook examples',
-                'Change the entire thesis topic without informing the supervisory committee or university',
-                'Skip the reporting of diagnostic tests altogether and present only the final regression conclusions'
-              ],
-              answer: 0,
-              explanation: 'Academic integrity and doctoral defense standards require complete transparency. External examiners respect candidates who identify and methodologically contextualize anomalies.'
-            }
+            getModuleMatchQuestion(courseId, modId, lessonTitle)
           ]
         }
       },
@@ -1548,13 +1810,7 @@ function getDomainKnowledge(courseId, lessonTitle, modTitle, modId, lessonId) {
           topic: 'empirical-reporting',
           confidence: true,
           questions: [
-            {
-              type: 'single',
-              q: modData.checkQ,
-              options: modData.checkOpts,
-              answer: 0,
-              explanation: modData.checkExpl
-            }
+            getModuleSpotErrorQuestion(courseId, modId, lessonTitle)
           ]
         }
       },
@@ -1636,18 +1892,7 @@ function getDomainKnowledge(courseId, lessonTitle, modTitle, modId, lessonId) {
           topic: 'viva-defense-strategy',
           confidence: true,
           questions: [
-            {
-              type: 'single',
-              q: `What is the most effective approach when an external examiner challenges a methodological delimitation in your study?`,
-              options: [
-                'Respectfully acknowledge the observation, explain that this boundary was deliberately delimited in Chapter 1 due to feasibility, cite literature supporting the boundary, and recommend it for future research',
-                'Argue that the examiner does not understand modern research and ignore their critique',
-                'Blame the university computer lab or supervisor for the limitation',
-                'Burst into tears and offer to abandon the thesis'
-              ],
-              answer: 0,
-              explanation: 'Examiners respect candidates who defend their deliberate delimitations as bounded research choices while acknowledging them as fertile ground for future research.'
-            }
+            getModuleScenarioQuestion(courseId, modId, lessonTitle)
           ]
         }
       }
@@ -1695,25 +1940,10 @@ function getDomainKnowledge(courseId, lessonTitle, modTitle, modId, lessonId) {
         answer: 0,
         explanation: modData.checkExpl
       },
-      {
-        type: 'trueFalse',
-        q: `True or False: Explicit operational delimitation protects the candidate from unfair scope creep during the oral defense.`,
-        options: ['True', 'False'],
-        answer: 0,
-        explanation: 'True. Clearly stating what is inside and outside the scope in Chapter 1 prevents examiners from criticizing the study for uninvestigated peripheral topics.'
-      },
-      {
-        type: 'single',
-        q: `What is the gold standard approach when an empirical metric falls below recommended benchmarks?`,
-        options: [
-          'Transparently report the diagnostic value and cite literature regarding boundary conditions',
-          'Silently falsify the table numbers',
-          'Delete the construct without informing anyone',
-          'Skip diagnostic reporting altogether'
-        ],
-        answer: 0,
-        explanation: 'Academic integrity and doctoral defense standards require complete transparency. External examiners respect candidates who identify and methodologically contextualize anomalies.'
-      }
+      getModuleOrderQuestion(courseId, modId, lessonTitle),
+      getModuleMatchQuestion(courseId, modId, lessonTitle),
+      getModuleSpotErrorQuestion(courseId, modId, lessonTitle),
+      getModuleScenarioQuestion(courseId, modId, lessonTitle)
     ]
   };
 }

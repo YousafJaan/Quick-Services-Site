@@ -42,6 +42,8 @@
   --qsa-text-tertiary: #A1ACB9;       /* Caption ink */
 
   /* Aliases for backwards compatibility */
+  --qsa-navy: #0F172A;
+  --qsa-bg-warm: var(--qsa-bg-page);
   --qsa-accent-clay: var(--qsa-terracotta);
   --qsa-accent-clay-dark: var(--qsa-terracotta-dark);
   --qsa-accent-clay-soft: var(--qsa-terracotta-soft);
@@ -92,8 +94,8 @@
   --qsa-text-dark-active: #FFFFFF;
 
   /* Typography Pairing */
-  --qsa-font-serif: "Newsreader", "Playfair Display", Georgia, "Times New Roman", serif;
-  --qsa-font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --qsa-font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --qsa-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --qsa-font-mono: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
   --qsa-font-cert-script: "Alex Brush", "Playfair Display", cursive;
   --qsa-font-cert-roman: "Cinzel", "Newsreader", serif;
@@ -154,9 +156,11 @@
    Dark Theme Variant
    ========================================================================== */
 [data-theme="dark"] {
-  --qsa-primary-navy: #7FAADB;
-  --qsa-primary-navy-dark: #A5C4EA;
-  --qsa-primary-navy-soft: #1E2D42;
+  --qsa-primary-navy: #F8FAFC;
+  --qsa-primary-navy-dark: #FFFFFF;
+  --qsa-primary-navy-soft: #162436;
+  --qsa-navy: #E2E8F0;
+  --qsa-bg-warm: var(--qsa-bg-page);
 
   --qsa-terracotta: #E27B5E;
   --qsa-terracotta-dark: #F39B81;

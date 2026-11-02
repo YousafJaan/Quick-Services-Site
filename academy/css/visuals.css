@@ -87,7 +87,7 @@
 
 .visual-def-example {
   font-size: 13.5px;
-  background: #ffffff;
+  background: var(--qsa-bg-card);
   padding: 8px 12px;
   border-radius: var(--qsa-radius-sm);
   color: var(--qsa-text-muted);
@@ -98,7 +98,7 @@
 .visual-compare-table {
   width: 100%;
   border-collapse: collapse;
-  background: #ffffff;
+  background: var(--qsa-bg-card);
   border-radius: var(--qsa-radius-md);
   overflow: hidden;
   font-size: 14px;
@@ -139,7 +139,7 @@
 
 .visual-funnel-stage:hover {
   transform: scale(1.02);
-  background: #ffffff;
+  background: var(--qsa-bg-fill-hover);
   box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
 
@@ -254,7 +254,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--qsa-bg-card);
   border: 2.5px solid var(--qsa-text-primary);
   box-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }

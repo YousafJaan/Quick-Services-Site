@@ -109,6 +109,8 @@ function createMockElement(tag = 'div') {
   const el = {
     tagName: tag.toUpperCase(),
     innerHTML: '',
+    innerText: '',
+    textContent: '',
     children: [],
     style: {},
     dataset: {},
@@ -171,6 +173,57 @@ try {
   assert(engine.score === 1, 'Calculation evaluation correctly validates answer within relative tolerance');
 } catch (err) {
   assert(false, `Calculation evaluation threw error: ${err.message}`);
+}
+
+// Test order evaluation logic
+try {
+  const orderQ = { type: 'order', q: 'Arrange steps', correctOrder: ['Topic', 'Literature', 'Methodology'] };
+  const mockContainer = createMockElement();
+  const engine = new QuizEngine(mockContainer, { bank: [orderQ] });
+  engine.answers[0] = ['Topic', 'Literature', 'Methodology'];
+  engine._evaluateAnswer(orderQ);
+  assert(engine.score === 1, 'Order evaluation validates exact sequence matches');
+
+  const engineFail = new QuizEngine(mockContainer, { bank: [orderQ] });
+  engineFail.answers[0] = ['Literature', 'Topic', 'Methodology'];
+  engineFail._evaluateAnswer(orderQ);
+  assert(engineFail.score === 0, 'Order evaluation rejects out-of-order sequence');
+} catch (err) {
+  assert(false, `Order evaluation threw error: ${err.message}`);
+}
+
+// Test spotError evaluation logic
+try {
+  const spotQ = { type: 'spotError', q: 'Find error', sentence: 'The data was analyzed with SPSS.', errorWord: 'was' };
+  const mockContainer = createMockElement();
+  const engine = new QuizEngine(mockContainer, { bank: [spotQ] });
+  engine.answers[0] = ['was'];
+  engine._evaluateAnswer(spotQ);
+  assert(engine.score === 1, 'SpotError evaluation successfully validates target error token');
+
+  const engineFail = new QuizEngine(mockContainer, { bank: [spotQ] });
+  engineFail.answers[0] = ['analyzed'];
+  engineFail._evaluateAnswer(spotQ);
+  assert(engineFail.score === 0, 'SpotError evaluation rejects incorrect word selection');
+} catch (err) {
+  assert(false, `SpotError evaluation threw error: ${err.message}`);
+}
+
+// Test match strict evaluation logic
+try {
+  const matchQ = { type: 'match', q: 'Match pairs', pairs: [{ key: 'A', value: '1' }, { key: 'B', value: '2' }] };
+  const mockContainer = createMockElement();
+  const engine = new QuizEngine(mockContainer, { bank: [matchQ] });
+  engine.answers[0] = { '0': '0', '1': '1' };
+  engine._evaluateAnswer(matchQ);
+  assert(engine.score === 1, 'Match evaluation validates 100% paired keys and values');
+
+  const engineFail = new QuizEngine(mockContainer, { bank: [matchQ] });
+  engineFail.answers[0] = { '0': '0', '1': '0' }; // imperfect match
+  engineFail._evaluateAnswer(matchQ);
+  assert(engineFail.score === 0, 'Match evaluation strictly rejects imperfect or mismatched pairs');
+} catch (err) {
+  assert(false, `Match evaluation threw error: ${err.message}`);
 }
 
 // ============================================================================

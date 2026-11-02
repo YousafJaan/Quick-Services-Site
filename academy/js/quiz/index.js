@@ -118,10 +118,11 @@ export class QuizEngine {
           <div class="order-list" id="order-list-area">
             ${steps.map((st, idx) => `
               <div class="order-item" data-step-idx="${idx}">
-                <span>${st}</span>
+                <span class="order-step-num">${idx + 1}.</span>
+                <span class="order-text">${st}</span>
                 <div class="order-controls">
-                  <button type="button" class="order-btn" data-dir="up">▲</button>
-                  <button type="button" class="order-btn" data-dir="down">▼</button>
+                  <button type="button" class="order-btn" data-dir="up" title="Move Up" aria-label="Move Up">▲</button>
+                  <button type="button" class="order-btn" data-dir="down" title="Move Down" aria-label="Move Down">▼</button>
                 </div>
               </div>`).join('')}
           </div>`;
@@ -138,23 +139,23 @@ export class QuizEngine {
         const leftKeys = pairs.map((p, i) => ({ text: p.key, idx: i }));
         const rightVals = pairs.map((p, i) => ({ text: p.value, idx: i })).sort(() => 0.5 - Math.random());
         return `
-          <div class="match-container" style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="font-size: 13px; color: var(--qsa-text-muted); margin-bottom: 4px;">Tap a concept on the left, then tap its definition on the right:</div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px;">
-              <div class="match-col left-col" style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="match-container">
+            <div class="match-instructions">Tap a concept on the left, then select its matching definition on the right:</div>
+            <div class="match-grid">
+              <div class="match-col left-col">
                 ${leftKeys.map(k => `
-                  <button type="button" class="match-btn match-key" data-key-idx="${k.idx}" style="padding: 12px 14px; text-align: left; border: 1.5px solid var(--qsa-border); border-radius: 8px; background: var(--qsa-card-bg, #fff); font-size: 13px; font-weight: 600; cursor: pointer; min-height: 48px;">
+                  <button type="button" class="match-btn match-key" data-key-idx="${k.idx}">
                     ${k.text}
                   </button>`).join('')}
               </div>
-              <div class="match-col right-col" style="display: flex; flex-direction: column; gap: 8px;">
+              <div class="match-col right-col">
                 ${rightVals.map(v => `
-                  <button type="button" class="match-btn match-val" data-val-idx="${v.idx}" style="padding: 12px 14px; text-align: left; border: 1.5px solid var(--qsa-border); border-radius: 8px; background: var(--qsa-card-bg, #fff); font-size: 13px; cursor: pointer; min-height: 48px;">
+                  <button type="button" class="match-btn match-val" data-val-idx="${v.idx}">
                     ${v.text}
                   </button>`).join('')}
               </div>
             </div>
-            <div id="match-status" style="font-size: 12px; font-weight: 600; color: #ff6b2c; min-height: 18px;"></div>
+            <div id="match-status" class="match-status-msg"></div>
           </div>`;
 
       case 'categorise':
@@ -287,12 +288,47 @@ export class QuizEngine {
           this.answers[this.currentIndex] = selected;
         });
       });
+    } else if (q.type === 'order') {
+      const orderList = interactionArea.querySelector('#order-list-area');
+      const updateOrderAnswer = () => {
+        if (!orderList) return;
+        const items = orderList.querySelectorAll('.order-item');
+        const currentOrder = Array.from(items).map(item => {
+          const txt = item.querySelector('.order-text');
+          return (txt?.innerText || txt?.textContent || item?.innerText || item?.textContent || '').trim();
+        });
+        this.answers[this.currentIndex] = currentOrder;
+        items.forEach((item, idx) => {
+          const numEl = item.querySelector('.order-step-num');
+          if (numEl) numEl.textContent = `${idx + 1}.`;
+        });
+      };
+
+      updateOrderAnswer();
+
+      if (orderList) {
+        orderList.addEventListener('click', (e) => {
+          const btn = e.target.closest('.order-btn');
+          if (!btn) return;
+          const item = btn.closest('.order-item');
+          if (!item) return;
+
+          const dir = btn.dataset.dir;
+          if (dir === 'up' && item.previousElementSibling) {
+            orderList.insertBefore(item, item.previousElementSibling);
+            updateOrderAnswer();
+          } else if (dir === 'down' && item.nextElementSibling) {
+            orderList.insertBefore(item.nextElementSibling, item);
+            updateOrderAnswer();
+          }
+        });
+      }
     } else if (q.type === 'spotError') {
       const words = interactionArea.querySelectorAll('.spot-word');
       words.forEach(w => {
         w.addEventListener('click', () => {
           w.classList.toggle('selected');
-          const sel = Array.from(words).filter(w => w.classList.contains('selected')).map(w => w.innerText);
+          const sel = Array.from(words).filter(w => w.classList.contains('selected')).map(w => w.innerText.trim());
           this.answers[this.currentIndex] = sel;
         });
       });
@@ -305,10 +341,10 @@ export class QuizEngine {
 
       keyBtns.forEach(kb => {
         kb.addEventListener('click', () => {
-          keyBtns.forEach(b => b.style.borderColor = 'var(--qsa-border)');
-          kb.style.borderColor = '#ff6b2c';
+          keyBtns.forEach(b => b.classList.remove('active-key'));
+          kb.classList.add('active-key');
           activeKey = kb.dataset.keyIdx;
-          if (statusEl) statusEl.textContent = 'Selected: ' + kb.textContent.trim() + '. Now tap matching definition.';
+          if (statusEl) statusEl.textContent = `Selected: "${kb.textContent.trim()}". Now select its matching definition.`;
         });
       });
 
@@ -316,14 +352,13 @@ export class QuizEngine {
         vb.addEventListener('click', () => {
           if (activeKey !== null) {
             this.answers[this.currentIndex][activeKey] = vb.dataset.valIdx;
-            vb.style.background = '#fef3c7';
-            vb.style.borderColor = '#d97706';
-            const matchingKeyBtn = interactionArea.querySelector('.match-key[data-key-idx="' + activeKey + '"]');
+            vb.classList.add('matched');
+            const matchingKeyBtn = interactionArea.querySelector(`.match-key[data-key-idx="${activeKey}"]`);
             if (matchingKeyBtn) {
-              matchingKeyBtn.style.background = '#fef3c7';
-              matchingKeyBtn.style.borderColor = '#d97706';
+              matchingKeyBtn.classList.remove('active-key');
+              matchingKeyBtn.classList.add('matched');
             }
-            if (statusEl) statusEl.textContent = 'Paired!';
+            if (statusEl) statusEl.textContent = '✓ Concept paired with definition.';
             activeKey = null;
           }
         });
@@ -423,6 +458,52 @@ export class QuizEngine {
       const val = (input?.value || '').trim().toLowerCase();
       const accepted = (q.accepted || [q.answer]).map(a => String(a).toLowerCase());
       isCorrect = accepted.includes(val);
+    } else if (q.type === 'order') {
+      const userOrder = this.answers[this.currentIndex] || [];
+      const correctOrder = q.correctOrder || q.steps || q.options || [];
+      
+      isCorrect = userOrder.length === correctOrder.length &&
+        userOrder.every((step, idx) => step.trim().toLowerCase() === String(correctOrder[idx]).trim().toLowerCase());
+
+      const items = this.container.querySelectorAll('.order-item');
+      items.forEach((it, idx) => {
+        const txt = (it.querySelector('.order-text')?.innerText || it.querySelector('.order-text')?.textContent || it.innerText || it.textContent || '').trim().toLowerCase();
+        const expected = String(correctOrder[idx] || '').trim().toLowerCase();
+        if (txt === expected) {
+          it.classList.add('correct');
+        } else {
+          it.classList.add('incorrect');
+        }
+      });
+    } else if (q.type === 'spotError') {
+      const userSelected = (this.answers[this.currentIndex] || []).map(w => String(w || '').replace(/[.,/#!$%^&*;:{}=\-_`~()?"']/g, '').trim().toLowerCase());
+      
+      let expectedErrors = [];
+      if (Array.isArray(q.errorWords)) {
+        expectedErrors = q.errorWords.map(w => String(w || '').replace(/[.,/#!$%^&*;:{}=\-_`~()?"']/g, '').trim().toLowerCase());
+      } else if (q.errorWord) {
+        expectedErrors = [String(q.errorWord).replace(/[.,/#!$%^&*;:{}=\-_`~()?"']/g, '').trim().toLowerCase()];
+      } else if (Array.isArray(q.errorIndices)) {
+        const words = (q.sentence || '').split(' ');
+        expectedErrors = q.errorIndices.map(idx => String(words[idx] || '').replace(/[.,/#!$%^&*;:{}=\-_`~()?"']/g, '').trim().toLowerCase()).filter(Boolean);
+      } else if (typeof q.errorIndex === 'number') {
+        const words = (q.sentence || '').split(' ');
+        expectedErrors = [String(words[q.errorIndex] || '').replace(/[.,/#!$%^&*;:{}=\-_`~()?"']/g, '').trim().toLowerCase()].filter(Boolean);
+      }
+
+      isCorrect = expectedErrors.length > 0 &&
+        userSelected.length === expectedErrors.length &&
+        expectedErrors.every(err => userSelected.includes(err));
+
+      const wordEls = this.container.querySelectorAll('.spot-word');
+      wordEls.forEach(w => {
+        const clean = String(w.innerText || w.textContent || '').replace(/[.,/#!$%^&*;:{}=\-_`~()?"']/g, '').trim().toLowerCase();
+        if (expectedErrors.includes(clean)) {
+          w.classList.add('correct');
+        } else if (userSelected.includes(clean)) {
+          w.classList.add('incorrect');
+        }
+      });
     } else if (q.type === 'match') {
       const userPairs = this.answers[this.currentIndex] || {};
       const pairs = q.pairs || [];
@@ -430,7 +511,28 @@ export class QuizEngine {
       pairs.forEach((p, idx) => {
         if (String(userPairs[idx]) === String(idx)) matches++;
       });
-      isCorrect = pairs.length > 0 && matches >= (pairs.length - 1);
+      isCorrect = pairs.length > 0 && matches === pairs.length;
+      
+      const keyBtns = this.container.querySelectorAll('.match-key');
+      const valBtns = this.container.querySelectorAll('.match-val');
+      keyBtns.forEach(kb => {
+        const kIdx = kb.dataset.keyIdx;
+        const pairedVal = userPairs[kIdx];
+        if (String(pairedVal) === String(kIdx)) {
+          kb.classList.add('correct');
+        } else {
+          kb.classList.add('incorrect');
+        }
+      });
+      valBtns.forEach(vb => {
+        const vIdx = vb.dataset.valIdx;
+        const matched = Object.entries(userPairs).some(([k, v]) => String(k) === String(vIdx) && String(v) === String(vIdx));
+        if (matched) {
+          vb.classList.add('correct');
+        } else {
+          vb.classList.add('incorrect');
+        }
+      });
     } else if (q.type === 'categorise') {
       const userCats = this.answers[this.currentIndex] || {};
       const items = q.items || [];

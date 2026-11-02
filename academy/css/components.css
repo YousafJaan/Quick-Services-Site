@@ -1,4 +1,72 @@
 /* ==========================================================================
+   Top Announcement Bar (HEC Pakistan Aligned Accreditation Banner)
+   ========================================================================== */
+.qsa-top-announcement {
+  background: var(--qsa-bg-subtle);
+  border-bottom: 1px solid var(--qsa-border);
+  font-family: var(--qsa-font-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 6px 0;
+  position: relative;
+  z-index: 55;
+}
+
+[data-theme="dark"] .qsa-top-announcement {
+  background: var(--qsa-bg-sidebar);
+  border-bottom-color: var(--qsa-border);
+}
+
+.qsa-announcement-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-left: clamp(16px, 2.5vw, 36px);
+  padding-right: clamp(16px, 2.5vw, 36px);
+}
+
+.qsa-announcement-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.qsa-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--qsa-terracotta);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--qsa-radius-pill);
+  letter-spacing: 0.02em;
+}
+
+.qsa-announcement-text {
+  color: var(--qsa-text-secondary);
+  font-weight: 500;
+}
+
+.qsa-announcement-link {
+  color: var(--qsa-terracotta);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  transition: opacity var(--qsa-dur-fast);
+}
+
+.qsa-announcement-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
    Header & Navigation (Ultra-Refined Glassmorphic Academic Aesthetic)
    ========================================================================== */
 .hd {
@@ -978,7 +1046,7 @@
 .selection-toolbar {
   position: absolute;
   z-index: 100;
-  background: #ffffff;
+  background: var(--qsa-bg-elevated);
   border: 1px solid var(--qsa-border-strong);
   border-radius: var(--qsa-radius-pill);
   padding: 6px 10px;
@@ -1050,7 +1118,7 @@
 }
 
 .rail-btn:hover {
-  background: #ffffff;
+  background: var(--qsa-bg-fill-hover);
   color: var(--qsa-accent-clay-dark);
   border-color: var(--qsa-border-strong);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -1067,7 +1135,7 @@
    ========================================================================== */
 .inline-visual-drawer {
   margin: 18px 0 26px;
-  background: #ffffff;
+  background: var(--qsa-bg-card);
   border: 1px solid var(--qsa-border-card);
   border-radius: var(--qsa-radius-card);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
@@ -1113,7 +1181,7 @@
 }
 
 .inline-tab-btn {
-  background: #ffffff;
+  background: var(--qsa-bg-card);
   border: 1px solid var(--qsa-border-line);
   color: var(--qsa-text-secondary);
   font-size: 12px;
@@ -1207,7 +1275,8 @@
 }
 
 .modal-content {
-  background: #ffffff;
+  background: var(--qsa-bg-elevated);
+  border: 1px solid var(--qsa-border);
   color: var(--qsa-text-primary);
   border-radius: var(--qsa-radius-modal);
   box-shadow: var(--qsa-shadow-modal);
@@ -1731,7 +1800,7 @@ details.menu:not([open]) .links {
 }
 
 .clarity-copy-btn {
-  background: #ffffff;
+  background: var(--qsa-bg-card);
   border: 1px solid var(--qsa-border);
   border-radius: var(--qsa-radius-pill);
   padding: 3px 10px;
@@ -2048,8 +2117,9 @@ details.menu:not([open]) .links {
 
 .claude-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.65fr) minmax(220px, 300px);
   align-items: center;
+  justify-content: space-between;
   gap: 48px;
 }
 
@@ -2086,7 +2156,7 @@ details.menu:not([open]) .links {
 
 .claude-hero-title {
   font-family: var(--qsa-font-serif);
-  font-size: clamp(34px, 4.5vw, 48px);
+  font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 500;
   line-height: 1.18;
   letter-spacing: -0.02em;
@@ -2170,6 +2240,19 @@ details.menu:not([open]) .links {
   color: #ffffff !important;
 }
 
+[data-theme="dark"] .claude-btn-dark {
+  background: var(--qsa-terracotta);
+  border-color: var(--qsa-terracotta);
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .claude-btn-dark:hover {
+  background: var(--qsa-terracotta-hover);
+  border-color: var(--qsa-terracotta-hover);
+  color: #ffffff !important;
+}
+
 .claude-btn-subtle {
   display: inline-flex;
   align-items: center;
@@ -2193,6 +2276,44 @@ details.menu:not([open]) .links {
   border-color: var(--qsa-border-strong);
   color: var(--qsa-primary-navy);
   transform: translateY(-1px);
+}
+
+[data-theme="dark"] .claude-btn-subtle {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--qsa-border-strong);
+  color: var(--qsa-text-primary);
+}
+
+[data-theme="dark"] .claude-btn-subtle:hover {
+  background: var(--qsa-bg-fill);
+  border-color: var(--qsa-terracotta);
+  color: var(--qsa-text-primary);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .claude-badge-decagon {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--qsa-radius-card);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Identity Lock & Verification Card Dark Theme Adaptations */
+.identity-lock-card {
+  background: var(--qsa-bg-card) !important;
+}
+
+.identity-lock-card input[type="text"] {
+  background: var(--qsa-widget-input-bg) !important;
+  color: var(--qsa-text-primary) !important;
+  border-color: var(--qsa-border-strong) !important;
+}
+
+[data-theme="dark"] .identity-verified-card strong {
+  color: var(--qsa-status-success) !important;
+}
+
+[data-theme="dark"] .identity-verified-card span {
+  color: var(--qsa-text-secondary) !important;
 }
 
 /* Decagonal Badge Container */
@@ -3225,12 +3346,18 @@ details.menu:not([open]) .links {
 
 .claude-home-hero-title {
   font-family: var(--qsa-font-serif);
-  font-size: clamp(36px, 5.2vw, 54px);
+  font-size: clamp(28px, 3.5vw, 42px);
   font-weight: 500;
-  line-height: 1.14;
+  line-height: 1.18;
   letter-spacing: -0.025em;
   color: var(--qsa-primary-navy);
   margin: 0 0 16px 0;
+}
+
+.claude-home-hero-title em {
+  font-style: italic;
+  color: var(--qsa-terracotta);
+  font-family: var(--qsa-font-serif);
 }
 
 .claude-home-hero-desc {
@@ -3359,6 +3486,34 @@ details.menu:not([open]) .links {
 
 [data-theme="dark"] .claude-deep-banner {
   background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .claude-deep-banner svg rect[fill="#FFFFFF"],
+[data-theme="dark"] .claude-deep-banner svg rect[fill="#ffffff"] {
+  fill: var(--qsa-bg-card) !important;
+}
+
+[data-theme="dark"] .claude-deep-banner svg rect[fill="#FAF7F2"],
+[data-theme="dark"] .claude-deep-banner svg rect[fill="#faf7f2"] {
+  fill: var(--qsa-bg-subtle) !important;
+}
+
+[data-theme="dark"] .claude-deep-banner svg circle[fill="#FAF7F2"] {
+  fill: var(--qsa-bg-subtle) !important;
+}
+
+[data-theme="dark"] .claude-deep-banner svg [stroke="#E8E1D8"],
+[data-theme="dark"] .claude-deep-banner svg [stroke="#e8e1d8"] {
+  stroke: var(--qsa-border) !important;
+}
+
+[data-theme="dark"] .claude-deep-banner svg text[fill="#102B4E"],
+[data-theme="dark"] .claude-deep-banner svg text[fill="#172536"] {
+  fill: var(--qsa-text-primary) !important;
+}
+
+[data-theme="dark"] .claude-deep-banner svg text[fill="#637083"] {
+  fill: var(--qsa-text-secondary) !important;
 }
 
 .claude-deep-body {

@@ -65,7 +65,7 @@ class Store {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       let parsed = {};
       if (saved) {
-        try { parsed = JSON.parse(saved); } catch (e) {}
+        try { parsed = JSON.parse(saved); } catch (e) { }
       }
       const directLang = window.localStorage.getItem('qsa_english_level');
       if (directLang && ['simple', 'plain', 'technical'].includes(directLang)) {
@@ -121,7 +121,7 @@ class Store {
     this.save();
     try {
       window.dispatchEvent(new CustomEvent('qsa:student-identity-locked', { detail: { name: this.state.verifiedStudentName, regId: this.state.studentRegistrationId } }));
-    } catch (e) {}
+    } catch (e) { }
     return true;
   }
 
@@ -136,7 +136,7 @@ class Store {
       if (direct && ['light', 'dark'].includes(direct)) {
         return direct;
       }
-    } catch (e) {}
+    } catch (e) { }
     return this.state.theme || 'light';
   }
 
@@ -145,14 +145,14 @@ class Store {
       this.state.theme = theme;
       try {
         window.localStorage.setItem('qsa_theme', theme);
-      } catch (e) {}
+      } catch (e) { }
       if (typeof document !== 'undefined') {
         document.documentElement.setAttribute('data-theme', theme);
       }
       this.save();
       try {
         window.dispatchEvent(new CustomEvent('qsa:theme-changed', { detail: { theme } }));
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 
@@ -163,7 +163,7 @@ class Store {
       if (direct && ['simple', 'plain', 'technical'].includes(direct)) {
         return direct;
       }
-    } catch (e) {}
+    } catch (e) { }
     return this.state.englishLevel || 'plain';
   }
 
@@ -173,11 +173,11 @@ class Store {
       this.state.hasChosenEnglishLevel = true;
       try {
         window.localStorage.setItem('qsa_english_level', level);
-      } catch (e) {}
+      } catch (e) { }
       this.save();
       try {
         window.dispatchEvent(new CustomEvent('qsa:english-level-changed', { detail: { level } }));
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 
@@ -191,7 +191,7 @@ class Store {
       if (window.localStorage.getItem('qsa_cookies_accepted') === 'true') {
         return true;
       }
-    } catch (e) {}
+    } catch (e) { }
     return Boolean(this.state.cookiesAccepted);
   }
 
@@ -199,29 +199,48 @@ class Store {
     this.state.cookiesAccepted = true;
     try {
       window.localStorage.setItem('qsa_cookies_accepted', 'true');
-    } catch (e) {}
+    } catch (e) { }
     this.save();
     try {
       window.dispatchEvent(new CustomEvent('qsa:cookies-accepted'));
-    } catch (e) {}
+    } catch (e) { }
   }
 
-  // Study Time Tracker (pauses when tab is blurred or hidden)
+  // Study Time Tracker (pauses when tab is blurred, hidden, or user idle)
   _initStudyTimer() {
     if (typeof document === 'undefined') return;
     this.isActive = !document.hidden;
+    this.lastUserActivity = Date.now();
+    const IDLE_TIMEOUT_MS = 60000; // 60 seconds
+
+    const markActive = () => {
+      this.lastUserActivity = Date.now();
+    };
+
+    if (typeof window !== 'undefined') {
+      ['mousemove', 'keydown', 'scroll', 'click', 'touchstart'].forEach(evt => {
+        window.addEventListener(evt, markActive, { passive: true });
+      });
+    }
+
     document.addEventListener('visibilitychange', () => {
       this.isActive = !document.hidden;
+      if (this.isActive) this.lastUserActivity = Date.now();
     });
 
     setInterval(() => {
-      if (this.isActive) {
-        this.state.studyTime.totalSeconds += 1;
+      const isNotIdle = (Date.now() - this.lastUserActivity) < IDLE_TIMEOUT_MS;
+      if (this.isActive && isNotIdle) {
+        if (!this.state.studyTime) {
+          this.state.studyTime = { totalSeconds: 0, byCourse: {} };
+        }
+        this.state.studyTime.totalSeconds = (this.state.studyTime.totalSeconds || 0) + 1;
         if (this.state.activeLesson && this.state.activeLesson.courseId) {
           const cid = this.state.activeLesson.courseId;
+          if (!this.state.studyTime.byCourse) this.state.studyTime.byCourse = {};
           this.state.studyTime.byCourse[cid] = (this.state.studyTime.byCourse[cid] || 0) + 1;
         }
-        if (this.state.studyTime.totalSeconds % 30 === 0) {
+        if (this.state.studyTime.totalSeconds % 15 === 0) {
           this.save();
         }
       }
@@ -242,6 +261,63 @@ class Store {
 
   isLessonComplete(courseId, lessonId) {
     return (this.state.completedLessons[courseId] || []).includes(lessonId);
+  }
+
+  isCourseCompleted(courseId, totalLessonsCount = 20) {
+    const done = (this.state.completedLessons[courseId] || []).length;
+    return totalLessonsCount > 0 && done >= totalLessonsCount;
+  }
+
+  getCourseStudySeconds(courseId) {
+    if (!this.state.studyTime || !this.state.studyTime.byCourse) return 0;
+    return this.state.studyTime.byCourse[courseId] || 0;
+  }
+
+  getCertificateEligibility(courseId, totalLessonsCount = 20, accreditedHours = 3.0) {
+    const completed = (this.state.completedLessons[courseId] || []).length;
+    const lessonsComplete = totalLessonsCount > 0 && completed >= totalLessonsCount;
+
+    let examPassed = false;
+    let bestExamScore = 0;
+    if (this.state.quizAttempts) {
+      for (const [key, val] of Object.entries(this.state.quizAttempts)) {
+        if (key.startsWith(courseId + '_')) {
+          if (val.bestScore > bestExamScore) bestExamScore = val.bestScore;
+          if (val.passed && val.bestScore >= 80) examPassed = true;
+        }
+      }
+    }
+    if (!examPassed && lessonsComplete && bestExamScore >= 80) {
+      examPassed = true;
+    }
+
+    const studySecs = this.getCourseStudySeconds(courseId);
+    const requiredStudySeconds = Math.max(600, Math.round((accreditedHours || 3.0) * 200));
+    const timeMet = studySecs >= requiredStudySeconds;
+
+    const lessonsWeight = lessonsComplete ? 50 : Math.round((completed / (totalLessonsCount || 1)) * 50);
+    const examWeight = examPassed ? 30 : Math.round((Math.min(80, bestExamScore) / 80) * 30);
+    const timeWeight = timeMet ? 20 : Math.round((Math.min(requiredStudySeconds, studySecs) / requiredStudySeconds) * 20);
+    const overallProgressPct = Math.min(100, lessonsWeight + examWeight + timeWeight);
+
+    const eligible = Boolean(lessonsComplete && examPassed && timeMet);
+
+    return {
+      eligible,
+      lessonsComplete,
+      completedLessons: completed,
+      totalLessons: totalLessonsCount,
+      examPassed,
+      bestExamScore,
+      studySeconds: studySecs,
+      requiredStudySeconds,
+      timeMet,
+      overallProgressPct
+    };
+  }
+
+  isCourseEligibleForCertificate(courseId, totalLessonsCount, accreditedHours) {
+    return this.getCertificateEligibility(courseId, totalLessonsCount, accreditedHours).eligible;
   }
 
   getCourseProgress(courseId, totalLessonsCount) {
