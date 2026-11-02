@@ -1,7 +1,7 @@
 /**
  * Quick Services Academy — Interactive Academic & Statistical Widgets (15 Tools)
  * Zero external libraries, responsive down to 360px, fully keyboard and touch accessible.
- * Version 2.5.0 Advanced: Includes lifecycle teardown, polymorphic ingestion, and full two-way reactivity.
+ * Pro-Level v2.6.0: 100% Theme-Token Reactive (Zero Hardcoded Hexes in DOM), High-Legibility Dark Theme.
  */
 
 export const WIDGET_REGISTRY = [
@@ -121,16 +121,19 @@ export function renderWidget(paramA, paramB, paramC) {
 // -------------------------------------------------------------
 function renderCochranCalculator(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid var(--qsa-border-light, #e2e8f0); border-radius: 16px; padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: var(--qsa-font-serif, Georgia, serif); color: #102B4E;">Cochran's Sample Size Calculator</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 24px;">
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Cochran's Sample Size Calculator</h4>
+        <span class="pro-lesson-type-badge visual">Statistical Tool</span>
+      </div>
+      <p class="qsa-widget-desc">
         Calculate required statistical sample size with finite population correction (Cochran, 1977).
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
         <div>
-          <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px; color: #102B4E;">Confidence Level (Z)</label>
-          <select id="calc-z" style="width: 100%; min-height: 44px; padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-weight: 600; font-size: 14px;">
+          <label class="qsa-widget-label">Confidence Level (Z)</label>
+          <select id="calc-z" class="qsa-widget-input">
             <option value="1.96" selected>95% Confidence (Z = 1.96)</option>
             <option value="2.576">99% Confidence (Z = 2.576)</option>
             <option value="1.645">90% Confidence (Z = 1.645)</option>
@@ -138,8 +141,8 @@ function renderCochranCalculator(el) {
         </div>
 
         <div>
-          <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px; color: #102B4E;">Margin of Error (e)</label>
-          <select id="calc-e" style="width: 100%; min-height: 44px; padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-weight: 600; font-size: 14px;">
+          <label class="qsa-widget-label">Margin of Error (e)</label>
+          <select id="calc-e" class="qsa-widget-input">
             <option value="0.05" selected>±5% Margin (0.05 Standard)</option>
             <option value="0.03">±3% Margin (0.03 Precision)</option>
             <option value="0.01">±1% Margin (0.01 Stringent)</option>
@@ -147,15 +150,15 @@ function renderCochranCalculator(el) {
         </div>
 
         <div>
-          <label style="display: block; font-size: 12.5px; font-weight: 700; margin-bottom: 6px; color: #102B4E;">Known Population Size N (Optional)</label>
-          <input type="number" id="calc-n" placeholder="Leave blank if infinite" style="width: 100%; min-height: 44px; padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 14px; box-sizing: border-box;">
+          <label class="qsa-widget-label">Known Population Size N (Optional)</label>
+          <input type="number" id="calc-n" class="qsa-widget-input" placeholder="Leave blank if infinite">
         </div>
       </div>
 
-      <div style="background: #102B4E; color: #ffffff; border-radius: 14px; padding: 22px; margin-top: 24px; text-align: center;">
+      <div class="qsa-widget-dark-box" style="margin-top: 24px;">
         <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: #fbd38d; letter-spacing: 1px;">Recommended Sample Size</div>
-        <div id="calc-result" style="font-size: 46px; font-weight: 800; color: #B95335; margin: 6px 0;">384</div>
-        <div id="calc-formula" style="font-size: 13px; color: #cbd5e1; font-family: monospace;">
+        <div id="calc-result" style="font-size: 48px; font-weight: 800; color: var(--qsa-terracotta); margin: 6px 0;">384</div>
+        <div id="calc-formula" style="font-size: 13px; color: var(--qsa-text-muted); font-family: monospace;">
           n₀ = (1.96² × 0.5 × 0.5) / 0.05² = 384.16
         </div>
       </div>
@@ -189,27 +192,30 @@ function renderCochranCalculator(el) {
 // -------------------------------------------------------------
 function renderPowerExplainer(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Statistical Power & Effect Size Visualizer</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Statistical Power & Effect Size Visualizer</h4>
+        <span class="pro-lesson-type-badge visual">G*Power Concept</span>
+      </div>
+      <p class="qsa-widget-desc">
         Notice how increasing effect size or sample size separates the null (H₀) and alternative (H₁) distributions, reducing Type II error (β).
       </p>
 
       <div style="margin: 20px 0;">
         <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 6px;">
           <span>Cohen's Effect Size (d):</span>
-          <span id="power-d-val" style="color: #B95335;">0.50 (Medium)</span>
+          <span id="power-d-val" style="color: var(--qsa-terracotta);">0.50 (Medium)</span>
         </div>
-        <input type="range" id="power-d" min="0.1" max="1.0" step="0.05" value="0.5" style="width: 100%; accent-color: #B95335; min-height: 44px;">
+        <input type="range" id="power-d" class="qsa-widget-range" min="0.1" max="1.0" step="0.05" value="0.5">
       </div>
 
-      <div style="background: #102B4E; border-radius: 14px; padding: 20px; text-align: center;">
+      <div class="qsa-widget-dark-box" style="padding: 20px;">
         <svg id="power-svg" viewBox="0 0 500 200" style="width: 100%; height: auto; max-height: 200px;">
           <!-- Bell curves rendered dynamically -->
         </svg>
       </div>
-      <div style="margin-top: 16px; font-size: 13.5px; color: #334155; line-height: 1.6;">
-        <strong>Statistical Power (1 - β):</strong> <span id="power-calc-pct" style="color: #B95335; font-weight: 800;">80%</span>.
+      <div style="margin-top: 16px; font-size: 13.5px; color: var(--qsa-text-secondary); line-height: 1.6;">
+        <strong>Statistical Power (1 - β):</strong> <span id="power-calc-pct" style="color: var(--qsa-terracotta); font-weight: 800;">80%</span>.
         A power of 0.80 means an 80% probability of detecting a real empirical effect if it exists in the population.
       </div>
     </div>`;
@@ -218,6 +224,7 @@ function renderPowerExplainer(el) {
     const d = parseFloat(el.querySelector('#power-d').value);
     const label = d < 0.3 ? 'Small' : d < 0.7 ? 'Medium' : 'Large';
     el.querySelector('#power-d-val').innerText = `${d.toFixed(2)} (${label})`;
+
     const shift = d * 110;
     const powerPct = Math.min(99, Math.round(48 + d * 48));
     el.querySelector('#power-calc-pct').innerText = `${powerPct}%`;
@@ -230,15 +237,15 @@ function renderPowerExplainer(el) {
           <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.0"/>
         </linearGradient>
         <linearGradient id="gradAlt" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#B95335" stop-opacity="0.6"/>
-          <stop offset="100%" stop-color="#B95335" stop-opacity="0.0"/>
+          <stop offset="0%" stop-color="var(--qsa-terracotta)" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="var(--qsa-terracotta)" stop-opacity="0.0"/>
         </linearGradient>
       </defs>
-      <line x1="20" y1="170" x2="480" y2="170" stroke="#334155" stroke-width="2"/>
+      <line x1="20" y1="170" x2="480" y2="170" stroke="var(--qsa-border-strong)" stroke-width="2"/>
       <path d="M 40 170 Q 160 20 280 170 Z" fill="url(#gradNull)" stroke="#94a3b8" stroke-width="2"/>
       <text x="160" y="80" fill="#94a3b8" font-size="12" font-weight="700" text-anchor="middle">H₀ (Null)</text>
-      <path d="M ${40 + shift} 170 Q ${160 + shift} 20 ${280 + shift} 170 Z" fill="url(#gradAlt)" stroke="#B95335" stroke-width="2"/>
-      <text x="${160 + shift}" y="80" fill="#B95335" font-size="12" font-weight="700" text-anchor="middle">H₁ (Alternative)</text>
+      <path d="M ${40 + shift} 170 Q ${160 + shift} 20 ${280 + shift} 170 Z" fill="url(#gradAlt)" stroke="var(--qsa-terracotta)" stroke-width="2"/>
+      <text x="${160 + shift}" y="80" fill="var(--qsa-terracotta)" font-size="12" font-weight="700" text-anchor="middle">H₁ (Alternative)</text>
     `;
   };
 
@@ -251,20 +258,23 @@ function renderPowerExplainer(el) {
 // -------------------------------------------------------------
 function renderTopicFunnel(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">The 4-Stage Topic Narrowing Funnel</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">The 4-Stage Topic Narrowing Funnel</h4>
+        <span class="pro-lesson-type-badge visual">Thesis Framing</span>
+      </div>
+      <p class="qsa-widget-desc">
         Click each stage to transition from an unmanageable domain to a defensible thesis problem statement.
       </p>
 
       <div style="display: flex; flex-direction: column; gap: 10px;">
-        <button type="button" class="funnel-btn" data-stage="1" style="min-height: 44px; width: 100%; padding: 12px; border-radius: 999px; background: #f8fafc; border: 1.5px solid #cbd5e1; font-weight: 700; cursor: pointer; text-align: center;">Stage 1: Broad Thematic Domain (e.g. Social Media & Well-being)</button>
-        <button type="button" class="funnel-btn" data-stage="2" style="min-height: 44px; width: 85%; margin: 0 auto; padding: 12px; border-radius: 999px; background: #f8fafc; border: 1.5px solid #cbd5e1; font-weight: 700; cursor: pointer; text-align: center;">Stage 2: Bounded Population (e.g. Postgraduate Students in Multan)</button>
-        <button type="button" class="funnel-btn" data-stage="3" style="min-height: 44px; width: 70%; margin: 0 auto; padding: 12px; border-radius: 999px; background: #f8fafc; border: 1.5px solid #cbd5e1; font-weight: 700; cursor: pointer; text-align: center;">Stage 3: Defined Variables (e.g. FOMO & Sleep Quality)</button>
-        <button type="button" class="funnel-btn active" data-stage="4" style="min-height: 44px; width: 55%; margin: 0 auto; padding: 12px; border-radius: 999px; background: #B95335; color: #ffffff; border: none; font-weight: 800; cursor: pointer; text-align: center;">Stage 4: Defensible Research Question</button>
+        <button type="button" class="funnel-btn qsa-widget-btn-secondary" data-stage="1" style="width: 100%; border-radius: var(--qsa-radius-pill);">Stage 1: Broad Thematic Domain (e.g. Social Media & Well-being)</button>
+        <button type="button" class="funnel-btn qsa-widget-btn-secondary" data-stage="2" style="width: 85%; margin: 0 auto; border-radius: var(--qsa-radius-pill);">Stage 2: Bounded Population (e.g. Postgraduate Students in Multan)</button>
+        <button type="button" class="funnel-btn qsa-widget-btn-secondary" data-stage="3" style="width: 70%; margin: 0 auto; border-radius: var(--qsa-radius-pill);">Stage 3: Defined Variables (e.g. FOMO & Sleep Quality)</button>
+        <button type="button" class="funnel-btn qsa-widget-btn active" data-stage="4" style="width: 55%; margin: 0 auto; border-radius: var(--qsa-radius-pill);">Stage 4: Defensible Research Question</button>
       </div>
 
-      <div id="funnel-desc" style="background: #FAF7F1; border: 1.5px solid #E8E1D8; border-radius: 12px; padding: 20px; margin-top: 24px; font-size: 14.5px; line-height: 1.6; color: #102B4E;">
+      <div id="funnel-desc" class="qsa-widget-muted-box" style="margin-top: 24px; font-size: 14.5px; line-height: 1.6;">
         <strong>Defensible Research Question:</strong><br>
         <em>"To what extent does Fear of Missing Out (FOMO) mediate the relationship between evening smartphone usage and self-reported sleep quality among undergraduate medical students in Multan?"</em>
       </div>
@@ -280,11 +290,9 @@ function renderTopicFunnel(el) {
   el.querySelectorAll('.funnel-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       el.querySelectorAll('.funnel-btn').forEach(b => {
-        b.style.background = '#f8fafc';
-        b.style.color = '#102B4E';
+        b.className = 'funnel-btn qsa-widget-btn-secondary';
       });
-      btn.style.background = '#B95335';
-      btn.style.color = '#ffffff';
+      btn.className = 'funnel-btn qsa-widget-btn active';
       el.querySelector('#funnel-desc').innerHTML = details[btn.dataset.stage];
     });
   });
@@ -295,12 +303,16 @@ function renderTopicFunnel(el) {
 // -------------------------------------------------------------
 function renderWordPlanner(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Thesis Word Budget & Chapter Planner</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">Enter your target dissertation word count to view proportional allocation across all 5 chapters.</p>
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Thesis Word Budget & Chapter Planner</h4>
+        <span class="pro-lesson-type-badge visual">Dissertation Roadmap</span>
+      </div>
+      <p class="qsa-widget-desc">Enter your target dissertation word count to view proportional allocation across all 5 chapters.</p>
+      
       <div style="margin: 16px 0 24px;">
-        <label style="font-size: 12.5px; font-weight: 700; display: block; margin-bottom: 6px; color: #102B4E;">Target Word Count</label>
-        <input type="number" id="planner-total" value="20000" step="1000" style="padding: 10px 14px; min-height: 44px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 16px; width: 100%; max-width: 240px; box-sizing: border-box;">
+        <label class="qsa-widget-label">Target Word Count</label>
+        <input type="number" id="planner-total" class="qsa-widget-input" value="20000" step="1000" style="max-width: 260px;">
       </div>
       <div id="planner-bars" style="display: flex; flex-direction: column; gap: 10px;"></div>
     </div>`;
@@ -319,12 +331,12 @@ function renderWordPlanner(el) {
     barsContainer.innerHTML = chapters.map(ch => {
       const words = Math.round(total * ch.pct);
       return `
-        <div style="background: #FAF7F1; border: 1px solid #E8E1D8; border-radius: 10px; padding: 14px 18px;">
-          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 14.5px; color: #102B4E;">
+        <div class="qsa-widget-muted-box" style="padding: 14px 18px;">
+          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 14.5px; color: var(--qsa-primary-navy);">
             <span>${ch.name}</span>
-            <span style="color: #B95335;">${words.toLocaleString()} words (${ch.pct * 100}%)</span>
+            <span style="color: var(--qsa-terracotta);">${words.toLocaleString()} words (${ch.pct * 100}%)</span>
           </div>
-          <div style="font-size: 12.5px; color: #64748b; margin-top: 4px;">${ch.role}</div>
+          <div style="font-size: 12.5px; color: var(--qsa-text-muted); margin-top: 4px;">${ch.role}</div>
         </div>`;
     }).join('');
   };
@@ -338,19 +350,22 @@ function renderWordPlanner(el) {
 // -------------------------------------------------------------
 function renderApaDissecter(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Interactive APA 7th Reference Dissecter</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Interactive APA 7th Reference Dissecter</h4>
+        <span class="pro-lesson-type-badge visual">APA 7th Manual</span>
+      </div>
+      <p class="qsa-widget-desc">
         Click each highlighted component to view its official APA 7th manual rule.
       </p>
-      <div style="font-size: 17px; line-height: 2.2; background: #FAF7F1; padding: 22px; border-radius: 12px; font-family: Georgia, serif; border: 1px solid #E8E1D8;">
-        <span class="apa-part" data-rule="author" style="cursor: pointer; background: #fed7aa; padding: 4px 8px; border-radius: 6px; font-weight: 600;">Khan, A. M., &amp; Yousaf, M.</span>
-        <span class="apa-part" data-rule="year" style="cursor: pointer; background: #bbf7d0; padding: 4px 8px; border-radius: 6px; font-weight: 600;">(2025).</span>
-        <span class="apa-part" data-rule="title" style="cursor: pointer; background: #bae6fd; padding: 4px 8px; border-radius: 6px;">Evaluating statistical power in postgraduate business dissertations.</span>
-        <span class="apa-part" data-rule="source" style="cursor: pointer; background: #fbcfe8; padding: 4px 8px; border-radius: 6px;"><em>Journal of Higher Education Research</em>, 14(2), 112–128.</span>
-        <span class="apa-part" data-rule="doi" style="cursor: pointer; background: #e2e8f0; padding: 4px 8px; border-radius: 6px; font-family: monospace; font-size: 14px;">https://doi.org/10.1016/j.jher.2025.02.004</span>
+      <div class="qsa-widget-muted-box" style="font-size: 16px; line-height: 2.2; font-family: var(--qsa-font-serif);">
+        <span class="apa-part" data-rule="author" style="cursor: pointer; background: var(--qsa-terracotta-soft); color: var(--qsa-terracotta); padding: 4px 8px; border-radius: 6px; font-weight: 700;">Khan, A. M., &amp; Yousaf, M.</span>
+        <span class="apa-part" data-rule="year" style="cursor: pointer; background: var(--qsa-status-success-bg); color: var(--qsa-status-success); padding: 4px 8px; border-radius: 6px; font-weight: 700;">(2025).</span>
+        <span class="apa-part" data-rule="title" style="cursor: pointer; background: var(--qsa-primary-navy-soft); color: var(--qsa-primary-navy); padding: 4px 8px; border-radius: 6px;">Evaluating statistical power in postgraduate business dissertations.</span>
+        <span class="apa-part" data-rule="source" style="cursor: pointer; background: var(--qsa-bg-fill); color: var(--qsa-text-primary); padding: 4px 8px; border-radius: 6px;"><em>Journal of Higher Education Research</em>, 14(2), 112–128.</span>
+        <span class="apa-part" data-rule="doi" style="cursor: pointer; background: var(--qsa-bg-subtle); color: var(--qsa-text-secondary); padding: 4px 8px; border-radius: 6px; font-family: monospace; font-size: 13.5px;">https://doi.org/10.1016/j.jher.2025.02.004</span>
       </div>
-      <div id="apa-explanation" style="margin-top: 20px; background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 12px; padding: 18px; font-size: 14px; line-height: 1.6; color: #102B4E;">
+      <div id="apa-explanation" class="qsa-widget-card" style="margin-top: 20px; font-size: 14px; line-height: 1.6; padding: 18px;">
         👉 Click any highlighted element above to inspect the specific formatting rule.
       </div>
     </div>`;
@@ -375,9 +390,12 @@ function renderApaDissecter(el) {
 // -------------------------------------------------------------
 function renderSimilaritySimulator(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Turnitin Similarity Simulator &amp; HEC Policy Checker</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Turnitin Similarity Simulator &amp; HEC Policy Checker</h4>
+        <span class="pro-lesson-type-badge visual">HEC Policy</span>
+      </div>
+      <p class="qsa-widget-desc">
         Test how direct quotes, patchwriting, and exclusions impact your overall Turnitin index against HEC Pakistan criteria.
       </p>
 
@@ -385,30 +403,30 @@ function renderSimilaritySimulator(el) {
         <div>
           <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 4px;">
             <span>Direct Quoted Text:</span>
-            <span id="sim-quotes-val">10%</span>
+            <span id="sim-quotes-val" style="color: var(--qsa-terracotta);">10%</span>
           </div>
-          <input type="range" id="sim-quotes" min="0" max="30" step="1" value="10" style="width: 100%; accent-color: #B95335; min-height: 44px;">
+          <input type="range" id="sim-quotes" class="qsa-widget-range" min="0" max="30" step="1" value="10">
         </div>
 
         <div>
           <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-bottom: 4px;">
             <span>Patchwriting &amp; Inadequate Paraphrasing:</span>
-            <span id="sim-patch-val">8%</span>
+            <span id="sim-patch-val" style="color: var(--qsa-terracotta);">8%</span>
           </div>
-          <input type="range" id="sim-patch" min="0" max="30" step="1" value="8" style="width: 100%; accent-color: #B95335; min-height: 44px;">
+          <input type="range" id="sim-patch" class="qsa-widget-range" min="0" max="30" step="1" value="8">
         </div>
 
         <div style="display: flex; flex-wrap: wrap; gap: 20px; padding: 12px 0;">
           <label style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; cursor: pointer;">
-            <input type="checkbox" id="sim-ex-bib" checked style="width: 18px; height: 18px;"> Exclude Bibliography (HEC Permitted)
+            <input type="checkbox" id="sim-ex-bib" checked style="width: 18px; height: 18px; accent-color: var(--qsa-terracotta);"> Exclude Bibliography (HEC Permitted)
           </label>
           <label style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; cursor: pointer;">
-            <input type="checkbox" id="sim-ex-quotes" checked style="width: 18px; height: 18px;"> Exclude Cited Quotes (HEC Permitted)
+            <input type="checkbox" id="sim-ex-quotes" checked style="width: 18px; height: 18px; accent-color: var(--qsa-terracotta);"> Exclude Cited Quotes (HEC Permitted)
           </label>
         </div>
       </div>
 
-      <div id="sim-banner" style="background: #102B4E; color: #ffffff; border-radius: 14px; padding: 24px; text-align: center;">
+      <div id="sim-banner" class="qsa-widget-dark-box">
         <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: #fbd38d; letter-spacing: 0.8px;">Calculated Similarity Index</div>
         <div id="sim-score" style="font-size: 52px; font-weight: 800; color: #34d399; margin: 6px 0;">12%</div>
         <div id="sim-status" style="font-size: 14px; font-weight: 700; color: #34d399;">🟢 Safe for HEC Proposal/Thesis Submission (≤ 19%)</div>
@@ -424,7 +442,6 @@ function renderSimilaritySimulator(el) {
     el.querySelector('#sim-quotes-val').innerText = `${quotes}%`;
     el.querySelector('#sim-patch-val').innerText = `${patch}%`;
 
-    // Mathematical formula per EGM Approved Design
     const quotesContrib = quotes * (exQuotes ? 0.15 : 1.0);
     const patchContrib = patch * 1.25;
     const bibReduction = exBib ? 6 : 0;
@@ -458,29 +475,32 @@ function renderSimilaritySimulator(el) {
 // -------------------------------------------------------------
 function renderTestPicker(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Statistical Test Selector</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">Answer three questions to discover the exact statistical test required for your data.</p>
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Statistical Test Selector</h4>
+        <span class="pro-lesson-type-badge visual">Methodology Guide</span>
+      </div>
+      <p class="qsa-widget-desc">Answer two questions to discover the exact statistical test required for your empirical data.</p>
       <div style="display: flex; flex-direction: column; gap: 16px; margin: 20px 0;">
         <div>
-          <label style="font-size: 12.5px; font-weight: 700; display: block; margin-bottom: 6px; color: #102B4E;">Research Goal</label>
-          <select id="tp-goal" style="width: 100%; min-height: 44px; padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 14px;">
+          <label class="qsa-widget-label">Research Goal</label>
+          <select id="tp-goal" class="qsa-widget-input">
             <option value="means">Comparing group means (e.g. Male vs Female GPA)</option>
             <option value="relation">Testing relationship between continuous variables</option>
             <option value="predict">Predicting an outcome variable from multiple factors</option>
           </select>
         </div>
         <div>
-          <label style="font-size: 12.5px; font-weight: 700; display: block; margin-bottom: 6px; color: #102B4E;">Comparison Groups</label>
-          <select id="tp-groups" style="width: 100%; min-height: 44px; padding: 10px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 14px;">
+          <label class="qsa-widget-label">Comparison Groups</label>
+          <select id="tp-groups" class="qsa-widget-input">
             <option value="2">2 Independent Groups</option>
             <option value="3">3 or more Groups</option>
           </select>
         </div>
       </div>
-      <div id="tp-result" style="background: #FAF7F1; border-left: 4px solid #B95335; border-radius: 10px; padding: 18px; color: #102B4E; font-size: 14px;">
+      <div id="tp-result" class="qsa-widget-muted-box" style="border-left: 4px solid var(--qsa-terracotta);">
         <strong>Recommended Test:</strong> Independent Samples t-Test<br>
-        <span style="font-size: 13px; color: #64748b;">Assumptions: Normal distribution (Shapiro-Wilk) and Homogeneity of variance (Levene's test).</span>
+        <span style="font-size: 13px; color: var(--qsa-text-muted);">Assumptions: Normal distribution (Shapiro-Wilk) and Homogeneity of variance (Levene's test).</span>
       </div>
     </div>`;
 
@@ -491,14 +511,14 @@ function renderTestPicker(el) {
 
     if (goal === 'means') {
       if (groups === '2') {
-        res.innerHTML = `<strong>Recommended Test:</strong> Independent Samples t-Test<br><span style="font-size: 13px; color: #64748b;">Assumptions: Normality (Shapiro-Wilk) and Homogeneity of Variance (Levene's Test).</span>`;
+        res.innerHTML = `<strong>Recommended Test:</strong> Independent Samples t-Test<br><span style="font-size: 13px; color: var(--qsa-text-muted);">Assumptions: Normality (Shapiro-Wilk) and Homogeneity of Variance (Levene's Test).</span>`;
       } else {
-        res.innerHTML = `<strong>Recommended Test:</strong> One-Way ANOVA with Post-Hoc Tests (Tukey/Bonferroni)<br><span style="font-size: 13px; color: #64748b;">Assumptions: Normality of residuals and equal variances across groups.</span>`;
+        res.innerHTML = `<strong>Recommended Test:</strong> One-Way ANOVA with Post-Hoc Tests (Tukey/Bonferroni)<br><span style="font-size: 13px; color: var(--qsa-text-muted);">Assumptions: Normality of residuals and equal variances across groups.</span>`;
       }
     } else if (goal === 'relation') {
-      res.innerHTML = `<strong>Recommended Test:</strong> Pearson Bivariate Correlation (r)<br><span style="font-size: 13px; color: #64748b;">Assumptions: Linear relationship between interval/ratio variables without severe outliers.</span>`;
+      res.innerHTML = `<strong>Recommended Test:</strong> Pearson Bivariate Correlation (r)<br><span style="font-size: 13px; color: var(--qsa-text-muted);">Assumptions: Linear relationship between interval/ratio variables without severe outliers.</span>`;
     } else {
-      res.innerHTML = `<strong>Recommended Test:</strong> Multiple Linear Regression<br><span style="font-size: 13px; color: #64748b;">Assumptions: No multicollinearity (VIF < 5.0), homoscedasticity, and normal residuals.</span>`;
+      res.innerHTML = `<strong>Recommended Test:</strong> Multiple Linear Regression<br><span style="font-size: 13px; color: var(--qsa-text-muted);">Assumptions: No multicollinearity (VIF < 5.0), homoscedasticity, and normal residuals.</span>`;
     }
   };
 
@@ -510,32 +530,35 @@ function renderTestPicker(el) {
 // -------------------------------------------------------------
 function renderSpssAnnotator(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">SPSS Output Table Annotator (Independent Samples t-Test)</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">Click on any statistical output cell to learn how to interpret it and write it in APA 7th style.</p>
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">SPSS Output Table Annotator (Independent Samples t-Test)</h4>
+        <span class="pro-lesson-type-badge visual">SPSS Practical</span>
+      </div>
+      <p class="qsa-widget-desc">Click on any statistical output cell to learn how to interpret it and write it in APA 7th style.</p>
       <div style="overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; font-family: monospace; font-size: 13.5px;">
           <thead>
-            <tr style="background: #102B4E; color: #ffffff;">
-              <th style="padding: 12px; border: 1px solid #334155;">Variable</th>
-              <th style="padding: 12px; border: 1px solid #334155;">Levene Sig.</th>
-              <th style="padding: 12px; border: 1px solid #334155;">t</th>
-              <th style="padding: 12px; border: 1px solid #334155;">df</th>
-              <th style="padding: 12px; border: 1px solid #334155;">Sig. (2-tailed)</th>
+            <tr style="background: var(--qsa-primary-navy); color: #ffffff;">
+              <th style="padding: 12px; border: 1px solid var(--qsa-border);">Variable</th>
+              <th style="padding: 12px; border: 1px solid var(--qsa-border);">Levene Sig.</th>
+              <th style="padding: 12px; border: 1px solid var(--qsa-border);">t</th>
+              <th style="padding: 12px; border: 1px solid var(--qsa-border);">df</th>
+              <th style="padding: 12px; border: 1px solid var(--qsa-border);">Sig. (2-tailed)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 700;">Exam Score</td>
-              <td class="spss-cell" data-val="levene" style="padding: 12px; border: 1px solid #e2e8f0; background: #fed7aa; cursor: pointer; text-align: center;">0.412</td>
-              <td class="spss-cell" data-val="t" style="padding: 12px; border: 1px solid #e2e8f0; background: #bbf7d0; cursor: pointer; text-align: center;">3.482</td>
-              <td class="spss-cell" data-val="df" style="padding: 12px; border: 1px solid #e2e8f0; background: #bae6fd; cursor: pointer; text-align: center;">148</td>
-              <td class="spss-cell" data-val="sig" style="padding: 12px; border: 1px solid #e2e8f0; background: #fbcfe8; cursor: pointer; text-align: center;">0.001</td>
+              <td style="padding: 12px; border: 1px solid var(--qsa-border); font-weight: 700;">Exam Score</td>
+              <td class="spss-cell" data-val="levene" style="padding: 12px; border: 1px solid var(--qsa-border); background: var(--qsa-terracotta-soft); color: var(--qsa-terracotta); cursor: pointer; text-align: center; font-weight: 700;">0.412</td>
+              <td class="spss-cell" data-val="t" style="padding: 12px; border: 1px solid var(--qsa-border); background: var(--qsa-status-success-bg); color: var(--qsa-status-success); cursor: pointer; text-align: center; font-weight: 700;">3.482</td>
+              <td class="spss-cell" data-val="df" style="padding: 12px; border: 1px solid var(--qsa-border); background: var(--qsa-primary-navy-soft); color: var(--qsa-primary-navy); cursor: pointer; text-align: center; font-weight: 700;">148</td>
+              <td class="spss-cell" data-val="sig" style="padding: 12px; border: 1px solid var(--qsa-border); background: var(--qsa-bg-fill); color: var(--qsa-text-primary); cursor: pointer; text-align: center; font-weight: 700;">0.001</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div id="spss-expl" style="margin-top: 16px; background: #FAF7F1; padding: 18px; border-radius: 10px; font-size: 14px; line-height: 1.6; color: #102B4E;">
+      <div id="spss-expl" class="qsa-widget-muted-box" style="margin-top: 16px; font-size: 14px; line-height: 1.6;">
         👉 Click on any cell above to see how to report it in your thesis.
       </div>
     </div>`;
@@ -559,16 +582,19 @@ function renderSpssAnnotator(el) {
 // -------------------------------------------------------------
 function renderPlsModel(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">SmartPLS 4 Path Model Explorer</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">Click structural model criteria to inspect Hair et al. (2022) evaluation standards.</p>
-      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
-        <button type="button" class="pls-btn" data-info="loadings" style="min-height: 44px; padding: 10px 18px; border-radius: 10px; background: #ecfdf5; border: 1.5px solid #a7f3d0; font-weight: 700; cursor: pointer; color: #065f46;">Outer Loadings (λ ≥ 0.708)</button>
-        <button type="button" class="pls-btn" data-info="ave" style="min-height: 44px; padding: 10px 18px; border-radius: 10px; background: #eff6ff; border: 1.5px solid #bfdbfe; font-weight: 700; cursor: pointer; color: #1e40af;">AVE (≥ 0.50)</button>
-        <button type="button" class="pls-btn" data-info="htmt" style="min-height: 44px; padding: 10px 18px; border-radius: 10px; background: #fffbeb; border: 1.5px solid #fde68a; font-weight: 700; cursor: pointer; color: #92400e;">HTMT (< 0.85)</button>
-        <button type="button" class="pls-btn" data-info="r2" style="min-height: 44px; padding: 10px 18px; border-radius: 10px; background: #fdf2f8; border: 1.5px solid #fbcfe8; font-weight: 700; cursor: pointer; color: #9d174d;">R-Squared (R²)</button>
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">SmartPLS 4 Path Model Explorer</h4>
+        <span class="pro-lesson-type-badge visual">PLS-SEM</span>
       </div>
-      <div id="pls-details" style="background: #FAF7F1; padding: 18px; border-radius: 12px; font-size: 14px; line-height: 1.6; color: #102B4E;">
+      <p class="qsa-widget-desc">Click structural model criteria to inspect Hair et al. (2022) evaluation standards.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
+        <button type="button" class="pls-btn qsa-widget-btn-secondary" data-info="loadings">Outer Loadings (λ ≥ 0.708)</button>
+        <button type="button" class="pls-btn qsa-widget-btn-secondary" data-info="ave">AVE (≥ 0.50)</button>
+        <button type="button" class="pls-btn qsa-widget-btn-secondary" data-info="htmt">HTMT (< 0.85)</button>
+        <button type="button" class="pls-btn qsa-widget-btn-secondary" data-info="r2">R-Squared (R²)</button>
+      </div>
+      <div id="pls-details" class="qsa-widget-muted-box" style="font-size: 14px; line-height: 1.6;">
         Select an assessment criterion above to inspect guidelines.
       </div>
     </div>`;
@@ -582,6 +608,8 @@ function renderPlsModel(el) {
 
   el.querySelectorAll('.pls-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      el.querySelectorAll('.pls-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
       el.querySelector('#pls-details').innerHTML = info[btn.dataset.info];
     });
   });
@@ -592,37 +620,40 @@ function renderPlsModel(el) {
 // -------------------------------------------------------------
 function renderThresholdsTable(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">PLS-SEM Quality Criteria Thresholds Table</h4>
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">PLS-SEM Quality Criteria Thresholds Table</h4>
+        <span class="pro-lesson-type-badge visual">Reference Standards</span>
+      </div>
       <div style="overflow-x: auto; margin-top: 16px;">
         <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
           <thead>
-            <tr style="background: #102B4E; color: #ffffff;">
-              <th style="padding: 10px; text-align: left; border: 1px solid #334155;">Criterion</th>
-              <th style="padding: 10px; text-align: left; border: 1px solid #334155;">Standard Threshold</th>
-              <th style="padding: 10px; text-align: left; border: 1px solid #334155;">Primary Source</th>
+            <tr style="background: var(--qsa-primary-navy); color: #ffffff;">
+              <th style="padding: 10px; text-align: left; border: 1px solid var(--qsa-border);">Criterion</th>
+              <th style="padding: 10px; text-align: left; border: 1px solid var(--qsa-border);">Standard Threshold</th>
+              <th style="padding: 10px; text-align: left; border: 1px solid var(--qsa-border);">Primary Source</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">Cronbach's Alpha (α)</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0; color: #15803d; font-weight: 700;">≥ 0.70</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">Hair et al. (2022)</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">Cronbach's Alpha (α)</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border); color: var(--qsa-status-success); font-weight: 700;">≥ 0.70</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">Hair et al. (2022)</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">Composite Reliability (CR)</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0; color: #15803d; font-weight: 700;">0.70 – 0.95</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">Hair et al. (2022)</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">Composite Reliability (CR)</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border); color: var(--qsa-status-success); font-weight: 700;">0.70 – 0.95</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">Hair et al. (2022)</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">Average Variance Extracted (AVE)</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0; color: #15803d; font-weight: 700;">≥ 0.50</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">Fornell &amp; Larcker (1981)</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">Average Variance Extracted (AVE)</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border); color: var(--qsa-status-success); font-weight: 700;">≥ 0.50</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">Fornell &amp; Larcker (1981)</td>
             </tr>
             <tr>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">HTMT Ratio</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0; color: #15803d; font-weight: 700;">&lt; 0.85 / &lt; 0.90</td>
-              <td style="padding: 10px; border: 1px solid #e2e8f0;">Henseler et al. (2015)</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">HTMT Ratio</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border); color: var(--qsa-status-success); font-weight: 700;">&lt; 0.85 / &lt; 0.90</td>
+              <td style="padding: 10px; border: 1px solid var(--qsa-border);">Henseler et al. (2015)</td>
             </tr>
           </tbody>
         </table>
@@ -635,15 +666,18 @@ function renderThresholdsTable(el) {
 // -------------------------------------------------------------
 function renderBooleanBuilder(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Boolean Search String Builder</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 16px;">Combine primary keywords and synonyms to generate verified Scopus/Web of Science queries.</p>
-      <div style="display: grid; gap: 12px; margin: 16px 0;">
-        <input type="text" id="bb-k1" value="higher education" placeholder="Core Concept 1" style="padding: 10px; min-height: 44px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 14px;">
-        <input type="text" id="bb-k2" value="artificial intelligence" placeholder="Core Concept 2" style="padding: 10px; min-height: 44px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 14px;">
-        <input type="text" id="bb-k3" value="academic integrity" placeholder="Core Concept 3" style="padding: 10px; min-height: 44px; border-radius: 8px; border: 1.5px solid #cbd5e1; font-size: 14px;">
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Boolean Search String Builder</h4>
+        <span class="pro-lesson-type-badge visual">Scopus / Web of Science</span>
       </div>
-      <div style="background: #102B4E; color: #fbd38d; font-family: monospace; padding: 18px; border-radius: 12px; font-size: 13.5px; line-height: 1.5;" id="bb-output">
+      <p class="qsa-widget-desc">Combine primary keywords and synonyms to generate verified Scopus/Web of Science queries.</p>
+      <div style="display: grid; gap: 12px; margin: 16px 0;">
+        <input type="text" id="bb-k1" class="qsa-widget-input" value="higher education" placeholder="Core Concept 1">
+        <input type="text" id="bb-k2" class="qsa-widget-input" value="artificial intelligence" placeholder="Core Concept 2">
+        <input type="text" id="bb-k3" class="qsa-widget-input" value="academic integrity" placeholder="Core Concept 3">
+      </div>
+      <div class="qsa-widget-dark-box" style="font-family: monospace; font-size: 13.5px; line-height: 1.5; color: #fbd38d; text-align: left;" id="bb-output">
         ("higher education" OR "university") AND ("artificial intelligence" OR "generative AI") AND ("academic integrity" OR "plagiarism")
       </div>
     </div>`;
@@ -663,19 +697,22 @@ function renderBooleanBuilder(el) {
 // -------------------------------------------------------------
 function renderZoteroFlow(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Zotero Research Automation Flow</h4>
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Zotero Research Automation Flow</h4>
+        <span class="pro-lesson-type-badge visual">Reference Manager</span>
+      </div>
       <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;">
-        <div style="padding: 14px; background: #FAF7F1; border-radius: 10px; border: 1px solid #E8E1D8;"><strong>1. Capture:</strong> Click Zotero Connector in Chrome to save PDFs and clean bibliographic metadata with one click.</div>
-        <div style="padding: 14px; background: #FAF7F1; border-radius: 10px; border: 1px solid #E8E1D8;"><strong>2. Organize:</strong> Add tags, group by thesis chapter collections, and highlight key empirical quotes.</div>
-        <div style="padding: 14px; background: #FAF7F1; border-radius: 10px; border: 1px solid #E8E1D8;"><strong>3. Cite:</strong> Press Alt+Z in Microsoft Word to insert in-text parenthetical citations seamlessly.</div>
-        <div style="padding: 14px; background: #FAF7F1; border-radius: 10px; border: 1px solid #E8E1D8;"><strong>4. Bibliography:</strong> Click 'Add Bibliography' for instant 100% formatted APA 7 reference list with hanging indent.</div>
+        <div class="qsa-widget-muted-box" style="padding: 14px 18px;"><strong>1. Capture:</strong> Click Zotero Connector in Chrome to save PDFs and clean bibliographic metadata with one click.</div>
+        <div class="qsa-widget-muted-box" style="padding: 14px 18px;"><strong>2. Organize:</strong> Add tags, group by thesis chapter collections, and highlight key empirical quotes.</div>
+        <div class="qsa-widget-muted-box" style="padding: 14px 18px;"><strong>3. Cite:</strong> Press Alt+Z in Microsoft Word to insert in-text parenthetical citations seamlessly.</div>
+        <div class="qsa-widget-muted-box" style="padding: 14px 18px;"><strong>4. Bibliography:</strong> Click 'Add Bibliography' for instant 100% formatted APA 7 reference list with hanging indent.</div>
       </div>
     </div>`;
 }
 
 // -------------------------------------------------------------
-// 13. Viva Defense Flashcards (10 Real Pakistani Postgraduate Scenarios)
+// 13. Viva Defense Flashcards (10 Real Postgraduate Scenarios)
 // -------------------------------------------------------------
 function renderVivaCards(el) {
   const cards = [
@@ -747,37 +784,37 @@ function renderVivaCards(el) {
   const renderCard = () => {
     const c = cards[currentIndex];
     el.innerHTML = `
-      <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <h4 style="margin: 0; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Viva Voce Defense Simulator</h4>
-          <span style="font-size: 13px; font-weight: 800; color: #B95335;">Card ${currentIndex + 1} of ${cards.length}</span>
+      <div class="qsa-widget-card">
+        <div class="qsa-widget-head">
+          <h4 class="qsa-widget-title">Viva Voce Defense Simulator</h4>
+          <span style="font-size: 13px; font-weight: 800; color: var(--qsa-terracotta);">Card ${currentIndex + 1} of ${cards.length}</span>
         </div>
 
-        <div id="viva-card-box" style="background: #FAF7F1; border: 1.5px solid #E8E1D8; border-radius: 14px; padding: 24px; min-height: 180px; cursor: pointer; transition: all 0.2s ease;">
-          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: #B95335; letter-spacing: 0.8px;">
+        <div id="viva-card-box" class="qsa-widget-muted-box" style="min-height: 180px; cursor: pointer; transition: all 0.2s ease;">
+          <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.8px;">
             ${isFlipped ? 'Examiner Defense Strategy & Model Response' : 'Examiner Question'}
           </div>
-          <div style="font-size: 17px; font-weight: 700; color: #102B4E; margin: 12px 0; line-height: 1.5;">
+          <div style="font-size: 17px; font-weight: 700; color: var(--qsa-primary-navy); margin: 12px 0; line-height: 1.5;">
             ${isFlipped ? c.defense : `"${c.q}"`}
           </div>
           ${isFlipped ? `
-            <div style="font-size: 13px; color: #64748b; margin-top: 12px; border-top: 1px dashed #cbd5e1; padding-top: 10px;">
+            <div style="font-size: 13px; color: var(--qsa-text-secondary); margin-top: 12px; border-top: 1px dashed var(--qsa-border); padding-top: 10px;">
               <strong>🎯 Examiner Intent:</strong> ${c.intent}<br>
-              <strong style="color: #dc2626;">⚠️ Fatal Trap to Avoid:</strong> ${c.trap}
+              <strong style="color: var(--qsa-status-danger);">⚠️ Fatal Trap to Avoid:</strong> ${c.trap}
             </div>` : `
-            <div style="font-size: 12.5px; color: #64748b; margin-top: 16px;">
+            <div style="font-size: 12.5px; color: var(--qsa-text-muted); margin-top: 16px;">
               👉 Click anywhere on this card to reveal the high-distinction defense script.
             </div>`}
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 12px;">
-          <button type="button" id="viva-prev-btn" style="min-height: 44px; padding: 8px 18px; border-radius: 8px; border: 1.5px solid #cbd5e1; background: #ffffff; font-weight: 700; cursor: pointer;" ${currentIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 12px; flex-wrap: wrap;">
+          <button type="button" id="viva-prev-btn" class="qsa-widget-btn-secondary" ${currentIndex === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
             ← Previous
           </button>
-          <button type="button" id="viva-flip-btn" style="min-height: 44px; padding: 8px 22px; border-radius: 8px; border: none; background: #B95335; color: #ffffff; font-weight: 700; cursor: pointer;">
+          <button type="button" id="viva-flip-btn" class="qsa-widget-btn">
             ${isFlipped ? 'Hide Answer' : 'Reveal Defense Answer'}
           </button>
-          <button type="button" id="viva-next-btn" style="min-height: 44px; padding: 8px 18px; border-radius: 8px; border: 1.5px solid #cbd5e1; background: #ffffff; font-weight: 700; cursor: pointer;" ${currentIndex === cards.length - 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+          <button type="button" id="viva-next-btn" class="qsa-widget-btn-secondary" ${currentIndex === cards.length - 1 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
             Next →
           </button>
         </div>
@@ -821,33 +858,36 @@ function renderSlideTimer(el) {
   let timerActive = false;
 
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Viva Slide Budget &amp; Practice Pace Timer</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Viva Slide Budget &amp; Practice Pace Timer</h4>
+        <span class="pro-lesson-type-badge visual">Viva Capstone</span>
+      </div>
+      <p class="qsa-widget-desc">
         For a standard 15-minute viva presentation, your deck should not exceed 12 slides (approx. 75 seconds per slide). Practice your pacing with this live rehearsal timer.
       </p>
 
-      <div id="timer-box" style="background: #102B4E; color: #ffffff; border-radius: 16px; padding: 24px; text-align: center; margin: 20px 0; transition: background 0.3s ease;">
+      <div id="timer-box" class="qsa-widget-dark-box" style="margin: 20px 0;">
         <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: #fbd38d; letter-spacing: 1px;">Current Slide Target Time</div>
         <div id="timer-display" style="font-size: 54px; font-weight: 800; color: #34d399; margin: 6px 0; font-family: monospace;">01:15</div>
-        <div id="timer-pace-label" style="font-size: 13.5px; color: #cbd5e1;">🟢 On Pace • Clear and deliberate delivery</div>
+        <div id="timer-pace-label" style="font-size: 13.5px; color: var(--qsa-text-muted);">🟢 On Pace • Clear and deliberate delivery</div>
       </div>
 
-      <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 24px;">
-        <button type="button" id="timer-toggle-btn" style="min-height: 44px; padding: 10px 24px; border-radius: 8px; border: none; background: #B95335; color: #ffffff; font-weight: 800; font-size: 14px; cursor: pointer;">
+      <div style="display: flex; justify-content: center; gap: 14px; margin-bottom: 24px; flex-wrap: wrap;">
+        <button type="button" id="timer-toggle-btn" class="qsa-widget-btn">
           Start Pacing Timer
         </button>
-        <button type="button" id="timer-reset-btn" style="min-height: 44px; padding: 10px 20px; border-radius: 8px; border: 1.5px solid #cbd5e1; background: #ffffff; color: #102B4E; font-weight: 700; font-size: 14px; cursor: pointer;">
+        <button type="button" id="timer-reset-btn" class="qsa-widget-btn-secondary">
           Reset Slide
         </button>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
-        <div style="background: #FAF7F1; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #E8E1D8; font-size: 13px;"><strong>Slide 1:</strong> Title (30s)</div>
-        <div style="background: #FAF7F1; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #E8E1D8; font-size: 13px;"><strong>Slides 2-3:</strong> Problem &amp; Lit (3m)</div>
-        <div style="background: #FAF7F1; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #E8E1D8; font-size: 13px;"><strong>Slides 4-6:</strong> Methodology (4m)</div>
-        <div style="background: #FAF7F1; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #E8E1D8; font-size: 13px;"><strong>Slides 7-9:</strong> Results (4m)</div>
-        <div style="background: #FAF7F1; padding: 12px; border-radius: 8px; text-align: center; border: 1px solid #E8E1D8; font-size: 13px;"><strong>Slides 10-12:</strong> Conclusion (3.5m)</div>
+        <div class="qsa-widget-muted-box" style="padding: 12px; text-align: center; font-size: 13px;"><strong>Slide 1:</strong> Title (30s)</div>
+        <div class="qsa-widget-muted-box" style="padding: 12px; text-align: center; font-size: 13px;"><strong>Slides 2-3:</strong> Problem &amp; Lit (3m)</div>
+        <div class="qsa-widget-muted-box" style="padding: 12px; text-align: center; font-size: 13px;"><strong>Slides 4-6:</strong> Methodology (4m)</div>
+        <div class="qsa-widget-muted-box" style="padding: 12px; text-align: center; font-size: 13px;"><strong>Slides 7-9:</strong> Results (4m)</div>
+        <div class="qsa-widget-muted-box" style="padding: 12px; text-align: center; font-size: 13px;"><strong>Slides 10-12:</strong> Conclusion (3.5m)</div>
       </div>
     </div>`;
 
@@ -859,28 +899,17 @@ function renderSlideTimer(el) {
   const updateDisplay = () => {
     const mins = Math.floor(secondsRemaining / 60);
     const secs = secondsRemaining % 60;
-    display.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    display.innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 
-    if (secondsRemaining > 20) {
+    if (secondsRemaining > 30) {
       display.style.color = '#34d399';
-      paceLabel.innerText = '🟢 On Pace • Clear and deliberate delivery';
-    } else if (secondsRemaining > 0) {
+      paceLabel.innerHTML = '🟢 On Pace • Clear and deliberate delivery';
+    } else if (secondsRemaining > 10) {
       display.style.color = '#fbbf24';
-      paceLabel.innerText = '🟡 Wrap Up • Conclude this slide within 20 seconds';
+      paceLabel.innerHTML = '🟡 Wrap Up • Transition to key takeaway';
     } else {
       display.style.color = '#f87171';
-      paceLabel.innerText = '🔴 Over Time • Move to the next slide immediately';
-    }
-  };
-
-  const tick = () => {
-    if (secondsRemaining > 0) {
-      secondsRemaining--;
-      updateDisplay();
-    } else {
-      teardownWidget();
-      timerActive = false;
-      toggleBtn.innerText = 'Re-Start Timer';
+      paceLabel.innerHTML = '🔴 Overtime Danger • Conclude this slide immediately';
     }
   };
 
@@ -890,10 +919,18 @@ function renderSlideTimer(el) {
       timerActive = false;
       toggleBtn.innerText = 'Resume Timer';
     } else {
-      teardownWidget();
-      window.__qsaActiveTimer = setInterval(tick, 1000);
       timerActive = true;
       toggleBtn.innerText = 'Pause Timer';
+      window.__qsaActiveTimer = setInterval(() => {
+        if (secondsRemaining > 0) {
+          secondsRemaining--;
+          updateDisplay();
+        } else {
+          teardownWidget();
+          timerActive = false;
+          toggleBtn.innerText = 'Slide Complete';
+        }
+      }, 1000);
     }
   });
 
@@ -911,24 +948,33 @@ function renderSlideTimer(el) {
 // -------------------------------------------------------------
 function renderChecklistWidget(el) {
   el.innerHTML = `
-    <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 28px;">
-      <h4 style="margin: 0 0 8px; font-size: 18px; font-family: Georgia, serif; color: #102B4E;">Interactive Thesis Submission Audit Checklist</h4>
-      <p style="font-size: 13.5px; color: #64748b; margin: 0 0 20px;">Complete this final compliance audit prior to binding and departmental submission.</p>
+    <div class="qsa-widget-card">
+      <div class="qsa-widget-head">
+        <h4 class="qsa-widget-title">Interactive Thesis Submission Audit Checklist</h4>
+        <span class="pro-lesson-type-badge visual">Pre-Flight Review</span>
+      </div>
+      <p class="qsa-widget-desc">Complete this final compliance audit prior to binding and departmental submission.</p>
+      
       <div style="display: flex; flex-direction: column; gap: 14px;">
-        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #102B4E; cursor: pointer;">
-          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px;"> Every in-text citation matches an exact entry in the reference list.
+        <label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--qsa-text-primary); cursor: pointer;">
+          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px; accent-color: var(--qsa-terracotta);"> 
+          <span>Every in-text citation matches an exact entry in the reference list.</span>
         </label>
-        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #102B4E; cursor: pointer;">
-          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px;"> All tables and figures adhere to APA 7th border rules (no vertical lines).
+        <label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--qsa-text-primary); cursor: pointer;">
+          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px; accent-color: var(--qsa-terracotta);"> 
+          <span>All tables and figures adhere to APA 7th border rules (no vertical lines).</span>
         </label>
-        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #102B4E; cursor: pointer;">
-          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px;"> Overall Turnitin similarity index is under 19% with no single source exceeding 5%.
+        <label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--qsa-text-primary); cursor: pointer;">
+          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px; accent-color: var(--qsa-terracotta);"> 
+          <span>Overall Turnitin similarity index is under 19% with no single source exceeding 5%.</span>
         </label>
-        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #102B4E; cursor: pointer;">
-          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px;"> Signed supervisor consent letter and ethics board clearance are attached in appendices.
+        <label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--qsa-text-primary); cursor: pointer;">
+          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px; accent-color: var(--qsa-terracotta);"> 
+          <span>Signed supervisor consent letter and ethics board clearance are attached in appendices.</span>
         </label>
-        <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #102B4E; cursor: pointer;">
-          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px;"> Front matter page numbers use Roman numerals (i, ii, iii) and Chapter 1 begins at Arabic page 1.
+        <label style="display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--qsa-text-primary); cursor: pointer;">
+          <input type="checkbox" style="width: 20px; height: 20px; margin-top: 2px; accent-color: var(--qsa-terracotta);"> 
+          <span>Front matter page numbers use Roman numerals (i, ii, iii) and Chapter 1 begins at Arabic page 1.</span>
         </label>
       </div>
     </div>`;

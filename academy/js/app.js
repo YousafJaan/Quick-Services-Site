@@ -635,10 +635,10 @@ function renderCatalog(courses) {
 
     <!-- Resume Banner (If Learner Has an Active Lesson) -->
     ${active && active.courseId ? `
-      <section style="background: #ffffff; border-bottom: 1px solid var(--qsa-border); padding: 14px 0;">
+      <section style="background: var(--qsa-bg-card); border-bottom: 1px solid var(--qsa-border); padding: 16px 0; box-shadow: var(--qsa-shadow-card);">
         <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
           <div style="font-size: 14px; color: var(--qsa-text-secondary);">
-            <strong>Resume where you left off:</strong> Lesson <code>${active.lessonId.toUpperCase()}</code> in <em>${active.courseId.toUpperCase()}</em>
+            <strong style="color: var(--qsa-primary-navy);">Resume where you left off:</strong> Lesson <code style="background: var(--qsa-bg-subtle); padding: 2px 6px; border-radius: 4px; color: var(--qsa-terracotta);">${active.lessonId.toUpperCase()}</code> in <em>${active.courseId.toUpperCase()}</em>
           </div>
           <a href="#lesson-${active.courseId}-${active.lessonId}" class="btn btn-primary btn-sm">Continue Lesson ➔</a>
         </div>
@@ -1323,46 +1323,62 @@ function renderCourseOverview(course) {
         </div>
       </div>
 
-      <!-- Curriculum by Module Breakdown with Claude Academy Accordions -->
-      <div id="curriculum-breakdown">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap: wrap; gap: 12px;">
-          <h3 style="font-family: var(--qsa-font-serif); color: var(--qsa-primary-navy); margin: 0; font-size: 26px; font-weight: 500;">
-            Curriculum by Module
-          </h3>
-          <button type="button" class="claude-prompt-copy-btn" id="claude-toggle-all-modules" style="font-size: 12.5px;">
-            <span>⊟</span> <span id="claude-toggle-all-text">Collapse All</span>
+      <!-- Pro-Grade Curriculum by Module Breakdown -->
+      <div id="curriculum-breakdown" style="margin-top: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.8px; margin-bottom: 4px;">Verified Doctoral Structure</div>
+            <h3 style="font-family: var(--qsa-font-serif); color: var(--qsa-primary-navy); margin: 0; font-size: 28px; font-weight: 600;">
+              Curriculum Syllabus by Module
+            </h3>
+          </div>
+          <button type="button" class="claude-prompt-copy-btn" id="claude-toggle-all-modules" style="font-size: 13px; padding: 8px 16px;">
+            <span>⊟</span> <span id="claude-toggle-all-text">Collapse All Modules</span>
           </button>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 18px;">
           ${course.modules.map((m, idx) => `
-            <div class="claude-module-accordion-card" style="background: var(--qsa-bg-card); border: 1px solid var(--qsa-border); border-radius: var(--qsa-radius-card); overflow: hidden; box-shadow: var(--qsa-shadow-card);">
-              <div class="claude-module-header" data-mod-idx="${idx}" style="padding: 22px 28px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; background: var(--qsa-bg-card); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
-                <div>
-                  <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 0.6px; margin-bottom: 4px;">
-                    Module ${idx + 1} • ${(m.lessons || []).length} Lessons
+            <div class="pro-syllabus-card">
+              <div class="pro-syllabus-header" data-mod-idx="${idx}">
+                <div style="flex: 1; padding-right: 16px;">
+                  <div class="pro-module-meta">
+                    <span>Module ${idx + 1}</span>
+                    <span>•</span>
+                    <span>${(m.lessons || []).length} Lessons</span>
+                    <span>•</span>
+                    <span>${(m.lessons || []).reduce((acc, l) => acc + (l.minutes || 10), 0)} Minutes</span>
                   </div>
-                  <h4 style="font-size: 19px; margin: 0; font-family: var(--qsa-font-serif); font-weight: 500; color: var(--qsa-primary-navy);">${m.title}</h4>
-                  <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 6px 0 0; line-height: 1.5;">${m.description}</p>
+                  <h4 class="pro-module-title">${m.title}</h4>
+                  <p class="pro-module-desc">${m.description}</p>
                 </div>
-                <div class="claude-module-chevron" style="font-size: 16px; color: var(--qsa-text-muted); transition: transform 0.2s ease;">
+                <div class="pro-module-chevron" aria-label="Toggle module accordion">
                   ▼
                 </div>
               </div>
-              <div class="claude-module-body" id="claude-mod-body-${idx}" style="padding: 0 28px 24px; display: block; border-top: 1px dashed var(--qsa-border);">
-                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 16px;">
-                  ${(m.lessons || []).map(l => {
+              <div class="pro-syllabus-body" id="claude-mod-body-${idx}">
+                <div class="pro-syllabus-list">
+                  ${(m.lessons || []).map((l, lIdx) => {
                     const done = store.isLessonComplete(course.id, l.id);
+                    const typeLabel = l.type === 'video' ? '📹 Video' : l.type === 'visual' ? '⚡ Interactive Tool' : l.type === 'quiz' ? '📝 Quiz' : '📖 Reading';
+                    const typeClass = l.type || 'read';
                     return `
-                      <a href="#lesson-${course.id}-${l.id}" style="display: flex; align-items: center; justify-content: space-between; padding: 11px 16px; background: var(--qsa-bg-subtle); border-radius: 8px; text-decoration: none; font-size: 14px; color: var(--qsa-text-primary); transition: background var(--qsa-dur-fast) var(--qsa-ease-out);">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                          <span style="color: ${done ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'}; font-weight: 800; font-size: 15px;">
-                            ${done ? '✓' : '○'}
+                      <a href="#lesson-${course.id}-${l.id}" class="pro-syllabus-lesson-row ${done ? 'completed' : ''}">
+                        <div class="pro-syllabus-left">
+                          <span class="pro-lesson-status-icon ${done ? 'done' : 'pending'}" title="${done ? 'Completed' : 'Not started'}">
+                            ${done ? '✓' : lIdx + 1}
                           </span>
-                          <span style="font-weight: 500;">${l.title}</span>
-                          <span class="tag tag-peach" style="font-size: 10px; padding: 2px 7px;">${l.type}</span>
+                          <div>
+                            <div style="font-weight: 600; font-size: 14.5px; line-height: 1.4;">${l.title}</div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                              <span class="pro-lesson-type-badge ${typeClass}">${typeLabel}</span>
+                              <span style="font-size: 12px; color: var(--qsa-text-muted); font-weight: 600;">⏱️ ${l.minutes || 10} min</span>
+                            </div>
+                          </div>
                         </div>
-                        <span style="font-size: 12.5px; color: var(--qsa-text-muted); font-weight: 600;">${l.minutes}m</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                          ${done ? `<span style="font-size: 12px; font-weight: 700; color: var(--qsa-status-success);">Completed</span>` : `<span style="font-size: 13px; color: var(--qsa-text-muted); font-weight: 600;">Start ➔</span>`}
+                        </div>
                       </a>`;
                   }).join('')}
                 </div>
@@ -1374,11 +1390,11 @@ function renderCourseOverview(course) {
     </div>`;
 
   // Setup Module Accordion Toggles
-  const moduleCards = mainEl.querySelectorAll('.claude-module-accordion-card');
+  const moduleCards = mainEl.querySelectorAll('.pro-syllabus-card');
   moduleCards.forEach(card => {
-    const header = card.querySelector('.claude-module-header');
-    const body = card.querySelector('.claude-module-body');
-    const chevron = card.querySelector('.claude-module-chevron');
+    const header = card.querySelector('.pro-syllabus-header');
+    const body = card.querySelector('.pro-syllabus-body');
+    const chevron = card.querySelector('.pro-module-chevron');
     if (header && body && chevron) {
       header.addEventListener('click', () => {
         const isCollapsed = body.style.display === 'none';

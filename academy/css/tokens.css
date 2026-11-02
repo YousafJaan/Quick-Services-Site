@@ -125,6 +125,29 @@
   --qsa-max-width: 1200px;
   --qsa-narrow-width: 820px;
   --qsa-header-height: 64px;
+
+  /* Glassmorphism & Header */
+  --qsa-header-bg: rgba(255, 255, 255, 0.88);
+  --qsa-header-border: rgba(16, 43, 78, 0.08);
+  --qsa-glass-blur: blur(16px) saturate(180%);
+  --qsa-bg-hover: rgba(16, 43, 78, 0.04);
+
+  /* Pro-Grade Widget System Tokens */
+  --qsa-widget-bg: #FFFFFF;
+  --qsa-widget-border: #E8E1D8;
+  --qsa-widget-border-hover: #D5CCC1;
+  --qsa-widget-muted-box: #F6F1E9;
+  --qsa-widget-input-bg: #FFFFFF;
+  --qsa-widget-input-border: #CBD5E1;
+  --qsa-widget-dark-box: #102B4E;
+  --qsa-widget-dark-box-border: #1B3F6E;
+  --qsa-widget-dark-box-text: #FFFFFF;
+
+  /* Pro Syllabus Architecture Tokens */
+  --qsa-syllabus-link-hover: #F4EFEB;
+  --qsa-syllabus-link-active: #FBF0EC;
+  --qsa-syllabus-active-border: #B95335;
+  --qsa-accent-glow: 0 0 20px rgba(185, 83, 53, 0.12);
 }
 
 /* ==========================================================================
@@ -145,32 +168,32 @@
   --qsa-sage-soft: #17241F;
 
   /* Surfaces */
-  --qsa-bg-page: #0B131E;             /* Deep academic night */
-  --qsa-bg-card: #131E2C;             /* Elevated dark surface */
-  --qsa-bg-sidebar: #0F1722;
-  --qsa-bg-elevated: #182535;
-  --qsa-bg-subtle: #15202E;
-  --qsa-bg-fill: #1D2B3D;
-  --qsa-bg-fill-hover: #26384F;
+  --qsa-bg-page: #080E18;             /* Deep academic obsidian canvas */
+  --qsa-bg-card: #101A28;             /* Elevated dark surface */
+  --qsa-bg-sidebar: #0C1420;
+  --qsa-bg-elevated: #162436;
+  --qsa-bg-subtle: #131E2C;
+  --qsa-bg-fill: #1C2B3E;
+  --qsa-bg-fill-hover: #263850;
 
   /* Text & Ink */
-  --qsa-text-primary: #F0F4F8;        /* Soft crisp white */
-  --qsa-text-secondary: #A0B0C0;      /* Clear readable secondary */
-  --qsa-text-muted: #728498;
-  --qsa-text-tertiary: #526375;
+  --qsa-text-primary: #F1F5F9;        /* Crisp high-legibility white */
+  --qsa-text-secondary: #94A3B8;      /* Clean WCAG-compliant secondary */
+  --qsa-text-muted: #64748B;
+  --qsa-text-tertiary: #475569;
 
   /* Hairlines & Borders */
-  --qsa-border: #223246;
-  --qsa-border-line: #223246;
-  --qsa-border-card: #223246;
-  --qsa-border-strong: #324760;
+  --qsa-border: #1F2D40;
+  --qsa-border-line: #1F2D40;
+  --qsa-border-card: #1F2D40;
+  --qsa-border-strong: #2D4057;
   --qsa-focus-ring: #E27B5E;
 
   /* Active Contrast Tokens */
   --qsa-grad-dark-active: #E27B5E;
   --qsa-grad-dark-hover: #EB8D72;
   --qsa-shadow-dark-active: 0 1px 4px rgba(0, 0, 0, 0.4);
-  --qsa-text-dark-active: #0B131E;
+  --qsa-text-dark-active: #080E18;
 
   /* Status Colors (Muted for Dark Mode) */
   --qsa-status-success: #4ADE80;
@@ -187,13 +210,35 @@
   --qsa-status-info-border: #233B58;
 
   /* Claude Academy Warm Blush & Decagon Tokens (Dark) */
-  --qsa-bg-blush: #1A222D;
-  --qsa-bg-blush-border: #2A3645;
-  --qsa-decagon-bg: #16202C;
-  --qsa-decagon-border: #2B3A4D;
+  --qsa-bg-blush: #121C2B;
+  --qsa-bg-blush-border: #1E2D40;
+  --qsa-decagon-bg: #101A28;
+  --qsa-decagon-border: #233246;
 
   /* Shadows for Dark Mode */
-  --qsa-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
-  --qsa-shadow-lift: 0 6px 16px -2px rgba(0, 0, 0, 0.35), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --qsa-shadow-modal: 0 16px 36px -6px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --qsa-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --qsa-shadow-lift: 0 8px 24px -2px rgba(0, 0, 0, 0.45), 0 2px 6px -1px rgba(0, 0, 0, 0.25);
+  --qsa-shadow-modal: 0 20px 48px -6px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  /* Glassmorphism & Header (Dark) */
+  --qsa-header-bg: rgba(12, 20, 32, 0.85);
+  --qsa-header-border: rgba(255, 255, 255, 0.08);
+  --qsa-bg-hover: rgba(255, 255, 255, 0.05);
+
+  /* Pro-Grade Widget System Tokens (Dark) */
+  --qsa-widget-bg: #101A28;
+  --qsa-widget-border: #1F2D40;
+  --qsa-widget-border-hover: #2D4057;
+  --qsa-widget-muted-box: #152234;
+  --qsa-widget-input-bg: #0C1420;
+  --qsa-widget-input-border: #263850;
+  --qsa-widget-dark-box: #080E18;
+  --qsa-widget-dark-box-border: #1F2D40;
+  --qsa-widget-dark-box-text: #F1F5F9;
+
+  /* Pro Syllabus Architecture Tokens (Dark) */
+  --qsa-syllabus-link-hover: #162436;
+  --qsa-syllabus-link-active: #2B1D19;
+  --qsa-syllabus-active-border: #E27B5E;
+  --qsa-accent-glow: 0 0 24px rgba(226, 123, 94, 0.25);
 }

@@ -259,14 +259,18 @@ function renderLessonPlayer(container, course, lesson) {
           </div>
         </main>
 
-        <!-- Right Column: Sticky Syllabus Sidebar (Claude Academy Style) -->
+        <!-- Right Column: Sticky Syllabus Sidebar (Pro Claude Academy Style) -->
         <aside class="claude-sticky-syllabus" aria-label="Course Curriculum">
           <div class="claude-syllabus-head">
             <div class="claude-syllabus-dropdown-label">Lesson ${currentIndex + 1} of ${allLessons.length}</div>
             <div class="claude-syllabus-progress-count">${Math.round(((currentIndex + 1) / allLessons.length) * 100)}%</div>
           </div>
           
-          <div style="font-weight: 700; font-size: 14.5px; color: var(--qsa-primary-navy); margin-bottom: 16px; font-family: var(--qsa-font-serif);">
+          <div class="claude-syllabus-progress-track">
+            <div class="claude-syllabus-progress-bar" style="width: ${Math.round(((currentIndex + 1) / allLessons.length) * 100)}%;"></div>
+          </div>
+          
+          <div style="font-weight: 700; font-size: 15px; color: var(--qsa-primary-navy); margin-bottom: 16px; font-family: var(--qsa-font-serif);">
             ${course.title}
           </div>
 
@@ -278,12 +282,14 @@ function renderLessonPlayer(container, course, lesson) {
                   ${(mod.lessons || []).map(l => {
                     const isDone = store.isLessonComplete(course.id, l.id);
                     const isCurrent = l.id === lesson.id;
+                    const typeIcon = l.type === 'video' ? '📹' : l.type === 'visual' ? '⚡' : l.type === 'quiz' ? '📝' : '📖';
                     return `
                       <a href="#lesson-${course.id}-${l.id}" class="claude-syllabus-link ${isCurrent ? 'active' : ''}">
-                        <span style="font-size: 13px; color: ${isDone ? 'var(--qsa-status-success)' : isCurrent ? 'var(--qsa-terracotta)' : 'var(--qsa-text-muted)'}; font-weight: 800;">
+                        <span style="font-size: 12px; color: ${isDone ? 'var(--qsa-status-success)' : isCurrent ? 'var(--qsa-terracotta)' : 'var(--qsa-text-muted)'}; font-weight: 800;">
                           ${isDone ? '✓' : isCurrent ? '●' : '○'}
                         </span>
-                        <span style="flex: 1;">${l.title}</span>
+                        <span style="flex: 1; font-weight: ${isCurrent ? '700' : '500'};">${l.title}</span>
+                        <span style="font-size: 11px; opacity: 0.7;">${typeIcon}</span>
                       </a>`;
                   }).join('')}
                 </div>
@@ -291,8 +297,8 @@ function renderLessonPlayer(container, course, lesson) {
           </div>
 
           <!-- Claude Academy "On this page" In-Page TOC -->
-          <div class="claude-toc-block">
-            <div class="claude-toc-heading">On this page</div>
+          <div class="claude-toc-block" style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--qsa-border);">
+            <div class="claude-toc-heading" style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--qsa-terracotta); margin-bottom: 8px;">On this page</div>
             <a href="#section-core-content" class="claude-toc-link">1. Core Lesson Analysis</a>
             <a href="#section-takeaways" class="claude-toc-link">2. Scholarly Takeaways</a>
             <a href="#section-ai-prompt" class="claude-toc-link">3. Research AI Prompt</a>
