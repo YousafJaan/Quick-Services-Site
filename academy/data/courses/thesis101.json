@@ -135,10 +135,10 @@
         },
         {
           "id": "t16",
-          "title": "The Three-Pass Thesis Submission Checklist",
+          "title": "5-Chapter Dissertation Defense Readiness Scorecard",
           "type": "visual",
-          "widget": "checklist",
-          "minutes": 10
+          "widget": "defenseScorecard",
+          "minutes": 15
         },
         {
           "id": "t17",

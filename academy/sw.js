@@ -3,7 +3,7 @@
  * Provides offline-first caching for courses, lessons, decagonal vector badges, and scripts.
  */
 
-const CACHE_NAME = 'qsa-pwa-v2.6';
+const CACHE_NAME = 'qsa-pwa-v3.0';
 
 const STATIC_ASSETS = [
   './',

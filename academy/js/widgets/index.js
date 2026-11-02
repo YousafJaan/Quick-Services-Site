@@ -19,7 +19,10 @@ export const WIDGET_REGISTRY = [
   'zoteroFlow',
   'vivaCards',
   'slideTimer',
-  'checklist'
+  'checklist',
+  'vivaSimulator',
+  'defenseScorecard',
+  'apaGenerator'
 ];
 
 /**
@@ -33,6 +36,14 @@ export function teardownWidget(container) {
   if (container && container.__qsaTimerId) {
     clearInterval(container.__qsaTimerId);
     container.__qsaTimerId = null;
+  }
+  if (container && typeof container.__qsaUnmount === 'function') {
+    try {
+      container.__qsaUnmount();
+    } catch (e) {
+      console.warn('Widget unmount error:', e);
+    }
+    container.__qsaUnmount = null;
   }
 }
 
@@ -108,6 +119,15 @@ export function renderWidget(paramA, paramB, paramC) {
       break;
     case 'slideTimer':
       renderSlideTimer(container, context);
+      break;
+    case 'vivaSimulator':
+      renderVivaSimulator(container, context);
+      break;
+    case 'defenseScorecard':
+      renderDefenseScorecard(container, context);
+      break;
+    case 'apaGenerator':
+      renderApaGenerator(container, context);
       break;
     case 'checklist':
     default:
@@ -978,4 +998,740 @@ function renderChecklistWidget(el) {
         </label>
       </div>
     </div>`;
+}
+
+// -------------------------------------------------------------
+// 16. Interactive Viva Voce Defense Simulator (Pro v3.0.0)
+// -------------------------------------------------------------
+function renderVivaSimulator(el) {
+  const scenarios = [
+    {
+      id: 1,
+      examiner: 'Prof. Tariq (Senior Methodologist)',
+      avatar: '👨‍🏫',
+      tone: 'Rigorous & Demanding',
+      question: 'Candidate, you collected N = 185 survey responses for a structural model with 6 latent constructs. How can you demonstrate that your study is not statistically underpowered, and why did you not utilize the G*Power minimum threshold?',
+      options: [
+        {
+          text: 'I think 185 is quite a large number of people in our city, and other students in my department also used around 150 to 200 participants.',
+          scores: { method: 10, theory: 20, poise: 20 },
+          examinerReaction: '❌ Unacceptable defense. Citing departmental precedent is subjective and does not satisfy international statistical power requirements.',
+          goldModel: 'Cite the Hair et al. (2022) 10-times rule as an absolute minimum baseline (which requires 10 × 4 = 40 observations for our maximum arrow construct), and triangulate with Kock & Hadaya (2018) Inverse Square Root Method which confirms that at α = 0.05, 1 - β = 0.80, and a minimum expected path coefficient of 0.20, the required sample size is 155. Therefore, N = 185 provides sufficient power (1 - β > 0.85).'
+        },
+        {
+          text: 'We conducted an a priori power calculation in G*Power 3.1 for multiple linear regression with 4 predictors (f² = 0.15, α = 0.05, power = 0.95), which yielded a required N = 129. Furthermore, per Kock & Hadaya (2018) Inverse Square Root method for PLS-SEM, our sample of 185 exceeds the threshold of 155 needed to detect minimum path coefficients of 0.20 at 80% power.',
+          scores: { method: 40, theory: 30, poise: 30 },
+          examinerReaction: '✅ Superb defense. The candidate demonstrated exact mathematical authority, citing both G*Power parameters and specialized PLS-SEM sample size literature.',
+          goldModel: 'This response is exemplary. It anchors the defense in peer-reviewed power literature (Faul et al., 2007; Kock & Hadaya, 2018) rather than subjective opinion.'
+        },
+        {
+          text: 'My supervisor approved this sample size before I went to the field, so you would have to ask him about the mathematical formulas.',
+          scores: { method: 0, theory: 10, poise: 0 },
+          examinerReaction: '❌ Fatal error. Never deflect methodological responsibility onto your supervisor during an oral defense; the candidate alone is responsible for defending the work.',
+          goldModel: 'Take full ownership of your methodology. Reframe the answer around statistical power (Faul et al., 2007) and effect size sensitivity.'
+        },
+        {
+          text: 'Because PLS-SEM is a non-parametric method, it works with any sample size, even as small as 30 or 40 participants.',
+          scores: { method: 15, theory: 15, poise: 25 },
+          examinerReaction: '⚠️ Misconception. While PLS-SEM handles smaller samples better than CB-SEM, it still requires adequate statistical power to avoid Type II errors.',
+          goldModel: 'Dispel the small-sample myth: PLS-SEM does not require multivariate normality, but statistical power theorems still strictly apply (Hair et al., 2022).'
+        }
+      ]
+    },
+    {
+      id: 2,
+      examiner: 'Dr. Ayesha (Theoretical Architect)',
+      avatar: '👩‍🏫',
+      tone: 'Inquisitive & Theoretical',
+      question: 'You hypothesize that Organizational Trust mediates the relationship between Transformational Leadership and Employee Retention. Why did you choose Social Exchange Theory rather than Job Demands-Resources (JD-R) Theory as your theoretical underpinning?',
+      options: [
+        {
+          text: 'Social Exchange Theory (Blau, 1964) specifically posits that socio-emotional resources provided by leaders generate perceived obligations and reciprocal trust from subordinates, leading to retention. While JD-R focuses on strain and physical workload demands, our research gap centers on relational reciprocity and social capital.',
+          scores: { method: 35, theory: 40, poise: 30 },
+          examinerReaction: '✅ Outstanding theoretical command. The candidate articulated the exact causal mechanism (norm of reciprocity) that justifies Blau over alternative lenses.',
+          goldModel: 'Highlight the central axiom of Social Exchange Theory: reciprocal obligations. Contrast this with the physiological/energetic mechanism of JD-R.'
+        },
+        {
+          text: 'Social Exchange Theory was the first theory I found in Google Scholar that had both variables in the same model.',
+          scores: { method: 5, theory: 5, poise: 15 },
+          examinerReaction: '❌ Weak scholarship. Indicates lack of deep literature immersion and opportunistic theoretical grafting.',
+          goldModel: 'Never admit convenience. Frame the theory around conceptual fit and explanatory power for the specific problem statement.'
+        },
+        {
+          text: 'Both theories are basically saying the same thing, so either one would have produced identical regression results.',
+          scores: { method: 15, theory: 10, poise: 20 },
+          examinerReaction: '❌ Theoretical conflation. Theories provide distinct causal mechanisms and epistemological assumptions that guide interpretation.',
+          goldModel: 'Acknowledge theoretical diversity, but delineate how Social Exchange Theory uniquely explains the psychological contract.'
+        }
+      ]
+    },
+    {
+      id: 3,
+      examiner: 'Prof. Tariq (Senior Methodologist)',
+      avatar: '👨‍🏫',
+      tone: 'Analytical & Direct',
+      question: 'Looking at your Chapter 4 correlation table, the HTMT value between Perceived Organizational Support and Organizational Commitment is 0.88. Why do you claim discriminant validity is established when the conservative benchmark is 0.85?',
+      options: [
+        {
+          text: 'While Henseler et al. (2015) proposed a conservative cut-off of 0.85 for conceptually distinct constructs, they established 0.90 as the accepted threshold for conceptually similar or related social science constructs. Furthermore, our bias-corrected and accelerated (BCa) 95% bootstrap confidence interval [0.812, 0.894] does not include 1.0, formally confirming discriminant validity.',
+          scores: { method: 40, theory: 35, poise: 30 },
+          examinerReaction: '✅ Flawless psychometric defense. Citing both the 0.90 liberal benchmark and the BCa confidence interval excluding 1.0 completely satisfies the committee.',
+          goldModel: 'Always pair the point estimate (< 0.90) with the inferential test: the bootstrap confidence interval must not contain 1.0 (Henseler et al., 2015; Hair et al., 2022).'
+        },
+        {
+          text: '0.88 is very close to 0.85, so we just rounded it down in our narrative discussion.',
+          scores: { method: 0, theory: 5, poise: 10 },
+          examinerReaction: '❌ Severe violation of academic integrity. Falsifying or arbitrarily rounding diagnostic thresholds will cause thesis rejection.',
+          goldModel: 'Transparently report the exact value (0.88) and cite Franke & Sarstedt (2019) and Henseler et al. (2015) regarding the 0.90 boundary for closely related constructs.'
+        },
+        {
+          text: 'SmartPLS produced a green font for that number, so the software confirmed it is valid.',
+          scores: { method: 10, theory: 10, poise: 15 },
+          examinerReaction: '⚠️ Software dependence. The candidate must understand the underlying mathematical criterion, not simply trust UI color-coding.',
+          goldModel: 'Explain the mathematical ratio of between-trait correlations to within-trait correlations.'
+        }
+      ]
+    },
+    {
+      id: 4,
+      examiner: 'Dr. Kamran (Applied Skeptic)',
+      avatar: '👨‍💼',
+      tone: 'Practical & Grounded',
+      question: 'Your data was collected entirely from private tertiary hospitals in Lahore. How can your managerial recommendations apply to public sector healthcare facilities in rural Punjab?',
+      options: [
+        {
+          text: 'We have explicitly stated this as a delimitation in Chapter 1 and a limitation in Chapter 5. Private institutions possess distinct incentive structures and resource endowments. Our practical implications are bounded to private healthcare organizations, while our theoretical findings on leadership provide a baseline model for comparative future research in public hospitals.',
+          scores: { method: 35, theory: 35, poise: 35 },
+          examinerReaction: '✅ Perfect scholarly poise. The candidate defended their research boundaries without overreaching, converting a potential criticism into a delimited contribution.',
+          goldModel: 'Never claim universal generalizability when using convenience or purposive single-sector sampling. Defend your boundary conditions (Creswell, 2014).'
+        },
+        {
+          text: 'Doctors and nurses are the same everywhere in Pakistan, so what works in private hospitals will definitely work in rural clinics.',
+          scores: { method: 5, theory: 10, poise: 15 },
+          examinerReaction: '❌ Lack of contextual nuance. Ignores institutional economics, civil service bureaucracy, and resource disparities.',
+          goldModel: 'Acknowledge institutional differences while bounding the scope of managerial recommendations.'
+        }
+      ]
+    }
+  ];
+
+  let currentScenarioIdx = 0;
+  let selectedOption = null;
+  let userHistory = [];
+
+  const renderCurrentScenario = () => {
+    const sc = scenarios[currentScenarioIdx];
+    const totalScore = userHistory.reduce((acc, h) => acc + h.score, 0);
+    const maxScore = (userHistory.length || 1) * 100;
+    const currentPct = Math.round((totalScore / maxScore) * 100) || 0;
+
+    el.innerHTML = `
+      <div class="qsa-widget-card">
+        <div class="qsa-widget-head">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 28px;">${sc.avatar}</span>
+            <div>
+              <h4 class="qsa-widget-title">${sc.examiner}</h4>
+              <div style="font-size: 12px; color: var(--qsa-text-muted);">Persona: ${sc.tone} • Scenario ${currentScenarioIdx + 1} of ${scenarios.length}</div>
+            </div>
+          </div>
+          <span class="pro-lesson-type-badge visual" style="background: var(--qsa-terracotta-soft); color: var(--qsa-terracotta); font-weight: 700;">
+            Viva Readiness: ${currentPct}%
+          </span>
+        </div>
+
+        <div class="qsa-widget-dark-box" style="margin: 18px 0; padding: 20px; font-size: 15px; line-height: 1.6; border-left: 4px solid var(--qsa-terracotta);">
+          <strong style="color: #fbd38d; display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Examiner Challenge:</strong>
+          "${sc.question}"
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <div style="font-size: 13px; font-weight: 700; color: var(--qsa-text-secondary); margin-bottom: 10px;">Select Your Defense Strategy:</div>
+          <div style="display: flex; flex-direction: column; gap: 10px;" id="viva-options-box">
+            ${sc.options.map((opt, i) => `
+              <div class="viva-opt-card qsa-widget-muted-box" data-idx="${i}" style="cursor: pointer; padding: 14px 18px; border: 1.5px solid var(--qsa-border); transition: all 0.2s; font-size: 13.5px; line-height: 1.5;">
+                <strong style="color: var(--qsa-primary-navy);">Option ${String.fromCharCode(65 + i)}:</strong> ${opt.text}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div id="viva-feedback-box" style="display: none; margin-top: 20px;"></div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; gap: 12px; flex-wrap: wrap;">
+          <button type="button" id="viva-sim-prev" class="qsa-widget-btn-secondary" ${currentScenarioIdx === 0 ? 'disabled style="opacity:0.4; cursor:not-allowed;"' : ''}>
+            ← Previous Question
+          </button>
+          <button type="button" id="viva-sim-next" class="qsa-widget-btn" style="display: none;">
+            ${currentScenarioIdx === scenarios.length - 1 ? 'View Final Defense Scorecard 🎓' : 'Next Examiner Challenge →'}
+          </button>
+        </div>
+      </div>`;
+
+    const optCards = el.querySelectorAll('.viva-opt-card');
+    const feedbackBox = el.querySelector('#viva-feedback-box');
+    const nextBtn = el.querySelector('#viva-sim-next');
+    const prevBtn = el.querySelector('#viva-sim-prev');
+
+    optCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.idx, 10);
+        selectedOption = sc.options[idx];
+        const earned = selectedOption.scores.method + selectedOption.scores.theory + selectedOption.scores.poise;
+
+        // Record history
+        userHistory[currentScenarioIdx] = {
+          scenarioId: sc.id,
+          optionIdx: idx,
+          score: earned
+        };
+
+        // Highlight selected
+        optCards.forEach(c => {
+          c.style.borderColor = 'var(--qsa-border)';
+          c.style.background = 'var(--qsa-bg-card)';
+        });
+        card.style.borderColor = earned >= 80 ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)';
+        card.style.background = earned >= 80 ? 'var(--qsa-status-success-bg)' : 'var(--qsa-terracotta-soft)';
+
+        // Show feedback
+        feedbackBox.style.display = 'block';
+        feedbackBox.innerHTML = `
+          <div class="qsa-widget-card" style="border-left: 4px solid ${earned >= 80 ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div style="font-weight: 800; font-size: 14px; color: ${earned >= 80 ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};">
+                ${selectedOption.examinerReaction}
+              </div>
+              <div style="font-size: 13px; font-weight: 700; color: var(--qsa-text-muted);">
+                Points: ${earned}/100 (Method: ${selectedOption.scores.method}/40, Theory: ${selectedOption.scores.theory}/30, Poise: ${selectedOption.scores.poise}/30)
+              </div>
+            </div>
+            <div class="qsa-widget-muted-box" style="padding: 14px; font-size: 13.5px; line-height: 1.6; margin-top: 10px;">
+              <strong style="color: var(--qsa-primary-navy);">📖 Peer-Reviewed Gold Standard Model:</strong><br>
+              ${selectedOption.goldModel}
+            </div>
+          </div>`;
+
+        nextBtn.style.display = 'inline-flex';
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentScenarioIdx > 0) {
+          currentScenarioIdx--;
+          renderCurrentScenario();
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (currentScenarioIdx < scenarios.length - 1) {
+          currentScenarioIdx++;
+          renderCurrentScenario();
+        } else {
+          // Render Final Summary
+          const grandTotal = userHistory.reduce((acc, h) => acc + h.score, 0);
+          const finalPct = Math.round((grandTotal / (scenarios.length * 100)) * 100);
+          let gradeLabel = '';
+          let badgeColor = '';
+          if (finalPct >= 85) {
+            gradeLabel = '🟢 Defensible With High Distinction';
+            badgeColor = 'var(--qsa-status-success)';
+          } else if (finalPct >= 70) {
+            gradeLabel = '🟡 Minor Revisions Anticipated';
+            badgeColor = '#f59e0b';
+          } else {
+            gradeLabel = '🔴 High Risk of Major Revisions';
+            badgeColor = 'var(--qsa-status-danger)';
+          }
+
+          el.innerHTML = `
+            <div class="qsa-widget-card" style="text-align: center; padding: 36px 24px;">
+              <div style="font-size: 48px; margin-bottom: 12px;">🎓</div>
+              <h3 style="font-size: 24px; color: var(--qsa-primary-navy); margin-bottom: 6px;">Viva Voce Defense Simulation Complete</h3>
+              <div style="font-size: 42px; font-weight: 800; color: ${badgeColor}; margin: 12px 0;">${finalPct}%</div>
+              <div style="font-size: 16px; font-weight: 700; color: ${badgeColor}; margin-bottom: 16px;">${gradeLabel}</div>
+              <p class="qsa-widget-desc" style="max-width: 580px; margin: 0 auto 24px;">
+                You have faced methodological, theoretical, and practical examiner challenges based on real Pakistani university defense protocols. Review your areas of vulnerability before your final oral defense.
+              </p>
+              <button type="button" id="viva-restart-btn" class="qsa-widget-btn">
+                ↻ Re-run Viva Simulation
+              </button>
+            </div>`;
+
+          el.querySelector('#viva-restart-btn').addEventListener('click', () => {
+            currentScenarioIdx = 0;
+            userHistory = [];
+            renderCurrentScenario();
+          });
+        }
+      });
+    }
+  };
+
+  renderCurrentScenario();
+}
+
+// -------------------------------------------------------------
+// 17. 5-Chapter Dissertation Defense Readiness Scorecard (Pro v3.0.0)
+// -------------------------------------------------------------
+function renderDefenseScorecard(el) {
+  const chapters = [
+    {
+      id: 'ch1',
+      title: 'Chapter 1: Introduction',
+      icon: '🎯',
+      criteria: [
+        { id: 'c1_1', text: 'Problem Statement structured via Hook-Anchor-Gap framework (Creswell, 2014)', tip: 'Ensure problem is grounded in documented institutional or social data.' },
+        { id: 'c1_2', text: 'Explicit 3-tier gap identification: Empirical, Theoretical, and Contextual', tip: 'Avoid generic claims of "little research"; cite 3+ recent studies.' },
+        { id: 'c1_3', text: 'Research objectives and questions aligned 1-to-1 with SMART action verbs', tip: 'Do not use "to know" or "to understand"; use "to examine", "to determine".' },
+        { id: 'c1_4', text: 'Clear delimitation of scope (population, geographical boundaries, time horizon)', tip: 'Protects candidate from scope-creep during oral defense.' },
+        { id: 'c1_5', text: 'Theoretical and practical significance articulated with policy relevance', tip: 'Highlight who specifically benefits from the empirical findings.' }
+      ]
+    },
+    {
+      id: 'ch2',
+      title: 'Chapter 2: Literature Review',
+      icon: '📚',
+      criteria: [
+        { id: 'c2_1', text: 'Systematic literature search documentation (Boolean strings, databases, PRISMA flow)', tip: 'Documents reproducible bibliographic search protocols.' },
+        { id: 'c2_2', text: 'Thematic synthesis matrix constructed rather than author-by-author summaries', tip: 'Synthesize across themes, identifying conflicting findings in past literature.' },
+        { id: 'c2_3', text: 'Underlying theoretical framework explicitly anchored (e.g. Social Exchange Theory)', tip: 'Explain the core causal mechanism connecting IV to DV.' },
+        { id: 'c2_4', text: 'Conceptual framework clearly distinguishing IV, DV, Mediator, and Moderator', tip: 'Include a clean diagram with hypothesized directional arrows.' },
+        { id: 'c2_5', text: 'Over 70% of citations are peer-reviewed journal articles from the last 5 years', tip: 'Examiners scrutinize reference lists for outdated citations.' }
+      ]
+    },
+    {
+      id: 'ch3',
+      title: 'Chapter 3: Methodology',
+      icon: '📐',
+      criteria: [
+        { id: 'c3_1', text: 'Epistemological stance positioned on Saunders Research Onion (e.g. Positivism)', tip: 'Demonstrates doctoral philosophical coherence.' },
+        { id: 'c3_2', text: 'Target population defined with exact sampling frame and sampling design', tip: 'Justify probability vs non-probability sampling with citations.' },
+        { id: 'c3_3', text: 'Sample size mathematically justified via Cochran formula or G*Power 3.1', tip: 'State α = 0.05, 1 - β = 0.80 or 0.95, and estimated effect size.' },
+        { id: 'c3_4', text: 'Operational scales adapted from validated literature with original Cronbach alphas', tip: 'Cite original source author for every measurement scale.' },
+        { id: 'c3_5', text: 'Institutional Review Board (IRB) ethical clearance and consent letter attached', tip: 'Mandatory HEC Pakistan requirement for human subject research.' }
+      ]
+    },
+    {
+      id: 'ch4',
+      title: 'Chapter 4: Data Analysis',
+      icon: '📊',
+      criteria: [
+        { id: 'c4_1', text: 'Data screening documented (missing values, univariate/multivariate outliers via Mahalanobis D²)', tip: 'Verify clean dataset before running parametric or SEM models.' },
+        { id: 'c4_2', text: 'Normality diagnostics reported (skewness and kurtosis z-scores within ±1.96 or ±2.58)', tip: 'Grounded in Kim (2013) sample size normality thresholds.' },
+        { id: 'c4_3', text: 'Measurement model validity confirmed (Loadings ≥ 0.708, AVE ≥ 0.50, HTMT < 0.85/0.90)', tip: 'Hair et al. (2022) gold standard criteria.' },
+        { id: 'c4_4', text: 'Structural path coefficients tested via Bootstrapping (5,000+ subsamples, BCa 95% CI)', tip: 'Verify confidence intervals do not straddle zero.' },
+        { id: 'c4_5', text: 'All tables formatted strictly to APA 7th style (no vertical borders, 3 horizontal rules)', tip: 'Common cause of minor revision delays.' }
+      ]
+    },
+    {
+      id: 'ch5',
+      title: 'Chapter 5: Discussion & Defense',
+      icon: '🏆',
+      criteria: [
+        { id: 'c5_1', text: 'Findings triangulated directly with past empirical literature from Chapter 2', tip: 'Explain why your findings supported or contradicted prior scholars.' },
+        { id: 'c5_2', text: 'Theoretical contributions distinctly articulated (how your model advances the theory)', tip: 'Examiners look for unique conceptual value-add.' },
+        { id: 'c5_3', text: 'Contextual, managerial, and policy recommendations provided for Pakistan', tip: 'Make actionable recommendations for industry or government.' },
+        { id: 'c5_4', text: 'Genuine methodological limitations acknowledged (e.g. cross-sectional design)', tip: 'Scholarly poise: defend bounded scope rather than claiming perfection.' },
+        { id: 'c5_5', text: 'Concrete future research agenda outlining actionable follow-up studies', tip: 'Demonstrates candidate vision beyond the dissertation.' }
+      ]
+    }
+  ];
+
+  let checkedItems = new Set();
+  let activeTab = 'ch1';
+
+  // Load from LocalStorage if available
+  try {
+    const saved = localStorage.getItem('qsa_defense_scorecard');
+    if (saved) {
+      checkedItems = new Set(JSON.parse(saved));
+    }
+  } catch (e) {}
+
+  const saveState = () => {
+    try {
+      localStorage.setItem('qsa_defense_scorecard', JSON.stringify([...checkedItems]));
+    } catch (e) {}
+  };
+
+  const render = () => {
+    const totalCriteria = 25;
+    const score = checkedItems.size * 4; // 4 points each = 100%
+    let category = '';
+    let categoryColor = '';
+
+    if (score >= 85) {
+      category = '🟢 Defensible With High Distinction (Ready for Submission)';
+      categoryColor = 'var(--qsa-status-success)';
+    } else if (score >= 70) {
+      category = '🟡 Minor Revisions Needed (Review Flagged Criteria)';
+      categoryColor = '#f59e0b';
+    } else {
+      category = '🔴 Major Methodological Vulnerabilities (High Rejection Risk)';
+      categoryColor = 'var(--qsa-status-danger)';
+    }
+
+    const currentCh = chapters.find(c => c.id === activeTab) || chapters[0];
+
+    el.innerHTML = `
+      <div class="qsa-widget-card">
+        <div class="qsa-widget-head">
+          <div>
+            <h4 class="qsa-widget-title">5-Chapter Dissertation Defense Readiness Scorecard</h4>
+            <div style="font-size: 13px; color: var(--qsa-text-muted);">25-Point Comprehensive Doctoral Self-Audit Matrix</div>
+          </div>
+          <span class="pro-lesson-type-badge visual" style="background: var(--qsa-primary-navy-soft); color: var(--qsa-primary-navy); font-weight: 800;">
+            ${checkedItems.size}/${totalCriteria} Completed
+          </span>
+        </div>
+
+        <!-- Overall Score Bar -->
+        <div class="qsa-widget-muted-box" style="margin: 18px 0; padding: 18px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--qsa-text-secondary); text-transform: uppercase;">
+              Dissertation Defense Readiness Index
+            </div>
+            <div style="font-size: 28px; font-weight: 800; color: ${categoryColor};">
+              ${score}%
+            </div>
+          </div>
+          <div style="width: 100%; height: 10px; background: var(--qsa-border); border-radius: var(--qsa-radius-pill); overflow: hidden; margin-bottom: 10px;">
+            <div style="width: ${score}%; height: 100%; background: ${categoryColor}; transition: width 0.3s ease;"></div>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: ${categoryColor};">
+            ${category}
+          </div>
+        </div>
+
+        <!-- Chapter Tabs -->
+        <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 6px;">
+          ${chapters.map(ch => {
+            const chCheckedCount = ch.criteria.filter(c => checkedItems.has(c.id)).length;
+            const isActive = ch.id === activeTab;
+            return `
+              <button type="button" class="qsa-scorecard-tab qsa-widget-btn-secondary" data-tab="${ch.id}" 
+                style="flex: 1; min-width: 130px; padding: 10px 12px; font-size: 12.5px; border-radius: var(--qsa-radius-md); ${isActive ? 'background: var(--qsa-terracotta); color: #fff; border-color: var(--qsa-terracotta);' : ''}">
+                <div>${ch.icon} ${ch.title.split(':')[0]}</div>
+                <div style="font-size: 11px; opacity: 0.85; margin-top: 2px;">${chCheckedCount}/5 verified</div>
+              </button>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- Current Chapter Checklist -->
+        <div style="font-size: 14px; font-weight: 800; color: var(--qsa-primary-navy); margin-bottom: 12px;">
+          ${currentCh.icon} ${currentCh.title}
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          ${currentCh.criteria.map(crit => {
+            const isDone = checkedItems.has(crit.id);
+            return `
+              <label class="qsa-widget-muted-box" style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; cursor: pointer; border: 1px solid ${isDone ? 'var(--qsa-status-success)' : 'var(--qsa-border)'};">
+                <input type="checkbox" class="qsa-scorecard-chk" data-cid="${crit.id}" ${isDone ? 'checked' : ''} style="width: 20px; height: 20px; margin-top: 2px; accent-color: var(--qsa-terracotta);">
+                <div style="flex: 1;">
+                  <div style="font-size: 14px; font-weight: ${isDone ? '700' : '500'}; color: var(--qsa-text-primary); text-decoration: ${isDone ? 'line-through' : 'none'}; opacity: ${isDone ? '0.75' : '1'};">
+                    ${crit.text}
+                  </div>
+                  <div style="font-size: 12px; color: var(--qsa-text-muted); margin-top: 4px;">
+                    💡 <em>Examiner Tip:</em> ${crit.tip}
+                  </div>
+                </div>
+              </label>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- Action Tools Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px; gap: 12px; flex-wrap: wrap;">
+          <button type="button" id="scorecard-reset-btn" class="qsa-widget-btn-secondary" style="font-size: 12.5px;">
+            ↻ Reset Audit
+          </button>
+          <button type="button" id="scorecard-copy-btn" class="qsa-widget-btn" style="font-size: 12.5px;">
+            📋 Copy Defense Audit Report
+          </button>
+        </div>
+      </div>`;
+
+    // Bind tab clicks
+    el.querySelectorAll('.qsa-scorecard-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeTab = btn.dataset.tab;
+        render();
+      });
+    });
+
+    // Bind checkboxes
+    el.querySelectorAll('.qsa-scorecard-chk').forEach(chk => {
+      chk.addEventListener('change', () => {
+        const cid = chk.dataset.cid;
+        if (chk.checked) {
+          checkedItems.add(cid);
+        } else {
+          checkedItems.delete(cid);
+        }
+        saveState();
+        render();
+      });
+    });
+
+    // Reset button
+    el.querySelector('#scorecard-reset-btn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to reset your audit progress?')) {
+        checkedItems.clear();
+        saveState();
+        render();
+      }
+    });
+
+    // Copy audit summary
+    el.querySelector('#scorecard-copy-btn').addEventListener('click', () => {
+      const summaryText = `Quick Services Academy — Dissertation Defense Audit Summary\n` +
+        `Total Score: ${score}% (${checkedItems.size}/25 Criteria Satisfied)\n` +
+        `Status: ${category}\n\n` +
+        chapters.map(ch => {
+          return `${ch.title}:\n` + ch.criteria.map(c => `  [${checkedItems.has(c.id) ? 'X' : ' '}] ${c.text}`).join('\n');
+        }).join('\n\n');
+
+      navigator.clipboard.writeText(summaryText).then(() => {
+        const btn = el.querySelector('#scorecard-copy-btn');
+        btn.innerText = '✅ Audit Report Copied!';
+        setTimeout(() => { btn.innerText = '📋 Copy Defense Audit Report'; }, 2500);
+      }).catch(() => {
+        alert('Audit summary generated. Please copy from screen.');
+      });
+    });
+  };
+
+  render();
+}
+
+// -------------------------------------------------------------
+// 18. APA 7th Statistical Statement Generator (Pro v3.0.0)
+// -------------------------------------------------------------
+function renderApaGenerator(el) {
+  let selectedTest = 'ind-t';
+
+  const testConfigs = {
+    'ind-t': {
+      title: 'Independent Samples t-Test',
+      fields: [
+        { id: 't_val', label: 't-statistic (t)', val: '3.24', step: '0.01' },
+        { id: 'df_val', label: 'Degrees of Freedom (df)', val: '148', step: '1' },
+        { id: 'p_val', label: 'p-value (p)', val: '0.002', step: '0.001' },
+        { id: 'd_val', label: "Cohen's d (effect size)", val: '0.53', step: '0.01' },
+        { id: 'grp1_name', label: 'Group 1 Name', val: 'Private Sector', type: 'text' },
+        { id: 'm1_val', label: 'Group 1 Mean (M)', val: '4.12', step: '0.01' },
+        { id: 'sd1_val', label: 'Group 1 SD (SD)', val: '0.68', step: '0.01' },
+        { id: 'grp2_name', label: 'Group 2 Name', val: 'Public Sector', type: 'text' },
+        { id: 'm2_val', label: 'Group 2 Mean (M)', val: '3.76', step: '0.01' },
+        { id: 'sd2_val', label: 'Group 2 SD (SD)', val: '0.74', step: '0.01' }
+      ]
+    },
+    'anova': {
+      title: 'One-Way ANOVA (F-Test)',
+      fields: [
+        { id: 'f_val', label: 'F-statistic (F)', val: '4.18', step: '0.01' },
+        { id: 'df1_val', label: 'Between-Groups df (df1)', val: '2', step: '1' },
+        { id: 'df2_val', label: 'Within-Groups df (df2)', val: '147', step: '1' },
+        { id: 'p_val', label: 'p-value (p)', val: '0.017', step: '0.001' },
+        { id: 'eta_val', label: 'Partial Eta Squared (η²p)', val: '0.054', step: '0.001' }
+      ]
+    },
+    'corr': {
+      title: 'Pearson Correlation (r)',
+      fields: [
+        { id: 'r_val', label: 'Correlation coefficient (r)', val: '0.48', step: '0.01' },
+        { id: 'df_val', label: 'Degrees of Freedom (df = N - 2)', val: '198', step: '1' },
+        { id: 'p_val', label: 'p-value (p)', val: '0.001', step: '0.001' },
+        { id: 'var1', label: 'Variable 1 Name', val: 'Transformational Leadership', type: 'text' },
+        { id: 'var2', label: 'Variable 2 Name', val: 'Organizational Trust', type: 'text' }
+      ]
+    },
+    'reg': {
+      title: 'Multiple Linear Regression',
+      fields: [
+        { id: 'b_val', label: 'Unstandardized Coeff (B)', val: '0.38', step: '0.01' },
+        { id: 'se_val', label: 'Standard Error (SE)', val: '0.09', step: '0.01' },
+        { id: 'beta_val', label: 'Standardized Beta (β)', val: '0.34', step: '0.01' },
+        { id: 't_val', label: 't-statistic (t)', val: '4.22', step: '0.01' },
+        { id: 'p_val', label: 'p-value (p)', val: '0.001', step: '0.001' },
+        { id: 'ci_ll', label: '95% CI Lower Limit', val: '0.20', step: '0.01' },
+        { id: 'ci_ul', label: '95% CI Upper Limit', val: '0.56', step: '0.01' }
+      ]
+    },
+    'pls-sem': {
+      title: 'PLS-SEM Path Coefficient (SmartPLS 4)',
+      fields: [
+        { id: 'beta_val', label: 'Path Coefficient (β)', val: '0.412', step: '0.001' },
+        { id: 't_val', label: 'Bootstrap t-value', val: '5.642', step: '0.001' },
+        { id: 'p_val', label: 'p-value (p)', val: '0.001', step: '0.001' },
+        { id: 'bca_ll', label: '95% BCa CI Lower Bound', val: '0.268', step: '0.001' },
+        { id: 'bca_ul', label: '95% BCa CI Upper Bound', val: '0.552', step: '0.001' },
+        { id: 'f2_val', label: "Cohen's f² Effect Size", val: '0.185', step: '0.001' }
+      ]
+    }
+  };
+
+  const formatP = (rawP) => {
+    const p = parseFloat(rawP);
+    if (isNaN(p) || p < 0.001) return '< .001';
+    const str = p.toFixed(3);
+    return '= ' + str.replace(/^0\./, '.'); // Omit leading zero per APA 7th
+  };
+
+  const generateStatement = () => {
+    if (selectedTest === 'ind-t') {
+      const t = el.querySelector('#inp-t_val')?.value || '3.24';
+      const df = el.querySelector('#inp-df_val')?.value || '148';
+      const p = formatP(el.querySelector('#inp-p_val')?.value || '0.002');
+      const d = el.querySelector('#inp-d_val')?.value || '0.53';
+      const g1 = el.querySelector('#inp-grp1_name')?.value || 'Group 1';
+      const m1 = el.querySelector('#inp-m1_val')?.value || '4.12';
+      const sd1 = el.querySelector('#inp-sd1_val')?.value || '0.68';
+      const g2 = el.querySelector('#inp-grp2_name')?.value || 'Group 2';
+      const m2 = el.querySelector('#inp-m2_val')?.value || '3.76';
+      const sd2 = el.querySelector('#inp-sd2_val')?.value || '0.74';
+
+      return `An independent-samples <em>t</em>-test indicated that scores were significantly higher for ${g1} (<em>M</em> = ${m1}, <em>SD</em> = ${sd1}) than for ${g2} (<em>M</em> = ${m2}, <em>SD</em> = ${sd2}), <em>t</em>(${df}) = ${t}, <em>p</em> ${p}, <em>d</em> = ${d}.`;
+    }
+
+    if (selectedTest === 'anova') {
+      const f = el.querySelector('#inp-f_val')?.value || '4.18';
+      const df1 = el.querySelector('#inp-df1_val')?.value || '2';
+      const df2 = el.querySelector('#inp-df2_val')?.value || '147';
+      const p = formatP(el.querySelector('#inp-p_val')?.value || '0.017');
+      const eta = el.querySelector('#inp-eta_val')?.value || '0.054';
+
+      return `A one-way analysis of variance (ANOVA) revealed a statistically significant difference between groups, <em>F</em>(${df1}, ${df2}) = ${f}, <em>p</em> ${p}, <em>η</em><sub>p</sub><sup>2</sup> = ${eta.replace(/^0\./, '.')}.`;
+    }
+
+    if (selectedTest === 'corr') {
+      const r = el.querySelector('#inp-r_val')?.value || '0.48';
+      const df = el.querySelector('#inp-df_val')?.value || '198';
+      const p = formatP(el.querySelector('#inp-p_val')?.value || '0.001');
+      const v1 = el.querySelector('#inp-var1')?.value || 'Variable 1';
+      const v2 = el.querySelector('#inp-var2')?.value || 'Variable 2';
+
+      return `There was a statistically significant positive correlation between ${v1} and ${v2}, <em>r</em>(${df}) = ${r.replace(/^0\./, '.')}, <em>p</em> ${p}.`;
+    }
+
+    if (selectedTest === 'reg') {
+      const b = el.querySelector('#inp-b_val')?.value || '0.38';
+      const se = el.querySelector('#inp-se_val')?.value || '0.09';
+      const beta = el.querySelector('#inp-beta_val')?.value || '0.34';
+      const t = el.querySelector('#inp-t_val')?.value || '4.22';
+      const p = formatP(el.querySelector('#inp-p_val')?.value || '0.001');
+      const ll = el.querySelector('#inp-ci_ll')?.value || '0.20';
+      const ul = el.querySelector('#inp-ci_ul')?.value || '0.56';
+
+      return `Multiple linear regression demonstrated that the predictor significantly predicted the outcome variable, <em>B</em> = ${b}, <em>SE</em> = ${se}, <em>β</em> = ${beta.replace(/^0\./, '.')}, <em>t</em> = ${t}, <em>p</em> ${p}, 95% CI [${ll}, ${ul}].`;
+    }
+
+    if (selectedTest === 'pls-sem') {
+      const beta = el.querySelector('#inp-beta_val')?.value || '0.412';
+      const t = el.querySelector('#inp-t_val')?.value || '5.642';
+      const p = formatP(el.querySelector('#inp-p_val')?.value || '0.001');
+      const ll = el.querySelector('#inp-bca_ll')?.value || '0.268';
+      const ul = el.querySelector('#inp-bca_ul')?.value || '0.552';
+      const f2 = el.querySelector('#inp-f2_val')?.value || '0.185';
+
+      return `In the structural model, the hypothesized direct path was statistically significant (<em>β</em> = ${beta.replace(/^0\./, '.')}, <em>t</em> = ${t}, <em>p</em> ${p}, 95% BCa CI [${ll}, ${ul}], <em>f</em><sup>2</sup> = ${f2.replace(/^0\./, '.')}), supporting the empirical hypothesis.`;
+    }
+
+    return '';
+  };
+
+  const render = () => {
+    const config = testConfigs[selectedTest];
+
+    el.innerHTML = `
+      <div class="qsa-widget-card">
+        <div class="qsa-widget-head">
+          <div>
+            <h4 class="qsa-widget-title">Interactive APA 7th Statistical Statement Generator</h4>
+            <div style="font-size: 13px; color: var(--qsa-text-muted);">Format verified narrative result statements for thesis Chapter 4</div>
+          </div>
+          <span class="pro-lesson-type-badge visual" style="background: var(--qsa-terracotta-soft); color: var(--qsa-terracotta); font-weight: 700;">
+            APA 7th Manual
+          </span>
+        </div>
+
+        <!-- Test Selector Pill Bar -->
+        <div style="display: flex; gap: 8px; margin: 18px 0; overflow-x: auto; padding-bottom: 6px;">
+          ${Object.keys(testConfigs).map(key => `
+            <button type="button" class="qsa-test-pill qsa-widget-btn-secondary" data-test="${key}" 
+              style="padding: 8px 14px; font-size: 13px; border-radius: var(--qsa-radius-pill); white-space: nowrap; ${key === selectedTest ? 'background: var(--qsa-terracotta); color: #fff; border-color: var(--qsa-terracotta);' : ''}">
+              ${testConfigs[key].title.split('(')[0]}
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Input Fields Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 20px;">
+          ${config.fields.map(f => `
+            <div>
+              <label class="qsa-widget-label" style="font-size: 12.5px; margin-bottom: 4px;">${f.label}</label>
+              <input type="${f.type || 'number'}" id="inp-${f.id}" class="qsa-widget-input apa-stat-inp" value="${f.val}" step="${f.step || 'any'}" style="width: 100%;">
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Generated APA Statement Card -->
+        <div class="qsa-widget-dark-box" style="margin: 20px 0; padding: 20px; border-left: 4px solid var(--qsa-terracotta);">
+          <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; color: #fbd38d; letter-spacing: 0.5px; margin-bottom: 8px;">
+            Compliant APA 7th Chapter 4 Narrative Output:
+          </div>
+          <div id="apa-output-preview" style="font-size: 15px; line-height: 1.7; color: #f8fafc; font-family: var(--qsa-font-serif);">
+            ${generateStatement()}
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div style="font-size: 12px; color: var(--qsa-text-muted);">
+            💡 <em>Rule Check:</em> Statistics italicized ($t, F, p, d, r, β$), leading zero omitted for bounded probabilities.
+          </div>
+          <button type="button" id="copy-apa-btn" class="qsa-widget-btn">
+            📋 Copy APA Statement
+          </button>
+        </div>
+      </div>`;
+
+    // Bind test pills
+    el.querySelectorAll('.qsa-test-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedTest = btn.dataset.test;
+        render();
+      });
+    });
+
+    // Bind input changes
+    const updatePreview = () => {
+      const preview = el.querySelector('#apa-output-preview');
+      if (preview) preview.innerHTML = generateStatement();
+    };
+
+    el.querySelectorAll('.apa-stat-inp').forEach(inp => {
+      inp.addEventListener('input', updatePreview);
+    });
+
+    // Bind copy button
+    const copyBtn = el.querySelector('#copy-apa-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const textToCopy = el.querySelector('#apa-output-preview').innerText;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          copyBtn.innerText = '✅ Copied to Clipboard!';
+          setTimeout(() => { copyBtn.innerText = '📋 Copy APA Statement'; }, 2500);
+        }).catch(() => {
+          alert('Statement ready. Please copy from the box.');
+        });
+      });
+    }
+  };
+
+  render();
 }

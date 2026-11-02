@@ -18,6 +18,7 @@ import { renderCertificateView, verifyCertId } from './certificate.js';
 import { getCourseThumbnailSvg } from './thumbnails.js';
 import { getUserProfile, saveUserProfile, getAllResearchFigures, saveResearchFigure, deleteResearchFigure } from './storage/idb.js';
 import { createDropzone, processImageFile } from './components/uploader.js';
+import { renderWidget } from './widgets/index.js';
 
 const mainEl = document.getElementById('app-main');
 
@@ -109,6 +110,30 @@ router.addRoute('clarity', () => {
   updateActiveNavLinks();
 });
 
+// Route 9: Research Workbench Hub (#tools)
+router.addRoute('tools', () => {
+  renderToolsHub();
+  updateActiveNavLinks();
+});
+
+// Route 10: Viva Voce Defense Simulator (#viva-simulator)
+router.addRoute('viva-simulator', () => {
+  renderStandaloneTool('vivaSimulator', 'Interactive Viva Voce Defense Simulator', 'Simulate doctoral oral examinations with Methodological, Theoretical, and Pragmatic examiner personas.');
+  updateActiveNavLinks();
+});
+
+// Route 11: 5-Chapter Dissertation Defense Readiness Scorecard (#defense-scorecard)
+router.addRoute('defense-scorecard', () => {
+  renderStandaloneTool('defenseScorecard', '5-Chapter Dissertation Defense Readiness Scorecard', '25-point weighted doctoral audit matrix across Chapters 1 to 5 to verify defense readiness.');
+  updateActiveNavLinks();
+});
+
+// Route 12: APA 7th Statistical Statement Generator (#apa-generator)
+router.addRoute('apa-generator', () => {
+  renderStandaloneTool('apaGenerator', 'APA 7th Statistical Statement Generator', 'Generate publication-ready Chapter 4 narrative statements for t-tests, ANOVA, regression, and PLS-SEM.');
+  updateActiveNavLinks();
+});
+
 // Initialize router
 router.start();
 
@@ -190,17 +215,21 @@ document.addEventListener('click', (e) => {
 function updateActiveNavLinks() {
   const hash = window.location.hash || '#/';
   const navCourses = document.getElementById('nav-courses');
+  const navTools = document.getElementById('nav-tools');
   const navLearning = document.getElementById('nav-learning');
   const navCertificates = document.getElementById('nav-certificates');
   const navClarity = document.getElementById('nav-clarity');
 
   if (navCourses) navCourses.classList.remove('active');
+  if (navTools) navTools.classList.remove('active');
   if (navLearning) navLearning.classList.remove('active');
   if (navCertificates) navCertificates.classList.remove('active');
   if (navClarity) navClarity.classList.remove('active');
 
   if (hash === '#/' || hash.startsWith('#course-') || hash.startsWith('#courses')) {
     if (navCourses) navCourses.classList.add('active');
+  } else if (hash === '#tools' || hash === '#viva-simulator' || hash === '#defense-scorecard' || hash === '#apa-generator') {
+    if (navTools) navTools.classList.add('active');
   } else if (hash === '#learning') {
     if (navLearning) navLearning.classList.add('active');
   } else if (hash === '#certificates' || hash.startsWith('#certificate-')) {
@@ -1166,6 +1195,191 @@ function renderClarityLabPage() {
 }
 
 /* ==========================================================================
+   Academic Research Workbench Hub & Standalone Tools (v3.0.0 Pro)
+   ========================================================================== */
+function renderStandaloneTool(widgetName, title, desc) {
+  mainEl.innerHTML = `
+    <div class="wrap" style="padding: 48px 20px 80px;">
+      <div style="max-width: 960px; margin: 0 auto;">
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <a href="#tools" class="btn btn-secondary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+            <span>←</span> Back to Research Workbench
+          </a>
+          <a href="#/" class="btn btn-secondary btn-sm">All Courses</a>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size: clamp(28px, 4vw, 36px); font-family: var(--qsa-font-serif); color: var(--qsa-text-primary); margin: 0 0 8px;">
+            ${title}
+          </h1>
+          <p style="font-size: 15px; color: var(--qsa-text-secondary); margin: 0; line-height: 1.6;">
+            ${desc}
+          </p>
+        </div>
+        <div id="standalone-tool-mount"></div>
+      </div>
+    </div>
+  `;
+  const mount = document.getElementById('standalone-tool-mount');
+  if (mount) {
+    renderWidget(widgetName, mount);
+  }
+}
+
+function renderToolsHub() {
+  const tools = [
+    {
+      id: 'vivaSimulator',
+      route: '#viva-simulator',
+      icon: '🎓',
+      badge: 'Capstone Simulator',
+      title: 'Viva Voce Defense Simulator',
+      desc: 'Simulate high-stakes thesis defense oral examinations with Methodological, Theoretical, and Pragmatic examiner personas. Real-time scoring and literature-backed model answers.',
+      accent: 'var(--qsa-terracotta)'
+    },
+    {
+      id: 'defenseScorecard',
+      route: '#defense-scorecard',
+      icon: '📋',
+      badge: 'Pre-Flight Audit',
+      title: '5-Chapter Defense Readiness Scorecard',
+      desc: '25-point weighted doctoral audit matrix across Chapters 1 to 5. Identifies critical vulnerabilities before departmental submission and generates copyable audit reports.',
+      accent: 'var(--qsa-primary-navy)'
+    },
+    {
+      id: 'apaGenerator',
+      route: '#apa-generator',
+      icon: '📊',
+      badge: 'APA 7th Manual',
+      title: 'APA 7th Statistical Statement Generator',
+      desc: 'Instantly build 100% compliant narrative results statements for Independent t-tests, ANOVA, Pearson Correlation, Multiple Regression, and SmartPLS 4 structural models.',
+      accent: '#2563eb'
+    },
+    {
+      id: 'sampleSize',
+      action: 'sampleSize',
+      icon: '📐',
+      badge: 'Methodology Engine',
+      title: "Cochran's Sample Size Calculator",
+      desc: "Compute required sample sizes for infinite and finite populations using Cochran's formula (1977) with 95% confidence intervals and margin of error calibration.",
+      accent: '#a855f7'
+    },
+    {
+      id: 'powerExplainer',
+      action: 'powerExplainer',
+      icon: '⚡',
+      badge: 'G*Power Concept',
+      title: 'Statistical Power Visualizer',
+      desc: 'Interactive dual-distribution visualization illustrating Type I vs Type II errors, alpha cutoffs, and statistical power (1 - beta >= 0.80).',
+      accent: '#10b981'
+    },
+    {
+      id: 'thresholds',
+      action: 'thresholds',
+      icon: '📈',
+      badge: 'PLS-SEM Standards',
+      title: 'SmartPLS 4 Quality Criteria Matrix',
+      desc: "Authoritative evaluation benchmark table covering indicator reliability (>= 0.708), AVE (>= 0.50), HTMT (< 0.85/0.90), VIF (< 3.0), and Cohen's f².",
+      accent: '#f59e0b'
+    },
+    {
+      id: 'boolean',
+      action: 'boolean',
+      icon: '🔎',
+      badge: 'Search Logic',
+      title: 'Boolean Search Query Builder',
+      desc: 'Interactive visual string constructor for Scopus, Web of Science, PubMed, and OpenAlex using nested AND, OR, and NOT Boolean logic.',
+      accent: '#06b6d4'
+    },
+    {
+      id: 'planner',
+      action: 'planner',
+      icon: '📖',
+      badge: 'Dissertation Roadmap',
+      title: 'Thesis Word Budget & Chapter Planner',
+      desc: 'Calculate proportional word count distributions across all 5 chapters based on your target thesis volume.',
+      accent: '#ec4899'
+    }
+  ];
+
+  mainEl.innerHTML = `
+    <div class="wrap" style="padding: 48px 20px 80px;">
+      <div style="max-width: 1040px; margin: 0 auto;">
+        
+        <div style="margin-bottom: 36px; text-align: center;">
+          <span class="pro-lesson-type-badge visual" style="background: var(--qsa-terracotta-soft); color: var(--qsa-terracotta); font-weight: 800; margin-bottom: 12px; display: inline-block;">
+            🛠️ ACADEMIC RESEARCH WORKBENCH
+          </span>
+          <h1 style="font-size: clamp(32px, 5vw, 44px); font-family: var(--qsa-font-serif); color: var(--qsa-text-primary); margin: 0 0 12px; font-weight: 500; letter-spacing: -0.02em;">
+            Graduate Research Tools &amp; Simulators
+          </h1>
+          <p style="font-size: 16px; color: var(--qsa-text-secondary); max-width: 700px; margin: 0 auto; line-height: 1.6;">
+            Interactive calculators, psychometric evaluators, and viva defense simulators engineered for postgraduate scholars (MPhil, MS, PhD) in Pakistan.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 20px;" id="tools-grid">
+          ${tools.map(t => `
+            <div class="qsa-widget-card" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; border-top: 4px solid ${t.accent};">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span style="font-size: 32px;">${t.icon}</span>
+                  <span class="pro-lesson-type-badge visual" style="font-size: 11px;">${t.badge}</span>
+                </div>
+                <h3 style="font-size: 18px; margin: 0 0 8px; color: var(--qsa-primary-navy); font-weight: 700;">${t.title}</h3>
+                <p style="font-size: 13.5px; color: var(--qsa-text-secondary); line-height: 1.6; margin: 0 0 20px;">
+                  ${t.desc}
+                </p>
+              </div>
+              <div>
+                ${t.action ? `
+                  <button type="button" class="qsa-widget-btn launch-inline-tool" data-tool="${t.action}" style="width: 100%; justify-content: center;">
+                    Launch Tool Inside Workbench ➔
+                  </button>
+                ` : `
+                  <a href="${t.route}" class="qsa-widget-btn" style="width: 100%; justify-content: center; text-decoration: none;">
+                    Open Full Simulator ➔
+                  </a>
+                `}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div id="inline-tool-modal" style="display: none; margin-top: 40px; padding-top: 30px; border-top: 2px dashed var(--qsa-border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 id="inline-tool-title" style="margin: 0; font-size: 20px; color: var(--qsa-primary-navy);">Interactive Tool Workspace</h3>
+            <button type="button" id="close-inline-tool-btn" class="qsa-widget-btn-secondary" style="font-size: 12px;">✕ Close Tool</button>
+          </div>
+          <div id="inline-tool-mount"></div>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  // Bind inline launchers
+  const modal = mainEl.querySelector('#inline-tool-modal');
+  const mount = mainEl.querySelector('#inline-tool-mount');
+  const closeBtn = mainEl.querySelector('#close-inline-tool-btn');
+
+  mainEl.querySelectorAll('.launch-inline-tool').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const toolName = btn.dataset.tool;
+      modal.style.display = 'block';
+      renderWidget(toolName, mount);
+      modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      mount.innerHTML = '';
+    });
+  }
+}
+
+/* ==========================================================================
    Course Card Renderer (Claude Academy Aligned Architecture)
    ========================================================================== */
 function renderCourseCard(c) {
@@ -2065,7 +2279,35 @@ async function loadSearchIndex() {
     const courses = await res.json();
     const items = [];
     
-    // Core Navigation items
+    // Core Navigation & Capstone Tools
+    items.push({
+      title: 'Academic Research Workbench',
+      sub: 'Interactive statistical calculators, G*Power, and defense simulators',
+      tag: 'Workbench',
+      href: '#tools',
+      keywords: 'tools workbench calculators statistical power cochran sample size'
+    });
+    items.push({
+      title: 'Viva Voce Defense Simulator',
+      sub: 'Simulate thesis defense questions with Methodological & Theoretical personas',
+      tag: 'Simulator',
+      href: '#viva-simulator',
+      keywords: 'viva defense oral examination questions Tariq examiner preparation simulation'
+    });
+    items.push({
+      title: '5-Chapter Dissertation Defense Readiness Scorecard',
+      sub: '25-point weighted doctoral audit matrix across Chapters 1 to 5',
+      tag: 'Scorecard',
+      href: '#defense-scorecard',
+      keywords: 'scorecard defense readiness audit checklist proposal chapters submission review'
+    });
+    items.push({
+      title: 'APA 7th Statistical Statement Generator',
+      sub: 'Generate publication-ready Chapter 4 narrative statements for t, F, r, beta',
+      tag: 'APA 7th',
+      href: '#apa-generator',
+      keywords: 'apa 7th statement generator t-test anova regression smartpls correlation results'
+    });
     items.push({
       title: 'Sentence Clarity Lab',
       sub: 'Academic Paraphrasing & Multi-Register Comparison',

@@ -29,7 +29,7 @@
       "description": "The questions every examiner prepares: justification of methods, sample limits, and theoretical novelty.",
       "lessons": [
         { "id": "v5", "title": "The 10 Inevitable Viva Questions Every Examiner Asks", "type": "read", "minutes": 12 },
-        { "id": "v6", "title": "Defense Question Flashcards with Model Answer Frameworks", "type": "visual", "widget": "vivaCards", "minutes": 15 },
+        { "id": "v6", "title": "Interactive Viva Voce Defense Simulator", "type": "visual", "widget": "vivaSimulator", "minutes": 15 },
         { "id": "v7", "title": "Defending Your Methodology and Sample Limitations", "type": "video", "vid": "V-VIVA-02", "minutes": 8 },
         { "id": "v8", "title": "Module 2 Assessment: Answering Questions", "type": "quiz", "minutes": 10 }
       ]

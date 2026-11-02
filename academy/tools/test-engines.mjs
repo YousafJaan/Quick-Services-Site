@@ -180,7 +180,7 @@ console.log('\n--- 4. Testing Advanced Widgets & Lifecycle ---');
 
 import { renderWidget, teardownWidget, WIDGET_REGISTRY } from '../js/widgets/index.js';
 
-assert(Array.isArray(WIDGET_REGISTRY) && WIDGET_REGISTRY.length === 15, 'WIDGET_REGISTRY contains all 15 academic widget identifiers');
+assert(Array.isArray(WIDGET_REGISTRY) && WIDGET_REGISTRY.length === 18, 'WIDGET_REGISTRY contains all 18 academic widget identifiers');
 
 // Test standard order: renderWidget(name, el)
 try {
@@ -200,10 +200,40 @@ try {
   assert(false, `renderWidget inverted signature failed: ${err.message}`);
 }
 
+// Test Pro Capstone: vivaSimulator
+try {
+  const mockContainer = createMockElement();
+  renderWidget('vivaSimulator', mockContainer);
+  assert(mockContainer.innerHTML.includes("Prof. Tariq") || mockContainer.innerHTML.includes("Viva"), 'renderWidget successfully instantiates vivaSimulator');
+} catch (err) {
+  assert(false, `renderWidget vivaSimulator failed: ${err.message}`);
+}
+
+// Test Pro Capstone: defenseScorecard
+try {
+  const mockContainer = createMockElement();
+  renderWidget('defenseScorecard', mockContainer);
+  assert(mockContainer.innerHTML.includes("Scorecard") || mockContainer.innerHTML.includes("Readiness"), 'renderWidget successfully instantiates defenseScorecard');
+} catch (err) {
+  assert(false, `renderWidget defenseScorecard failed: ${err.message}`);
+}
+
+// Test Pro Capstone: apaGenerator
+try {
+  const mockContainer = createMockElement();
+  renderWidget('apaGenerator', mockContainer);
+  assert(mockContainer.innerHTML.includes("APA 7th") || mockContainer.innerHTML.includes("Generator"), 'renderWidget successfully instantiates apaGenerator');
+} catch (err) {
+  assert(false, `renderWidget apaGenerator failed: ${err.message}`);
+}
+
 // Test teardownWidget cleans up without throwing
 try {
-  teardownWidget();
-  assert(true, 'teardownWidget safely cleans up active timers and handles');
+  const mockContainer = createMockElement();
+  let unmountCalled = false;
+  mockContainer.__qsaUnmount = () => { unmountCalled = true; };
+  teardownWidget(mockContainer);
+  assert(unmountCalled === true, 'teardownWidget executes container.__qsaUnmount lifecycle hook');
 } catch (err) {
   assert(false, `teardownWidget threw error: ${err.message}`);
 }

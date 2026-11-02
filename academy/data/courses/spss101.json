@@ -65,7 +65,7 @@
       "lessons": [
         { "id": "sp19", "title": "Internal Consistency: Cronbach's Alpha and Item-Total Statistics", "type": "read", "minutes": 11 },
         { "id": "sp20", "title": "Formatting SPSS Output into Publication-Ready APA Tables", "type": "video", "vid": "V-SPSS-05", "minutes": 7 },
-        { "id": "sp21", "title": "SPSS Results Section Audit Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "sp21", "title": "Interactive APA 7th Statistical Statement Generator", "type": "visual", "widget": "apaGenerator", "minutes": 12 },
         { "id": "sp22", "title": "SPSS Basics Comprehensive Final Check", "type": "quiz", "minutes": 22 }
       ]
     }

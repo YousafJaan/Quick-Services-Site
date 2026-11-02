@@ -54,7 +54,7 @@
         { "id": "c14", "title": "Matching In-Text Citations to Reference Lists", "type": "read", "minutes": 10 },
         { "id": "c15", "title": "Automated Citation Formatting in Zotero", "type": "video", "vid": "V-CITE-03", "minutes": 8 },
         { "id": "c16", "title": "Top 10 Referencing Mistakes and How to Catch Them", "type": "read", "minutes": 10 },
-        { "id": "c17", "title": "Citation Verification Checklist", "type": "visual", "widget": "checklist", "minutes": 8 },
+        { "id": "c17", "title": "Interactive APA 7th Statistical Statement Generator", "type": "visual", "widget": "apaGenerator", "minutes": 12 },
         { "id": "c18", "title": "Citations & Referencing Comprehensive Final Check", "type": "quiz", "minutes": 20 }
       ]
     }

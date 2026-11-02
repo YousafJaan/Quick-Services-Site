@@ -8,6 +8,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { synthesizeLesson } from '../js/curriculum-synthesizer.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,7 +69,7 @@ function validateVisual(visual, context) {
     logError(context, 'Visual missing required string "caption"');
   }
   const str = JSON.stringify(visual);
-  if (/<img|\.png|\.jpg|\.jpeg|\.webp|http:\/\/|https:\/\/(?!fonts)/i.test(str)) {
+  if (/<img|\.png|\.jpg|\.jpeg|\.webp|http:\/\/|https:\/\/(?!(fonts|doi\.org))/i.test(str)) {
     logError(context, 'Visual contains raster image tag or external raster URL');
   }
 }
@@ -124,13 +125,20 @@ function runValidation() {
       for (const l of mod.lessons) {
         stats.lessons++;
         const lessonPath = path.join(DATA_DIR, 'lessons', c.id, `${l.id}.json`);
-        if (!fs.existsSync(lessonPath)) {
-          // File might not be generated yet during incremental rollout
-          continue;
+        let lesson = null;
+        if (fs.existsSync(lessonPath)) {
+          lesson = JSON.parse(fs.readFileSync(lessonPath, 'utf8'));
+        } else {
+          lesson = synthesizeLesson(manifest, l.id);
         }
 
-        const lesson = JSON.parse(fs.readFileSync(lessonPath, 'utf8'));
-        const fileTag = `${c.id}/${l.id}.json`;
+        const fileTag = `${c.id}/${l.id}`;
+
+        // Strict monoculture eradication assertion
+        const lessonStr = JSON.stringify(lesson);
+        if (lessonStr.includes('transformational leadership across 384 educators in South Punjab')) {
+          logError(fileTag, 'Legacy transformational leadership South Punjab boilerplate monoculture detected!');
+        }
 
         if (lesson.type === 'read') {
           stats.readLessons++;

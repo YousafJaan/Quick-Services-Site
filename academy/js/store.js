@@ -3,10 +3,10 @@
  * Versioned LocalStorage Store (qsa-progress-v2) with non-blocking fallback
  */
 
-const STORAGE_KEY = 'qsa-progress-v2';
+const STORAGE_KEY = 'qsa-progress-v3';
 
 const DEFAULT_STATE = {
-  version: 2,
+  version: 3,
   theme: 'light',       // 'light' | 'dark'
   englishLevel: 'plain', // 'simple' | 'plain' | 'technical'
   hasChosenEnglishLevel: false,
@@ -20,6 +20,8 @@ const DEFAULT_STATE = {
   badges: [],           // [ { id, title, icon, earnedAt } ]
   streak: { current: 1, lastStudyDate: new Date().toISOString().split('T')[0] },
   cookiesAccepted: false,
+  defenseScorecard: null,
+  vivaSessions: [],
   settings: {
     selfCheckPrompt: 'gentle', // 'off' | 'gentle' | 'on'
     reducedMotion: false
@@ -349,6 +351,28 @@ class Store {
 
   hasBadge(id) {
     return this.state.badges.some(b => b.id === id);
+  }
+
+  // Capstone v3.0.0 State: Defense Scorecard & Viva Sessions
+  saveDefenseScorecard(data) {
+    this.state.defenseScorecard = data;
+    this.save();
+  }
+
+  getDefenseScorecard() {
+    return this.state.defenseScorecard || null;
+  }
+
+  saveVivaSession(session) {
+    if (!Array.isArray(this.state.vivaSessions)) {
+      this.state.vivaSessions = [];
+    }
+    this.state.vivaSessions.push({ ...session, timestamp: new Date().toISOString() });
+    this.save();
+  }
+
+  getVivaSessions() {
+    return this.state.vivaSessions || [];
   }
 
   // Export / Import
