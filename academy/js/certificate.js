@@ -78,6 +78,105 @@ export async function renderCertificateView(container, { certId, courseId }) {
 
   const studentName = isLocked ? lockedName : 'Registered Scholar';
 
+  // STRICT GATE: If prerequisites are incomplete, lock access completely
+  if (!eligibility.eligible) {
+    container.innerHTML = `
+      <div class="wrap" style="padding: 48px 20px 80px; max-width: 900px;">
+        <!-- Top Back Navigation -->
+        <div style="margin-bottom: 24px;">
+          <a href="#certificates" class="reader-back-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; color: var(--qsa-text-secondary); font-size: 14px; font-weight: 500;">
+            <span style="font-size: 16px;">←</span> <span>All Academic Credentials</span>
+          </a>
+        </div>
+
+        <!-- Credential Locked Institutional Card -->
+        <div class="eligibility-status-card" style="background: var(--qsa-bg-card); border: 1.5px solid var(--qsa-border); border-radius: var(--qsa-radius-card); padding: 44px 36px; box-shadow: var(--qsa-shadow-card); text-align: center;">
+          <div style="width: 68px; height: 68px; border-radius: 50%; background: var(--qsa-terracotta-soft, rgba(185, 83, 53, 0.12)); color: var(--qsa-terracotta); font-size: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; border: 1.5px solid rgba(185, 83, 53, 0.25);">
+            🔒
+          </div>
+
+          <span class="tag tag-orange" style="margin-bottom: 12px; font-size: 11px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase;">
+            Academic Prerequisite Gate • Credential Locked
+          </span>
+
+          <h2 style="font-size: clamp(22px, 3vw, 28px); margin: 6px 0 10px; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary);">
+            Official Fellowship Credential Inaccessible
+          </h2>
+
+          <div style="font-size: 15px; font-weight: 600; color: var(--qsa-terracotta); margin-bottom: 14px;">
+            ${course.title}
+          </div>
+
+          <p style="font-size: 14px; color: var(--qsa-text-secondary); max-width: 660px; margin: 0 auto 32px; line-height: 1.65;">
+            In accordance with postgraduate academic integrity standards and HEC Pakistan methodology guidelines, official Fellowship Diplomas with cryptographic verification IDs, institutional seals, and Faculty signatures are non-transferable and can only be conferred after completing all 3 academic prerequisites below.
+          </p>
+
+          <!-- 3 Prerequisites Checklist Grid -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; max-width: 820px; margin: 0 auto 36px; text-align: left;">
+            <!-- 1. Lessons -->
+            <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 18px 20px; border-left: 4px solid ${eligibility.lessonsComplete ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 700; font-size: 13.5px; color: var(--qsa-text-primary);">1. Curriculum Mastery</span>
+                <span class="tag ${eligibility.lessonsComplete ? 'tag-green' : 'tag-orange'}" style="font-size: 11px;">
+                  ${eligibility.completedLessons}/${eligibility.totalLessons} Lessons
+                </span>
+              </div>
+              <div style="width: 100%; height: 6px; background: var(--qsa-border); border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                <div style="width: ${Math.round((eligibility.completedLessons / (eligibility.totalLessons || 1)) * 100)}%; height: 100%; background: ${eligibility.lessonsComplete ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};"></div>
+              </div>
+              <div style="font-size: 12px; color: var(--qsa-text-muted);">
+                ${eligibility.lessonsComplete ? '✓ All syllabus lessons completed' : `${eligibility.totalLessons - eligibility.completedLessons} lessons remaining before diploma eligibility`}
+              </div>
+            </div>
+
+            <!-- 2. Exam -->
+            <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 18px 20px; border-left: 4px solid ${eligibility.examPassed ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 700; font-size: 13.5px; color: var(--qsa-text-primary);">2. Assessment Benchmark</span>
+                <span class="tag ${eligibility.examPassed ? 'tag-green' : 'tag-orange'}" style="font-size: 11px;">
+                  ${eligibility.bestExamScore}% / 80% Min
+                </span>
+              </div>
+              <div style="width: 100%; height: 6px; background: var(--qsa-border); border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                <div style="width: ${Math.min(100, Math.round((eligibility.bestExamScore / 80) * 100))}%; height: 100%; background: ${eligibility.examPassed ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};"></div>
+              </div>
+              <div style="font-size: 12px; color: var(--qsa-text-muted);">
+                ${eligibility.examPassed ? '✓ Benchmark satisfied (≥80% passing grade)' : 'Requires ≥80% score on the comprehensive module assessment'}
+              </div>
+            </div>
+
+            <!-- 3. Study Time -->
+            <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 18px 20px; border-left: 4px solid ${eligibility.timeMet ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-weight: 700; font-size: 13.5px; color: var(--qsa-text-primary);">3. Active Telemetry</span>
+                <span class="tag ${eligibility.timeMet ? 'tag-green' : 'tag-orange'}" style="font-size: 11px;">
+                  ${Math.round(eligibility.studySeconds / 60)}m / ${Math.round(eligibility.requiredStudySeconds / 60)}m
+                </span>
+              </div>
+              <div style="width: 100%; height: 6px; background: var(--qsa-border); border-radius: 3px; overflow: hidden; margin-bottom: 8px;">
+                <div style="width: ${Math.min(100, Math.round((eligibility.studySeconds / eligibility.requiredStudySeconds) * 100))}%; height: 100%; background: ${eligibility.timeMet ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};"></div>
+              </div>
+              <div style="font-size: 12px; color: var(--qsa-text-muted);">
+                ${eligibility.timeMet ? '✓ Minimum verified engagement logged' : 'Authentic focused study time verified through lesson interactions'}
+              </div>
+            </div>
+          </div>
+
+          <!-- Action CTAs -->
+          <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+            <a href="#course-${targetCourseId}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 26px; font-weight: 600;">
+              <span>📖</span> <span>Resume Course Curriculum (${eligibility.completedLessons}/${eligibility.totalLessons}) ➔</span>
+            </a>
+            <a href="#certificates" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 6px; padding: 12px 22px;">
+              <span>←</span> <span>All Academic Credentials</span>
+            </a>
+          </div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // ELIGIBLE VIEW: Only rendered when all prerequisites are 100% fulfilled
   container.innerHTML = `
     <div class="wrap" style="padding: 40px 20px 80px; max-width: 1060px;">
       <!-- Action Bar -->
@@ -86,33 +185,31 @@ export async function renderCertificateView(container, { certId, courseId }) {
           <span style="font-size: 16px;">←</span> <span>All Academic Credentials</span>
         </a>
         <div class="cert-actions-wrap" style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-          <button type="button" class="btn btn-secondary btn-sm" id="print-cert-btn" ${!eligibility.eligible ? 'disabled style="opacity: 0.55; cursor: not-allowed;" title="Complete all 3 requirements to unlock print"' : 'style="display: inline-flex; align-items: center; gap: 6px;"'}>
-            <span>${eligibility.eligible ? '🖨️' : '🔒'}</span> <span>${eligibility.eligible ? 'Print Diploma' : 'Print (Locked)'}</span>
+          <button type="button" class="btn btn-secondary btn-sm" id="print-cert-btn" style="display: inline-flex; align-items: center; gap: 6px;">
+            <span>🖨️</span> <span>Print Diploma</span>
           </button>
-          <button type="button" class="btn ${eligibility.eligible ? 'btn-primary' : 'btn-secondary'} btn-sm" id="download-cert-btn" ${!eligibility.eligible ? 'disabled style="opacity: 0.55; cursor: not-allowed;" title="Complete all 3 requirements to unlock 300 DPI download"' : 'style="display: inline-flex; align-items: center; gap: 6px;"'}>
-            <span>${eligibility.eligible ? '📥' : '🔒'}</span> <span>${eligibility.eligible ? 'Download 300 DPI Official PNG' : 'Download 300 DPI (Locked)'}</span>
+          <button type="button" class="btn btn-primary btn-sm" id="download-cert-btn" style="display: inline-flex; align-items: center; gap: 6px;">
+            <span>📥</span> <span>Download 300 DPI Official PNG</span>
           </button>
         </div>
       </div>
 
       <!-- Credential Gating & Verification Audit Card -->
-      <div class="eligibility-status-card" style="background: var(--qsa-bg-card); border: 1.5px solid ${eligibility.eligible ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'}; border-radius: var(--qsa-radius-card); padding: 24px 28px; margin-bottom: 28px; box-shadow: var(--qsa-shadow-card);">
+      <div class="eligibility-status-card" style="background: var(--qsa-bg-card); border: 1.5px solid var(--qsa-status-success); border-radius: var(--qsa-radius-card); padding: 24px 28px; margin-bottom: 28px; box-shadow: var(--qsa-shadow-card);">
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 18px;">
           <div>
-            <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: ${eligibility.eligible ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};">
-              ${eligibility.eligible ? '✓ Credential Conferred &amp; Verified' : '🔒 Official Academic Credential Locked'}
+            <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--qsa-status-success);">
+              ✓ Credential Conferred &amp; Verified
             </div>
             <h2 style="font-size: 20px; margin: 4px 0 6px; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary);">
-              ${eligibility.eligible ? 'Requirements 100% Fulfilled — Ready for Archival Export' : 'Academic Verification Prerequisite Checklist'}
+              Requirements 100% Fulfilled — Ready for Archival Export
             </h2>
             <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 0; max-width: 680px; line-height: 1.55;">
-              ${eligibility.eligible
-                ? 'You have systematically completed the entire curriculum, satisfied comprehensive assessment standards, and fulfilled active study time.'
-                : 'In accordance with HEC Pakistan and international graduate research standards, official certificates are non-transferable and cannot be downloaded prematurely. Complete the 3 academic requirements below to confer and unlock this credential:'}
+              You have systematically completed the entire curriculum, satisfied comprehensive assessment standards, and fulfilled active study time.
             </p>
           </div>
           <div style="text-align: right;">
-            <span style="font-size: 28px; font-weight: 800; font-family: var(--qsa-font-serif); color: ${eligibility.eligible ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};">${eligibility.overallProgressPct}%</span>
+            <span style="font-size: 28px; font-weight: 800; font-family: var(--qsa-font-serif); color: var(--qsa-status-success);">100%</span>
             <div style="font-size: 11.5px; color: var(--qsa-text-muted);">Verification Audit</div>
           </div>
         </div>
@@ -120,44 +217,44 @@ export async function renderCertificateView(container, { certId, courseId }) {
         <!-- 3 Prerequisites Grid -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
           <!-- Criterion 1: Lessons Completed -->
-          <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 14px 16px; border-left: 3.5px solid ${eligibility.lessonsComplete ? 'var(--qsa-status-success)' : 'var(--qsa-border-strong)'};">
+          <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 14px 16px; border-left: 3.5px solid var(--qsa-status-success);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
               <span style="font-weight: 700; font-size: 13px; color: var(--qsa-text-primary);">1. Curriculum Mastery</span>
-              <span style="font-size: 12px; font-weight: 700; color: ${eligibility.lessonsComplete ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'};">${eligibility.completedLessons}/${eligibility.totalLessons}</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--qsa-status-success);">${eligibility.completedLessons}/${eligibility.totalLessons}</span>
             </div>
             <div style="width: 100%; height: 6px; background: var(--qsa-border); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
-              <div style="width: ${Math.round((eligibility.completedLessons / (eligibility.totalLessons || 1)) * 100)}%; height: 100%; background: ${eligibility.lessonsComplete ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};"></div>
+              <div style="width: 100%; height: 100%; background: var(--qsa-status-success);"></div>
             </div>
             <div style="font-size: 11.5px; color: var(--qsa-text-muted);">
-              ${eligibility.lessonsComplete ? '✓ All syllabus lessons completed' : `${eligibility.totalLessons - eligibility.completedLessons} lessons remaining`}
+              ✓ All syllabus lessons completed
             </div>
           </div>
 
           <!-- Criterion 2: Comprehensive Exam -->
-          <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 14px 16px; border-left: 3.5px solid ${eligibility.examPassed ? 'var(--qsa-status-success)' : 'var(--qsa-border-strong)'};">
+          <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 14px 16px; border-left: 3.5px solid var(--qsa-status-success);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
               <span style="font-weight: 700; font-size: 13px; color: var(--qsa-text-primary);">2. Assessment Benchmark</span>
-              <span style="font-size: 12px; font-weight: 700; color: ${eligibility.examPassed ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'};">${eligibility.bestExamScore}% / 80%</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--qsa-status-success);">${eligibility.bestExamScore}% / 80%</span>
             </div>
             <div style="width: 100%; height: 6px; background: var(--qsa-border); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
-              <div style="width: ${Math.min(100, Math.round((eligibility.bestExamScore / 80) * 100))}%; height: 100%; background: ${eligibility.examPassed ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};"></div>
+              <div style="width: 100%; height: 100%; background: var(--qsa-status-success);"></div>
             </div>
             <div style="font-size: 11.5px; color: var(--qsa-text-muted);">
-              ${eligibility.examPassed ? '✓ Passed (≥80% benchmark achieved)' : 'Requires ≥80% on module evaluation'}
+              ✓ Passed (≥80% benchmark achieved)
             </div>
           </div>
 
           <!-- Criterion 3: Active Telemetry -->
-          <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 14px 16px; border-left: 3.5px solid ${eligibility.timeMet ? 'var(--qsa-status-success)' : 'var(--qsa-border-strong)'};">
+          <div style="background: var(--qsa-bg-subtle); border-radius: 10px; padding: 14px 16px; border-left: 3.5px solid var(--qsa-status-success);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
               <span style="font-weight: 700; font-size: 13px; color: var(--qsa-text-primary);">3. Active Study Telemetry</span>
-              <span style="font-size: 12px; font-weight: 700; color: ${eligibility.timeMet ? 'var(--qsa-status-success)' : 'var(--qsa-text-muted)'};">${Math.round(eligibility.studySeconds / 60)}m / ${Math.round(eligibility.requiredStudySeconds / 60)}m</span>
+              <span style="font-size: 12px; font-weight: 700; color: var(--qsa-status-success);">${Math.round(eligibility.studySeconds / 60)}m / ${Math.round(eligibility.requiredStudySeconds / 60)}m</span>
             </div>
             <div style="width: 100%; height: 6px; background: var(--qsa-border); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
-              <div style="width: ${Math.min(100, Math.round((eligibility.studySeconds / eligibility.requiredStudySeconds) * 100))}%; height: 100%; background: ${eligibility.timeMet ? 'var(--qsa-status-success)' : 'var(--qsa-terracotta)'};"></div>
+              <div style="width: 100%; height: 100%; background: var(--qsa-status-success);"></div>
             </div>
             <div style="font-size: 11.5px; color: var(--qsa-text-muted);">
-              ${eligibility.timeMet ? '✓ Minimum verified active time fulfilled' : 'Focus time logged in browser'}
+              ✓ Minimum verified active time fulfilled
             </div>
           </div>
         </div>
@@ -216,23 +313,6 @@ export async function renderCertificateView(container, { certId, courseId }) {
 
       <!-- Prestigious Academic Fellowship Diploma Stage -->
       <div id="certificate-stage" style="background: #faf8f2; color: #1c1917; border-radius: 8px; border: 10px solid #102B4E; outline: 3px solid #b45309; outline-offset: -6px; padding: 52px 44px; box-shadow: 0 16px 40px rgba(0,0,0,0.18); text-align: center; position: relative; overflow: hidden; font-family: var(--qsa-font-serif);">
-        
-        <!-- Locked Watermark Overlay (If Prerequisites Incomplete) -->
-        ${!eligibility.eligible ? `
-          <div class="cert-watermark-overlay" style="position: absolute; inset: 0; background: rgba(16, 26, 40, 0.45); backdrop-filter: blur(2.5px); z-index: 15; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;">
-            <div style="background: var(--qsa-bg-card); color: var(--qsa-text-primary); border: 1.5px solid var(--qsa-terracotta); border-radius: var(--qsa-radius-card); padding: 32px 36px; max-width: 520px; text-align: center; box-shadow: 0 24px 50px rgba(0,0,0,0.5);">
-              <div style="font-size: 36px; margin-bottom: 8px;">🔒</div>
-              <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--qsa-terracotta); letter-spacing: 1px; margin-bottom: 6px;">Pre-Conferral Academic Audit</div>
-              <h3 style="font-size: 20px; margin: 0 0 10px; font-family: var(--qsa-font-serif); color: var(--qsa-text-primary);">Official Credential Locked</h3>
-              <p style="font-size: 13.5px; color: var(--qsa-text-secondary); margin: 0 0 20px; line-height: 1.6;">
-                This preview depicts the conferred fellowship diploma. Direct 300 DPI export is unlocked automatically once 100% of lessons are completed, the evaluation exam is passed (≥80%), and active study time is logged.
-              </p>
-              <a href="#course-${targetCourseId}" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
-                <span>📖</span> <span>Resume Course Curriculum (${eligibility.completedLessons}/${eligibility.totalLessons}) ➔</span>
-              </a>
-            </div>
-          </div>
-        ` : ''}
 
         <!-- Corner Guilloché Flourish Accents -->
         <div style="position: absolute; top: 14px; left: 14px; width: 44px; height: 44px; border-top: 2px solid #b45309; border-left: 2px solid #b45309; pointer-events: none;"></div>

@@ -630,33 +630,42 @@ function renderCatalog(courses) {
   const active = store.getActiveLesson();
 
   mainEl.innerHTML = `
-    <!-- Serene Claude Academy Hero Section -->
+    <!-- Serene Claude Academy Hero Section with Full HD Academic Terminal -->
     <section class="claude-home-hero">
       <div class="wrap">
-        <div class="claude-home-hero-inner">
-          <div class="claude-breadcrumb-tag" style="margin-bottom: 16px;">
-            <span class="dot"></span>
-            <span>HEC Pakistan Aligned Postgraduate Academic Fellowship</span>
+        <div class="claude-home-hero-grid">
+          <div class="claude-home-hero-inner">
+            <div class="claude-breadcrumb-tag" style="margin-bottom: 16px;">
+              <span class="dot"></span>
+              <span>HEC Pakistan Aligned • Postgraduate Research Academy</span>
+            </div>
+            <h1 class="claude-home-hero-title">
+              Make your research <em>make sense.</em>
+            </h1>
+            <p class="claude-home-hero-desc">
+              Rigorous research methodology, empirical statistics, and thesis writing instruction for postgraduate scholars.
+            </p>
+            <div class="hero-feature-pills" style="display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap;">
+              <span class="tag tag-blue" style="font-size: 12px; font-weight: 600;">9 Specializations</span>
+              <span class="tag tag-green" style="font-size: 12px; font-weight: 600;">168 Interactive Lessons</span>
+              <span class="tag tag-orange" style="font-size: 12px; font-weight: 600;">Verifiable Fellowship Diplomas</span>
+            </div>
+            <div class="claude-home-hero-actions">
+              <a href="#courses-section" class="claude-btn-dark">
+                Explore All Courses ➔
+              </a>
+              <a href="#tools" class="claude-btn-subtle">
+                <span>⚙️</span> Research Workbench
+              </a>
+              <a href="#clarity" class="claude-btn-subtle">
+                <span>🔬</span> Clarity Lab
+              </a>
+            </div>
           </div>
-          <h1 class="claude-home-hero-title">
-            Make your research <em>make sense.</em>
-          </h1>
-          <p class="claude-home-hero-desc">
-            Rigorous research methodology, empirical statistics, and thesis writing instruction for postgraduate scholars.
-          </p>
-          <div class="claude-home-hero-actions">
-            <a href="#courses-section" class="claude-btn-dark">
-              Browse all courses
-            </a>
-            <a href="#clarity" class="claude-btn-subtle">
-              <span>🔬</span> Sentence Clarity Lab ➔
-            </a>
-            <a href="#certificates" class="claude-btn-subtle">
-              <span>📄</span> View Credentials
-            </a>
-            <a href="https://quick-services-site.pages.dev/guide.html" target="_blank" class="claude-btn-subtle">
-              <span>📖</span> Open Field Guide
-            </a>
+          <div class="claude-home-hero-visual-wrap">
+            <div class="claude-hero-terminal-card">
+              <img src="./assets/images/hero-academic-terminal.svg" alt="Quick Services Academic Research Terminal &amp; Empirical Telemetry Workbench" width="1920" height="1080" class="claude-hero-terminal-img" loading="eager">
+            </div>
           </div>
         </div>
       </div>
@@ -2214,12 +2223,12 @@ function renderCertificatesList() {
               </div>
             </div>
             ${elig.eligible ? `
-              <a href="#certificate-${c.id}" class="btn btn-primary btn-sm" style="width: 100%; text-align: center;">
-                🎓 View &amp; Download Diploma ➔
+              <a href="#certificate-${c.id}" class="btn btn-primary btn-sm" style="width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                <span>🎓</span> <span>View Conferred Diploma ➔</span>
               </a>
             ` : `
-              <a href="#certificate-${c.id}" class="btn btn-secondary btn-sm" style="width: 100%; text-align: center;">
-                🔒 View Requirements &amp; Audit ➔
+              <a href="#course-${c.id}" class="btn btn-secondary btn-sm" style="width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                <span>🔒</span> <span>Resume Course to Unlock (${elig.completedLessons}/${elig.totalLessons}) ➔</span>
               </a>
             `}
           </div>`;

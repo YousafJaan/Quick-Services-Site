@@ -959,7 +959,13 @@ function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
 
       <div id="section-core-content">
         <h4 style="margin: 28px 0 12px; font-family: var(--qsa-font-serif); font-size: 20px;">Spoken Transcript</h4>
-        ${(c.transcript || c.p || []).map(p => `<p style="font-size: 16px; line-height: 1.7; color: var(--qsa-text-secondary);">${p}</p>`).join('')}
+        ${Array.isArray(c.transcript)
+          ? c.transcript.map(p => `<p style="font-size: 16px; line-height: 1.7; color: var(--qsa-text-secondary);">${p}</p>`).join('')
+          : typeof c.transcript === 'string'
+          ? `<p style="font-size: 16px; line-height: 1.7; color: var(--qsa-text-secondary);">${c.transcript}</p>`
+          : Array.isArray(c.p)
+          ? c.p.map(p => `<p style="font-size: 16px; line-height: 1.7; color: var(--qsa-text-secondary);">${p}</p>`).join('')
+          : ''}
       </div>
 
       <div class="claude-callout claude-callout-tip" id="section-takeaways">
@@ -1105,7 +1111,9 @@ function renderLessonBody(lesson, depth = 'standard', lang = 'plain') {
         <div class="claude-callout-content">
           <strong>Methodological Traps &amp; Common Errors:</strong>
           <ul style="margin: 6px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.6;">
-            ${c.mistakes.map(m => `<li>${m}</li>`).join('')}
+            ${c.mistakes.map(m => typeof m === 'object' && m !== null
+              ? `<li style="margin-bottom: 8px;"><strong>Trap:</strong> ${m.bad || ''}<br><span style="color: var(--qsa-status-success); font-weight: 600;">✓ Defensible Solution:</span> ${m.fix || ''}</li>`
+              : `<li>${m}</li>`).join('')}
           </ul>
         </div>
       </div>`;

@@ -3,7 +3,7 @@
  * Provides offline-first caching for courses, lessons, decagonal vector badges, and scripts.
  */
 
-const CACHE_NAME = 'qsa-pwa-v3.0';
+const CACHE_NAME = 'qsa-pwa-v4.8-20261103v48';
 
 const STATIC_ASSETS = [
   './',
@@ -28,6 +28,7 @@ const STATIC_ASSETS = [
   './js/components/uploader.js',
   './data/courses.json',
   './data/paths.json',
+  './assets/images/hero-academic-terminal.svg',
   './assets/images/hero-academy-emblem.svg',
   './assets/images/badge-thesis101.svg',
   './assets/images/badge-cite101.svg',
@@ -84,7 +85,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // App shell & static assets: Cache-first, fallback to network
+  // Styles, scripts, and documents: Network-first, fallback to cache
+  const isDynamicAsset = req.destination === 'document' || req.destination === 'style' || req.destination === 'script' || url.search.includes('v=');
+  if (isDynamicAsset) {
+    event.respondWith(
+      fetch(req).then((res) => {
+        if (res && res.status === 200) {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
+        }
+        return res;
+      }).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // Static images and fonts: Cache-first, fallback to network
   event.respondWith(
     caches.match(req).then((cached) => {
       if (cached) {

@@ -97,33 +97,34 @@
 .logo-link {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
-}
-
-.logo-brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
+  flex-shrink: 0;
 }
 
 .logo-title {
   font-family: var(--qsa-font-serif);
-  font-size: 21px;
+  font-size: 19px;
   font-weight: 600;
   letter-spacing: -0.015em;
   color: var(--qsa-primary-navy);
   white-space: nowrap;
 }
 
-.logo-tagline {
+[data-theme="dark"] .logo-title {
+  color: #F8FAFC;
+}
+
+.logo-dept {
   font-family: var(--qsa-font-sans);
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 1.4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
   text-transform: uppercase;
   color: var(--qsa-text-muted);
-  margin-top: 1px;
+  padding-left: 10px;
+  border-left: 1px solid var(--qsa-border);
+  white-space: nowrap;
 }
 
 .logo-q {
@@ -140,6 +141,7 @@
   font-family: var(--qsa-font-serif);
   box-shadow: 0 2px 8px rgba(185, 83, 53, 0.28);
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+  flex-shrink: 0;
 }
 
 .logo-link:hover .logo-q {
@@ -152,6 +154,8 @@
   display: none;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
@@ -3333,20 +3337,34 @@ details.menu:not([open]) .links {
    19. Claude Academy Homepage Clone (Faithful Reverse-Engineered System)
    ========================================================================== */
 
-/* Clean Serene Hero matching academy.claude.com */
+/* Clean Serene Hero matching academy.claude.com with Full HD Academic Terminal */
 .claude-home-hero {
   background: var(--qsa-bg-warm);
   border-bottom: 1px solid var(--qsa-border);
-  padding: 72px 0 64px;
+  padding: 56px 0 52px;
+}
+
+.claude-home-hero-grid {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  align-items: center;
+  gap: 40px;
+}
+
+@media (max-width: 992px) {
+  .claude-home-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
 }
 
 .claude-home-hero-inner {
-  max-width: 840px;
+  max-width: 620px;
 }
 
 .claude-home-hero-title {
   font-family: var(--qsa-font-serif);
-  font-size: clamp(28px, 3.5vw, 42px);
+  font-size: clamp(28px, 3.4vw, 42px);
   font-weight: 500;
   line-height: 1.18;
   letter-spacing: -0.025em;
@@ -3362,18 +3380,47 @@ details.menu:not([open]) .links {
 
 .claude-home-hero-desc {
   font-family: var(--qsa-font-sans);
-  font-size: clamp(16px, 1.8vw, 17.5px);
-  line-height: 1.65;
+  font-size: clamp(15.5px, 1.6vw, 17px);
+  line-height: 1.62;
   color: var(--qsa-text-secondary);
-  margin: 0 0 32px 0;
-  max-width: 740px;
+  margin: 0 0 24px 0;
+  max-width: 580px;
 }
 
 .claude-home-hero-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
+}
+
+.claude-home-hero-visual-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.claude-hero-terminal-card {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.22), 0 4px 12px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--qsa-border-strong);
+  background: #0B132B;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+}
+
+.claude-hero-terminal-card:hover {
+  transform: translateY(-3px) scale(1.008);
+  box-shadow: 0 24px 54px rgba(15, 23, 42, 0.3), 0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+.claude-hero-terminal-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 /* Claude Section Typography */
