@@ -1,0 +1,65 @@
+<!-- wp:template-part {"slug":"header","theme":"quickservices-theme","tagName":"header"} /-->
+
+<main id="primary" class="site-main academy-hub-page">
+    <!-- Academy Hero Header -->
+    <section class="academy-hero-sec sec">
+        <div class="wrap text-center">
+            <span class="badge-accent">Offline-First Academic Learning Platform</span>
+            <h1 class="academy-hero-title">Quick Academy Classroom.</h1>
+            <p class="academy-hero-lead">
+                Interactive, rigorous educational masterclasses designed for postgraduate scholars and research candidates. Complete modules offline, interact with dynamic SVG models, and earn verifiable cryptographic certificates.
+            </p>
+
+            <div class="academy-features-pill-row">
+                <span class="feat-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Zero Framework Bloat</span>
+                <span class="feat-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg> 12 Quiz Modalities</span>
+                <span class="feat-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> 30 SVG Visual Engines</span>
+                <span class="feat-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Checksum-Verified Certificates</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masterclass Curriculum Catalog -->
+    <section class="academy-catalog-sec sec" id="curriculum">
+        <div class="wrap">
+            <div class="catalog-header-bar">
+                <div>
+                    <h2 class="catalog-title">Active Masterclasses</h2>
+                    <p class="catalog-sub">Select a masterclass to launch the interactive lesson classroom.</p>
+                </div>
+                <div class="student-status-badge" id="studentStatusBadge">
+                    <span class="pulse-indicator"></span>
+                    <span id="studentProgressSummary">Progress Stored Locally (Offline Ready)</span>
+                </div>
+            </div>
+
+            <!-- wp:pattern {"slug":"quickservices/academy-course-card"} /-->
+        </div>
+    </section>
+
+    <!-- Certificate Verification Registry Section -->
+    <section class="academy-verify-sec sec" id="certificates">
+        <div class="wrap">
+            <div class="verify-box">
+                <span class="badge-sub">Academic Integrity &amp; Transparency</span>
+                <h2 class="verify-title">Verify a Quick Academy Certificate</h2>
+                <p class="verify-sub">
+                    Every certificate issued by Quick Services Academy contains a deterministic polynomial checksum. University committees, employers, and supervisors can verify candidate credentials here.
+                </p>
+
+                <form id="certVerifyForm" class="verify-form" onsubmit="event.preventDefault(); window.verifyCertificateId();">
+                    <div class="verify-input-group">
+                        <input type="text" id="certIdInput" class="verify-input" placeholder="e.g. QSA-SPSS-2026-A48F" required autocomplete="off">
+                        <button type="submit" class="btn btn-primary btn-lg">Verify Record</button>
+                    </div>
+                </form>
+
+                <div id="certVerifyResult" class="verify-result-box" hidden></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- wp:template-part {"slug":"inquiry-modal","theme":"quickservices-theme"} /-->
+
+<!-- wp:template-part {"slug":"footer","theme":"quickservices-theme","tagName":"footer"} /-->

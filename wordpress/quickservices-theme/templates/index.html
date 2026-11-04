@@ -1,0 +1,25 @@
+<!-- wp:template-part {"slug":"header","theme":"quickservices-theme","tagName":"header"} /-->
+
+<main id="primary" class="site-main wrap sec">
+    <!-- wp:query {"queryId":1,"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true}} -->
+    <div class="wp-block-query">
+        <!-- wp:post-template {"layout":{"type":"default"}} -->
+            <!-- wp:group {"tagName":"article","className":"academic-post-card","layout":{"type":"constrained"}} -->
+            <article class="wp-block-group academic-post-card">
+                <!-- wp:post-title {"isLink":true,"className":"post-card-title"} /-->
+                <!-- wp:post-date {"className":"post-card-date"} /-->
+                <!-- wp:post-excerpt {"moreText":"Read Manuscript &rarr;"} /-->
+            </article>
+            <!-- /wp:group -->
+        <!-- /wp:post-template -->
+
+        <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"}} -->
+            <!-- wp:query-pagination-previous /-->
+            <!-- wp:query-pagination-numbers /-->
+            <!-- wp:query-pagination-next /-->
+        <!-- /wp:query-pagination -->
+    </div>
+    <!-- /wp:query -->
+</main>
+
+<!-- wp:template-part {"slug":"footer","theme":"quickservices-theme","tagName":"footer"} /-->

@@ -1,0 +1,91 @@
+<!-- wp:template-part {"slug":"header","theme":"quickservices-theme","tagName":"header"} /-->
+
+<main id="primary" class="site-main classroom-single-page">
+    <div class="classroom-top-bar">
+        <div class="wrap in">
+            <div class="crumb-nav">
+                <a href="/academy" class="crumb-link">Academy</a>
+                <span class="crumb-sep">/</span>
+                <a href="/academy/courses" class="crumb-link" id="crumbCourseTitle">Masterclass</a>
+                <span class="crumb-sep">/</span>
+                <span class="crumb-current"><!-- wp:post-title /--></span>
+            </div>
+            <div class="classroom-controls">
+                <div class="lesson-progress-wrap">
+                    <span class="progress-lbl" id="lessonProgressLabel">Lesson Progress: 0%</span>
+                    <div class="progress-track">
+                        <div class="progress-bar" id="lessonProgressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap classroom-layout">
+        <!-- Main Lesson Article -->
+        <article class="lesson-article">
+            <header class="lesson-header">
+                <!-- wp:post-title {"level":1,"className":"lesson-title"} /-->
+                <div class="lesson-meta-row">
+                    <span class="badge-accent">Interactive Lesson</span>
+                    <span class="meta-readtime"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg> 12 Min Guided Practice</span>
+                </div>
+            </header>
+
+            <!-- Lesson Body Text -->
+            <div class="lesson-content-body">
+                <!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+            </div>
+
+            <!-- Dynamic SVG Diagram Engine Mount Root -->
+            <section class="lesson-visual-mount-sec" id="visualMountSection">
+                <div class="visual-mount-header">
+                    <span class="engine-badge">SVG Visual Engine (Interactive Diagram)</span>
+                    <h3 class="visual-mount-title">Conceptual Architecture Diagram</h3>
+                </div>
+                <div id="visual-container" class="visual-container-root" data-visual-kind="pyramid">
+                    <!-- Synthesized pure SVG/HTML diagram injected here by visual-engine.js -->
+                </div>
+            </section>
+
+            <!-- Dynamic 12-Modality Quiz Engine Mount Root -->
+            <section class="lesson-quiz-mount-sec" id="quizMountSection">
+                <div class="quiz-mount-header">
+                    <span class="engine-badge badge-accent">Knowledge Checkpoint</span>
+                    <h3 class="quiz-mount-title">Empirical Assessment Checkpoint</h3>
+                    <p class="quiz-mount-desc">Demonstrate conceptual mastery to advance your completion progress.</p>
+                </div>
+                <div id="quiz-container" class="quiz-container-root">
+                    <!-- Interactive Question Component injected here by quiz-engine.js -->
+                </div>
+            </section>
+
+            <!-- Certificate Issuance Mount (Appears on Final Lesson or 100% completion) -->
+            <section class="certificate-issuance-sec" id="certificateSection" hidden>
+                <div class="cert-card">
+                    <div class="cert-card-crest">QS</div>
+                    <span class="badge-accent">Masterclass Completed</span>
+                    <h3 class="cert-title">Congratulations! Your Verified Credential is Ready.</h3>
+                    <p class="cert-sub">You have successfully achieved all assessment thresholds across this masterclass.</p>
+
+                    <div class="cert-claim-form">
+                        <input type="text" id="studentCertName" class="cert-input" placeholder="Enter your full name for the certificate" required>
+                        <button type="button" class="btn btn-primary btn-lg" id="generateCertBtn">
+                            Generate &amp; Claim Certificate
+                        </button>
+                    </div>
+
+                    <div id="certDisplayArea" class="cert-display-box" hidden></div>
+                </div>
+            </section>
+
+            <!-- Navigation Footer -->
+            <footer class="lesson-nav-footer">
+                <button class="btn btn-outline" id="prevLessonBtn">&larr; Previous Lesson</button>
+                <button class="btn btn-primary" id="nextLessonBtn">Complete &amp; Next Lesson &rarr;</button>
+            </footer>
+        </article>
+    </div>
+</main>
+
+<!-- wp:template-part {"slug":"footer","theme":"quickservices-theme","tagName":"footer"} /-->

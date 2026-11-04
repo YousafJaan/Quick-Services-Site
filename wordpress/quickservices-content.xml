@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:wp="http://wordpress.org/export/1.2/"
+>
+<channel>
+	<title>Quick Services Academic Support &amp; Quick Academy</title>
+	<link>https://quickservices.pk</link>
+	<description>High-credibility academic consulting and research coaching led by M. Yousaf (MS English, BZU)</description>
+	<pubDate>Wed, 04 Nov 2026 01:30:00 +0000</pubDate>
+	<language>en-US</language>
+	<wp:wxr_version>1.2</wp:wxr_version>
+	<wp:base_site_url>https://quickservices.pk</wp:base_site_url>
+	<wp:base_blog_url>https://quickservices.pk</wp:base_blog_url>
+
+	<!-- Page 1: Homepage -->
+	<item>
+		<title>Home</title>
+		<link>https://quickservices.pk/</link>
+		<pubDate>Wed, 04 Nov 2026 01:00:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://quickservices.pk/?page_id=2</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:pattern {"slug":"quickservices/hero-editorial"} /-->
+<!-- wp:template-part {"slug":"trust-strip","theme":"quickservices-theme"} /-->
+<!-- wp:pattern {"slug":"quickservices/specialties-grid"} /-->
+<!-- wp:pattern {"slug":"quickservices/field-guide-preview"} /-->
+<!-- wp:pattern {"slug":"quickservices/academy-course-card"} /-->
+<!-- wp:pattern {"slug":"quickservices/pricing-matrix"} /-->]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>2</wp:post_id>
+		<wp:post_date><![CDATA[2026-11-04 01:00:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2026-11-04 01:00:00]]></wp:post_date_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[home]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
+		<wp:is_sticky>0</wp:is_sticky>
+	</item>
+
+	<!-- Page 2: Field Guide -->
+	<item>
+		<title>Research Student's Field Guide</title>
+		<link>https://quickservices.pk/field-guide/</link>
+		<pubDate>Wed, 04 Nov 2026 01:05:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://quickservices.pk/?page_id=10</guid>
+		<description></description>
+		<content:encoded><![CDATA[<!-- wp:pattern {"slug":"quickservices/field-guide-preview"} /-->]]></content:encoded>
+		<wp:post_id>10</wp:post_id>
+		<wp:post_name><![CDATA[field-guide]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
+		<wp:page_template><![CDATA[templates/page-field-guide.html]]></wp:page_template>
+	</item>
+
+	<!-- Page 3: Quick Academy Hub -->
+	<item>
+		<title>Quick Academy</title>
+		<link>https://quickservices.pk/academy/</link>
+		<pubDate>Wed, 04 Nov 2026 01:10:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://quickservices.pk/?page_id=20</guid>
+		<content:encoded><![CDATA[<!-- wp:pattern {"slug":"quickservices/academy-course-card"} /-->]]></content:encoded>
+		<wp:post_id>20</wp:post_id>
+		<wp:post_name><![CDATA[academy]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_type><![CDATA[page]]></wp:post_type>
+		<wp:page_template><![CDATA[templates/page-academy.html]]></wp:page_template>
+	</item>
+
+	<!-- Course 1: SPSS & SmartPLS Mastery -->
+	<item>
+		<title>SPSS &amp; SmartPLS 4 Quantitative Mastery</title>
+		<link>https://quickservices.pk/academy/course/spss-smartpls-mastery/</link>
+		<pubDate>Wed, 04 Nov 2026 01:15:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://quickservices.pk/?post_type=qs_course&#038;p=101</guid>
+		<content:encoded><![CDATA[<p>Master practical quantitative data screening, construct validity (CR, AVE, HTMT), regression, and structural equation modeling (PLS-SEM) with reporting templates aligned with APA 7th standards.</p>]]></content:encoded>
+		<wp:post_id>101</wp:post_id>
+		<wp:post_name><![CDATA[spss-smartpls-mastery]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_type><![CDATA[qs_course]]></wp:post_type>
+	</item>
+
+	<!-- Course 2: APA 7th Referencing -->
+	<item>
+		<title>APA 7th Academic Referencing &amp; Scholarly Tone</title>
+		<link>https://quickservices.pk/academy/course/apa7-referencing-mastery/</link>
+		<pubDate>Wed, 04 Nov 2026 01:20:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://quickservices.pk/?post_type=qs_course&#038;p=102</guid>
+		<content:encoded><![CDATA[<p>Master parenthetical vs narrative citations, multi-author et al. protocols, thesis formatting, and legitimate academic paraphrasing for Turnitin defense.</p>]]></content:encoded>
+		<wp:post_id>102</wp:post_id>
+		<wp:post_name><![CDATA[apa7-referencing-mastery]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_type><![CDATA[qs_course]]></wp:post_type>
+	</item>
+
+	<!-- Lesson 1.1 -->
+	<item>
+		<title>Lesson 1.1: Data Hygiene, Missing Values &amp; Coding Schemes</title>
+		<link>https://quickservices.pk/academy/lesson/data-hygiene-missing-values/</link>
+		<pubDate>Wed, 04 Nov 2026 01:25:00 +0000</pubDate>
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<guid isPermaLink="false">https://quickservices.pk/?post_type=qs_lesson&#038;p=201</guid>
+		<content:encoded><![CDATA[<p>Prior to executing any inferential statistical analysis, raw dataset hygiene is mandatory. In this lesson, we examine missing value diagnostics using Little's MCAR test and series mean imputation techniques.</p>]]></content:encoded>
+		<wp:post_id>201</wp:post_id>
+		<wp:post_name><![CDATA[data-hygiene-missing-values]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_type><![CDATA[qs_lesson]]></wp:post_type>
+	</item>
+</channel>
+</rss>

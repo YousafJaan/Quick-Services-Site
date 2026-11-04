@@ -1,0 +1,58 @@
+/*
+Theme Name: Quick Services Oxford Academic
+Theme URI: https://quickservices.pk
+Author: M. Yousaf & Quick Services Engineering
+Author URI: https://quickservices.pk
+Description: Bespoke Oxford Academic Editorial Full-Site Editing (FSE) block theme for Quick Services academic consulting and Quick Academy. Features zero-bloat Gutenberg block patterns, offline-first assessment engines (12 quiz modalities, 30 SVG diagrams), and verifiable cryptographic certificates.
+Version: 2.0.0
+Requires at least: 6.2
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: quickservices-theme
+Tags: full-site-editing, block-patterns, block-styles, education, grid-layout, custom-colors, responsive-layout, translation-ready
+*/
+
+/* Baseline Reset & Box Model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+body {
+  margin: 0;
+  background-color: var(--wp--preset--color--ivory-canvas, #FAF8F5);
+  color: var(--wp--preset--color--ink-primary, #1A202C);
+  font-family: var(--wp--preset--font-family--sans-body, 'Plus Jakarta Sans', system-ui, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--wp--preset--color--hunter-forest, #16302B);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:hover {
+  color: var(--wp--preset--color--antique-bronze, #B8823B);
+}
+
+:focus-visible {
+  outline: 2px solid var(--wp--preset--color--antique-bronze, #B8823B);
+  outline-offset: 3px;
+}

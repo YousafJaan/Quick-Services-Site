@@ -1,0 +1,234 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "title": "Quick Services Oxford Academic",
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+    "layout": {
+      "contentSize": "860px",
+      "wideSize": "1200px"
+    },
+    "color": {
+      "defaultPalette": false,
+      "custom": true,
+      "link": true,
+      "palette": [
+        {
+          "slug": "oxford-navy",
+          "color": "#0C192E",
+          "name": "Oxford Navy"
+        },
+        {
+          "slug": "hunter-forest",
+          "color": "#16302B",
+          "name": "Hunter Forest"
+        },
+        {
+          "slug": "antique-bronze",
+          "color": "#B8823B",
+          "name": "Antique Bronze"
+        },
+        {
+          "slug": "bronze-warm",
+          "color": "#976426",
+          "name": "Warm Bronze Accent"
+        },
+        {
+          "slug": "ivory-canvas",
+          "color": "#FAF8F5",
+          "name": "Ivory Canvas"
+        },
+        {
+          "slug": "parchment-subtle",
+          "color": "#F3EFE6",
+          "name": "Parchment Subtle"
+        },
+        {
+          "slug": "ink-primary",
+          "color": "#1A202C",
+          "name": "Ink Primary"
+        },
+        {
+          "slug": "slate-muted",
+          "color": "#5A6A80",
+          "name": "Slate Muted"
+        },
+        {
+          "slug": "border-warm",
+          "color": "#E5DFD3",
+          "name": "Border Warm"
+        },
+        {
+          "slug": "white",
+          "color": "#FFFFFF",
+          "name": "Pure White"
+        }
+      ]
+    },
+    "typography": {
+      "customFontSize": true,
+      "lineHeight": true,
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "'Fraunces', 'Playfair Display', Georgia, serif",
+          "slug": "serif-display",
+          "name": "Editorial Serif",
+          "fontFace": [
+            {
+              "fontFamily": "Fraunces",
+              "fontWeight": "400 900",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "src": ["https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&display=swap"]
+            }
+          ]
+        },
+        {
+          "fontFamily": "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif",
+          "slug": "sans-body",
+          "name": "Modern Sans",
+          "fontFace": [
+            {
+              "fontFamily": "Plus Jakarta Sans",
+              "fontWeight": "400 800",
+              "fontStyle": "normal",
+              "src": ["https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"]
+            }
+          ]
+        },
+        {
+          "fontFamily": "'JetBrains Mono', 'Space Mono', monospace",
+          "slug": "mono-code",
+          "name": "Academic Monospace"
+        }
+      ],
+      "fontSizes": [
+        {
+          "slug": "small",
+          "size": "0.875rem",
+          "name": "Small"
+        },
+        {
+          "slug": "medium",
+          "size": "1rem",
+          "name": "Medium"
+        },
+        {
+          "slug": "large",
+          "size": "1.25rem",
+          "name": "Large",
+          "fluid": { "min": "1.125rem", "max": "1.35rem" }
+        },
+        {
+          "slug": "x-large",
+          "size": "1.75rem",
+          "name": "X-Large",
+          "fluid": { "min": "1.5rem", "max": "2rem" }
+        },
+        {
+          "slug": "xx-large",
+          "size": "2.5rem",
+          "name": "XX-Large",
+          "fluid": { "min": "2rem", "max": "2.85rem" }
+        },
+        {
+          "slug": "display-hero",
+          "size": "3.75rem",
+          "name": "Display Hero",
+          "fluid": { "min": "2.5rem", "max": "4.5rem" }
+        }
+      ]
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "units": ["px", "em", "rem", "vh", "vw", "%"],
+      "spacingScale": {
+        "operator": "*",
+        "increment": 1.5,
+        "steps": 7,
+        "mediumStep": 1.5,
+        "unit": "rem"
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--ivory-canvas)",
+      "text": "var(--wp--preset--color--ink-primary)"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--sans-body)",
+      "fontSize": "var(--wp--preset--font-size--medium)",
+      "lineHeight": "1.65"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--serif-display)",
+          "fontWeight": "700",
+          "lineHeight": "1.2"
+        },
+        "color": {
+          "text": "var(--wp--preset--color--oxford-navy)"
+        }
+      },
+      "h1": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--display-hero)",
+          "letterSpacing": "-0.025em"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--xx-large)",
+          "letterSpacing": "-0.02em"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontSize": "var(--wp--preset--font-size--x-large)",
+          "letterSpacing": "-0.015em"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var(--wp--preset--color--hunter-forest)"
+        },
+        ":hover": {
+          "color": {
+            "text": "var(--wp--preset--color--antique-bronze)"
+          }
+        }
+      },
+      "button": {
+        "appearance": "none",
+        "border": {
+          "radius": "999px",
+          "width": "1px",
+          "style": "solid",
+          "color": "transparent"
+        },
+        "color": {
+          "background": "var(--wp--preset--color--hunter-forest)",
+          "text": "var(--wp--preset--color--white)"
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--sans-body)",
+          "fontSize": "var(--wp--preset--font-size--medium)",
+          "fontWeight": "600"
+        },
+        "spacing": {
+          "padding": {
+            "top": "0.85rem",
+            "bottom": "0.85rem",
+            "left": "1.75rem",
+            "right": "1.75rem"
+          }
+        }
+      }
+    }
+  }
+}

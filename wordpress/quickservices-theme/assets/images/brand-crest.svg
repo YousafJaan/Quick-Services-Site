@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="crestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16302B" />
+      <stop offset="100%" stop-color="#0C192E" />
+    </linearGradient>
+    <linearGradient id="bronzeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F7EBD9" />
+      <stop offset="50%" stop-color="#B8823B" />
+      <stop offset="100%" stop-color="#8C5E22" />
+    </linearGradient>
+  </defs>
+
+  <!-- Crest Shield Frame -->
+  <path d="M 100 15 C 145 15, 175 35, 175 85 C 175 145, 100 185, 100 185 C 100 185, 25 145, 25 85 C 25 35, 55 15, 100 15 Z" fill="url(#crestGrad)" stroke="url(#bronzeGrad)" stroke-width="4" />
+
+  <!-- Inner Double Filigree Line -->
+  <path d="M 100 25 C 138 25, 163 42, 163 85 C 163 135, 100 172, 100 172 C 100 172, 37 135, 37 85 C 37 42, 62 25, 100 25 Z" fill="none" stroke="url(#bronzeGrad)" stroke-width="1.5" stroke-dasharray="4,2" />
+
+  <!-- Academic Mortarboard Cap -->
+  <path d="M 100 50 L 140 68 L 100 86 L 60 68 Z" fill="url(#bronzeGrad)" />
+  <path d="M 78 77 L 78 95 C 78 102, 122 102, 122 95 L 122 77" fill="none" stroke="url(#bronzeGrad)" stroke-width="2.5" />
+  <path d="M 140 68 L 145 88" stroke="url(#bronzeGrad)" stroke-width="2" />
+  <circle cx="145" cy="90" r="3" fill="url(#bronzeGrad)" />
+
+  <!-- Open Scholarly Manuscript Book -->
+  <path d="M 100 135 C 90 125, 65 125, 55 130 L 55 155 C 65 150, 90 150, 100 160 C 110 150, 135 150, 145 155 L 145 130 C 135 125, 110 125, 100 135 Z" fill="#FAF8F5" stroke="url(#bronzeGrad)" stroke-width="2" />
+  <line x1="100" y1="135" x2="100" y2="160" stroke="#0C192E" stroke-width="2" />
+
+  <!-- QS Monogram -->
+  <text x="100" y="122" font-family="'Fraunces', Georgia, serif" font-size="28" font-weight="900" fill="url(#bronzeGrad)" text-anchor="middle" letter-spacing="2">QS</text>
+</svg>
